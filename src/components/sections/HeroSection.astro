@@ -1,0 +1,94 @@
+---
+// HeroSection.astro - メインのヒーローセクション
+---
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- 背景エフェクト -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"></div>
+    <div class="absolute top-3/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+    <div class="absolute bottom-1/4 left-1/2 w-96 h-96 bg-gradient-to-r from-emerald-400 to-cyan-500 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center max-w-4xl mx-auto">
+      <!-- アバター -->
+      <div class="mb-8 animate-fade-in-up">
+        <div class="w-32 h-32 mx-auto mb-6 relative">
+          <div class="w-full h-full bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-full animate-pulse-glow"></div>
+          <div class="absolute inset-2 bg-gray-800 rounded-full flex items-center justify-center">
+            <img src="../../image/icon/toriforium_circle.png" alt="torifo Avatar" class="w-full h-full rounded-full object-cover" />
+          </div>
+        </div>
+      </div>
+
+      <!-- メインタイトル -->
+      <div class="mb-6 animate-fade-in-up animation-delay-2000">
+        <h1 class="text-5xl md:text-7xl font-bold mb-4">
+          <span class="gradient-text-cyan">とりふぉ</span>
+          <br>
+          <span class="text-white">ポートフォリオ</span>
+        </h1>
+        <div class="text-xl md:text-2xl text-gray-300 font-light">
+          <span class="text-cyan-400">各関連サイト連携</span>
+          <span class="gradient-text">Portfolio</span>
+        </div>
+      </div>
+
+      <!-- サブタイトル -->
+      <div class="mb-8 animate-fade-in-up animation-delay-4000">
+        <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+          Game、開発、旅の軌跡を軸に，<br class="hidden md:block">
+          <span class="text-cyan-400">多様な体験と技術</span>を共有しています．
+        </p>
+      </div>
+
+      <!-- キーワード -->
+      <div class="mb-10 animate-fade-in-up animation-delay-6000">
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="px-4 py-2 glass rounded-full text-sm text-cyan-300 border border-cyan-400/30">原神</span>
+          <span class="px-4 py-2 glass rounded-full text-sm text-purple-300 border border-purple-400/30">崩壊スターレイル</span>
+          <span class="px-4 py-2 glass rounded-full text-sm text-emerald-300 border border-emerald-400/30">ゼンレスゾーンゼロ</span>
+          <span class="px-4 py-2 glass rounded-full text-sm text-blue-300 border border-blue-400/30">開発</span>
+          <span class="px-4 py-2 glass rounded-full text-sm text-pink-300 border border-pink-400/30">旅の軌跡</span>
+        </div>
+      </div>
+
+      <!-- CTA ボタン -->
+      <div class="animate-fade-in-up animation-delay-6000">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#Opus" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 hover-lift animate-pulse-glow">
+            <span class="flex items-center justify-center space-x-2">
+              <span>作品を見る</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </span>
+          </a>
+          <a href="#about" class="glass text-white font-semibold py-4 px-8 rounded-xl hover:bg-white/10 transition-all duration-300 hover-lift">
+            <span class="flex items-center justify-center space-x-2">
+              <span>もっと知る</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スクロールインジケーター -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float">
+    <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+      <div class="w-1 h-3 bg-gradient-to-b from-cyan-400 to-transparent rounded-full mt-2 animate-pulse"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* セクション固有のスタイル */
+  #hero {
+    background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+  }
+</style>

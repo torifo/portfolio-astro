@@ -1,0 +1,333 @@
+---
+// GamesSection.astro - ゲームセクション（ダミーデータ）
+---
+
+<section id="games" class="py-20 relative">
+  <div class="container mx-auto px-6">
+    <!-- セクションタイトル -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Games</h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+        プレイしているゲームと関連アカウントをご紹介します。<br>
+        ゲームを通じてコミュニティとつながり、新しい体験を楽しんでいます。
+      </p>
+    </div>
+
+    <!-- ゲームグリッド -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- ゲーム 1 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-2xl flex items-center justify-center">
+                <img src="../../image/icon/HOYOVERSE/Genshin-Impact.png" alt="原神アイコン" class="w-16 h-16 rounded-xl object-cover" />
+              </div>
+              <div class="text-lg font-semibold">原神</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <div class="flex space-x-4">
+              <a href="https://genshin.hoyoverse.com/" target="_blank" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+              <a href="https://x.com/kuroba_Genshin" target="_blank" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">原神 (Genshin Impact)</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            miHoYoが開発したオープンワールドアクションRPG。
+            美しいグラフィックと豊富なキャラクターが魅力的。
+          </p>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">プレイヤー名</span>
+              <span class="text-cyan-400">A_B-Clover</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">UID</span>
+              <span class="text-purple-400">853192782</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">ARPG</span>
+            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">Open World</span>
+            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs">Gacha</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ゲーム 2 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-2xl flex items-center justify-center">
+                <img src="../../image/icon/HOYOVERSE/houkaistarrail.png" alt="崩壊スターレイルアイコン" class="w-16 h-16 rounded-xl object-cover" />
+              </div>
+              <div class="text-lg font-semibold">崩壊：スターレイル</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <div class="flex space-x-4">
+              <a href="https://hsr.hoyoverse.com/" target="_blank" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+              <a href="https://x.com/kuroba_Genshin" target="_blank" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">崩壊：スターレイル</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            宇宙を舞台にしたターン制RPG。
+            戦略的なバトルシステムと魅力的なストーリーが特徴。
+          </p>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">プレイヤー名</span>
+              <span class="text-cyan-400">黒刃</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">UID</span>
+              <span class="text-purple-400">828459135</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">Turn-based</span>
+            <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-xs">Space Opera</span>
+            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs">Strategy</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ゲーム 3 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-2xl flex items-center justify-center">
+                <img src="../../image/icon/HOYOVERSE/zenless.png" alt="ゼンレスゾーンゼロアイコン" class="w-16 h-16 rounded-xl object-cover" />
+              </div>
+              <div class="text-lg font-semibold">ゼンレスゾーンゼロ</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <div class="flex space-x-4">
+              <a href="https://zenless.hoyoverse.com/" target="_blank" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+              <a href="https://x.com/kuroba_Genshin" target="_blank" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">ゼンレスゾーンゼロ</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            近未来都市を舞台にしたアクションRPG。
+            スタイリッシュなビジュアルと爽快なアクションが魅力。
+          </p>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">プレイヤー名</span>
+              <span class="text-cyan-400">くろばーん</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">UID</span>
+              <span class="text-purple-400">1300593797</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-xs">Action</span>
+            <span class="px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-xs">Urban</span>
+            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs">Stylish</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ゲーム 4 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-sky-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-2xl flex items-center justify-center">
+                <img src="../../image/icon/YOSTAR/blue-archive.png" alt="ブルーアーカイブアイコン" class="w-16 h-16 rounded-xl object-cover" />
+              </div>
+              <div class="text-lg font-semibold">ブルーアーカイブ</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <div class="flex space-x-4">
+              <a href="https://4th-anniversary.bluearchive.jp/" target="_blank" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">ブルーアーカイブ</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            学園都市「キヴォトス」を舞台にした戦略シミュレーションRPG。
+            可愛いキャラクターと戦略性の高いバトルが特徴。
+          </p>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">提供会社</span>
+              <span class="text-cyan-400">Yostar</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">ジャンル</span>
+              <span class="text-purple-400">学園RPG</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Strategy</span>
+            <span class="px-3 py-1 bg-sky-500/20 text-sky-300 rounded-full text-xs">School</span>
+            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs">Simulation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ゲーム 5 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-2xl flex items-center justify-center">
+                <span class="text-3xl">🎮</span>
+              </div>
+              <div class="text-lg font-semibold">Apex Legends</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <div class="flex space-x-4">
+              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8.386 0c3.082 0 5.567 2.484 5.567 5.567 0 3.082-2.485 5.567-5.567 5.567s-5.567-2.485-5.567-5.567c0-3.083 2.485-5.567 5.567-5.567zm6.646 11.134c3.082 0 5.567 2.484 5.567 5.567 0 3.082-2.485 5.567-5.567 5.567s-5.567-2.485-5.567-5.567c0-3.083 2.485-5.567 5.567-5.567z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">Apex Legends</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            60人のプレイヤーが20チームに分かれて戦うバトルロイヤルFPS。
+            チームワークと戦略が勝利の鍵。
+          </p>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">ランク</span>
+              <span class="text-cyan-400">プラチナ</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-300">メインレジェンド</span>
+              <span class="text-purple-400">レイス</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-xs">FPS</span>
+            <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-xs">Battle Royale</span>
+            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-xs">Team</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ゲーム 6 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-2xl flex items-center justify-center">
+                <span class="text-3xl">🌟</span>
+              </div>
+              <div class="text-lg font-semibold">その他のゲーム</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <div class="flex space-x-4">
+              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">その他のゲーム</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            インディーゲームからAAAタイトルまで、様々なゲームを幅広くプレイしています。
+            新しいゲーム体験を常に探求中。
+          </p>
+          <div class="space-y-2 mb-4 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-300">Valorant</span>
+              <span class="text-cyan-400">シルバー</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Minecraft</span>
+              <span class="text-purple-400">Builder</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Among Us</span>
+              <span class="text-green-400">Crewmate</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-violet-500/20 text-violet-300 rounded-full text-xs">Variety</span>
+            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">Indie</span>
+            <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-xs">Casual</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ゲーム統計 -->
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">6+</div>
+        <p class="text-gray-300 text-sm">メインゲーム</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text mb-2">500+</div>
+        <p class="text-gray-300 text-sm">プレイ時間</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">3</div>
+        <p class="text-gray-300 text-sm">プラットフォーム</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text mb-2">20+</div>
+        <p class="text-gray-300 text-sm">達成実績</p>
+      </div>
+    </div>
+  </div>
+</section>

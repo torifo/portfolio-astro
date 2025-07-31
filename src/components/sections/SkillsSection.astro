@@ -1,0 +1,138 @@
+---
+// SkillsSection.astro - スキル紹介セクション
+
+// microCMS APIからスキルデータを取得
+const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
+const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+
+interface Skill {
+  id: string;
+  name: string;
+  icon?: {
+    url: string;
+    height: number;
+    width: number;
+  };
+  category: string[];
+  level: number;
+}
+
+interface SkillsResponse {
+  contents: Skill[];
+  totalCount: number;
+}
+
+let skills: Skill[] = [];
+
+try {
+  const response = await fetch(`${SERVICE_DOMAIN}skills?limit=100`, {
+    headers: {
+      'X-MICROCMS-API-KEY': MICROCMS_API_KEY,
+    },
+  });
+  
+  if (response.ok) {
+    const data: SkillsResponse = await response.json();
+    skills = data.contents;
+  }
+} catch (error) {
+  console.error('Failed to fetch skills:', error);
+}
+
+// レベル別の説明とスタイル
+const levelConfig = {
+  0: { label: '学習中', width: '25%', color: 'from-red-400 to-red-600' },
+  1: { label: '基礎理解', width: '40%', color: 'from-orange-400 to-orange-600' },
+  2: { label: '実用レベル', width: '60%', color: 'from-yellow-400 to-yellow-600' },
+  3: { label: '上級者', width: '80%', color: 'from-green-400 to-green-600' },
+  4: { label: 'エキスパート', width: '100%', color: 'from-blue-400 to-blue-600' },
+};
+
+// カテゴリ別にスキルをグループ化（マークアップ言語とスタイルシート言語を統合）
+const skillsByCategory = skills.reduce((acc, skill) => {
+  skill.category.forEach(cat => {
+    // マークアップ言語とスタイルシート言語をWeb技術として統合
+    const mappedCategory = cat === 'マークアップ言語' || cat === 'スタイルシート言語' ? 'Web技術' : cat;
+    if (!acc[mappedCategory]) acc[mappedCategory] = [];
+    acc[mappedCategory].push(skill);
+  });
+  return acc;
+}, {} as Record<string, Skill[]>);
+---
+
+<section id="skills" class="py-20 relative">
+  <div class="container mx-auto px-6">
+    <!-- セクションタイトル -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Skills</h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+        モダンな技術スタックを駆使して、フロントエンドからバックエンドまで幅広く対応できます。
+      </p>
+    </div>
+
+    <!-- スキルカテゴリ -->
+    <div class="space-y-12">
+      {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+        <div class="glass p-8 rounded-2xl hover-lift">
+          <h3 class="text-2xl font-bold text-white mb-8 flex items-center">
+            <div class="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg mr-4 flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            {category}
+          </h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {categorySkills.map((skill) => {
+              const config = levelConfig[skill.level as keyof typeof levelConfig];
+              return (
+                <div class="text-center group">
+                  <div class="w-16 h-16 mx-auto mb-3 bg-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform p-1">
+                    {skill.icon ? (
+                      <img 
+                        src={skill.icon.url} 
+                        alt={skill.name}
+                        class="w-full h-full object-contain rounded-lg"
+                      />
+                    ) : (
+                      <div class="w-full h-full flex items-center justify-center text-gray-600 font-bold text-xs">
+                        {skill.name.substring(0, 2)}
+                      </div>
+                    )}
+                  </div>
+                  <h4 class="text-white font-semibold mb-2">{skill.name}</h4>
+                  <div class="w-full bg-gray-700 rounded-full h-3 mb-2">
+                    <div 
+                      class={`bg-gradient-to-r ${config.color} h-3 rounded-full transition-all duration-500`}
+                      style={`width: ${config.width}`}
+                    ></div>
+                  </div>
+                  <span class="text-xs text-gray-400 block">{config.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- スキル統計 -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">{skills.length}+</div>
+        <p class="text-gray-300">習得技術</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text mb-2">{skills.filter(s => s.level >= 3).length}</div>
+        <p class="text-gray-300">上級スキル</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">{Object.keys(skillsByCategory).length}</div>
+        <p class="text-gray-300">カテゴリ数</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- セクション区切り線 -->
+  <div class="section-divider"></div>
+</section>

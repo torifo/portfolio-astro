@@ -1,0 +1,275 @@
+---
+// JourneySection.astro - 旅の記録セクション（ダミーデータ）
+---
+
+<section id="journey" class="py-20 relative">
+  <div class="container mx-auto px-6">
+    <!-- セクションタイトル -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Journey</h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+        世界各地を旅しながら得た経験と出会いを記録しています。<br>
+        新しい文化と技術に触れることで、視野を広げ続けています。
+      </p>
+    </div>
+
+    <!-- 旅の記録グリッド -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- 旅行記録 1 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-5xl mb-4">🗾</div>
+              <div class="text-xl font-semibold">Japan Tech Tour</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <a href="#" class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">日本テックツアー 2024</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            東京、大阪、京都の最新テクノロジー企業を巡る技術研修旅行。
+            AIとロボティクス分野の最前線を学びました。
+          </p>
+          <div class="flex items-center text-gray-300 text-sm mb-3">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            東京・大阪・京都
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Tech</span>
+            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">AI</span>
+            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs">Culture</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 旅行記録 2 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-5xl mb-4">🇰🇷</div>
+              <div class="text-xl font-semibold">Seoul Innovation</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <a href="#" class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">ソウル・イノベーション体験</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            韓国のスタートアップエコシステムとK-Tech企業を探訪。
+            Gangnamの技術ハブで最新のモバイル技術を学習。
+          </p>
+          <div class="flex items-center text-gray-300 text-sm mb-3">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            ソウル・江南
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">Startup</span>
+            <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-xs">Mobile</span>
+            <span class="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-xs">K-Tech</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 旅行記録 3 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-5xl mb-4">🇸🇬</div>
+              <div class="text-xl font-semibold">Singapore Tech</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <a href="#" class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">シンガポール・スマートシティ</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            アジアのフィンテック・ハブであるシンガポールで最新の金融技術とスマートシティソリューションを研究。
+          </p>
+          <div class="flex items-center text-gray-300 text-sm mb-3">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            シンガポール
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-xs">Fintech</span>
+            <span class="px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-xs">Smart City</span>
+            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs">Innovation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 旅行記録 4 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-5xl mb-4">🇺🇸</div>
+              <div class="text-xl font-semibold">Silicon Valley</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <a href="#" class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">シリコンバレー・ピルグリメッジ</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            世界のテック聖地シリコンバレーで大手IT企業とスタートアップを訪問。
+            イノベーションの源泉を体感。
+          </p>
+          <div class="flex items-center text-gray-300 text-sm mb-3">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            サンフランシスコ・ベイエリア
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-xs">Big Tech</span>
+            <span class="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-xs">Startup</span>
+            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-xs">Innovation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 旅行記録 5 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-5xl mb-4">🇩🇪</div>
+              <div class="text-xl font-semibold">Berlin Tech Hub</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <a href="#" class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">ベルリン・テックハブ探訪</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            ヨーロッパのスタートアップ首都ベルリンでブロックチェーンとフィンテック企業を研究。
+            多様性とイノベーションが融合する環境を体験。
+          </p>
+          <div class="flex items-center text-gray-300 text-sm mb-3">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            ベルリン
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs">Blockchain</span>
+            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">Fintech</span>
+            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Europe</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 旅行記録 6 -->
+      <div class="glass rounded-2xl overflow-hidden hover-lift group">
+        <div class="relative overflow-hidden">
+          <div class="w-full h-64 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-5xl mb-4">🏔️</div>
+              <div class="text-xl font-semibold">Digital Nomad</div>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <a href="#" class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 616 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-2">デジタルノマド・チャレンジ</h3>
+          <p class="text-gray-400 text-sm mb-4">
+            様々な国でリモートワークを実践。バリ、タイ、エストニアでノマドライフを体験し、
+            グローバルなワークスタイルを学習。
+          </p>
+          <div class="flex items-center text-gray-300 text-sm mb-3">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 616 0z"></path>
+            </svg>
+            世界各地
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-xs">Remote</span>
+            <span class="px-3 py-1 bg-rose-500/20 text-rose-300 rounded-full text-xs">Nomad</span>
+            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">Global</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 統計情報 -->
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">15+</div>
+        <p class="text-gray-300 text-sm">訪問都市</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text mb-2">8</div>
+        <p class="text-gray-300 text-sm">訪問国</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">50+</div>
+        <p class="text-gray-300 text-sm">企業訪問</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text mb-2">100+</div>
+        <p class="text-gray-300 text-sm">学んだ技術</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- セクション区切り線 -->
+  <div class="section-divider"></div>
+</section>
