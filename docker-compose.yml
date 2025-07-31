@@ -1,0 +1,20 @@
+services:
+  portfolio-frontend:
+    build: .
+    container_name: portfolio-frontend
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=portorifo.riumu.net
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=portorifo.riumu.net
+      - LETSENCRYPT_EMAIL=progbot.clover@gmail.com
+      - PUBLIC_MICROCMS_API_KEY=${PUBLIC_MICROCMS_API_KEY}
+      - PUBLIC_MICROCMS_SERVICE_DOMAIN=${PUBLIC_MICROCMS_SERVICE_DOMAIN}
+    env_file:
+      - .env
+    networks:
+      - global-proxy-network
+
+networks:
+  global-proxy-network:
+    external: true

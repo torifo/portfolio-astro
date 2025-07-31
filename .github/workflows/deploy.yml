@@ -1,0 +1,70 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ deploy/docker-setup ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # VPS deployment runner (GitHub-hosted)
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Create .env file from secrets
+      run: |
+        echo "PUBLIC_MICROCMS_API_KEY=${{ secrets.PUBLIC_MICROCMS_API_KEY }}" > .env
+        echo "PUBLIC_MICROCMS_SERVICE_DOMAIN=${{ secrets.PUBLIC_MICROCMS_SERVICE_DOMAIN }}" >> .env
+        
+    - name: Build application
+      run: npm run build
+      
+    - name: Build Docker image
+      run: docker build -t portfolio-frontend .
+      
+    - name: Create production docker-compose.yml
+      run: |
+        cat > docker-compose.prod.yml << EOF
+        services:
+          portfolio-frontend:
+            image: portfolio-frontend
+            container_name: portfolio-frontend
+            restart: unless-stopped
+            environment:
+              - VIRTUAL_HOST=portorifo.riumu.net
+              - VIRTUAL_PORT=80
+              - LETSENCRYPT_HOST=portorifo.riumu.net
+              - LETSENCRYPT_EMAIL=progbot.clover@gmail.com
+              - PUBLIC_MICROCMS_API_KEY=${{ secrets.PUBLIC_MICROCMS_API_KEY }}
+              - PUBLIC_MICROCMS_SERVICE_DOMAIN=${{ secrets.PUBLIC_MICROCMS_SERVICE_DOMAIN }}
+            networks:
+              - global-proxy-network
+
+        networks:
+          global-proxy-network:
+            external: true
+        EOF
+        
+    - name: Save production config
+      uses: actions/upload-artifact@v4
+      with:
+        name: production-config
+        path: |
+          docker-compose.prod.yml
+          
+    # Deploy to production server (add your deployment steps here)
+    # - name: Deploy to server
+    #   run: |
+    #     # SSH to server and deploy
+    #     # docker compose -f docker-compose.prod.yml up -d
