@@ -1,0 +1,85 @@
+---
+// Header.astro - サイト全体のナビゲーション
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 glass backdrop-blur-md">
+  <nav class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <!-- ロゴ -->
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full flex items-center justify-center">
+          <span class="text-white font-bold text-sm">T</span>
+        </div>
+        <span class="text-white font-semibold text-lg">Toriforiumu</span>
+      </div>
+      
+      <!-- デスクトップナビゲーション -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#hero" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Home</a>
+        <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">About Me</a>
+        <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Skills</a>
+        <a href="#opus" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Opus</a>
+        <a href="#journey" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Journey</a>
+        <a href="#games" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Games</a>
+        <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 hover-lift">
+          Contact
+        </a>
+      </div>
+      
+      <!-- モバイルメニューボタン -->
+      <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="メニューを開く">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- モバイルメニュー -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+      <div class="flex flex-col space-y-2">
+        <a href="#hero" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Home</a>
+        <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">About</a>
+        <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Skills</a>
+        <a href="#works" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Works</a>
+        <a href="#journey" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Journey</a>
+        <a href="#games" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Games</a>
+        <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 mt-2 text-center">
+          Contact
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // モバイルメニューの制御
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+  
+  // スムーズスクロール
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+      if (href) {
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // モバイルメニューを閉じる
+          if (mobileMenu) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      }
+    });
+  });
+</script>
