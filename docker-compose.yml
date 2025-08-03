@@ -1,6 +1,6 @@
 services:
   portfolio-frontend:
-    build: .
+    image: ghcr.io/torifo/portfolio-astro:latest
     container_name: portfolio-frontend
     restart: unless-stopped
     environment:
