@@ -151,8 +151,13 @@ const allSNS = games.reduce((acc, game) => {
                 </div>
               </div>
               <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="flex space-x-4">
-                  <a href={game.officialUrl} target="_blank" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <div class="flex space-x-4 z-20">
+                  <a
+                    href={game.officialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors z-20 relative"
+                  >
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                     </svg>
@@ -200,6 +205,20 @@ const allSNS = games.reduce((acc, game) => {
                 ))}
               </div>
             </div>
+            <!-- 公式サイトリンクをカード下部にも追加 -->
+            <div class="px-6 pb-6">
+              <a
+                href={game.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-medium"
+              >
+                <span>公式サイト</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
           </div>
         );
       })}
@@ -208,7 +227,7 @@ const allSNS = games.reduce((acc, game) => {
     <!-- ゲーム統計 -->
     <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
       <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text-cyan mb-2">{games.length}+</div>
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">{games.length}</div>
         <p class="text-gray-300 text-sm">メインゲーム</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
@@ -216,11 +235,11 @@ const allSNS = games.reduce((acc, game) => {
         <p class="text-gray-300 text-sm">プレイ時間</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text-cyan mb-2">{games.reduce((acc, game) => acc + game.account.length, 0)}</div>
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">{games.reduce((acc, game) => acc + game.account.length, 0)}+</div>
         <p class="text-gray-300 text-sm">アカウント数</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text mb-2">{games.reduce((acc, game) => acc + (game.relatedSNS?.length || 0), 0)}+</div>
+        <div class="text-3xl font-bold gradient-text mb-2">{games.reduce((acc, game) => acc + (game.relatedSNS?.length || 0), 0)}</div>
         <p class="text-gray-300 text-sm">SNSリンク</p>
       </div>
     </div>
