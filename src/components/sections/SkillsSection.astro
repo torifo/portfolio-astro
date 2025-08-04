@@ -42,11 +42,11 @@ try {
 
 // レベル別の説明とスタイル
 const levelConfig = {
-  0: { label: '挑戦待ち', width: '0%', color: 'from-red-400 to-red-600' },
-  1: { label: '基礎理解', width: '25%', color: 'from-orange-400 to-orange-600' },
-  2: { label: '実用レベル', width: '50%', color: 'from-yellow-400 to-yellow-600' },
-  3: { label: '上級者', width: '75%', color: 'from-green-400 to-green-600' },
-  4: { label: 'エキスパート', width: '100%', color: 'from-blue-400 to-blue-600' },
+  0: { label: 'レベル０', width: '0%', color: 'from-red-400 to-red-600', detail: 'これから挑戦する予定' },
+  1: { label: 'レベル１', width: '25%', color: 'from-orange-400 to-orange-600', detail: '実際に模擬コードを書いたことがある' },
+  2: { label: 'レベル２', width: '50%', color: 'from-yellow-400 to-yellow-600', detail: '大学生活で実際に使用した経験がある' },
+  3: { label: 'レベル３', width: '75%', color: 'from-green-400 to-green-600', detail: '単一の個人開発で使用した経験がある' },
+  4: { label: 'レベル４', width: '100%', color: 'from-blue-400 to-blue-600', detail: '複数の個人開発で使用した経験がある' },
 };
 
 // カテゴリ別にスキルをグループ化（マークアップ言語とスタイルシート言語を統合）
@@ -66,11 +66,26 @@ const skillsByCategory = skills.reduce((acc, skill) => {
     <!-- セクションタイトル -->
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Skills</h2>
-      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-        モダンな技術スタックを駆使して、フロントエンドからバックエンドまで幅広く対応できます。(修正予定)
-        最新の技術をおいつつ，様々な技術に挑戦して実際に作品開発に活用していることをまとめたい．
-        (このしたあたりに習得度レベルのdetailの説明とかを書く)
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
+        最新の技術を追いつつ、様々な技術に挑戦して実際に作品開発に活用しています。
+        それぞれの技術について、習得レベルに応じた実践経験をもとに評価しています。
       </p>
+      
+      <!-- スキルレベルの説明 -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-4xl mx-auto mb-8">
+        {Object.entries(levelConfig).map(([level, config]) => (
+          <div class="text-center p-4 glass rounded-lg">
+            <div class={`w-full bg-gray-700 rounded-full h-2 mb-2`}>
+              <div
+                class={`bg-gradient-to-r ${config.color} h-2 rounded-full`}
+                style={`width: ${config.width}`}
+              ></div>
+            </div>
+            <h4 class="text-white font-semibold text-sm mb-1">{config.label}</h4>
+            <p class="text-gray-400 text-xs">{config.detail}</p>
+          </div>
+        ))}
+      </div>
     </div>
 
     <!-- スキルカテゴリ -->
