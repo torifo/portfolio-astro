@@ -32,18 +32,32 @@ import ThemeToggle from './ThemeToggle.astro';
       </div>
       
       <!-- タブレット専用ナビゲーション (md〜lg) -->
-      <div class="hidden md:flex lg:hidden items-center space-x-4">
-        <!-- テーマ切り替えコンポーネント -->
-        <ThemeToggle />
+      <div class="hidden md:flex lg:hidden items-center space-x-2">
+        <!-- テーマ切り替えコンポーネント（コンパクトに） -->
+        <div class="flex items-center space-x-1">
+          <div class="current-time-tablet text-cyan-400 font-mono text-xs"></div>
+          <div class="flex space-x-1 text-xs">
+            <div id="sunriseTime-tablet" class="text-orange-300 font-medium shadow-text">--:--</div>
+            <div id="sunsetTime-tablet" class="text-purple-400 font-medium shadow-text">--:--</div>
+          </div>
+          <button id="themeToggleBtn-tablet" class="p-1.5 rounded-lg glass hover:bg-white/10 transition-all duration-300" title="テーマ切り替え">
+            <svg id="sunIcon-tablet" class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+            </svg>
+            <svg id="moonIcon-tablet" class="w-4 h-4 text-blue-300 hidden" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+            </svg>
+          </button>
+        </div>
         
-        <a href="#hero" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Home</a>
-        <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">About</a>
-        <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Skills</a>
-        <a href="#opus" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Opus</a>
-        <a href="#journey" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Journey</a>
-        <a href="#games" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Games</a>
+        <a href="#hero" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">Home</a>
+        <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">About</a>
+        <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">Skills</a>
+        <a href="#opus" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">Opus</a>
+        <a href="#journey" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">Journey</a>
+        <a href="#games" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">Games</a>
         
-        <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-3 py-1.5 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 text-sm">
+        <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 py-1 rounded text-xs">
           Contact
         </a>
       </div>
@@ -65,9 +79,9 @@ import ThemeToggle from './ThemeToggle.astro';
           <div class="current-time-mobile text-cyan-400 font-mono text-lg font-bold"></div>
           
           <!-- 日の出・日没時間表示 -->
-          <div class="flex space-x-4 text-xs text-gray-400">
-            <div id="sunriseTime-mobile">Sunrise: --:--</div>
-            <div id="sunsetTime-mobile">Sunset: --:--</div>
+          <div class="flex space-x-4 text-xs">
+            <div id="sunriseTime-mobile" class="text-orange-300 font-medium shadow-text">Sunrise: --:--</div>
+            <div id="sunsetTime-mobile" class="text-purple-400 font-medium shadow-text">Sunset: --:--</div>
           </div>
           
           <!-- テーマ切り替えボタン -->
@@ -231,6 +245,63 @@ import ThemeToggle from './ThemeToggle.astro';
     }
   }
   
+  // タブレット用現在時刻を更新する関数
+  function updateTabletCurrentTime(): void {
+    const now = new Date();
+    const timeElementTablet = document.querySelector('.current-time-tablet');
+    if (timeElementTablet) {
+      timeElementTablet.textContent = now.toLocaleTimeString('ja-JP', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Tokyo'
+      });
+    }
+  }
+  
+  // タブレット用日の出・日没時間を更新する関数
+  function updateTabletSunTimes(): void {
+    const sunriseElementTablet = document.getElementById('sunriseTime-tablet');
+    const sunsetElementTablet = document.getElementById('sunsetTime-tablet');
+    const sunriseElement = document.getElementById('sunriseTime');
+    const sunsetElement = document.getElementById('sunsetTime');
+    
+    if (sunriseElementTablet && sunsetElementTablet && sunriseElement && sunsetElement) {
+      const sunriseText = sunriseElement.textContent || 'Sunrise: --:--';
+      const sunsetText = sunsetElement.textContent || 'Sunset: --:--';
+      sunriseElementTablet.textContent = sunriseText.replace('Sunrise: ', '');
+      sunsetElementTablet.textContent = sunsetText.replace('Sunset: ', '');
+    }
+  }
+  
+  // タブレット用アイコンを更新する関数
+  function updateTabletThemeIcon(): void {
+    const sunIconTablet = document.getElementById('sunIcon-tablet');
+    const moonIconTablet = document.getElementById('moonIcon-tablet');
+    
+    if (sunIconTablet && moonIconTablet) {
+      if (document.body.classList.contains('night-mode')) {
+        sunIconTablet.classList.add('hidden');
+        moonIconTablet.classList.remove('hidden');
+      } else {
+        sunIconTablet.classList.remove('hidden');
+        moonIconTablet.classList.add('hidden');
+      }
+    }
+  }
+  
+  // タブレット用テーマ切り替えボタンの制御
+  const themeToggleTablet = document.getElementById('themeToggleBtn-tablet');
+  
+  if (themeToggleTablet) {
+    themeToggleTablet.addEventListener('click', () => {
+      // 自動テーマ切り替え機能を呼び出し
+      if ((window as any).setThemeBasedOnSunriseSunset) {
+        (window as any).setThemeBasedOnSunriseSunset();
+      }
+      setTimeout(updateTabletThemeIcon, 100);
+    });
+  }
+  
   // モバイル機能の初期化
   window.addEventListener('load', () => {
     // モバイル用現在時刻の定期的な更新
@@ -243,5 +314,16 @@ import ThemeToggle from './ThemeToggle.astro';
     
     // モバイル用アイコンの初期更新
     setTimeout(updateMobileThemeIcon, 200);
+    
+    // タブレット用現在時刻の定期的な更新
+    updateTabletCurrentTime();
+    setInterval(updateTabletCurrentTime, 1000);
+    
+    // タブレット用日の出・日没時間の定期更新
+    updateTabletSunTimes();
+    setInterval(updateTabletSunTimes, 5000);
+    
+    // タブレット用アイコンの初期更新
+    setTimeout(updateTabletThemeIcon, 200);
   });
 </script>

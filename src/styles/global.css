@@ -311,6 +311,22 @@ body {
   text-align: center;
 }
 
+/* テキストの影効果（背景に同化しないように） */
+.shadow-text {
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.8),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ライトモード時のテキスト影調整 */
+body.light-mode .shadow-text {
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.9),
+    0 0 4px rgba(255, 255, 255, 0.7),
+    0 0 8px rgba(255, 255, 255, 0.5);
+}
+
 /* テーマ切り替えボタンのアイコン */
 body.light-mode #themeToggleBtn svg {
   color: #f59e0b !important;
