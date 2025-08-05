@@ -14,8 +14,8 @@ import ThemeToggle from './ThemeToggle.astro';
         <span class="text-white font-semibold text-lg">Toriforiumu</span>
       </div>
       
-      <!-- デスクトップナビゲーション -->
-      <div class="hidden md:flex items-center space-x-6">
+      <!-- タブレット・デスクトップナビゲーション -->
+      <div class="hidden lg:flex items-center space-x-6">
         <!-- テーマ切り替えコンポーネント -->
         <ThemeToggle />
         
@@ -31,16 +31,72 @@ import ThemeToggle from './ThemeToggle.astro';
         </a>
       </div>
       
+      <!-- タブレット専用ナビゲーション (md〜lg) -->
+      <div class="hidden md:flex lg:hidden items-center space-x-4">
+        <!-- テーマ切り替えコンポーネント -->
+        <ThemeToggle />
+        
+        <a href="#hero" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Home</a>
+        <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">About</a>
+        <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Skills</a>
+        <a href="#opus" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Opus</a>
+        <a href="#journey" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Journey</a>
+        <a href="#games" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm">Games</a>
+        
+        <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-3 py-1.5 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 text-sm">
+          Contact
+        </a>
+      </div>
+      
       <!-- モバイルメニューボタン -->
-      <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="メニューを開く">
+      <button id="mobile-menu-btn" class="lg:hidden text-white p-2" aria-label="メニューを開く">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
     
-    <!-- モバイルメニュー -->
-    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+    <!-- モバイル・タブレットメニュー -->
+    <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4">
+      <!-- モバイル用時間表示とテーマ切り替え -->
+      <div class="mb-4 p-4 glass rounded-lg">
+        <div class="flex flex-col items-center space-y-2">
+          <!-- 現在時刻表示 -->
+          <div class="current-time-mobile text-cyan-400 font-mono text-lg font-bold"></div>
+          
+          <!-- 日の出・日没時間表示 -->
+          <div class="flex space-x-4 text-xs text-gray-400">
+            <div id="sunriseTime-mobile">Sunrise: --:--</div>
+            <div id="sunsetTime-mobile">Sunset: --:--</div>
+          </div>
+          
+          <!-- テーマ切り替えボタン -->
+          <div class="flex items-center space-x-3">
+            <button id="themeToggleBtn-mobile" class="p-2 rounded-lg glass hover:bg-white/10 transition-all duration-300" title="テーマ切り替え">
+              <svg id="sunIcon-mobile" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+              </svg>
+              <svg id="moonIcon-mobile" class="w-5 h-5 text-blue-300 hidden" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+              </svg>
+            </button>
+            
+            <!-- テーマドロップダウンメニュー -->
+            <div class="theme-dropdown-mobile hidden glass rounded-lg p-2 space-y-1 z-50">
+              <button data-theme="light" class="w-full px-3 py-1 text-left text-gray-300 hover:text-cyan-400 hover:bg-white/10 rounded transition-colors text-sm">
+                ☀️ ライト
+              </button>
+              <button data-theme="dark" class="w-full px-3 py-1 text-left text-gray-300 hover:text-cyan-400 hover:bg-white/10 rounded transition-colors text-sm">
+                🌙 ダーク
+              </button>
+              <button data-theme="auto" class="w-full px-3 py-1 text-left text-gray-300 hover:text-cyan-400 hover:bg-white/10 rounded transition-colors text-sm">
+                🌅 自動
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="flex flex-col space-y-2">
         <a href="#hero" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Home</a>
         <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">About</a>
@@ -86,5 +142,106 @@ import ThemeToggle from './ThemeToggle.astro';
         }
       }
     });
+  });
+  
+  // モバイル用のテーマ切り替え機能
+  const themeToggleMobile = document.getElementById('themeToggleBtn-mobile');
+  const themeDropdownMobile = document.querySelector('.theme-dropdown-mobile');
+  
+  if (themeToggleMobile && themeDropdownMobile) {
+    themeToggleMobile.addEventListener('click', () => {
+      themeDropdownMobile.classList.toggle('hidden');
+    });
+    
+    // 外部クリックでメニューを閉じる
+    document.addEventListener('click', (e) => {
+      if (!themeToggleMobile.contains(e.target as Node) && !themeDropdownMobile.contains(e.target as Node)) {
+        themeDropdownMobile.classList.add('hidden');
+      }
+    });
+  }
+  
+  // モバイル用テーマドロップダウンメニューでテーマ選択
+  document.querySelectorAll('.theme-dropdown-mobile button').forEach(button => {
+    button.addEventListener('click', (event) => {
+      const selectedTheme = (event.currentTarget as HTMLButtonElement).getAttribute('data-theme');
+      
+      if (selectedTheme === 'light') {
+        document.body.classList.remove('night-mode');
+        document.body.classList.add('light-mode');
+        updateMobileThemeIcon();
+      } else if (selectedTheme === 'dark') {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('night-mode');
+        updateMobileThemeIcon();
+      } else if (selectedTheme === 'auto') {
+        // デスクトップ版のテーマ機能を呼び出し
+        if ((window as any).setThemeBasedOnSunriseSunset) {
+          (window as any).setThemeBasedOnSunriseSunset();
+        }
+      }
+      
+      // メニューを閉じる
+      if (themeDropdownMobile) {
+        themeDropdownMobile.classList.add('hidden');
+      }
+    });
+  });
+  
+  // モバイル用アイコンを更新する関数
+  function updateMobileThemeIcon(): void {
+    const sunIconMobile = document.getElementById('sunIcon-mobile');
+    const moonIconMobile = document.getElementById('moonIcon-mobile');
+    
+    if (sunIconMobile && moonIconMobile) {
+      if (document.body.classList.contains('night-mode')) {
+        sunIconMobile.classList.add('hidden');
+        moonIconMobile.classList.remove('hidden');
+      } else {
+        sunIconMobile.classList.remove('hidden');
+        moonIconMobile.classList.add('hidden');
+      }
+    }
+  }
+  
+  // モバイル用現在時刻を更新する関数
+  function updateMobileCurrentTime(): void {
+    const now = new Date();
+    const timeElementMobile = document.querySelector('.current-time-mobile');
+    if (timeElementMobile) {
+      timeElementMobile.textContent = now.toLocaleTimeString('ja-JP', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: 'Asia/Tokyo'
+      });
+    }
+  }
+  
+  // モバイル用日の出・日没時間を更新する関数
+  function updateMobileSunTimes(): void {
+    const sunriseElementMobile = document.getElementById('sunriseTime-mobile');
+    const sunsetElementMobile = document.getElementById('sunsetTime-mobile');
+    const sunriseElement = document.getElementById('sunriseTime');
+    const sunsetElement = document.getElementById('sunsetTime');
+    
+    if (sunriseElementMobile && sunsetElementMobile && sunriseElement && sunsetElement) {
+      sunriseElementMobile.textContent = sunriseElement.textContent || 'Sunrise: --:--';
+      sunsetElementMobile.textContent = sunsetElement.textContent || 'Sunset: --:--';
+    }
+  }
+  
+  // モバイル機能の初期化
+  window.addEventListener('load', () => {
+    // モバイル用現在時刻の定期的な更新
+    updateMobileCurrentTime();
+    setInterval(updateMobileCurrentTime, 1000);
+    
+    // モバイル用日の出・日没時間の定期更新
+    updateMobileSunTimes();
+    setInterval(updateMobileSunTimes, 5000);
+    
+    // モバイル用アイコンの初期更新
+    setTimeout(updateMobileThemeIcon, 200);
   });
 </script>

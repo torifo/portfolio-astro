@@ -102,19 +102,20 @@
       if (sunsetElement) sunsetElement.textContent = `Sunset: ${sunsetTime}`;
       
       // テーマ切り替えロジック（UTCで統一して比較）
+      // 日の出後から日没前の場合：ライトモード
       // 日没後または日の出前の場合：ナイトモード
       if (nowUTC >= sunriseUTC && nowUTC <= sunsetUTC) {
-        document.body.classList.add('night-mode');
-        document.body.classList.remove('light-mode');
-        console.log('ナイトモードに切り替え:', {
+        document.body.classList.add('light-mode');
+        document.body.classList.remove('night-mode');
+        console.log('ライトモードに切り替え:', {
           now: nowUTC.toISOString(),
           sunrise: sunriseUTC.toISOString(),
           sunset: sunsetUTC.toISOString()
         });
       } else {
-        document.body.classList.add('light-mode');
-        document.body.classList.remove('night-mode');
-        console.log('ライトモードに切り替え:', {
+        document.body.classList.add('night-mode');
+        document.body.classList.remove('light-mode');
+        console.log('ナイトモードに切り替え:', {
           now: nowUTC.toISOString(),
           sunrise: sunriseUTC.toISOString(),
           sunset: sunsetUTC.toISOString()
