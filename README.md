@@ -13,6 +13,7 @@ AstroとReactを使用して構築されたモダンなポートフォリオWeb�
 - **スタイリング**: Tailwind CSS 4.1.11 - ユーティリティファーストのCSS
 - **言語**: TypeScript - 型安全性とコード品質の向上
 - **バックエンド**: microCMS - ヘッドレスCMSによるコンテンツ管理
+- **外部API**: Sunrise Sunset API - 日の出・日没時刻による自動テーマ切り替え
 
 ### ✨ 特徴
 
@@ -21,6 +22,8 @@ AstroとReactを使用して構築されたモダンなポートフォリオWeb�
 - **モダンなUI**: グラデーションエフェクトとアニメーション
 - **コンポーネント指向**: 再利用可能な設計
 - **動的コンテンツ**: microCMS APIによる柔軟なコンテンツ管理
+- **自動テーマ切り替え**: 日の出・日没時刻に基づくライト/ダークモード自動切り替え
+- **リアルタイム時計**: JST時刻のリアルタイム表示
 - **開発中**: 継続的な機能追加とUI改善を実施中
 
 ### 📁 プロジェクト構造
@@ -30,6 +33,7 @@ AstroとReactを使用して構築されたモダンなポートフォリオWeb�
 ├── src/
 │   ├── components/          # 再利用可能なコンポーネント
 │   │   ├── Header.astro     # ヘッダーナビゲーション
+│   │   ├── ThemeToggle.astro # テーマ切り替えと時間表示
 │   │   ├── Footer.astro     # フッター
 │   │   └── sections/        # セクション別コンポーネント
 │   │       ├── HeroSection.astro     # メインビジュアル
@@ -62,8 +66,17 @@ AstroとReactを使用して構築されたモダンなポートフォリオWeb�
 
 - **現在の状況**: 開発段階・継続的な機能追加中
 - **API連携**: Skillsセクションでは既にmicroCMS APIを使用してデータを動的取得
+- **新機能完了**: 日の出・日没APIによる自動テーマ切り替え機能を実装済み
 - **今後の展開**: 他のセクションにもAPI連携を拡張し、より柔軟なコンテンツ管理を実現予定
 - **計画中の機能**: プロジェクト情報の動的管理、経歴データのAPI化、ゲーム情報の自動更新
+
+### 🌅 最新機能 - ナイトモード (2025年1月)
+
+- **自動テーマ切り替え**: 東京の日の出・日没時刻に基づいて自動的にライト/ダークモードを切り替え
+- **リアルタイム時計**: ヘッダーにJST時刻をリアルタイム表示
+- **手動テーマ選択**: ドロップダウンメニューでライト/ダーク/自動モードを選択可能
+- **動的アイコン**: テーマに応じて太陽/月のアイコンが切り替わる
+- **UI最適化**: ライトモードでの文字の視認性を大幅改善
 
 ---
 
@@ -88,6 +101,8 @@ A modern portfolio website built with Astro and React, featuring clean design an
 - **Modern UI**: Gradient effects and smooth animations
 - **Component-Oriented**: Reusable and maintainable architecture
 - **Dynamic Content**: Flexible content management with microCMS API
+- **Auto Theme Switching**: Automatic light/dark mode based on sunrise/sunset times
+- **Real-time Clock**: JST time display in real-time
 - **In Development**: Continuous feature additions and UI improvements
 
 ### 📁 Project Structure
@@ -129,5 +144,14 @@ A modern portfolio website built with Astro and React, featuring clean design an
 
 - **Current Status**: In development with continuous feature additions
 - **API Integration**: Skills section already uses microCMS API for dynamic data retrieval
+- **New Feature Completed**: Automatic theme switching based on sunrise/sunset API implementation
 - **Future Expansion**: Planning to extend API integration to other sections for more flexible content management
 - **Planned Features**: Dynamic project information management, API-driven career data, automated game information updates
+
+### 🌅 Latest Feature - Night Mode (January 2025)
+
+- **Auto Theme Switching**: Automatically switches between light/dark mode based on Tokyo's sunrise/sunset times
+- **Real-time Clock**: JST time display in header with real-time updates
+- **Manual Theme Selection**: Dropdown menu for light/dark/auto mode selection
+- **Dynamic Icons**: Sun/moon icons change according to current theme
+- **UI Optimization**: Significantly improved text visibility in light mode
