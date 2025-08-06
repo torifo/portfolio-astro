@@ -34,20 +34,35 @@ import ThemeToggle from './ThemeToggle.astro';
       <!-- タブレット専用ナビゲーション (md〜lg) -->
       <div class="hidden md:flex lg:hidden items-center space-x-2">
         <!-- テーマ切り替えコンポーネント（コンパクトに） -->
-        <div class="flex items-center space-x-1">
+        <div class="flex items-center space-x-3">
           <div class="current-time-tablet text-cyan-400 font-mono text-xs"></div>
-          <div class="flex space-x-1 text-xs">
+          <div class="flex space-x-2 text-xs">
             <div id="sunriseTime-tablet" class="text-orange-300 font-medium shadow-text">--:--</div>
             <div id="sunsetTime-tablet" class="text-purple-400 font-medium shadow-text">--:--</div>
           </div>
-          <button id="themeToggleBtn-tablet" class="p-1.5 rounded-lg glass hover:bg-white/10 transition-all duration-300" title="テーマ切り替え">
-            <svg id="sunIcon-tablet" class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
-            </svg>
-            <svg id="moonIcon-tablet" class="w-4 h-4 text-blue-300 hidden" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-            </svg>
-          </button>
+          <div class="relative">
+            <button id="themeToggleBtn-tablet" class="p-1.5 rounded-lg glass hover:bg-white/10 transition-all duration-300" title="テーマ切り替え">
+              <svg id="sunIcon-tablet" class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+              </svg>
+              <svg id="moonIcon-tablet" class="w-4 h-4 text-blue-300 hidden" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+              </svg>
+            </button>
+            
+            <!-- タブレット用テーマドロップダウンメニュー -->
+            <div class="theme-dropdown-tablet absolute right-0 top-full mt-2 w-40 glass rounded-lg shadow-lg hidden z-50">
+              <button data-theme="light" class="w-full px-3 py-2 text-left text-gray-300 hover:text-cyan-400 hover:bg-white/10 rounded-t-lg transition-colors text-xs">
+                ☀️ ライトモード
+              </button>
+              <button data-theme="dark" class="w-full px-3 py-2 text-left text-gray-300 hover:text-cyan-400 hover:bg-white/10 transition-colors text-xs">
+                🌙 ダークモード
+              </button>
+              <button data-theme="auto" class="w-full px-3 py-2 text-left text-gray-300 hover:text-cyan-400 hover:bg-white/10 rounded-b-lg transition-colors text-xs">
+                🌅 自動（日没に合わせる）
+              </button>
+            </div>
+          </div>
         </div>
         
         <a href="#hero" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">Home</a>
@@ -291,16 +306,47 @@ import ThemeToggle from './ThemeToggle.astro';
   
   // タブレット用テーマ切り替えボタンの制御
   const themeToggleTablet = document.getElementById('themeToggleBtn-tablet');
+  const themeDropdownTablet = document.querySelector('.theme-dropdown-tablet');
   
-  if (themeToggleTablet) {
+  if (themeToggleTablet && themeDropdownTablet) {
     themeToggleTablet.addEventListener('click', () => {
-      // 自動テーマ切り替え機能を呼び出し
-      if ((window as any).setThemeBasedOnSunriseSunset) {
-        (window as any).setThemeBasedOnSunriseSunset();
+      themeDropdownTablet.classList.toggle('hidden');
+    });
+    
+    // 外部クリックでメニューを閉じる
+    document.addEventListener('click', (e) => {
+      if (!themeToggleTablet.contains(e.target as Node) && !themeDropdownTablet.contains(e.target as Node)) {
+        themeDropdownTablet.classList.add('hidden');
       }
-      setTimeout(updateTabletThemeIcon, 100);
     });
   }
+  
+  // タブレット用テーマドロップダウンメニューでテーマ選択
+  document.querySelectorAll('.theme-dropdown-tablet button').forEach(button => {
+    button.addEventListener('click', (event) => {
+      const selectedTheme = (event.currentTarget as HTMLButtonElement).getAttribute('data-theme');
+      
+      if (selectedTheme === 'light') {
+        document.body.classList.remove('night-mode');
+        document.body.classList.add('light-mode');
+        updateTabletThemeIcon();
+      } else if (selectedTheme === 'dark') {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('night-mode');
+        updateTabletThemeIcon();
+      } else if (selectedTheme === 'auto') {
+        // デスクトップ版のテーマ機能を呼び出し
+        if ((window as any).setThemeBasedOnSunriseSunset) {
+          (window as any).setThemeBasedOnSunriseSunset();
+        }
+      }
+      
+      // メニューを閉じる
+      if (themeDropdownTablet) {
+        themeDropdownTablet.classList.add('hidden');
+      }
+    });
+  });
   
   // モバイル機能の初期化
   window.addEventListener('load', () => {

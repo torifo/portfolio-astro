@@ -279,6 +279,23 @@ body.light-mode .theme-dropdown button:hover {
   background: rgba(0, 0, 0, 0.08);
 }
 
+/* タブレット用テーマドロップダウンメニューの調整 */
+body.light-mode .theme-dropdown-tablet {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .theme-dropdown-tablet button {
+  color: #1f2937;
+}
+
+body.light-mode .theme-dropdown-tablet button:hover {
+  color: #0e7490;
+  background: rgba(0, 0, 0, 0.08);
+}
+
 /* スクロールバーのライトモード調整 */
 body.light-mode ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
