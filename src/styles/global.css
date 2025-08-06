@@ -411,51 +411,127 @@ body.light-mode #games .glass h3 {
 
 /* GameSectionのタグのライトモード調整 */
 body.light-mode #games .bg-blue-500\/20 {
-  background-color: rgba(59, 130, 246, 0.3);
-  color: #1d4ed8;
+  background-color: rgba(59, 130, 246, 0.5);
+  color: #1e3a8a;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-sky-500\/20 {
-  background-color: rgba(14, 165, 233, 0.3);
-  color: #0369a1;
+  background-color: rgba(14, 165, 233, 0.5);
+  color: #0c4a6e;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-purple-500\/20 {
-  background-color: rgba(168, 85, 247, 0.3);
-  color: #7c3aed;
+  background-color: rgba(168, 85, 247, 0.5);
+  color: #581c87;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-green-500\/20 {
-  background-color: rgba(34, 197, 94, 0.3);
-  color: #15803d;
+  background-color: rgba(34, 197, 94, 0.5);
+  color: #14532d;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-red-500\/20 {
-  background-color: rgba(239, 68, 68, 0.3);
-  color: #dc2626;
+  background-color: rgba(239, 68, 68, 0.5);
+  color: #991b1b;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-indigo-500\/20 {
-  background-color: rgba(99, 102, 241, 0.3);
-  color: #4338ca;
+  background-color: rgba(99, 102, 241, 0.5);
+  color: #312e81;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-pink-500\/20 {
-  background-color: rgba(236, 72, 153, 0.3);
-  color: #be185d;
+  background-color: rgba(236, 72, 153, 0.5);
+  color: #831843;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-teal-500\/20 {
-  background-color: rgba(20, 184, 166, 0.3);
-  color: #0f766e;
+  background-color: rgba(20, 184, 166, 0.5);
+  color: #134e4a;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-cyan-500\/20 {
-  background-color: rgba(6, 182, 212, 0.3);
-  color: #0891b2;
+  background-color: rgba(6, 182, 212, 0.5);
+  color: #164e63;
+  font-weight: 600;
 }
 
 body.light-mode #games .bg-gray-500\/20 {
-  background-color: rgba(107, 114, 128, 0.3);
-  color: #374151;
+  background-color: rgba(107, 114, 128, 0.5);
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* HeroSectionのキーワードタグのライトモード調整 */
+body.light-mode #hero .text-cyan-300 {
+  color: #0e7490 !important;
+  font-weight: 700;
+}
+
+body.light-mode #hero .border-cyan-400\/30 {
+  border-color: rgba(14, 116, 144, 0.6) !important;
+}
+
+body.light-mode #hero .hover\:bg-cyan-400\/10:hover {
+  background-color: rgba(14, 116, 144, 0.25) !important;
+}
+
+body.light-mode #hero .text-emerald-300 {
+  color: #047857 !important;
+  font-weight: 700;
+}
+
+body.light-mode #hero .border-emerald-400\/30 {
+  border-color: rgba(4, 120, 87, 0.6) !important;
+}
+
+body.light-mode #hero .hover\:bg-emerald-400\/10:hover {
+  background-color: rgba(4, 120, 87, 0.25) !important;
+}
+
+body.light-mode #hero .text-sky-300 {
+  color: #0369a1 !important;
+  font-weight: 700;
+}
+
+body.light-mode #hero .border-sky-400\/30 {
+  border-color: rgba(3, 105, 161, 0.6) !important;
+}
+
+body.light-mode #hero .hover\:bg-sky-400\/10:hover {
+  background-color: rgba(3, 105, 161, 0.25) !important;
+}
+
+body.light-mode #hero .text-blue-300 {
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+
+body.light-mode #hero .border-blue-400\/30 {
+  border-color: rgba(29, 78, 216, 0.6) !important;
+}
+
+body.light-mode #hero .hover\:bg-blue-400\/10:hover {
+  background-color: rgba(29, 78, 216, 0.25) !important;
+}
+
+body.light-mode #hero .text-pink-300 {
+  color: #be185d !important;
+  font-weight: 700;
+}
+
+body.light-mode #hero .border-pink-400\/30 {
+  border-color: rgba(190, 24, 93, 0.6) !important;
+}
+
+body.light-mode #hero .hover\:bg-pink-400\/10:hover {
+  background-color: rgba(190, 24, 93, 0.25) !important;
 }
