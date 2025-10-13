@@ -8,6 +8,7 @@
 - [ビルド時の問題](#ビルド時の問題)
 - [Docker関連の問題](#docker関連の問題)
 - [API関連の問題](#api関連の問題)
+- [コンポーネントの問題](#コンポーネントの問題)
 - [テーマ機能の問題](#テーマ機能の問題)
 
 ## 開発環境の問題
@@ -157,6 +158,72 @@ fetch('https://api.sunrise-sunset.org/json?lat=35.6762&lng=139.6503&formatted=0'
   .then(response => response.json())
   .then(data => console.log(data));
 ```
+
+## コンポーネントの問題
+
+### OpusSection - モバイル端末での開閉機能が動作しない
+
+**症状**: 関連プロジェクトの開閉ボタンをクリックしても反応がない
+
+**原因**:
+動的に生成されたIDを含むCSSクラスセレクタが正しく動作しない問題が発生しました。
+```javascript
+// 動作しないコード例
+const container = document.querySelector('.related-projects-' + projectId);
+// projectId = "mocnp48jpl81" の場合
+// document.querySelector('.related-projects-mocnp48jpl81') は null を返す
+```
+
+ハイフンを含む複雑な動的クラス名は、JavaScriptの`querySelector()`で信頼性の低い動作を引き起こします。
+
+**解決方法**:
+CSSクラスセレクタの代わりに**data属性セレクタ**を使用します。
+
+```astro
+<!-- 修正前（動作しない） -->
+<div class="related-projects-{project.id}">...</div>
+<script>
+const container = document.querySelector('.related-projects-' + projectId);
+</script>
+
+<!-- 修正後（動作する） -->
+<div data-related-container={project.id}>...</div>
+<script is:inline>
+const container = document.querySelector('[data-related-container="' + projectId + '"]');
+</script>
+```
+
+**重要なポイント**:
+
+1. **data属性を使用**:
+   - `class="related-projects-{id}"` → `data-related-container={id}`
+   - `class="related-toggle-icon-{id}"` → `data-related-icon={id}`
+
+2. **属性セレクタ構文**:
+   ```javascript
+   // クラスセレクタ（推奨されない）
+   document.querySelector('.related-projects-' + projectId)
+
+   // 属性セレクタ（推奨）
+   document.querySelector('[data-related-container="' + projectId + '"]')
+   ```
+
+3. **`is:inline`ディレクティブの追加**:
+   ```astro
+   <script is:inline>
+   // TypeScript処理をスキップしてプレーンなJavaScriptとして実行
+   </script>
+   ```
+
+**関連エラー**: SVGパスエラー
+```
+Error: <path> attribute d: Expected arc flag ('0' or '1')
+```
+このエラーはテンプレートリテラルとTypeScriptがJSX内のインラインイベントハンドラで競合した場合に発生します。`is:inline`ディレクティブを使用してプレーンJavaScriptに変更することで解決します。
+
+**関連ファイル**:
+- `/src/components/sections/OpusSection.astro` - 302-365行目（JavaScript実装）
+- 188-198行目（data属性を使用したHTML）
 
 ## テーマ機能の問題
 
