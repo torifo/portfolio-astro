@@ -35,7 +35,7 @@ cd portfolio-astro
 git pull origin deploy/docker-setup
 
 # 依存関係のインストール（必要に応じて）
-npm ci
+# npm ci
 
 # .envファイルの確認・作成
 # PUBLIC_MICROCMS_API_KEY=your_api_key
