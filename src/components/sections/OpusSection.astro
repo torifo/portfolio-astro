@@ -1,5 +1,92 @@
 ---
-// OpusSection.astro - 開発実績セクション（ダミーデータ）
+// OpusSection.astro - 開発実績セクション（microCMS連携）
+
+// microCMS APIからopusデータを取得
+const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
+const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+
+interface Opus {
+  id: string;
+  title: string;
+  description: string; // HTML形式
+  galleryTypes: {
+    url: string;
+    height: number;
+    width: number;
+  }[];
+  category: string[];
+  relatedLinks: {
+    fieldId: string;
+    service: string;
+    thumbnail: {
+      url: string;
+      height: number;
+      width: number;
+    }[];
+    repoUrl?: string;
+    context?: string; // Markdown形式の詳細説明
+  }[];
+}
+
+interface OpusResponse {
+  contents: Opus[];
+  totalCount: number;
+}
+
+let opus: Opus[] = [];
+let allCategories: string[] = [];
+
+try {
+  const response = await fetch(`${SERVICE_DOMAIN}opus?limit=100`, {
+    headers: {
+      'X-MICROCMS-API-KEY': MICROCMS_API_KEY,
+    },
+  });
+  
+  if (response.ok) {
+    const data: OpusResponse = await response.json();
+    opus = data.contents;
+    
+    // 全カテゴリーを収集（重複除去）
+    allCategories = [...new Set(opus.flatMap(item => item.category))];
+  }
+} catch (error) {
+  console.error('Failed to fetch opus:', error);
+}
+
+// カテゴリ別の色マッピング
+const getCategoryColor = (category: string) => {
+  const categoryColors: Record<string, string> = {
+    'Web': 'bg-cyan-500/20 text-cyan-300',
+    'Discord Bot': 'bg-purple-500/20 text-purple-300',
+    'Bot': 'bg-indigo-500/20 text-indigo-300',
+    'Game': 'bg-green-500/20 text-green-300',
+    'TODO': 'bg-orange-500/20 text-orange-300',
+    'LP': 'bg-pink-500/20 text-pink-300',
+  };
+  return categoryColors[category] || 'bg-gray-500/20 text-gray-300';
+};
+
+// カラーパターン
+const colorPatterns = [
+  'from-cyan-500 to-blue-600',
+  'from-purple-500 to-pink-600',
+  'from-emerald-500 to-teal-600',
+  'from-blue-400 to-sky-600',
+  'from-red-500 to-orange-600',
+  'from-violet-500 to-purple-600',
+  'from-indigo-500 to-purple-600',
+  'from-rose-500 to-pink-600',
+];
+
+// 動的グリッドクラスを決定する関数
+const getGridColumns = (itemCount: number) => {
+  if (itemCount === 1) return 'grid-cols-1';
+  if (itemCount === 2) return 'grid-cols-1 md:grid-cols-2';
+  if (itemCount <= 3) return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+  if (itemCount <= 6) return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+  return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+};
 ---
 
 <section id="opus" class="py-20 relative">
@@ -8,251 +95,143 @@
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Opus</h2>
       <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-        これまでに手がけた作品をご紹介します。（※一部ダミーデータを含みます）
         これまでに手がけた主要な開発プロジェクトをご紹介します。<br>
         技術選定から実装まで、一貫してこだわり抜いて制作しています。
       </p>
     </div>
 
+    <!-- カテゴリー統計 -->
+    {allCategories.length > 0 && (
+      <div class="mb-12 text-center">
+        <div class="flex flex-wrap justify-center gap-3">
+          {allCategories.map((category) => (
+            <span class={`px-4 py-2 ${getCategoryColor(category)} rounded-full text-sm font-medium`}>
+              {category} ({opus.filter(item => item.category.includes(category)).length})
+            </span>
+          ))}
+        </div>
+      </div>
+    )}
+
     <!-- プロジェクトグリッド -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- プロジェクト 1 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-48 bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-4xl mb-2">🌐</div>
-              <div class="text-lg font-semibold">Portfolio Site</div>
+    <div class={`grid ${getGridColumns(opus.length)} gap-8`}>
+      {opus.map((project, index) => {
+        const colorPattern = colorPatterns[index % colorPatterns.length];
+        const heroImage = project.galleryTypes?.[0];
+        
+        return (
+          <div class="glass rounded-2xl overflow-hidden hover-lift group">
+            <div class="relative overflow-hidden">
+              {heroImage ? (
+                <div class="w-full h-48 relative">
+                  <img
+                    src={heroImage.url}
+                    alt={`${project.title}のメイン画像`}
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-black/40"></div>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-white text-center">
+                      <div class="text-lg font-semibold">{project.title}</div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div class={`w-full h-48 bg-gradient-to-br ${colorPattern} flex items-center justify-center`}>
+                  <div class="text-white text-center">
+                    <div class="text-4xl mb-2">🚀</div>
+                    <div class="text-lg font-semibold">{project.title}</div>
+                  </div>
+                </div>
+              )}
+              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <div class="flex space-x-4">
+                  {project.relatedLinks.map((link) => (
+                    link.repoUrl ? (
+                      <a
+                        href={link.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors"
+                        title="GitHubリポジトリ"
+                      >
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                      </a>
+                    ) : null
+                  ))}
+                  <button
+                    class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors opus-detail-btn"
+                    data-opus-id={project.id}
+                    title="詳細を見る"
+                  >
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white mb-2">{project.title}</h3>
+              <div class="text-gray-400 text-sm mb-4 line-clamp-3" set:html={project.description}></div>
+              <div class="flex flex-wrap gap-2">
+                {project.category.map((cat) => (
+                  <span class={`px-3 py-1 ${getCategoryColor(cat)} rounded-full text-xs`}>
+                    {cat}
+                  </span>
+                ))}
+              </div>
+              {project.relatedLinks.length > 0 && (
+                <div class="mt-4 pt-4 border-t border-gray-700">
+                  <div class="text-sm text-gray-300 mb-2">関連プロジェクト:</div>
+                  <div class="space-y-1">
+                    {project.relatedLinks.slice(0, 3).map((link) => (
+                      <div class="text-xs text-cyan-400">
+                        • {link.service}
+                      </div>
+                    ))}
+                    {project.relatedLinks.length > 3 && (
+                      <div class="text-xs text-gray-500">
+                        他 {project.relatedLinks.length - 3} 件
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <div class="flex space-x-4">
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">モダンポートフォリオサイト</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            Astro + Tailwind CSSで構築したパフォーマンス重視のポートフォリオサイト．
-            View Transitionsとアニメーションで近未来的なUXを実現。
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs">Astro</span>
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">TypeScript</span>
-            <span class="px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-xs">Tailwind</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- プロジェクト 2 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-4xl mb-2">📊</div>
-              <div class="text-lg font-semibold">Dashboard App</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <div class="flex space-x-4">
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">データ分析ダッシュボード</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            React + Chart.jsを使用したリアルタイムデータ可視化ダッシュボード。
-            レスポンシブデザインで複数デバイス対応。
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">React</span>
-            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-xs">Chart.js</span>
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs">Node.js</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- プロジェクト 3 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-48 bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-4xl mb-2">🔌</div>
-              <div class="text-lg font-semibold">REST API</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <div class="flex space-x-4">
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">マイクロサービスAPI</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            Python FastAPIで構築したスケーラブルなRESTful API。
-            認証機能とリアルタイム通信を実装。
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">FastAPI</span>
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs">Python</span>
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">PostgreSQL</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- プロジェクト 4 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-48 bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-4xl mb-2">📱</div>
-              <div class="text-lg font-semibold">Mobile App</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <div class="flex space-x-4">
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">ToDo管理アプリ</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            React Nativeで開発したクロスプラットフォーム対応のToDo管理アプリ。
-            オフライン同期機能付き。
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">React Native</span>
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">Expo</span>
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs">SQLite</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- プロジェクト 5 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-4xl mb-2">🛒</div>
-              <div class="text-lg font-semibold">E-commerce</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <div class="flex space-x-4">
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">ECサイトプラットフォーム</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            Next.js + Stripeで構築したフルスタックECサイト。
-            決済機能と在庫管理システムを実装。
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-black/20 text-white rounded-full text-xs">Next.js</span>
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">Stripe</span>
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs">MongoDB</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- プロジェクト 6 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-4xl mb-2">✍️</div>
-              <div class="text-lg font-semibold">Blog Platform</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <div class="flex space-x-4">
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">ブログプラットフォーム</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            Astro + microCMSで構築したヘッドレスCMSブログ。
-            SEO最適化とMarkdown対応で高速表示を実現。
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-xs">Astro</span>
-            <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-xs">microCMS</span>
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Markdown</span>
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </div>
 
-    <!-- もっと見るボタン -->
-    <div class="text-center mt-12">
-      <a href="/opus" class="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold px-8 py-4 rounded-xl hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 hover-lift">
-        全ての作品を見る
-      </a>
+    <!-- 統計情報 -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">{opus.length}</div>
+        <p class="text-gray-300">開発プロジェクト</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text mb-2">{allCategories.length}</div>
+        <p class="text-gray-300">技術カテゴリ</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">{opus.reduce((acc, project) => acc + project.relatedLinks.length, 0)}</div>
+        <p class="text-gray-300">関連サービス</p>
+      </div>
     </div>
   </div>
 
   <!-- セクション区切り線 -->
   <div class="section-divider"></div>
 </section>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
