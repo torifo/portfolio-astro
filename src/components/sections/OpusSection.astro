@@ -117,24 +117,62 @@ const getGridColumns = (itemCount: number) => {
     <div class={`grid ${getGridColumns(opus.length)} gap-8`}>
       {opus.map((project, index) => {
         const colorPattern = colorPatterns[index % colorPatterns.length];
-        const heroImage = project.galleryTypes?.[0];
-        
+        const galleryImages = project.galleryTypes || [];
+        const hasMultipleGalleryImages = galleryImages.length > 1;
+
         return (
           <div class="glass rounded-2xl overflow-hidden hover-lift group">
             <div class="relative overflow-hidden">
-              {heroImage ? (
-                <div class="w-full h-64 relative">
-                  <img
-                    src={heroImage.url}
-                    alt={`${project.title}のメイン画像`}
-                    class="w-full h-full object-contain bg-gray-900"
-                  />
+              {galleryImages.length > 0 ? (
+                <div class="w-full h-64 relative bg-gray-900 group/main-gallery">
+                  <div class="relative w-full h-full flex items-center justify-center">
+                    {galleryImages.map((img, imgIndex) => (
+                      <img
+                        src={img.url}
+                        alt={`${project.title} - ${imgIndex + 1}`}
+                        class={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 main-gallery-image-${project.id}`}
+                        data-index={imgIndex}
+                        style={imgIndex === 0 ? 'opacity: 1;' : 'opacity: 0;'}
+                      />
+                    ))}
+                  </div>
                   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
                   <div class="absolute bottom-4 left-0 right-0 text-center">
                     <div class="text-white">
                       <div class="text-lg font-semibold drop-shadow-lg">{project.title}</div>
                     </div>
                   </div>
+                  {hasMultipleGalleryImages && (
+                    <>
+                      <button
+                        class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 rounded opacity-0 group-hover/main-gallery:opacity-100 transition-opacity z-10"
+                        onclick={`prevMainImage('${project.id}', ${galleryImages.length}); event.stopPropagation();`}
+                        type="button"
+                      >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                      </button>
+                      <button
+                        class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 rounded opacity-0 group-hover/main-gallery:opacity-100 transition-opacity z-10"
+                        onclick={`nextMainImage('${project.id}', ${galleryImages.length}); event.stopPropagation();`}
+                        type="button"
+                      >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </button>
+                      <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                        {galleryImages.map((_, dotIndex) => (
+                          <div
+                            class={`w-2 h-2 rounded-full transition-colors main-gallery-dot-${project.id}`}
+                            data-index={dotIndex}
+                            style={dotIndex === 0 ? 'background-color: rgb(34, 211, 238);' : 'background-color: rgba(255, 255, 255, 0.5);'}
+                          ></div>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               ) : (
                 <div class={`w-full h-48 bg-gradient-to-br ${colorPattern} flex items-center justify-center`}>
@@ -300,18 +338,53 @@ const getGridColumns = (itemCount: number) => {
 </section>
 
 <script is:inline>
-  // 画像スライドショー機能
+  // メインギャラリー用の状態管理
+  const mainGalleryState = new Map();
+
+  // 関連プロジェクトギャラリー用の状態管理
   const galleryState = new Map();
 
+  // メインギャラリー更新関数
+  function updateMainGallery(projectId, currentIndex) {
+    const images = document.querySelectorAll('.main-gallery-image-' + projectId);
+    const dots = document.querySelectorAll('.main-gallery-dot-' + projectId);
+
+    images.forEach(function(img, idx) {
+      img.style.opacity = idx === currentIndex ? '1' : '0';
+    });
+
+    dots.forEach(function(dot, idx) {
+      dot.style.backgroundColor =
+        idx === currentIndex ? 'rgb(34, 211, 238)' : 'rgba(255, 255, 255, 0.5)';
+    });
+
+    mainGalleryState.set(projectId, currentIndex);
+  }
+
+  // メインギャラリー: 次の画像
+  window.nextMainImage = function(projectId, totalImages) {
+    const current = mainGalleryState.get(projectId) || 0;
+    const next = (current + 1) % totalImages;
+    updateMainGallery(projectId, next);
+  };
+
+  // メインギャラリー: 前の画像
+  window.prevMainImage = function(projectId, totalImages) {
+    const current = mainGalleryState.get(projectId) || 0;
+    const prev = (current - 1 + totalImages) % totalImages;
+    updateMainGallery(projectId, prev);
+  };
+
+  // 関連プロジェクトギャラリー更新関数
   function updateGallery(galleryId, currentIndex) {
     const images = document.querySelectorAll('.gallery-image-' + galleryId);
     const dots = document.querySelectorAll('.gallery-dot-' + galleryId);
 
-    images.forEach((img, idx) => {
+    images.forEach(function(img, idx) {
       img.style.opacity = idx === currentIndex ? '1' : '0';
     });
 
-    dots.forEach((dot, idx) => {
+    dots.forEach(function(dot, idx) {
       dot.style.backgroundColor =
         idx === currentIndex ? 'rgb(34, 211, 238)' : 'rgba(255, 255, 255, 0.5)';
     });
@@ -319,12 +392,14 @@ const getGridColumns = (itemCount: number) => {
     galleryState.set(galleryId, currentIndex);
   }
 
+  // 関連プロジェクトギャラリー: 次の画像
   window.nextImage = function(galleryId, totalImages) {
     const current = galleryState.get(galleryId) || 0;
     const next = (current + 1) % totalImages;
     updateGallery(galleryId, next);
   };
 
+  // 関連プロジェクトギャラリー: 前の画像
   window.prevImage = function(galleryId, totalImages) {
     const current = galleryState.get(galleryId) || 0;
     const prev = (current - 1 + totalImages) % totalImages;
