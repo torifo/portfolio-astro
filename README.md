@@ -58,11 +58,12 @@ AstroとReactを使用して構築されたモダンなポートフォリオWeb�
 │   └── deploy.yml          # デプロイメントワークフロー
 ├── image/icon/              # アイコン・画像素材
 ├── public/                  # 静的ファイル
+├── docs/                    # ドキュメント
+│   ├── deployment/         # デプロイメント関連
+│   └── troubleshooting/    # トラブルシューティング
 ├── docker-compose.yml       # Docker Compose設定
 ├── Dockerfile              # Docker設定
 ├── nginx.conf              # Nginx設定
-├── DEPLOYMENT.md           # デプロイメント手順書
-├── TROUBLESHOOTING.md      # トラブルシューティングガイド
 └── 設定ファイル (astro.config.mjs, tailwind.config.mjs等)
 ```
 
@@ -114,7 +115,7 @@ AstroとReactを使用して構築されたモダンなポートフォリオWeb�
 2. **ビルド環境**: WSLでのDockerイメージビルド・Container Registryへプッシュ
 3. **プレ公開環境**: `https://portorifo.riumu.net` でのコンテナテスト運用
 
-詳細は [`DEPLOYMENT.md`](DEPLOYMENT.md) を参照してください。
+詳細は [`docs/deployment/DEPLOYMENT.md`](docs/deployment/DEPLOYMENT.md) を参照してください。
 
 ---
 
@@ -176,11 +177,12 @@ A modern portfolio website built with Astro and React, featuring clean design an
 │   └── deploy.yml          # Deployment workflow
 ├── image/icon/              # Icons and images
 ├── public/                  # Static files
+├── docs/                    # Documentation
+│   ├── deployment/         # Deployment related
+│   └── troubleshooting/    # Troubleshooting guides
 ├── docker-compose.yml       # Docker Compose configuration
 ├── Dockerfile              # Docker configuration
 ├── nginx.conf              # Nginx configuration
-├── DEPLOYMENT.md           # Deployment documentation
-├── TROUBLESHOOTING.md      # Troubleshooting guide
 └── Configuration files (astro.config.mjs, tailwind.config.mjs, etc.)
 ```
 
@@ -234,4 +236,4 @@ A modern portfolio website built with Astro and React, featuring clean design an
 3. **GitHub Actions**: Automated CI/CD pipeline
 4. **Production Environment**: Container operation at `https://portorifo.riumu.net`
 
-For detailed instructions, see [`DEPLOYMENT.md`](DEPLOYMENT.md).
+For detailed instructions, see [`docs/deployment/DEPLOYMENT.md`](docs/deployment/DEPLOYMENT.md).
