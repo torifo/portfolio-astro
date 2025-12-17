@@ -142,16 +142,28 @@ import ThemeToggle from './ThemeToggle.astro';
 </header>
 
 <script>
+  // ローカルストレージのキー（ThemeToggle.astroと同じ）
+  const THEME_PREFERENCE_KEY = 'theme-preference';
+
+  // テーマ設定を保存する関数
+  function saveThemePreference(theme: 'light' | 'dark' | 'auto'): void {
+    try {
+      localStorage.setItem(THEME_PREFERENCE_KEY, theme);
+    } catch (error) {
+      console.error('テーマ設定保存エラー:', error);
+    }
+  }
+
   // モバイルメニューの制御
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  
+
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
   }
-  
+
   // スムーズスクロール
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -172,16 +184,16 @@ import ThemeToggle from './ThemeToggle.astro';
       }
     });
   });
-  
+
   // モバイル用のテーマ切り替え機能
   const themeToggleMobile = document.getElementById('themeToggleBtn-mobile');
   const themeDropdownMobile = document.querySelector('.theme-dropdown-mobile');
-  
+
   if (themeToggleMobile && themeDropdownMobile) {
     themeToggleMobile.addEventListener('click', () => {
       themeDropdownMobile.classList.toggle('hidden');
     });
-    
+
     // 外部クリックでメニューを閉じる
     document.addEventListener('click', (e) => {
       if (!themeToggleMobile.contains(e.target as Node) && !themeDropdownMobile.contains(e.target as Node)) {
@@ -189,27 +201,30 @@ import ThemeToggle from './ThemeToggle.astro';
       }
     });
   }
-  
+
   // モバイル用テーマドロップダウンメニューでテーマ選択
   document.querySelectorAll('.theme-dropdown-mobile button').forEach(button => {
     button.addEventListener('click', (event) => {
       const selectedTheme = (event.currentTarget as HTMLButtonElement).getAttribute('data-theme');
-      
+
       if (selectedTheme === 'light') {
         document.body.classList.remove('night-mode');
         document.body.classList.add('light-mode');
         updateMobileThemeIcon();
+        saveThemePreference('light');
       } else if (selectedTheme === 'dark') {
         document.body.classList.remove('light-mode');
         document.body.classList.add('night-mode');
         updateMobileThemeIcon();
+        saveThemePreference('dark');
       } else if (selectedTheme === 'auto') {
+        saveThemePreference('auto');
         // デスクトップ版のテーマ機能を呼び出し
         if ((window as any).setThemeBasedOnSunriseSunset) {
           (window as any).setThemeBasedOnSunriseSunset();
         }
       }
-      
+
       // メニューを閉じる
       if (themeDropdownMobile) {
         themeDropdownMobile.classList.add('hidden');
@@ -325,31 +340,34 @@ import ThemeToggle from './ThemeToggle.astro';
   document.querySelectorAll('.theme-dropdown-tablet button').forEach(button => {
     button.addEventListener('click', (event) => {
       const selectedTheme = (event.currentTarget as HTMLButtonElement).getAttribute('data-theme');
-      
+
       if (selectedTheme === 'light') {
         document.body.classList.remove('night-mode');
         document.body.classList.add('light-mode');
         updateTabletThemeIcon();
+        saveThemePreference('light');
       } else if (selectedTheme === 'dark') {
         document.body.classList.remove('light-mode');
         document.body.classList.add('night-mode');
         updateTabletThemeIcon();
+        saveThemePreference('dark');
       } else if (selectedTheme === 'auto') {
+        saveThemePreference('auto');
         // デスクトップ版のテーマ機能を呼び出し
         if ((window as any).setThemeBasedOnSunriseSunset) {
           (window as any).setThemeBasedOnSunriseSunset();
         }
       }
-      
+
       // メニューを閉じる
       if (themeDropdownTablet) {
         themeDropdownTablet.classList.add('hidden');
       }
     });
   });
-  
+
   // モバイル機能の初期化
-  window.addEventListener('load', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     // モバイル用現在時刻の定期的な更新
     updateMobileCurrentTime();
     setInterval(updateMobileCurrentTime, 1000);
