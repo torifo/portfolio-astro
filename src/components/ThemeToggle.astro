@@ -46,7 +46,6 @@
   const LONGITUDE = 139.6503; // 東京の経度
 
   // ローカルストレージのキー
-  const THEME_PREFERENCE_KEY = 'theme-preference';
   const SUNRISE_SUNSET_CACHE_KEY = 'sunrise-sunset-cache';
   const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24時間（ミリ秒）
 
@@ -281,29 +280,6 @@
     }
   }
 
-  // テーマ設定を保存する関数
-  function saveThemePreference(theme: 'light' | 'dark' | 'auto'): void {
-    try {
-      localStorage.setItem(THEME_PREFERENCE_KEY, theme);
-    } catch (error) {
-      console.error('テーマ設定保存エラー:', error);
-    }
-  }
-
-  // テーマ設定を読み込む関数
-  function loadThemePreference(): 'light' | 'dark' | 'auto' | null {
-    try {
-      const preference = localStorage.getItem(THEME_PREFERENCE_KEY);
-      if (preference === 'light' || preference === 'dark' || preference === 'auto') {
-        return preference;
-      }
-      return null;
-    } catch (error) {
-      console.error('テーマ設定読み込みエラー:', error);
-      return null;
-    }
-  }
-
   // 手動テーマ設定を適用する関数
   function applyManualTheme(theme: 'light' | 'dark'): void {
     if (theme === 'light') {
@@ -318,30 +294,23 @@
 
   // 初期テーマを設定する関数（即座に実行）
   function initializeTheme(): void {
-    const preference = loadThemePreference();
+    // リロード時は常に自動モードでスタート
+    // キャッシュまたはデフォルトでテーマを設定
+    const cached = getCachedSunriseSunset();
+    if (cached) {
+      const nowUTC = new Date();
+      const sunriseUTC = new Date(cached.sunrise);
+      const sunsetUTC = new Date(cached.sunset);
 
-    if (preference === 'light') {
-      applyManualTheme('light');
-    } else if (preference === 'dark') {
-      applyManualTheme('dark');
-    } else {
-      // 'auto' または設定なしの場合、キャッシュまたはデフォルトでテーマを設定
-      const cached = getCachedSunriseSunset();
-      if (cached) {
-        const nowUTC = new Date();
-        const sunriseUTC = new Date(cached.sunrise);
-        const sunsetUTC = new Date(cached.sunset);
-
-        if (nowUTC >= sunriseUTC && nowUTC <= sunsetUTC) {
-          applyManualTheme('light');
-        } else {
-          applyManualTheme('dark');
-        }
+      if (nowUTC >= sunriseUTC && nowUTC <= sunsetUTC) {
+        applyManualTheme('light');
       } else {
-        // キャッシュもない場合、デフォルト（18時判定）
-        const hour = new Date().getHours();
-        applyManualTheme(hour < 18 ? 'light' : 'dark');
+        applyManualTheme('dark');
       }
+    } else {
+      // キャッシュもない場合、デフォルト（18時判定）
+      const hour = new Date().getHours();
+      applyManualTheme(hour < 18 ? 'light' : 'dark');
     }
   }
 
@@ -375,12 +344,9 @@
 
       if (selectedTheme === 'light') {
         applyManualTheme('light');
-        saveThemePreference('light');
       } else if (selectedTheme === 'dark') {
         applyManualTheme('dark');
-        saveThemePreference('dark');
       } else if (selectedTheme === 'auto') {
-        saveThemePreference('auto');
         setThemeBasedOnSunriseSunset();
       }
 
@@ -400,12 +366,8 @@
     // 日の出・日没時間を常に取得・表示（全モード共通）
     updateSunTimes();
 
-    // テーマ設定
-    const preference = loadThemePreference();
-    if (preference === 'auto' || preference === null) {
-      // 自動モードまたは設定なしの場合、テーマを自動適用
-      setThemeBasedOnSunriseSunset();
-    }
+    // テーマを自動適用（常に自動モード）
+    setThemeBasedOnSunriseSunset();
 
     // 初回アイコン更新
     updateThemeIcon();
@@ -416,12 +378,9 @@
     updateSunTimes();
   }, 5 * 60 * 1000); // 5分ごと
 
-  // 定期的にテーマを確認・変更（1分ごと - 自動モードのみ）
+  // 定期的にテーマを確認・変更（1分ごと）
   setInterval(() => {
-    const preference = loadThemePreference();
-    if (preference === 'auto' || preference === null) {
-      // 自動モードの場合のみテーマを自動適用
-      setThemeBasedOnSunriseSunset();
-    }
+    // テーマを自動適用
+    setThemeBasedOnSunriseSunset();
   }, 60 * 1000); // 1分ごと
 </script>
