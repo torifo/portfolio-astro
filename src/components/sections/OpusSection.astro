@@ -24,6 +24,7 @@ interface Opus {
       width: number;
     }[];
     repoUrl?: string;
+    opusUrl?: string;
     context?: string; // Markdown形式の詳細説明
   }[];
 }
@@ -286,9 +287,22 @@ const getGridColumns = (itemCount: number) => {
                             </div>
                           )}
                           <div class="text-center">
-                            <div class="text-sm text-white font-medium mb-1" title={link.service}>
-                              {link.service}
-                            </div>
+                            {link.opusUrl ? (
+                              <a
+                                href={link.opusUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-sm text-white font-medium mb-1 hover:text-cyan-300 transition-colors inline-block"
+                                title={link.service}
+                                onclick="event.stopPropagation()"
+                              >
+                                {link.service}
+                              </a>
+                            ) : (
+                              <div class="text-sm text-white font-medium mb-1" title={link.service}>
+                                {link.service}
+                              </div>
+                            )}
                             {link.repoUrl && (
                               <a
                                 href={link.repoUrl}
