@@ -645,3 +645,46 @@ body.light-mode #opus .border-gray-700 {
 body.light-mode #opus .hover\:text-cyan-300:hover {
   color: #0e7490 !important;
 }
+
+/* ===== Opus詳細ページ - markdownコンテンツスタイル ===== */
+.opus-context h1 { font-size: 1.5rem; font-weight: 700; color: #f9fafb; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+.opus-context h2 { font-size: 1.25rem; font-weight: 600; color: #f3f4f6; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+.opus-context h3 { font-size: 1.0625rem; font-weight: 600; color: #e5e7eb; margin-top: 1rem; margin-bottom: 0.375rem; }
+.opus-context p { color: #d1d5db; line-height: 1.75; margin-bottom: 0.75rem; }
+.opus-context a { color: #22d3ee; text-decoration: underline; }
+.opus-context a:hover { color: #67e8f9; }
+.opus-context ul, .opus-context ol { color: #d1d5db; margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.opus-context ul { list-style-type: disc; }
+.opus-context ol { list-style-type: decimal; }
+.opus-context li { margin-bottom: 0.25rem; line-height: 1.6; }
+.opus-context code { background: rgba(255, 255, 255, 0.1); padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.875em; font-family: 'JetBrains Mono', monospace; }
+.opus-context pre { background: rgba(0, 0, 0, 0.4); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 0.75rem; }
+.opus-context pre code { background: none; padding: 0; }
+.opus-context blockquote { border-left: 3px solid #22d3ee; padding-left: 1rem; margin: 0 0 0.75rem 0; color: #9ca3af; }
+.opus-context table { width: 100%; border-collapse: collapse; margin-bottom: 0.75rem; font-size: 0.9rem; }
+.opus-context th, .opus-context td { border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.5rem 0.75rem; text-align: left; }
+.opus-context th { background: rgba(255, 255, 255, 0.07); font-weight: 600; color: #f3f4f6; }
+.opus-context td { color: #d1d5db; }
+.opus-context img { max-width: 100%; border-radius: 0.5rem; }
+.opus-context hr { border-color: rgba(255, 255, 255, 0.1); margin: 1.5rem 0; }
+.opus-context strong { color: #f9fafb; font-weight: 600; }
+
+/* ライトモード調整 */
+body.light-mode .opus-context h1,
+body.light-mode .opus-context h2,
+body.light-mode .opus-context h3 { color: #111827; }
+body.light-mode .opus-context strong { color: #111827; }
+body.light-mode .opus-context p,
+body.light-mode .opus-context li,
+body.light-mode .opus-context td { color: #374151; }
+body.light-mode .opus-context a { color: #0e7490; }
+body.light-mode .opus-context a:hover { color: #0891b2; }
+body.light-mode .opus-context ul,
+body.light-mode .opus-context ol { color: #374151; }
+body.light-mode .opus-context code { background: rgba(0, 0, 0, 0.08); }
+body.light-mode .opus-context pre { background: rgba(0, 0, 0, 0.05); }
+body.light-mode .opus-context blockquote { border-left-color: #0e7490; color: #6b7280; }
+body.light-mode .opus-context th { background: rgba(0, 0, 0, 0.05); color: #1f2937; }
+body.light-mode .opus-context th,
+body.light-mode .opus-context td { border-color: rgba(0, 0, 0, 0.12); }
+body.light-mode .opus-context hr { border-color: rgba(0, 0, 0, 0.1); }
