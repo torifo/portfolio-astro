@@ -22,6 +22,8 @@ const getCategoryColor = (category: string) => {
     'Game': 'bg-green-500/20 text-green-300',
     'TODO': 'bg-orange-500/20 text-orange-300',
     'LP': 'bg-pink-500/20 text-pink-300',
+    'CLI': 'bg-yellow-500/20 text-yellow-300',
+    'Application': 'bg-blue-500/20 text-blue-300',
   };
   return categoryColors[category] || 'bg-gray-500/20 text-gray-300';
 };
@@ -59,14 +61,25 @@ const getGridColumns = (itemCount: number) => {
       </p>
     </div>
 
-    <!-- カテゴリー統計 -->
+    <!-- カテゴリーフィルター -->
     {allCategories.length > 0 && (
       <div class="mb-12 text-center">
         <div class="flex flex-wrap justify-center gap-3">
+          <button
+            class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium transition-all hover:bg-white/20 cursor-pointer category-filter-btn active-filter"
+            data-category="all"
+            type="button"
+          >
+            All
+          </button>
           {allCategories.map((category) => (
-            <span class={`px-4 py-2 ${getCategoryColor(category)} rounded-full text-sm font-medium`}>
-              {category} ({opus.filter(item => item.category.includes(category)).length})
-            </span>
+            <button
+              class={`px-4 py-2 ${getCategoryColor(category)} rounded-full text-sm font-medium transition-all hover:opacity-100 opacity-60 cursor-pointer category-filter-btn`}
+              data-category={category}
+              type="button"
+            >
+              {category}
+            </button>
           ))}
         </div>
       </div>
@@ -80,7 +93,7 @@ const getGridColumns = (itemCount: number) => {
         const hasMultipleGalleryImages = galleryImages.length > 1;
 
         return (
-          <div class="glass rounded-2xl overflow-hidden hover-lift group">
+          <div class="glass rounded-2xl overflow-hidden hover-lift group opus-project-card" data-categories={project.category.join(',')}>
             <div class="relative overflow-hidden">
               {galleryImages.length > 0 ? (
                 <div class="w-full h-64 relative bg-gray-900 group/main-gallery">
@@ -386,6 +399,48 @@ const getGridColumns = (itemCount: number) => {
     const prev = (current - 1 + totalImages) % totalImages;
     updateGallery(galleryId, prev);
   };
+
+  // カテゴリーフィルター機能
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.category-filter-btn');
+    const projectCards = document.querySelectorAll('.opus-project-card');
+
+    filterButtons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const selectedCategory = this.getAttribute('data-category');
+
+        // ボタンのアクティブ状態を更新
+        filterButtons.forEach(function(b) {
+          b.classList.remove('active-filter');
+          if (b.getAttribute('data-category') === 'all') {
+            b.classList.remove('bg-white/30');
+            b.classList.add('bg-white/10');
+          } else {
+            b.classList.add('opacity-60');
+            b.classList.remove('opacity-100');
+          }
+        });
+        this.classList.add('active-filter');
+        if (selectedCategory === 'all') {
+          this.classList.remove('bg-white/10');
+          this.classList.add('bg-white/30');
+        } else {
+          this.classList.remove('opacity-60');
+          this.classList.add('opacity-100');
+        }
+
+        // カードの表示/非表示を切り替え
+        projectCards.forEach(function(card) {
+          if (selectedCategory === 'all') {
+            card.style.display = '';
+          } else {
+            const categories = card.getAttribute('data-categories').split(',');
+            card.style.display = categories.includes(selectedCategory) ? '' : 'none';
+          }
+        });
+      });
+    });
+  });
 
   // 関連プロジェクト折りたたみ機能（モバイルのみ）
   document.addEventListener('DOMContentLoaded', function() {
