@@ -35,7 +35,7 @@ export async function fetchAllOpus(): Promise<Opus[]> {
   const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
   const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
 
-  const response = await fetch(`${SERVICE_DOMAIN}opus?limit=100`, {
+  const response = await fetch(`${SERVICE_DOMAIN}opus?limit=100&orders=createdAt`, {
     headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY },
   });
 
