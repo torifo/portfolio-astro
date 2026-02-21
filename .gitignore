@@ -27,3 +27,6 @@ pnpm-debug.log*
 .env
 
 ToDo.md
+
+# developer-only scripts
+build-push.sh
