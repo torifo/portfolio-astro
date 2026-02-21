@@ -1,5 +1,7 @@
 ---
 // HeroSection.astro - メインのヒーローセクション
+import { fetchProfile } from '../../lib/microcms';
+const profile = await fetchProfile();
 ---
 
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -29,9 +31,8 @@
           <br>
           <span class="text-white">ポートフォリオ</span>
         </h1>
-        <div class="text-xl md:text-2xl text-gray-300 font-light">
-          <span class="text-cyan-400">各関連サイト連携</span>
-          <span class="text-yellow-400">Portfolio</span>
+        <div class="text-base md:text-lg text-gray-400 font-light mt-2">
+          {profile?.title ?? 'デベロッパー / 東京都立大学 システムデザイン学部 情報科学科'}
         </div>
       </div>
 
@@ -57,7 +58,7 @@
       <!-- CTA ボタン -->
       <div class="animate-fade-in-up animation-delay-6000">
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#Opus" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 hover-lift animate-pulse-glow">
+          <a href="#opus" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 hover-lift animate-pulse-glow">
             <span class="flex items-center justify-center space-x-2">
               <span>作品を見る</span>
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

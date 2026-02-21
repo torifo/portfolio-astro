@@ -1,5 +1,31 @@
 ---
-// AboutSection.astro - 自己紹介セクション
+// AboutSection.astro - 自己紹介セクション（microCMS連携）
+import { fetchProfile } from '../../lib/microcms';
+
+const profile = await fetchProfile();
+
+const getTagBorderColor = (tags: string[]) => {
+  const first = tags[0];
+  const map: Record<string, string> = {
+    'Academic':   'border-cyan-400',
+    'Technology': 'border-purple-400',
+    'Opus':       'border-green-400',
+    'Pulse':      'border-orange-400',
+    'Community':  'border-pink-400',
+  };
+  return map[first] || 'border-gray-400';
+};
+
+const getTagBadgeColor = (tag: string) => {
+  const map: Record<string, string> = {
+    'Academic':   'bg-cyan-500/20 text-cyan-300',
+    'Technology': 'bg-purple-500/20 text-purple-300',
+    'Opus':       'bg-green-500/20 text-green-300',
+    'Pulse':      'bg-orange-500/20 text-orange-300',
+    'Community':  'bg-pink-500/20 text-pink-300',
+  };
+  return map[tag] || 'bg-gray-500/20 text-gray-300';
+};
 ---
 
 <section id="about" class="py-20 relative">
@@ -8,114 +34,112 @@
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">About Me</h2>
       <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-        ゲーム，開発，旅の軌跡を通じて，多様な体験と技術を共有することに情熱を注いでいます．
+        {profile?.introduction ?? 'プロフィールを読み込み中...'}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <!-- 左側: プロフィール画像とメイン情報 -->
-      <div class="space-y-8">
-        <div class="relative">
-          <!-- プロフィール画像 -->
-          <div class="w-64 h-64 mx-auto lg:mx-0 relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-2xl animate-pulse-glow"></div>
-            <div class="absolute inset-2 bg-gray-800 rounded-2xl flex items-center justify-center overflow-hidden">
-              <img src="/images/toriforium_circle.png" alt="トリフォリウム Profile" class="w-full h-full object-cover rounded-xl" />
-            </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <!-- 左側: プロフィール画像・基本情報 -->
+      <div class="space-y-6">
+        <!-- アバター -->
+        <div class="relative w-56 h-56 mx-auto lg:mx-0">
+          <div class="absolute inset-0 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-2xl animate-pulse-glow"></div>
+          <div class="absolute inset-2 bg-gray-800 rounded-2xl overflow-hidden">
+            {profile?.avatar ? (
+              <img
+                src={profile.avatar.url}
+                alt={`${profile.name} avatar`}
+                class="w-full h-full object-cover"
+              />
+            ) : (
+              <img
+                src="/images/toriforium_circle.png"
+                alt="avatar"
+                class="w-full h-full object-cover"
+              />
+            )}
           </div>
         </div>
 
-        <!-- 基本情報 -->
+        <!-- 名前・肩書き -->
         <div class="glass p-6 rounded-2xl">
-          <h3 class="text-2xl font-bold text-white mb-4">トリフォリウム</h3>
-          <p class="text-cyan-400 text-lg mb-4">各関連サイト連携ポートフォリオ</p>
-          <p class="text-gray-300 leading-relaxed">
-            HoYoverse ゲーム（原神）とYostar ゲーム（ブルアカ）を中心とした
-            ゲーミング活動と，Web開発，旅の軌跡などの多様な作品を
-            各種プラットフォームで共有しています．
+          <h3 class="text-2xl font-bold text-white mb-1">
+            {profile?.name ?? 'とりふぉりうむ'}
+          </h3>
+          <p class="text-cyan-400 text-sm mb-4 leading-relaxed">
+            {profile?.title ?? ''}
+          </p>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Python, SQL, JavaScript, Java を扱い、Discord Bot・Web アプリ・CLI ツールなどを開発しています。
+            現在は情報推薦システムにおけるプライバシー問題の研究に取り組んでいます。
           </p>
         </div>
-      </div>
 
-      <!-- 右側: 詳細情報 -->
-      <div class="space-y-8">
-        <!-- 経歴 -->
+        <!-- Connect -->
         <div class="glass p-6 rounded-2xl">
-          <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-            <svg class="w-6 h-6 mr-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            経歴
-          </h3>
-          <div class="space-y-4">
-            <div class="border-l-2 border-cyan-400 pl-4">
-              <h4 class="text-white font-semibold">2024年</h4>
-              <p class="text-gray-300">フルスタック開発者として活動開始</p>
-            </div>
-            <div class="border-l-2 border-purple-400 pl-4">
-              <h4 class="text-white font-semibold">2023年</h4>
-              <p class="text-gray-300">Web開発技術の習得を開始</p>
-            </div>
-            <div class="border-l-2 border-blue-400 pl-4">
-              <h4 class="text-white font-semibold">2022年</h4>
-              <p class="text-gray-300">プログラミング学習を本格的に開始</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 興味・関心 -->
-        <div class="glass p-6 rounded-2xl">
-          <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-            <svg class="w-6 h-6 mr-3 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-            </svg>
-            興味・関心
-          </h3>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="text-center p-3 bg-white/5 rounded-lg">
-              <span class="text-2xl mb-2 block">⚔️</span>
-              <span class="text-sm text-gray-300">原神</span>
-            </div>
-            <div class="text-center p-3 bg-white/5 rounded-lg">
-              <span class="text-2xl mb-2 block">⚡</span>
-              <span class="text-sm text-gray-300">ゼンゼロ</span>
-            </div>
-            <div class="text-center p-3 bg-white/5 rounded-lg">
-              <span class="text-2xl mb-2 block">🎓</span>
-              <span class="text-sm text-gray-300">ブルアカ</span>
-            </div>
-            <div class="text-center p-3 bg-white/5 rounded-lg">
-              <span class="text-2xl mb-2 block">✈️</span>
-              <span class="text-sm text-gray-300">旅</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 連絡先情報 -->
-        <div class="glass p-6 rounded-2xl">
-          <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-            <svg class="w-6 h-6 mr-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+            <svg class="w-5 h-5 mr-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
             </svg>
             Connect
           </h3>
           <div class="space-y-3">
-            <a href="mailto:contact@toriforium.dev" class="flex items-center text-gray-300 hover:text-cyan-400 transition-colors">
-              <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-              contact@toriforium.dev
-            </a>
-            <a href="https://github.com/torifo" class="flex items-center text-gray-300 hover:text-cyan-400 transition-colors">
-              <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+            <a
+              href="https://github.com/toriforium"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center text-gray-300 hover:text-cyan-400 transition-colors"
+            >
+              <svg class="w-5 h-5 mr-3 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
               </svg>
               GitHub
             </a>
-            <a href="/contact" class="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 hover-lift">
-              お問い合わせ
+            <a
+              href="https://www.instagram.com/a_man_who_pursue_nature/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center text-gray-300 hover:text-pink-400 transition-colors"
+            >
+              <svg class="w-5 h-5 mr-3 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              Instagram
             </a>
           </div>
+        </div>
+      </div>
+
+      <!-- 右側: 経歴タイムライン -->
+      <div class="glass p-6 rounded-2xl">
+        <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+          <svg class="w-5 h-5 mr-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          経歴
+        </h3>
+
+        <!-- タグ凡例 -->
+        <div class="flex flex-wrap gap-2 mb-5">
+          {(['Academic', 'Technology', 'Opus', 'Pulse', 'Community'] as const).map((tag) => (
+            <span class={`px-2 py-0.5 ${getTagBadgeColor(tag)} rounded-full text-xs`}>{tag}</span>
+          ))}
+        </div>
+
+        <div class="space-y-4 max-h-[520px] overflow-y-auto pr-2 scrollbar-thin">
+          {profile?.history.map((item) => (
+            <div class={`border-l-2 ${getTagBorderColor(item.tag)} pl-4`}>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-white font-semibold text-sm">{item.date}</span>
+                <div class="flex gap-1 flex-wrap">
+                  {item.tag.map((t) => (
+                    <span class={`px-1.5 py-0.5 ${getTagBadgeColor(t)} rounded text-xs`}>{t}</span>
+                  ))}
+                </div>
+              </div>
+              <p class="text-gray-300 text-sm leading-relaxed">{item.event}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -124,3 +148,20 @@
   <!-- セクション区切り線 -->
   <div class="section-divider"></div>
 </section>
+
+<style>
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 116, 139, 0.4) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 116, 139, 0.4);
+    border-radius: 2px;
+  }
+</style>

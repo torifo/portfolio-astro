@@ -1,5 +1,120 @@
 ---
-// JourneySection.astro - 旅の記録セクション（日本国内）
+// JourneySection.astro - 旅の記録セクション（7地方・都道府県別）
+
+interface Prefecture {
+  name: string;
+  visited: boolean;
+  note?: string;
+}
+
+interface Region {
+  name: string;
+  en: string;
+  gradient: string;
+  prefectures: Prefecture[];
+}
+
+const regions: Region[] = [
+  {
+    name: '北海道',
+    en: 'Hokkaido',
+    gradient: 'from-sky-500 to-blue-700',
+    prefectures: [
+      { name: '北海道', visited: true, note: '知床・富良野・釧路湿原' },
+    ],
+  },
+  {
+    name: '東北',
+    en: 'Tohoku',
+    gradient: 'from-emerald-500 to-green-700',
+    prefectures: [
+      { name: '青森', visited: true, note: '奥入瀬渓流・白神山地' },
+      { name: '岩手', visited: false },
+      { name: '宮城', visited: true, note: '松島' },
+      { name: '秋田', visited: false },
+      { name: '山形', visited: false },
+      { name: '福島', visited: true, note: '磐梯山・裏磐梯' },
+    ],
+  },
+  {
+    name: '関東',
+    en: 'Kanto',
+    gradient: 'from-indigo-500 to-purple-700',
+    prefectures: [
+      { name: '東京', visited: true, note: '在学中' },
+      { name: '神奈川', visited: true, note: '鎌倉・江ノ島' },
+      { name: '埼玉', visited: true },
+      { name: '千葉', visited: true, note: '九十九里浜' },
+      { name: '茨城', visited: false },
+      { name: '栃木', visited: false },
+      { name: '群馬', visited: false },
+    ],
+  },
+  {
+    name: '中部',
+    en: 'Chubu',
+    gradient: 'from-orange-500 to-red-700',
+    prefectures: [
+      { name: '新潟', visited: false },
+      { name: '富山', visited: false },
+      { name: '石川', visited: false },
+      { name: '福井', visited: false },
+      { name: '山梨', visited: true, note: '富士山・富士五湖' },
+      { name: '長野', visited: true, note: '北アルプス・槍ヶ岳' },
+      { name: '岐阜', visited: true, note: '白川郷' },
+      { name: '静岡', visited: true, note: '富士山麓' },
+      { name: '愛知', visited: true },
+    ],
+  },
+  {
+    name: '近畿',
+    en: 'Kinki',
+    gradient: 'from-pink-500 to-rose-700',
+    prefectures: [
+      { name: '三重', visited: false },
+      { name: '滋賀', visited: false },
+      { name: '京都', visited: true, note: '嵐山・金閣寺' },
+      { name: '大阪', visited: true },
+      { name: '兵庫', visited: true, note: '有馬温泉' },
+      { name: '奈良', visited: true, note: '春日大社・吉野山' },
+      { name: '和歌山', visited: false },
+    ],
+  },
+  {
+    name: '中国・四国',
+    en: 'Chugoku / Shikoku',
+    gradient: 'from-teal-500 to-cyan-700',
+    prefectures: [
+      { name: '鳥取', visited: false },
+      { name: '島根', visited: false },
+      { name: '岡山', visited: false },
+      { name: '広島', visited: true, note: '宮島・厳島神社' },
+      { name: '山口', visited: false },
+      { name: '徳島', visited: false },
+      { name: '香川', visited: false },
+      { name: '愛媛', visited: false },
+      { name: '高知', visited: false },
+    ],
+  },
+  {
+    name: '九州・沖縄',
+    en: 'Kyushu / Okinawa',
+    gradient: 'from-yellow-500 to-orange-700',
+    prefectures: [
+      { name: '福岡', visited: true },
+      { name: '佐賀', visited: false },
+      { name: '長崎', visited: false },
+      { name: '熊本', visited: false },
+      { name: '大分', visited: true, note: '別府温泉・湯布院' },
+      { name: '宮崎', visited: false },
+      { name: '鹿児島', visited: false },
+      { name: '沖縄', visited: true, note: '石垣島・竹富島' },
+    ],
+  },
+];
+
+const visitedCount = regions.flatMap(r => r.prefectures).filter(p => p.visited).length;
+const totalCount = regions.flatMap(r => r.prefectures).length;
 ---
 
 <section id="journey" class="py-20 relative">
@@ -13,265 +128,54 @@
       </p>
     </div>
 
-    <!-- 旅の記録グリッド -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- 旅記録 1: 北海道 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-64 bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-5xl mb-4">🌾</div>
-              <div class="text-xl font-semibold">Hokkaido</div>
+    <!-- 7地方グリッド -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {regions.map((region) => {
+        const regionVisited = region.prefectures.filter(p => p.visited).length;
+        return (
+          <div class="glass rounded-2xl overflow-hidden hover-lift">
+            <!-- ヘッダー -->
+            <div class={`bg-gradient-to-r ${region.gradient} px-5 py-4 flex items-center justify-between`}>
+              <div>
+                <div class="text-white font-bold text-lg">{region.name}</div>
+                <div class="text-white/70 text-xs">{region.en}</div>
+              </div>
+              <div class="text-right">
+                <div class="text-white font-semibold text-sm">{regionVisited} / {region.prefectures.length}</div>
+                <div class="text-white/70 text-xs">都道府県</div>
+              </div>
             </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <a
-              href="https://www.instagram.com/a_man_who_pursue_nature/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors"
-            >
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">北海道</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            広大な大地と雄大な自然。富良野のラベンダー畑、知床の原始の森、
-            そして息をのむ星空。北海道の自然はスケールが違います。
-          </p>
-          <div class="flex items-center text-gray-300 text-sm mb-3">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            富良野・知床・釧路湿原
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-sky-500/20 text-sky-300 rounded-full text-xs">自然</span>
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">星空</span>
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">湿原</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- 旅記録 2: 東北 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-64 bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-5xl mb-4">🌲</div>
-              <div class="text-xl font-semibold">Tohoku</div>
+            <!-- 都道府県バッジ -->
+            <div class="p-4">
+              <div class="flex flex-wrap gap-2">
+                {region.prefectures.map((pref) => (
+                  <div
+                    class={`group/pref relative`}
+                    title={pref.note ?? pref.name}
+                  >
+                    <span class={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
+                      pref.visited
+                        ? 'bg-white/20 text-white border border-white/30'
+                        : 'bg-white/5 text-gray-500 border border-white/10'
+                    }`}>
+                      {pref.name}
+                      {pref.visited && (
+                        <span class="ml-1 text-green-400 text-xs">✓</span>
+                      )}
+                    </span>
+                    {pref.note && (
+                      <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover/pref:opacity-100 transition-opacity pointer-events-none z-10">
+                        {pref.note}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <a
-              href="https://www.instagram.com/a_man_who_pursue_nature/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors"
-            >
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">東北</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            深い緑と静寂に包まれた山々、清流に咲く花々。
-            奥入瀬渓流や白神山地など、手つかずの大自然が残る場所。
-          </p>
-          <div class="flex items-center text-gray-300 text-sm mb-3">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            奥入瀬・白神山地・八甲田
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-xs">渓流</span>
-            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs">紅葉</span>
-            <span class="px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-xs">世界遺産</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 旅記録 3: 関東・山 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-64 bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-5xl mb-4">🗻</div>
-              <div class="text-xl font-semibold">Mt. Fuji & Alps</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <a
-              href="https://www.instagram.com/a_man_who_pursue_nature/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors"
-            >
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">富士山・日本アルプス</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            日本最高峰の富士山、そして北・中央・南アルプスの稜線を歩く。
-            山頂から見下ろす雲海と、夜明けの空が忘れられない。
-          </p>
-          <div class="flex items-center text-gray-300 text-sm mb-3">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            富士山・槍ヶ岳・穂高
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-xs">登山</span>
-            <span class="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-xs">雲海</span>
-            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-xs">夜明け</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 旅記録 4: 西日本・海 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-64 bg-gradient-to-br from-cyan-400 to-teal-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-5xl mb-4">🌊</div>
-              <div class="text-xl font-semibold">Setouchi & Kyushu</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <a
-              href="https://www.instagram.com/a_man_who_pursue_nature/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors"
-            >
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">瀬戸内・九州</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            穏やかな瀬戸内海の島々と夕暮れ時の水平線。
-            九州の温泉地や活火山が作り出す、ダイナミックな景色。
-          </p>
-          <div class="flex items-center text-gray-300 text-sm mb-3">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            直島・阿蘇・屋久島
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs">海</span>
-            <span class="px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-xs">夕焼け</span>
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">温泉</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 旅記録 5: 沖縄 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-5xl mb-4">🌺</div>
-              <div class="text-xl font-semibold">Okinawa</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <a
-              href="https://www.instagram.com/a_man_who_pursue_nature/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors"
-            >
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">沖縄・琉球の海</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            エメラルドグリーンの海と白砂のビーチ。
-            与那国島や石垣島など離島を巡り、日本最南端の自然に浸る旅。
-          </p>
-          <div class="flex items-center text-gray-300 text-sm mb-3">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            石垣島・与那国島・宮古島
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">珊瑚礁</span>
-            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs">離島</span>
-            <span class="px-3 py-1 bg-sky-500/20 text-sky-300 rounded-full text-xs">シュノーケル</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 旅記録 6: 日本の四季 -->
-      <div class="glass rounded-2xl overflow-hidden hover-lift group">
-        <div class="relative overflow-hidden">
-          <div class="w-full h-64 bg-gradient-to-br from-pink-400 to-rose-600 flex items-center justify-center">
-            <div class="text-white text-center">
-              <div class="text-5xl mb-4">🌸</div>
-              <div class="text-xl font-semibold">Four Seasons</div>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <a
-              href="https://www.instagram.com/a_man_who_pursue_nature/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-white/20 p-4 rounded-full hover:bg-white/30 transition-colors"
-            >
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2">日本の四季</h3>
-          <p class="text-gray-400 text-sm mb-4">
-            春の桜、夏の新緑、秋の紅葉、冬の雪景色。
-            日本の四季折々の美しさを追いかけて、各地を旅しています。
-          </p>
-          <div class="flex items-center text-gray-300 text-sm mb-3">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            日本全国
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-xs">桜</span>
-            <span class="px-3 py-1 bg-rose-500/20 text-rose-300 rounded-full text-xs">紅葉</span>
-            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">雪景色</span>
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </div>
 
     <!-- Instagram リンクバナー -->
@@ -295,19 +199,19 @@
       </a>
     </div>
 
-    <!-- 統計情報 -->
-    <div class="mt-10 grid grid-cols-2 md:grid-cols-3 gap-6">
+    <!-- 統計 -->
+    <div class="mt-10 grid grid-cols-3 gap-6">
       <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text-cyan mb-2">47</div>
-        <p class="text-gray-300 text-sm">都道府県</p>
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">{visitedCount}</div>
+        <p class="text-gray-300 text-sm">訪問済み都道府県</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text mb-2">365</div>
-        <p class="text-gray-300 text-sm">旅した日々</p>
+        <div class="text-3xl font-bold gradient-text mb-2">{totalCount - visitedCount}</div>
+        <p class="text-gray-300 text-sm">まだ見ぬ土地</p>
       </div>
-      <div class="text-center glass p-6 rounded-2xl hover-lift col-span-2 md:col-span-1">
-        <div class="text-3xl font-bold gradient-text-cyan mb-2">∞</div>
-        <p class="text-gray-300 text-sm">出会った景色</p>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">7</div>
+        <p class="text-gray-300 text-sm">地方</p>
       </div>
     </div>
   </div>

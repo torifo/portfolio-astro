@@ -1,5 +1,36 @@
 // microCMS API ユーティリティ
 
+export interface HistoryEntry {
+  fieldId: string;
+  date: string;
+  event: string;
+  tag: string[];
+}
+
+export interface Profile {
+  name: string;
+  title: string;
+  introduction: string;
+  avatar: {
+    url: string;
+    height: number;
+    width: number;
+  };
+  history: HistoryEntry[];
+}
+
+export async function fetchProfile(): Promise<Profile | null> {
+  const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
+  const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+
+  const response = await fetch(`${SERVICE_DOMAIN}profile`, {
+    headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY },
+  });
+
+  if (!response.ok) return null;
+  return response.json();
+}
+
 export interface RelatedLink {
   fieldId: string;
   service: string;
