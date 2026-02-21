@@ -31,11 +31,33 @@ const getTagBadgeColor = (tag: string) => {
 <section id="about" class="py-20 relative">
   <div class="container mx-auto px-6">
     <!-- セクションタイトル -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-10">
       <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">About Me</h2>
       <p class="text-gray-400 text-lg max-w-2xl mx-auto">
         {profile?.introduction ?? 'プロフィールを読み込み中...'}
       </p>
+    </div>
+
+    <!-- 経歴タグフィルター -->
+    <div class="mb-12 text-center">
+      <div class="flex flex-wrap justify-center gap-3">
+        <button
+          class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium transition-all hover:bg-white/20 cursor-pointer about-tag-btn active-about-tag"
+          data-tag="all"
+          type="button"
+        >
+          All
+        </button>
+        {(['Academic', 'Technology', 'Opus', 'Pulse', 'Community'] as const).map((tag) => (
+          <button
+            class={`px-4 py-2 ${getTagBadgeColor(tag)} rounded-full text-sm font-medium transition-all hover:opacity-100 opacity-60 cursor-pointer about-tag-btn`}
+            data-tag={tag}
+            type="button"
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -119,16 +141,12 @@ const getTagBadgeColor = (tag: string) => {
           経歴
         </h3>
 
-        <!-- タグ凡例 -->
-        <div class="flex flex-wrap gap-2 mb-5">
-          {(['Academic', 'Technology', 'Opus', 'Pulse', 'Community'] as const).map((tag) => (
-            <span class={`px-2 py-0.5 ${getTagBadgeColor(tag)} rounded-full text-xs`}>{tag}</span>
-          ))}
-        </div>
-
-        <div class="space-y-4 max-h-[520px] overflow-y-auto pr-2 scrollbar-thin">
+        <div class="space-y-4 max-h-[520px] overflow-y-auto pr-2 scrollbar-thin" id="about-timeline">
           {profile?.history.map((item) => (
-            <div class={`border-l-2 ${getTagBorderColor(item.tag)} pl-4`}>
+            <div
+              class={`border-l-2 ${getTagBorderColor(item.tag)} pl-4 about-history-item`}
+              data-tags={item.tag.join(',')}
+            >
               <div class="flex items-center gap-2 mb-1">
                 <span class="text-white font-semibold text-sm">{item.date}</span>
                 <div class="flex gap-1 flex-wrap">
@@ -148,6 +166,49 @@ const getTagBadgeColor = (tag: string) => {
   <!-- セクション区切り線 -->
   <div class="section-divider"></div>
 </section>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tagButtons = document.querySelectorAll('.about-tag-btn');
+    const historyItems = document.querySelectorAll('.about-history-item');
+
+    tagButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const selectedTag = this.getAttribute('data-tag');
+
+        // ボタンのアクティブ状態を更新
+        tagButtons.forEach(function (b) {
+          b.classList.remove('active-about-tag');
+          if (b.getAttribute('data-tag') === 'all') {
+            b.classList.remove('bg-white/30');
+            b.classList.add('bg-white/10');
+          } else {
+            b.classList.add('opacity-60');
+            b.classList.remove('opacity-100');
+          }
+        });
+        this.classList.add('active-about-tag');
+        if (selectedTag === 'all') {
+          this.classList.remove('bg-white/10');
+          this.classList.add('bg-white/30');
+        } else {
+          this.classList.remove('opacity-60');
+          this.classList.add('opacity-100');
+        }
+
+        // 経歴アイテムの表示/非表示
+        historyItems.forEach(function (item) {
+          if (selectedTag === 'all') {
+            item.style.display = '';
+          } else {
+            const tags = item.getAttribute('data-tags').split(',');
+            item.style.display = tags.includes(selectedTag) ? '' : 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
 
 <style>
   .scrollbar-thin {
