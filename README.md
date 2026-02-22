@@ -94,22 +94,26 @@ VPS (root@162.43.88.107)
 |-----------|------|------------|
 | **Hero** | メインビジュアル・タイトル | microCMS Profile API |
 | **About** | 自己紹介・経歴タイムライン・Connect | microCMS Profile API（タグフィルター対応）|
-| **Skills** | 技術スキル | 静的データ |
+| **Skills** | 技術スキル | microCMS Skills API |
 | **Opus** | 作品・プロジェクト・詳細ページ | microCMS Opus API（カテゴリフィルター対応）|
 | **Journey** | 日本8地方・都道府県別旅記録 | 静的データ（訪問済み管理）|
-| **Games** | ゲーム関連情報 | 外部API |
+| **Games** | ゲーム関連情報 | microCMS Games API |
 
 ### 🔌 microCMS API連携
 
 - **エンドポイント**: `https://portorifo.microcms.io/api/v1/`
 - **Profile** (`/profile`): 名前・肩書き・自己紹介・アバター・メールアドレス・経歴タイムライン
 - **Opus** (`/opus?orders=createdAt`): 作品一覧・カテゴリ・関連リンク・サムネイル
+- **Skills** (`/skills`): 技術スキル一覧・カテゴリ・レベル・アイコン
+- **Games** (`/games`): ゲーム情報・関連SNS・タグ
 - 全API呼び出しはビルド時のみ実行（SSG）→ APIキーは最終HTMLに含まれない
 
 ### ✅ 実装済み機能
 
 - [x] microCMS Profile API連携（Hero・About・Connect）
 - [x] microCMS Opus API連携（作品一覧・カテゴリフィルター）
+- [x] microCMS Skills API連携（技術スキル一覧）
+- [x] microCMS Games API連携（ゲーム情報・SNS）
 - [x] Opus詳細ページ自動生成（`/opus/[slug]`）
 - [x] About経歴タイムライン タグフィルター（Academic / Technology / Opus / Pulse / Community）
 - [x] 日の出・日没APIによる自動テーマ切り替え
@@ -140,7 +144,7 @@ A modern portfolio website built with Astro and TypeScript. Features microCMS AP
 
 - **Responsive Design**: Optimized for mobile to desktop
 - **High Performance**: Static site generation with Astro SSG
-- **Dynamic Content**: Build-time data fetching from microCMS (Profile & Opus)
+- **Dynamic Content**: Build-time data fetching from microCMS (Profile, Opus, Skills, Games)
 - **Dynamic Routes**: Auto-generated Opus detail pages via `getStaticPaths()`
 - **Filter UI**: Category/tag filters in Opus and About sections
 - **Auto Theme**: Light/dark mode based on Tokyo sunrise/sunset times
