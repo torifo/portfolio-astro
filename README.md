@@ -113,7 +113,7 @@ VPS (root@162.43.88.107)
 - [x] Opus詳細ページ自動生成（`/opus/[slug]`）
 - [x] About経歴タイムライン タグフィルター（Academic / Technology / Opus / Pulse / Community）
 - [x] 日の出・日没APIによる自動テーマ切り替え
-- [x] Journey 8地方・都道府県別訪問管理
+- [x] Journey 8地方・都道府県別訪問管理（静的仮データ・API連携は未実装）
 - [x] Footerビルド時刻自動表示
 - [x] GHCR Docker イメージ管理
 
