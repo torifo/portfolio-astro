@@ -16,6 +16,8 @@ export interface Profile {
     height: number;
     width: number;
   };
+  occupation_mail?: string;
+  develop_mail?: string;
   history: HistoryEntry[];
 }
 
