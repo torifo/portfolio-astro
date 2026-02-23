@@ -40,13 +40,14 @@ const colorPatterns = [
   'from-rose-500 to-pink-600',
 ];
 
-// 動的グリッドクラスを決定する関数
+// 動的グリッドクラスを決定する関数（最大3列・均等レイアウト優先）
+// 4件 → 2列(2+2)、5件以上 → 3列(3+2, 3+3, ...)
 const getGridColumns = (itemCount: number) => {
   if (itemCount === 1) return 'grid-cols-1';
   if (itemCount === 2) return 'grid-cols-1 md:grid-cols-2';
-  if (itemCount <= 3) return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
-  if (itemCount <= 6) return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
-  return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+  if (itemCount === 3) return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+  if (itemCount === 4) return 'grid-cols-1 md:grid-cols-2';
+  return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
 };
 ---
 
