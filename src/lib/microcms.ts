@@ -94,3 +94,15 @@ export async function fetchAllOpus(): Promise<Opus[]> {
 export function generateSlug(opusId: string, linkIndex: number): string {
   return `${opusId}-${linkIndex}`;
 }
+
+// スキルカテゴリ → SkillsセクションアンカーID用スラッグ
+export const SKILL_CATEGORY_SLUG: Record<string, string> = {
+  'プログラミング言語': 'lang',
+  'フレームワーク・ライブラリ': 'fw',
+  'データベース': 'db',
+  'マークアップ・スタイルシート': 'markup',
+  'Web技術 / アーキテクチャ / ネットワーク': 'web',
+  'デプロイ・インフラ・OS': 'deploy',
+  '開発ツール・CI/CD': 'tools',
+  '数値解析・自動化(マクロ)': 'analytics',
+};
