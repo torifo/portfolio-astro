@@ -8,10 +8,16 @@ let allCategories: string[] = [];
 
 try {
   opus = await fetchAllOpus();
-  allCategories = [...new Set(opus.flatMap(item => item.category))];
+  // category:[] のアイテムはtitleをカテゴリとして使用（APIデータから導出）
+  allCategories = [...new Set(opus.flatMap(item =>
+    item.category.length > 0 ? item.category : [item.title]
+  ))];
 } catch (error) {
   console.error('Failed to fetch opus:', error);
 }
+
+// グリッドにはrelatedLinksがあるもののみ表示（Application等はフィルターには出るがグリッドに含めない）
+const visibleOpus = opus.filter(item => item.relatedLinks.length > 0);
 
 // カテゴリ別の色マッピング
 const getCategoryColor = (category: string) => {
@@ -87,8 +93,8 @@ const getGridColumns = (itemCount: number) => {
     )}
 
     <!-- プロジェクトグリッド -->
-    <div class={`grid ${getGridColumns(opus.length)} gap-8`}>
-      {opus.map((project, index) => {
+    <div class={`grid ${getGridColumns(visibleOpus.length)} gap-8`}>
+      {visibleOpus.map((project, index) => {
         const colorPattern = colorPatterns[index % colorPatterns.length];
         const galleryImages = project.galleryTypes || [];
         const hasMultipleGalleryImages = galleryImages.length > 1;
