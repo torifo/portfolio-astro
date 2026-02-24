@@ -47,7 +47,11 @@
 
   // ローカルストレージのキー
   const SUNRISE_SUNSET_CACHE_KEY = 'sunrise-sunset-cache';
-  const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24時間（ミリ秒）
+
+  // JSTの今日の日付を YYYY/M/D 形式で返す
+  function getTodayJST(): string {
+    return new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
+  }
 
   // 時刻のフォーマット関数
   function formatTime(date: Date): string {
@@ -73,22 +77,20 @@
   }
 
   // キャッシュから日の出・日没データを取得
-  function getCachedSunriseSunset(): { sunrise: string; sunset: string; timestamp: number } | null {
+  function getCachedSunriseSunset(): { sunrise: string; sunset: string; date: string } | null {
     try {
       const cached = localStorage.getItem(SUNRISE_SUNSET_CACHE_KEY);
       if (!cached) return null;
 
       const data = JSON.parse(cached);
-      const now = Date.now();
 
-      // キャッシュが有効期限内かチェック
-      if (now - data.timestamp < CACHE_DURATION) {
-        return data;
+      // JSTの今日の日付と一致しない場合は無効（日付をまたぐと時刻がずれるため）
+      if (data.date !== getTodayJST()) {
+        localStorage.removeItem(SUNRISE_SUNSET_CACHE_KEY);
+        return null;
       }
 
-      // 期限切れのキャッシュを削除
-      localStorage.removeItem(SUNRISE_SUNSET_CACHE_KEY);
-      return null;
+      return data;
     } catch (error) {
       console.error('キャッシュ読み込みエラー:', error);
       return null;
@@ -98,12 +100,11 @@
   // 日の出・日没データをキャッシュに保存
   function cacheSunriseSunset(sunrise: string, sunset: string): void {
     try {
-      const data = {
+      localStorage.setItem(SUNRISE_SUNSET_CACHE_KEY, JSON.stringify({
         sunrise,
         sunset,
-        timestamp: Date.now()
-      };
-      localStorage.setItem(SUNRISE_SUNSET_CACHE_KEY, JSON.stringify(data));
+        date: getTodayJST(),
+      }));
     } catch (error) {
       console.error('キャッシュ保存エラー:', error);
     }
