@@ -621,6 +621,25 @@ body.light-mode #opus .bg-gray-500\/20 {
   font-weight: 600;
 }
 
+/* OpusSectionのスキルタグのライトモード調整（relatedSkill） */
+body.light-mode #opus .bg-blue-500\/20 {
+  background-color: rgba(59, 130, 246, 0.5);
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+body.light-mode #opus .bg-red-500\/20 {
+  background-color: rgba(239, 68, 68, 0.5);
+  color: #991b1b;
+  font-weight: 600;
+}
+
+body.light-mode #opus .bg-yellow-500\/20 {
+  background-color: rgba(234, 179, 8, 0.5);
+  color: #713f12;
+  font-weight: 600;
+}
+
 /* OpusSectionの関連プロジェクト背景のライトモード調整 */
 body.light-mode #opus .bg-gray-800\/50 {
   background-color: rgba(229, 231, 235, 0.7) !important;
