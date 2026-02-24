@@ -15,7 +15,7 @@ interface Skill {
   };
   category: string[];
   level: number;
-  usedIn: string[];
+  usedIn: { id: string; title: string; }[];
 }
 
 interface SkillsResponse {
@@ -49,13 +49,11 @@ const levelConfig = {
   4: { label: 'レベル４', width: '100%', color: 'from-blue-400 to-blue-600', detail: '複数の個人開発で使用した経験がある' },
 };
 
-// カテゴリ別にスキルをグループ化（マークアップ言語とスタイルシート言語を統合）
+// カテゴリ別にスキルをグループ化
 const skillsByCategory = skills.reduce((acc, skill) => {
   skill.category.forEach(cat => {
-    // マークアップ言語とスタイルシート言語をWeb技術として統合
-    const mappedCategory = cat === 'マークアップ言語' || cat === 'スタイルシート言語' ? 'Web技術' : cat;
-    if (!acc[mappedCategory]) acc[mappedCategory] = [];
-    acc[mappedCategory].push(skill);
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(skill);
   });
   return acc;
 }, {} as Record<string, Skill[]>);

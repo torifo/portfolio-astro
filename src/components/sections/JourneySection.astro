@@ -1,5 +1,5 @@
 ---
-// JourneySection.astro - 旅の記録セクション（7地方・都道府県別）
+// JourneySection.astro - 旅の記録セクション（8地方・都道府県別）
 
 interface Prefecture {
   name: string;
@@ -122,6 +122,7 @@ const regions: Region[] = [
 
 const visitedCount = regions.flatMap(r => r.prefectures).filter(p => p.visited).length;
 const totalCount = regions.flatMap(r => r.prefectures).length;
+const visitedRegionCount = regions.filter(r => r.prefectures.some(p => p.visited)).length;
 ---
 
 <section id="journey" class="py-20 relative">
@@ -135,7 +136,7 @@ const totalCount = regions.flatMap(r => r.prefectures).length;
       </p>
     </div>
 
-    <!-- 7地方グリッド -->
+    <!-- 8地方グリッド -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
       {regions.map((region) => {
         const regionVisited = region.prefectures.filter(p => p.visited).length;
@@ -217,8 +218,8 @@ const totalCount = regions.flatMap(r => r.prefectures).length;
         <p class="text-gray-300 text-sm">まだ見ぬ土地</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text-cyan mb-2">7</div>
-        <p class="text-gray-300 text-sm">地方</p>
+        <div class="text-3xl font-bold gradient-text-cyan mb-2">{visitedRegionCount}</div>
+        <p class="text-gray-300 text-sm">訪問済み地方</p>
       </div>
     </div>
   </div>
