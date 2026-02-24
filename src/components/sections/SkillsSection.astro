@@ -57,6 +57,26 @@ const skillsByCategory = skills.reduce((acc, skill) => {
   });
   return acc;
 }, {} as Record<string, Skill[]>);
+
+// カテゴリ表示順（APIから順序は取得できないため固定）
+const categoryOrder = [
+  'プログラミング言語',
+  'フレームワーク・ライブラリ',
+  'データベース',
+  'マークアップ・スタイルシート',
+  'Web技術 / アーキテクチャ / ネットワーク',
+  'デプロイ・インフラ・OS',
+  '開発ツール・CI/CD',
+  '数値解析・自動化(マクロ)',
+];
+const sortedCategories = Object.entries(skillsByCategory).sort(([a], [b]) => {
+  const ia = categoryOrder.indexOf(a);
+  const ib = categoryOrder.indexOf(b);
+  if (ia === -1 && ib === -1) return a.localeCompare(b);
+  if (ia === -1) return 1;
+  if (ib === -1) return -1;
+  return ia - ib;
+});
 ---
 
 <section id="skills" class="py-20 relative">
@@ -88,7 +108,7 @@ const skillsByCategory = skills.reduce((acc, skill) => {
 
     <!-- スキルカテゴリ -->
     <div class="space-y-12">
-      {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+      {sortedCategories.map(([category, categorySkills]) => (
         <div class="glass p-8 rounded-2xl hover-lift">
           <h3 class="text-2xl font-bold text-white mb-8 flex items-center">
             <div class="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg mr-4 flex items-center justify-center">

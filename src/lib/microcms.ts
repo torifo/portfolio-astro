@@ -33,6 +33,18 @@ export async function fetchProfile(): Promise<Profile | null> {
   return response.json();
 }
 
+export interface RelatedSkill {
+  id: string;
+  name: string;
+  icon?: {
+    url: string;
+    height: number;
+    width: number;
+  };
+  category: string[];
+  level: number;
+}
+
 export interface RelatedLink {
   fieldId: string;
   service: string;
@@ -44,6 +56,7 @@ export interface RelatedLink {
   repoUrl?: string;
   opusUrl?: string;
   context?: string;
+  relatedSkill?: RelatedSkill[];
 }
 
 export interface Opus {
