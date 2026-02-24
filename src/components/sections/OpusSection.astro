@@ -1,7 +1,7 @@
 ---
 // OpusSection.astro - 開発実績セクション（microCMS連携）
-import { fetchAllOpus, generateSlug } from '../../lib/microcms';
-import type { Opus } from '../../lib/microcms';
+import { fetchAllOpus, generateSlug, SKILL_CATEGORY_SLUG } from '../../lib/microcms';
+import type { Opus, RelatedSkill } from '../../lib/microcms';
 
 let opus: Opus[] = [];
 let allCategories: string[] = [];
@@ -47,6 +47,26 @@ const getSkillCategoryColor = (category: string) => {
     '数値解析・自動化(マクロ)': 'bg-pink-500/20 text-pink-300',
   };
   return colors[category] || 'bg-gray-500/20 text-gray-300';
+};
+
+// relatedSkillをカテゴリ別にグループ化（categoryOrder順）
+const skillCategoryOrder = [
+  'プログラミング言語', 'フレームワーク・ライブラリ', 'データベース',
+  'マークアップ・スタイルシート', 'Web技術 / アーキテクチャ / ネットワーク',
+  'デプロイ・インフラ・OS', '開発ツール・CI/CD', '数値解析・自動化(マクロ)',
+];
+const groupSkillsByCategory = (skills: RelatedSkill[]) => {
+  const grouped = skills.reduce((acc, skill) => {
+    const cat = skill.category[0] || 'その他';
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(skill);
+    return acc;
+  }, {} as Record<string, RelatedSkill[]>);
+  return Object.entries(grouped).sort(([a], [b]) => {
+    const ia = skillCategoryOrder.indexOf(a);
+    const ib = skillCategoryOrder.indexOf(b);
+    return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+  });
 };
 
 // カラーパターン
@@ -296,11 +316,18 @@ const getGridColumns = (itemCount: number) => {
                               </div>
                             )}
                             {link.relatedSkill && link.relatedSkill.length > 0 && (
-                              <div class="flex flex-wrap justify-center gap-1 mt-1 mb-1">
-                                {link.relatedSkill.map((skill) => (
-                                  <span class={`px-2 py-0.5 ${getSkillCategoryColor(skill.category[0])} rounded-full text-xs`}>
-                                    {skill.name}
-                                  </span>
+                              <div class="mt-1 mb-1 space-y-1">
+                                {groupSkillsByCategory(link.relatedSkill).map(([cat, catSkills]) => (
+                                  <div class="flex flex-wrap justify-center gap-1">
+                                    {catSkills.map((skill) => (
+                                      <a
+                                        href={`#skills-${SKILL_CATEGORY_SLUG[cat] ?? cat}`}
+                                        class={`px-2 py-0.5 ${getSkillCategoryColor(cat)} rounded-full text-xs opacity-80 hover:opacity-100 transition-opacity`}
+                                      >
+                                        {skill.name}
+                                      </a>
+                                    ))}
+                                  </div>
                                 ))}
                               </div>
                             )}

@@ -7,6 +7,7 @@ const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
 
 interface Skill {
   id: string;
+  createdAt: string;
   name: string;
   icon?: {
     url: string;
@@ -58,6 +59,15 @@ const skillsByCategory = skills.reduce((acc, skill) => {
   return acc;
 }, {} as Record<string, Skill[]>);
 
+// 各カテゴリ内のスキルをレベル降順・作成日昇順でソート
+Object.values(skillsByCategory).forEach(arr => {
+  arr.sort((a, b) =>
+    b.level !== a.level
+      ? b.level - a.level
+      : new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  );
+});
+
 // カテゴリ表示順（APIから順序は取得できないため固定）
 const categoryOrder = [
   'プログラミング言語',
@@ -69,6 +79,19 @@ const categoryOrder = [
   '開発ツール・CI/CD',
   '数値解析・自動化(マクロ)',
 ];
+
+// アンカーリンク用スラッグ（microcms.tsのSKILL_CATEGORY_SLUGと同一）
+const skillCategorySlug: Record<string, string> = {
+  'プログラミング言語': 'lang',
+  'フレームワーク・ライブラリ': 'fw',
+  'データベース': 'db',
+  'マークアップ・スタイルシート': 'markup',
+  'Web技術 / アーキテクチャ / ネットワーク': 'web',
+  'デプロイ・インフラ・OS': 'deploy',
+  '開発ツール・CI/CD': 'tools',
+  '数値解析・自動化(マクロ)': 'analytics',
+};
+
 const sortedCategories = Object.entries(skillsByCategory).sort(([a], [b]) => {
   const ia = categoryOrder.indexOf(a);
   const ib = categoryOrder.indexOf(b);
@@ -109,7 +132,7 @@ const sortedCategories = Object.entries(skillsByCategory).sort(([a], [b]) => {
     <!-- スキルカテゴリ -->
     <div class="space-y-12">
       {sortedCategories.map(([category, categorySkills]) => (
-        <div class="glass p-8 rounded-2xl hover-lift">
+        <div id={`skills-${skillCategorySlug[category] ?? category}`} class="glass p-8 rounded-2xl hover-lift">
           <h3 class="text-2xl font-bold text-white mb-8 flex items-center">
             <div class="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg mr-4 flex items-center justify-center">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
