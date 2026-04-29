@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { fetchProfile } from '../lib/microcms';
+
+const profile = await fetchProfile();
+const developEmail = profile?.develop_mail ?? '';
+const occupationEmail = profile?.occupation_mail ?? '';
+---
+
+<Layout title="Contact | Toriforiumu" description="お問い合わせフォーム">
+  <Header />
+
+  <div class="min-h-screen pt-24 pb-16 relative">
+    <div class="container mx-auto px-6 max-w-2xl">
+
+      <!-- タイトル -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Contact</h1>
+        <p class="text-gray-400 text-lg">お気軽にご連絡ください</p>
+      </div>
+
+      <!-- フォーム -->
+      <div class="glass rounded-2xl p-8">
+
+        <!-- 種別選択 -->
+        <div class="mb-8">
+          <p class="text-white font-semibold mb-3">お問い合わせ種別 <span class="text-red-400">*</span></p>
+          <div class="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              id="type-develop"
+              class="contact-type-btn py-4 px-4 rounded-xl border-2 border-white/20 text-center transition-all"
+              data-type="develop"
+            >
+              <div class="text-2xl mb-1">💻</div>
+              <div class="text-white font-semibold text-sm">開発相談</div>
+              <div class="text-gray-400 text-xs mt-1">技術・開発に関するご相談</div>
+            </button>
+            <button
+              type="button"
+              id="type-occupation"
+              class="contact-type-btn py-4 px-4 rounded-xl border-2 border-white/20 text-center transition-all"
+              data-type="occupation"
+            >
+              <div class="text-2xl mb-1">💼</div>
+              <div class="text-white font-semibold text-sm">仕事依頼</div>
+              <div class="text-gray-400 text-xs mt-1">採用・業務委託のご相談</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- フォーム本体 -->
+        <form id="contact-form" class="space-y-5" novalidate>
+
+          <!-- 氏名 -->
+          <div>
+            <label class="block text-white text-sm font-medium mb-2">
+              お名前 <span class="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              id="input-name"
+              placeholder="山田 太郎"
+              class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors"
+              required
+            />
+          </div>
+
+          <!-- メールアドレス -->
+          <div>
+            <label class="block text-white text-sm font-medium mb-2">
+              メールアドレス <span class="text-red-400">*</span>
+            </label>
+            <input
+              type="email"
+              id="input-email"
+              placeholder="your@email.com"
+              class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors"
+              required
+            />
+          </div>
+
+          <!-- 件名 -->
+          <div>
+            <label class="block text-white text-sm font-medium mb-2">
+              件名 <span class="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              id="input-subject"
+              placeholder="件名を入力してください"
+              class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors"
+              required
+            />
+          </div>
+
+          <!-- 要件・内容 -->
+          <div>
+            <label class="block text-white text-sm font-medium mb-2">
+              要件・内容 <span class="text-red-400">*</span>
+            </label>
+            <textarea
+              id="input-message"
+              rows="5"
+              placeholder="お問い合わせ内容を詳しくご記入ください"
+              class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors resize-none"
+              required
+            ></textarea>
+          </div>
+
+          <!-- 返信重要度 -->
+          <div>
+            <label class="block text-white text-sm font-medium mb-2">返信重要度</label>
+            <select
+              id="input-priority"
+              class="w-full bg-gray-900 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors"
+            >
+              <option value="low">低 — いつでも大丈夫です</option>
+              <option value="medium" selected>中 — 数日以内に返信いただけると幸いです</option>
+              <option value="high">高 — できるだけ早めにご連絡ください</option>
+              <option value="urgent">緊急 — 至急ご連絡をお願いします</option>
+            </select>
+          </div>
+
+          <!-- 返信期待日時 -->
+          <div>
+            <label class="block text-white text-sm font-medium mb-2">返信期待日時（任意）</label>
+            <input
+              type="date"
+              id="input-reply-date"
+              class="w-full bg-gray-900 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors"
+            />
+          </div>
+
+          <!-- エラー表示 -->
+          <p id="form-error" class="hidden text-red-400 text-sm"></p>
+
+          <!-- 送信ボタン -->
+          <button
+            type="submit"
+            id="submit-btn"
+            class="w-full py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-purple-600 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            disabled
+          >
+            メールを送信する
+          </button>
+
+          <p class="text-gray-500 text-xs text-center">
+            送信ボタンを押すとメールクライアントが起動します
+          </p>
+        </form>
+      </div>
+
+      <!-- 戻るリンク -->
+      <div class="mt-8 text-center">
+        <a href="/" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">
+          ← ポートフォリオに戻る
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<script define:vars={{ developEmail, occupationEmail }}>
+  const PRIORITY_LABEL = {
+    low: '低（いつでも大丈夫です）',
+    medium: '中（数日以内）',
+    high: '高（できるだけ早めに）',
+    urgent: '緊急（至急）',
+  };
+
+  let selectedType = null;
+
+  const typeBtns = document.querySelectorAll('.contact-type-btn');
+  const submitBtn = document.getElementById('submit-btn');
+  const formError = document.getElementById('form-error');
+
+  typeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedType = btn.getAttribute('data-type');
+      typeBtns.forEach(b => {
+        b.classList.remove('border-cyan-400', 'bg-cyan-500/10', 'border-purple-400', 'bg-purple-500/10');
+        b.classList.add('border-white/20');
+      });
+      if (selectedType === 'develop') {
+        btn.classList.remove('border-white/20');
+        btn.classList.add('border-cyan-400', 'bg-cyan-500/10');
+      } else {
+        btn.classList.remove('border-white/20');
+        btn.classList.add('border-purple-400', 'bg-purple-500/10');
+      }
+      validateForm();
+    });
+  });
+
+  function validateForm() {
+    const name = document.getElementById('input-name').value.trim();
+    const email = document.getElementById('input-email').value.trim();
+    const subject = document.getElementById('input-subject').value.trim();
+    const message = document.getElementById('input-message').value.trim();
+    submitBtn.disabled = !(selectedType && name && email && subject && message);
+  }
+
+  ['input-name', 'input-email', 'input-subject', 'input-message'].forEach(id => {
+    document.getElementById(id).addEventListener('input', validateForm);
+  });
+
+  document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+
+    const name    = document.getElementById('input-name').value.trim();
+    const email   = document.getElementById('input-email').value.trim();
+    const subject = document.getElementById('input-subject').value.trim();
+    const message = document.getElementById('input-message').value.trim();
+    const priority = document.getElementById('input-priority').value;
+    const replyDate = document.getElementById('input-reply-date').value;
+
+    if (!selectedType) {
+      formError.textContent = 'お問い合わせ種別を選択してください。';
+      formError.classList.remove('hidden');
+      return;
+    }
+    formError.classList.add('hidden');
+
+    const toEmail = selectedType === 'develop' ? developEmail : occupationEmail;
+
+    const bodyLines = [
+      `【お名前】${name}`,
+      `【メールアドレス】${email}`,
+      `【種別】${selectedType === 'develop' ? '開発相談' : '仕事依頼'}`,
+      '',
+      `【件名】${subject}`,
+      '',
+      `【要件・内容】`,
+      message,
+      '',
+      `【返信重要度】${PRIORITY_LABEL[priority]}`,
+    ];
+    if (replyDate) bodyLines.push(`【返信期待日時】${replyDate}`);
+
+    const mailto = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+    window.location.href = mailto;
+  });
+</script>
+
+<style>
+  /* ライトモード調整 */
+  body.light-mode #contact-form input,
+  body.light-mode #contact-form textarea,
+  body.light-mode #contact-form select {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: #111827 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+  }
+
+  body.light-mode #contact-form input::placeholder,
+  body.light-mode #contact-form textarea::placeholder {
+    color: #9ca3af !important;
+  }
+
+  body.light-mode .contact-type-btn {
+    color: #111827 !important;
+  }
+
+  body.light-mode .contact-type-btn .text-gray-400 {
+    color: #374151 !important;
+  }
+</style>
