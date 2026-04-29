@@ -321,6 +321,18 @@
   // グローバル関数として登録（Header.astroから呼び出せるように）
   (window as any).setThemeBasedOnSunriseSunset = setThemeBasedOnSunriseSunset;
 
+  // View Transitions: DOM swap直後にテーマを即再適用（フラッシュ防止）
+  document.addEventListener('astro:after-swap', () => {
+    initializeTheme();
+    updateThemeIcon();
+  });
+
+  // View Transitions: ページ遷移完了後に日時情報を更新
+  document.addEventListener('astro:page-load', () => {
+    updateSunTimes();
+    updateThemeIcon();
+  });
+
   // テーマドロップダウンメニューの制御
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const themeDropdown = document.querySelector('.theme-dropdown');

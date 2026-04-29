@@ -21,16 +21,17 @@ export interface Profile {
   history: HistoryEntry[];
 }
 
-export async function fetchProfile(): Promise<Profile | null> {
-  const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
-  const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+let _profilePromise: Promise<Profile | null> | null = null;
 
-  const response = await fetch(`${SERVICE_DOMAIN}profile`, {
-    headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY },
-  });
-
-  if (!response.ok) return null;
-  return response.json();
+export function fetchProfile(): Promise<Profile | null> {
+  if (!_profilePromise) {
+    const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
+    const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+    _profilePromise = fetch(`${SERVICE_DOMAIN}profile`, {
+      headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY },
+    }).then(r => r.ok ? r.json() : null).catch(() => null);
+  }
+  return _profilePromise;
 }
 
 export interface RelatedSkill {
@@ -77,17 +78,20 @@ export interface OpusResponse {
   totalCount: number;
 }
 
-export async function fetchAllOpus(): Promise<Opus[]> {
-  const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
-  const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+let _opusPromise: Promise<Opus[]> | null = null;
 
-  const response = await fetch(`${SERVICE_DOMAIN}opus?limit=100&orders=createdAt`, {
-    headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY },
-  });
-
-  if (!response.ok) return [];
-  const data: OpusResponse = await response.json();
-  return data.contents;
+export function fetchAllOpus(): Promise<Opus[]> {
+  if (!_opusPromise) {
+    const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
+    const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+    _opusPromise = fetch(`${SERVICE_DOMAIN}opus?limit=100&orders=createdAt`, {
+      headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY },
+    }).then(r => {
+      if (!r.ok) return [];
+      return r.json().then((data: OpusResponse) => data.contents);
+    }).catch(() => []);
+  }
+  return _opusPromise;
 }
 
 // opus.id + linkIndex から一意なslugを生成
