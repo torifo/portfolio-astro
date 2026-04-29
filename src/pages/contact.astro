@@ -173,6 +173,21 @@ const occupationEmail = profile?.occupation_mail ?? '';
     urgent: '緊急（至急）',
   };
 
+  // ロゴクリック時、入力中なら警告
+  document.getElementById('header-logo')?.addEventListener('click', e => {
+    const name    = document.getElementById('input-name').value.trim();
+    const email   = document.getElementById('input-email').value.trim();
+    const subject = document.getElementById('input-subject').value.trim();
+    const message = document.getElementById('input-message').value.trim();
+    const hasInput = selectedType || name || email || subject || message;
+    if (hasInput) {
+      e.preventDefault();
+      if (window.confirm('入力中の内容がクリアされます。トップページに戻りますか？')) {
+        window.location.href = '/';
+      }
+    }
+  });
+
   let selectedType = null;
 
   const typeBtns = document.querySelectorAll('.contact-type-btn');

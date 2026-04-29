@@ -7,12 +7,12 @@ import ThemeToggle from './ThemeToggle.astro';
   <nav class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
       <!-- ロゴ -->
-      <div class="flex items-center space-x-2">
+      <a href="/" id="header-logo" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
         <div class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center">
           <img src="/images/toriforium_circle.png" alt="Toriforiumu Logo" class="w-full h-full object-cover">
         </div>
         <span class="text-white font-semibold text-lg">Toriforiumu</span>
-      </div>
+      </a>
       
       <!-- タブレット・デスクトップナビゲーション -->
       <div class="hidden lg:flex items-center space-x-6">
