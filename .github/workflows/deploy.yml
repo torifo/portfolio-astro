@@ -2,69 +2,57 @@ name: Deploy to Production
 
 on:
   push:
-    branches: [ deploy/docker-setup ]
+    branches: [ main ]
   workflow_dispatch:
+
+env:
+  IMAGE: ghcr.io/torifo/portfolio-astro
+  VPS_APP_DIR: /home/ubuntu/Web/portfolio-astro
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # VPS deployment runner (GitHub-hosted)
-    
+    runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
-      
+
+    - name: Determine image tag
+      id: meta
+      run: echo "tag=$(TZ=Asia/Tokyo date +%Y%m%d-%H%M)" >> "$GITHUB_OUTPUT"
+
+    # Dockerfile の builder ステージが npm run build を実行するため、
+    # microCMS の値はビルドコンテキストの .env として渡す
     - name: Create .env file from secrets
       run: |
         echo "PUBLIC_MICROCMS_API_KEY=${{ secrets.PUBLIC_MICROCMS_API_KEY }}" > .env
         echo "PUBLIC_MICROCMS_SERVICE_DOMAIN=${{ secrets.PUBLIC_MICROCMS_SERVICE_DOMAIN }}" >> .env
-        
-    - name: Build application
-      run: npm run build
-      
-    - name: Build Docker image
-      run: docker build -t portfolio-frontend .
-      
-    - name: Create production docker-compose.yml
-      run: |
-        cat > docker-compose.prod.yml << EOF
-        services:
-          portfolio-frontend:
-            image: portfolio-frontend
-            container_name: portfolio-frontend
-            restart: unless-stopped
-            environment:
-              - VIRTUAL_HOST=portorifo.riumu.net
-              - VIRTUAL_PORT=80
-              - LETSENCRYPT_HOST=portorifo.riumu.net
-              - LETSENCRYPT_EMAIL=progbot.clover@gmail.com
-              - PUBLIC_MICROCMS_API_KEY=${{ secrets.PUBLIC_MICROCMS_API_KEY }}
-              - PUBLIC_MICROCMS_SERVICE_DOMAIN=${{ secrets.PUBLIC_MICROCMS_SERVICE_DOMAIN }}
-            networks:
-              - global-proxy-network
 
-        networks:
-          global-proxy-network:
-            external: true
-        EOF
-        
-    - name: Save production config
-      uses: actions/upload-artifact@v4
-      with:
-        name: production-config
-        path: |
-          docker-compose.prod.yml
-          
-    # Deploy to production server (add your deployment steps here)
-    # - name: Deploy to server
-    #   run: |
-    #     # SSH to server and deploy
-    #     # docker compose -f docker-compose.prod.yml up -d
+    - name: Log in to GHCR
+      run: |
+        echo "${{ secrets.GHCR_TOKEN }}" \
+          | docker login ghcr.io -u "${{ github.repository_owner }}" --password-stdin
+
+    - name: Build and push image
+      run: |
+        docker build -t "$IMAGE:${{ steps.meta.outputs.tag }}" -t "$IMAGE:latest" .
+        docker push "$IMAGE:${{ steps.meta.outputs.tag }}"
+        docker push "$IMAGE:latest"
+
+    # VPS 側の deploy.sh をそのまま呼ぶ（手動デプロイと同じ経路）
+    - name: Deploy on VPS
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_deploy
+        chmod 600 ~/.ssh/id_deploy
+        ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+        ssh -i ~/.ssh/id_deploy -o IdentitiesOnly=yes \
+          "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
+          "cd $VPS_APP_DIR && ./deploy.sh ${{ steps.meta.outputs.tag }}"
+
+    - name: Summary
+      run: |
+        echo "### Deployed" >> "$GITHUB_STEP_SUMMARY"
+        echo "- image: \`$IMAGE:${{ steps.meta.outputs.tag }}\`" >> "$GITHUB_STEP_SUMMARY"
+        echo "- url: https://portorifo.riumu.net" >> "$GITHUB_STEP_SUMMARY"
+        echo "- rollback: \`./deploy.sh <前のタグ>\` on VPS" >> "$GITHUB_STEP_SUMMARY"
