@@ -4,6 +4,12 @@ import { fetchProfile } from '../../lib/microcms';
 
 const profile = await fetchProfile();
 
+// Connect セクションのメールアドレス（コピーボタン付きで表示）
+const mails: { label: string; value: string }[] = [
+  { label: '採用・就活', value: profile?.occupation_mail ?? '' },
+  { label: '開発・技術', value: profile?.develop_mail ?? '' },
+].filter((mail) => mail.value !== '');
+
 const getTagBorderColor = (tags: string[]) => {
   const first = tags[0];
   const map: Record<string, string> = {
@@ -118,36 +124,38 @@ const getTagBadgeColor = (tag: string) => {
               </svg>
               <span>github.com/torifo</span>
             </a>
-            <!-- 採用・就活用メール -->
-            {profile?.occupation_mail && (
-              <a
-                href={`mailto:${profile.occupation_mail}`}
-                class="flex items-center text-gray-300 hover:text-cyan-400 transition-colors"
-              >
-                <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-                <div>
-                  <div class="text-xs text-gray-500 leading-none mb-0.5">採用・就活</div>
-                  <div>{profile.occupation_mail}</div>
-                </div>
-              </a>
-            )}
-            <!-- 開発・技術用メール -->
-            {profile?.develop_mail && (
-              <a
-                href={`mailto:${profile.develop_mail}`}
-                class="flex items-center text-gray-300 hover:text-cyan-400 transition-colors"
-              >
-                <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-                <div>
-                  <div class="text-xs text-gray-500 leading-none mb-0.5">開発・技術</div>
-                  <div>{profile.develop_mail}</div>
-                </div>
-              </a>
-            )}
+            <!-- メールアドレス（採用・就活 / 開発・技術）-->
+            {mails.map((mail) => (
+              <div class="flex items-center">
+                <a
+                  href={`mailto:${mail.value}`}
+                  class="flex items-center min-w-0 flex-1 text-gray-300 hover:text-cyan-400 transition-colors"
+                >
+                  <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                  <div class="min-w-0">
+                    <div class="text-xs text-gray-500 leading-none mb-0.5">{mail.label}</div>
+                    <div class="truncate">{mail.value}</div>
+                  </div>
+                </a>
+                <button
+                  type="button"
+                  class="copy-mail-btn ml-2 shrink-0 p-2 rounded-lg text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-colors cursor-pointer"
+                  data-mail={mail.value}
+                  aria-label={`${mail.label}のメールアドレスをコピー`}
+                  title="コピー"
+                >
+                  <svg class="copy-icon-default w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                  <svg class="copy-icon-done w-4 h-4 hidden text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </button>
+              </div>
+            ))}
+            <span id="copy-mail-status" class="sr-only" aria-live="polite"></span>
           </div>
         </div>
       </div>
@@ -225,6 +233,66 @@ const getTagBadgeColor = (tag: string) => {
             item.style.display = tags.includes(selectedTag) ? '' : 'none';
           }
         });
+      });
+    });
+
+    // メールアドレスのコピー
+    const copyButtons = document.querySelectorAll('.copy-mail-btn');
+    const copyStatus = document.getElementById('copy-mail-status');
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (e) {
+        copied = false;
+      }
+      document.body.removeChild(textarea);
+      return copied;
+    }
+
+    copyButtons.forEach(function (btn) {
+      const defaultIcon = btn.querySelector('.copy-icon-default');
+      const doneIcon = btn.querySelector('.copy-icon-done');
+      let resetTimer = null;
+
+      function showCopied() {
+        defaultIcon.classList.add('hidden');
+        doneIcon.classList.remove('hidden');
+        btn.setAttribute('title', 'コピーしました');
+        if (copyStatus) {
+          copyStatus.textContent = 'メールアドレスをコピーしました';
+        }
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function () {
+          defaultIcon.classList.remove('hidden');
+          doneIcon.classList.add('hidden');
+          btn.setAttribute('title', 'コピー');
+          if (copyStatus) {
+            copyStatus.textContent = '';
+          }
+        }, 1600);
+      }
+
+      btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        const mail = btn.getAttribute('data-mail');
+        if (!mail) return;
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(mail).then(showCopied, function () {
+            if (fallbackCopy(mail)) showCopied();
+          });
+        } else if (fallbackCopy(mail)) {
+          showCopied();
+        }
       });
     });
   });
