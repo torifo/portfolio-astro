@@ -1,1 +1,187 @@
-{ "_placeholder": true, "contents": [], "totalCount": 0 }
+{
+ "contents": [
+  {
+   "id": "thpjp0k0w6f",
+   "createdAt": "2025-08-03T07:06:06.036Z",
+   "updatedAt": "2025-08-03T08:27:20.407Z",
+   "publishedAt": "2025-08-03T07:06:06.036Z",
+   "revisedAt": "2025-08-03T08:27:20.407Z",
+   "title": "ブルーアーカイブ",
+   "gameIcon": [
+    {
+     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/7a4a639b91834e3592d05c4161eb5565/blue-archive.png",
+     "height": 200,
+     "width": 200
+    }
+   ],
+   "officialUrl": "https://bluearchive.jp/",
+   "tags": [
+    "RPG",
+    "Yostar",
+    "学園✖青春✖物語"
+   ],
+   "account": [],
+   "relatedSNS": null
+  },
+  {
+   "id": "fbdaa004jem",
+   "createdAt": "2025-08-03T07:02:46.605Z",
+   "updatedAt": "2025-08-03T08:27:04.766Z",
+   "publishedAt": "2025-08-03T07:02:46.605Z",
+   "revisedAt": "2025-08-03T08:27:04.766Z",
+   "title": "ゼンレスゾーンゼロ",
+   "gameIcon": [
+    {
+     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/4efb3c2777774fbc89feaf86ed856185/zenless.png",
+     "height": 109,
+     "width": 109
+    }
+   ],
+   "officialUrl": "https://zenless.hoyoverse.com/",
+   "tags": [
+    "HoYoverse",
+    "RPG",
+    "アクション",
+    "都市ファンタジー"
+   ],
+   "account": [
+    {
+     "fieldId": "account",
+     "accountName": "くろバーン",
+     "uid": 1300593797
+    }
+   ],
+   "relatedSNS": null
+  },
+  {
+   "id": "xb0bsq3jj",
+   "createdAt": "2025-08-03T06:54:41.065Z",
+   "updatedAt": "2026-07-17T12:10:18.096Z",
+   "publishedAt": "2025-08-03T06:54:41.065Z",
+   "revisedAt": "2026-07-17T12:10:18.096Z",
+   "title": "崩壊スターレイル",
+   "gameIcon": [
+    {
+     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/b943280ad2174c03b208437ad0528d32/houkaistarrail.png",
+     "height": 873,
+     "width": 873
+    }
+   ],
+   "officialUrl": "https://hsr.hoyoverse.com/ja-jp/home",
+   "tags": [
+    "HoYoverse",
+    "RPG",
+    "スペースファンタジー",
+    "ターン性バトル"
+   ],
+   "account": [
+    {
+     "fieldId": "account",
+     "accountName": "黒刃",
+     "uid": 828459135
+    }
+   ],
+   "relatedSNS": null
+  },
+  {
+   "id": "hurugtdpxug",
+   "createdAt": "2025-08-03T06:49:19.564Z",
+   "updatedAt": "2025-08-14T16:09:45.370Z",
+   "publishedAt": "2025-08-03T06:51:33.876Z",
+   "revisedAt": "2025-08-14T16:09:45.370Z",
+   "title": "原神",
+   "gameIcon": [
+    {
+     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/6ec807fdc7c6447e9bdaf11e3ebc575b/Genshin-Impact.png",
+     "height": 451,
+     "width": 451
+    }
+   ],
+   "officialUrl": "https://genshin.hoyoverse.com/",
+   "tags": [
+    "HoYoverse",
+    "RPG",
+    "オープンワールド",
+    "アクション"
+   ],
+   "account": [
+    {
+     "fieldId": "account",
+     "accountName": "A_B-Clover",
+     "uid": 853192782
+    },
+    {
+     "fieldId": "account",
+     "accountName": "Sub",
+     "uid": 864058871
+    }
+   ],
+   "relatedSNS": [
+    {
+     "fieldId": "relatedSNS",
+     "sns": [
+      "Twitter"
+     ],
+     "link": "https://x.com/kuroba_Genshin?t=SO9ZHwpapdQxRnPRMrPJDw&s=09",
+     "icon": [
+      {
+       "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/6a72787d6ea24a399fb1782b2b41f961/twitter.png",
+       "height": 512,
+       "width": 512
+      }
+     ]
+    },
+    {
+     "fieldId": "relatedSNS",
+     "sns": [
+      "TikTok"
+     ],
+     "link": "https://www.tiktok.com/@a_b.clover?_t=ZS-8yZSGrlhCC2&_r=1",
+     "icon": [
+      {
+       "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/ddad7ac74ebd47ff914e3b87acf76f42/tiktok-seeklogo.png",
+       "height": 2000,
+       "width": 1713
+      }
+     ]
+    },
+    {
+     "fieldId": "relatedSNS",
+     "sns": [
+      "Youtube"
+     ],
+     "link": "https://youtube.com/@kuroba_channel?si=pkc67iHXK3vPPba-",
+     "icon": [
+      {
+       "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/4b1b5d6926544a76b7899fef0a410694/yt_logo_rgb_light.png",
+       "height": 178,
+       "width": 794
+      },
+      {
+       "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/644e259e205743568cbcee7739ef1dd4/yt_logo_rgb_dark.png",
+       "height": 178,
+       "width": 794
+      }
+     ]
+    },
+    {
+     "fieldId": "relatedSNS",
+     "sns": [
+      "HoYoLab"
+     ],
+     "link": "https://www.hoyolab.com/accountCenter/postList?id=199583515",
+     "icon": [
+      {
+       "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/02c87040b51748f881fe894d9fd798f3/HoYoLab.png",
+       "height": 240,
+       "width": 240
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "totalCount": 4,
+ "offset": 0,
+ "limit": 100
+}

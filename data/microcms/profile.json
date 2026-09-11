@@ -1,1 +1,235 @@
-{ "_placeholder": true }
+{
+ "createdAt": "2025-07-20T10:03:22.575Z",
+ "updatedAt": "2026-04-29T07:54:54.579Z",
+ "publishedAt": "2025-07-20T13:03:46.255Z",
+ "revisedAt": "2026-04-29T07:54:54.579Z",
+ "name": "とりふぉりうむ",
+ "title": "デベロッパー/ ジーニー",
+ "introduction": "26卒のエンジニアです。開発部(techub-organization)を設立し、様々なチーム開発を行っています。また、個人開発としてもtorifoリポジトリに多種多様のサービスを公開しています。",
+ "avatar": {
+  "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/cea48065414342b6a032435ed277ec11/toriforium.png",
+  "height": 1100,
+  "width": 1100
+ },
+ "occupation_mail": "occupation.clover@gmail.com",
+ "develop_mail": "progbot.clover@gmail.com",
+ "history": [
+  {
+   "fieldId": "history",
+   "date": "2019/4",
+   "event": "工学院大学附属高等学校(サイエンスコース) 入学",
+   "tag": [
+    "Academic"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2021/8",
+   "event": "実用数学技能検定 準1級 合格",
+   "tag": [
+    "Academic",
+    "Pulse"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2021/12",
+   "event": "実用英語技能検定 2級 合格",
+   "tag": [
+    "Academic",
+    "Pulse"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2022/3",
+   "event": "工学院大学附属高等学校 卒業 ＋ ITパスポート 取得",
+   "tag": [
+    "Academic"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2022/4",
+   "event": "東京都立大学 システムデザイン学部 情報科学科 入学",
+   "tag": [
+    "Academic"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2022/05",
+   "event": "「ソロ活」を開始：計画力と論理的思考力の礎となる旅や散歩の記録を開始",
+   "tag": [
+    "Pulse"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2022/08",
+   "event": "都立大「原神サークル（非公認）」を設立：コミュニティ運営を開始",
+   "tag": [
+    "Community"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2022/10",
+   "event": "家計簿DB管理システムの構築：Excel, PostgreSQL, Pythonを組み合わせた収支管理を開始",
+   "tag": [
+    "Technology"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2022/11",
+   "event": "本格的なソロ活（旅・散歩）への発展：演繹的思考による行動範囲の拡大を実践",
+   "tag": [
+    "Pulse"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2023/04",
+   "event": "Pythonによる天気取得CLIの制作：APIライブラリを活用した実用ツールの個人開発",
+   "tag": [
+    "Technology"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2024/06",
+   "event": "Discord Bot 開発に本格着手：Node.jsやPythonを用いたBot開発を開始",
+   "tag": [
+    "Opus",
+    "Technology"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2024/08",
+   "event": "原神サークル向け「サポートボット」実装：サークル運営のシステム化を促進",
+   "tag": [
+    "Opus",
+    "Technology"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2024/09",
+   "event": "「Maintenance Bot」の制作・実装：Bot運用の安定化を図る保守ツールの構築",
+   "tag": [
+    "Opus",
+    "Technology"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2025/02",
+   "event": "「Notify API Genshin Status Bot」実装：Cookieを活用したステータス通知機能を開発",
+   "tag": [
+    "Opus",
+    "Technology"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2025/05",
+   "event": "「大学卒業判定 Web Application」公開：共同開発による実利的なWebアプリのリリース",
+   "tag": [
+    "Opus",
+    "Technology"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2025/06",
+   "event": "「原神データベース Webサイト」公開：DBを活用した情報検索・提供システムの構築",
+   "tag": [
+    "Opus",
+    "Technology"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/3",
+   "event": "東京都立大学 システムデザイン学部 情報科学科 卒業",
+   "tag": [
+    "Academic"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/03",
+   "event": "JALカードスカイメイトにて、女満別・丘珠・釧路空港をはしご",
+   "tag": [
+    "Journey"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/03",
+   "event": "納沙布岬を訪問！日本四端制覇‼︎",
+   "tag": [
+    "Journey"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/04",
+   "event": "株式会社ジーニー 26新卒エンジニア職 入社",
+   "tag": [
+    "Occupation"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/04",
+   "event": "値を加重配分する Web ユーティリティを開発＆公開(portion-flow)",
+   "tag": [
+    "Opus"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/04",
+   "event": "プロフィール用リポジトリtorifoを作成＆公開",
+   "tag": [
+    "Opus"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/04",
+   "event": "日本語の豊かな表現を投稿・共有・発見できる SNSを開発＆公開(wording-stock)",
+   "tag": [
+    "Opus"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/04",
+   "event": "チーム開発により特定のチャンネルのダイジェストをcanvasに描画するslack botを開発＆実装",
+   "tag": [
+    "Community",
+    "Opus"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/04",
+   "event": "特定のLLMを使って自然言語から Google Calendar の予定候補を作成し、確認後に登録する Chrome / Edge 向けブラウザ拡張機能の開発＆プレリリース",
+   "tag": [
+    "Opus"
+   ]
+  },
+  {
+   "fieldId": "history",
+   "date": "2026/04",
+   "event": "Gitコマンドをかるた形式で学習できる静的なサイトをGithub Pagesにて開発＆公開(fudagit)",
+   "tag": [
+    "Opus"
+   ]
+  }
+ ]
+}
