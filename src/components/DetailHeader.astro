@@ -4,26 +4,34 @@ import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
   title: string;
+  backHref?: string;
+  backLabel?: string;
 }
 
-const { title } = Astro.props;
+const { title, backHref = '/#opus', backLabel = 'ポートフォリオに戻る' } = Astro.props;
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 glass backdrop-blur-md">
-  <nav class="container mx-auto px-6 py-4 flex items-center justify-between gap-4">
+  <!-- 左右を等幅にして中央のタイトルを真ん中に固定する。
+       justify-between だけだと、右の時計・テーマ切替のほうが幅広いぶんタイトルが左に寄る。
+       ただし min-w-fit が無いと、狭い画面で右の時計（約237px）が枠からはみ出して
+       タイトルに重なる。中身より縮まないようにし、代わりにタイトルを truncate する。 -->
+  <nav class="container mx-auto px-6 py-4 flex items-center gap-4">
+    <div class="flex-1 min-w-fit flex justify-start">
     <a
-      href="/#opus"
+      href={backHref}
       class="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors shrink-0"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
-      <span class="text-sm font-medium hidden sm:inline">ポートフォリオに戻る</span>
+      <span class="text-sm font-medium hidden sm:inline">{backLabel}</span>
     </a>
+    </div>
 
-    <span class="text-white font-semibold text-base truncate text-center">{title}</span>
+    <span class="text-white font-semibold text-base truncate text-center min-w-0">{title}</span>
 
-    <div class="shrink-0">
+    <div class="flex-1 min-w-fit flex justify-end">
       <ThemeToggle />
     </div>
   </nav>

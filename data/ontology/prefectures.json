@@ -1,0 +1,284 @@
+[
+ {
+  "code": "01",
+  "qid": "Q1037393",
+  "name": "北海道",
+  "en": "Hokkaido"
+ },
+ {
+  "code": "02",
+  "qid": "Q71699",
+  "name": "青森県",
+  "en": "Aomori Prefecture"
+ },
+ {
+  "code": "03",
+  "qid": "Q48326",
+  "name": "岩手県",
+  "en": "Iwate Prefecture"
+ },
+ {
+  "code": "04",
+  "qid": "Q47896",
+  "name": "宮城県",
+  "en": "Miyagi Prefecture"
+ },
+ {
+  "code": "05",
+  "qid": "Q81863",
+  "name": "秋田県",
+  "en": "Akita Prefecture"
+ },
+ {
+  "code": "06",
+  "qid": "Q125863",
+  "name": "山形県",
+  "en": "Yamagata Prefecture"
+ },
+ {
+  "code": "07",
+  "qid": "Q71707",
+  "name": "福島県",
+  "en": "Fukushima Prefecture"
+ },
+ {
+  "code": "08",
+  "qid": "Q83273",
+  "name": "茨城県",
+  "en": "Ibaraki Prefecture"
+ },
+ {
+  "code": "09",
+  "qid": "Q44843",
+  "name": "栃木県",
+  "en": "Tochigi Prefecture"
+ },
+ {
+  "code": "10",
+  "qid": "Q129499",
+  "name": "群馬県",
+  "en": "Gunma Prefecture"
+ },
+ {
+  "code": "11",
+  "qid": "Q128186",
+  "name": "埼玉県",
+  "en": "Saitama Prefecture"
+ },
+ {
+  "code": "12",
+  "qid": "Q80011",
+  "name": "千葉県",
+  "en": "Chiba Prefecture"
+ },
+ {
+  "code": "13",
+  "qid": "Q1490",
+  "name": "東京都",
+  "en": "Tokyo"
+ },
+ {
+  "code": "14",
+  "qid": "Q127513",
+  "name": "神奈川県",
+  "en": "Kanagawa Prefecture"
+ },
+ {
+  "code": "15",
+  "qid": "Q132705",
+  "name": "新潟県",
+  "en": "Niigata Prefecture"
+ },
+ {
+  "code": "16",
+  "qid": "Q132929",
+  "name": "富山県",
+  "en": "Toyama Prefecture"
+ },
+ {
+  "code": "17",
+  "qid": "Q131281",
+  "name": "石川県",
+  "en": "Ishikawa Prefecture"
+ },
+ {
+  "code": "18",
+  "qid": "Q133879",
+  "name": "福井県",
+  "en": "Fukui Prefecture"
+ },
+ {
+  "code": "19",
+  "qid": "Q132720",
+  "name": "山梨県",
+  "en": "Yamanashi Prefecture"
+ },
+ {
+  "code": "20",
+  "qid": "Q127877",
+  "name": "長野県",
+  "en": "Nagano Prefecture"
+ },
+ {
+  "code": "21",
+  "qid": "Q131277",
+  "name": "岐阜県",
+  "en": "Gifu Prefecture"
+ },
+ {
+  "code": "22",
+  "qid": "Q131320",
+  "name": "静岡県",
+  "en": "Shizuoka Prefecture"
+ },
+ {
+  "code": "23",
+  "qid": "Q80434",
+  "name": "愛知県",
+  "en": "Aichi Prefecture"
+ },
+ {
+  "code": "24",
+  "qid": "Q128196",
+  "name": "三重県",
+  "en": "Mie Prefecture"
+ },
+ {
+  "code": "25",
+  "qid": "Q131358",
+  "name": "滋賀県",
+  "en": "Shiga Prefecture"
+ },
+ {
+  "code": "26",
+  "qid": "Q120730",
+  "name": "京都府",
+  "en": "Kyoto Prefecture"
+ },
+ {
+  "code": "27",
+  "qid": "Q122723",
+  "name": "大阪府",
+  "en": "Osaka Prefecture"
+ },
+ {
+  "code": "28",
+  "qid": "Q130290",
+  "name": "兵庫県",
+  "en": "Hyōgo Prefecture"
+ },
+ {
+  "code": "29",
+  "qid": "Q131287",
+  "name": "奈良県",
+  "en": "Nara Prefecture"
+ },
+ {
+  "code": "30",
+  "qid": "Q131314",
+  "name": "和歌山県",
+  "en": "Wakayama Prefecture"
+ },
+ {
+  "code": "31",
+  "qid": "Q133935",
+  "name": "鳥取県",
+  "en": "Tottori Prefecture"
+ },
+ {
+  "code": "32",
+  "qid": "Q132751",
+  "name": "島根県",
+  "en": "Shimane Prefecture"
+ },
+ {
+  "code": "33",
+  "qid": "Q132936",
+  "name": "岡山県",
+  "en": "Okayama Prefecture"
+ },
+ {
+  "code": "34",
+  "qid": "Q617375",
+  "name": "広島県",
+  "en": "Hiroshima Prefecture"
+ },
+ {
+  "code": "35",
+  "qid": "Q127264",
+  "name": "山口県",
+  "en": "Yamaguchi Prefecture"
+ },
+ {
+  "code": "36",
+  "qid": "Q160734",
+  "name": "徳島県",
+  "en": "Tokushima Prefecture"
+ },
+ {
+  "code": "37",
+  "qid": "Q161454",
+  "name": "香川県",
+  "en": "Kagawa Prefecture"
+ },
+ {
+  "code": "38",
+  "qid": "Q123376",
+  "name": "愛媛県",
+  "en": "Ehime Prefecture"
+ },
+ {
+  "code": "39",
+  "qid": "Q134093",
+  "name": "高知県",
+  "en": "Kōchi Prefecture"
+ },
+ {
+  "code": "40",
+  "qid": "Q123258",
+  "name": "福岡県",
+  "en": "Fukuoka Prefecture"
+ },
+ {
+  "code": "41",
+  "qid": "Q160420",
+  "name": "佐賀県",
+  "en": "Saga Prefecture"
+ },
+ {
+  "code": "42",
+  "qid": "Q169376",
+  "name": "長崎県",
+  "en": "Nagasaki Prefecture"
+ },
+ {
+  "code": "43",
+  "qid": "Q130308",
+  "name": "熊本県",
+  "en": "Kumamoto Prefecture"
+ },
+ {
+  "code": "44",
+  "qid": "Q133924",
+  "name": "大分県",
+  "en": "Ōita Prefecture"
+ },
+ {
+  "code": "45",
+  "qid": "Q130300",
+  "name": "宮崎県",
+  "en": "Miyazaki Prefecture"
+ },
+ {
+  "code": "46",
+  "qid": "Q15701",
+  "name": "鹿児島県",
+  "en": "Kagoshima Prefecture"
+ },
+ {
+  "code": "47",
+  "qid": "Q766445",
+  "name": "沖縄県",
+  "en": "Okinawa Prefecture"
+ }
+]

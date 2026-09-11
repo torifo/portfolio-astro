@@ -1,0 +1,85 @@
+---
+// PostGrid.astro - 投稿のサムネ一覧。県ページ・旅ページ・聖地巡礼ページで共用。
+import {
+  prefCodesFor,
+  prefectureByCode,
+  thumbUrl,
+  formatDate,
+  instagramUrl,
+  hasPermalink,
+  type Post,
+} from '../../lib/journey';
+
+interface Props {
+  posts: Post[];
+  /** この県のページなら自分自身のバッジは出さない（全部同じ表示になるため） */
+  omitPrefCode?: string;
+}
+
+const { posts, omitPrefCode } = Astro.props;
+
+// 先頭行が日付だけの投稿が多いので、その場合は次の行を見出しにする。
+const headline = (caption: string) => {
+  const lines = caption.split('\n').map((line) => line.trim()).filter(Boolean);
+  return lines.find((line) => !/^20\d{2}[-/.年]\s*\d{1,2}/.test(line)) ?? lines[0] ?? '';
+};
+---
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  {posts.map((post) => {
+    const codes = prefCodesFor(post).filter((code) => code !== omitPrefCode);
+    const title = headline(post.caption);
+    return (
+      <a
+        href={instagramUrl(post)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="glass rounded-2xl overflow-hidden hover-lift group block"
+        title={hasPermalink(post) ? 'Instagramで開く' : 'Instagramのプロフィールを開く'}
+      >
+        <div class="relative aspect-square bg-white/5">
+          <img
+            src={thumbUrl(post)}
+            alt={title || post.date}
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          {post.kind === 'reel' && (
+            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-black/60 text-white text-[10px] font-medium">Reel</span>
+          )}
+          <span class="absolute bottom-2 right-2 w-6 h-6 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg class="w-3.5 h-3.5 text-pink-300" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </span>
+        </div>
+        <div class="p-3">
+          <time class="block text-[11px] text-gray-500 mb-1">
+            {formatDate(post.date, post.datePrecision)}
+          </time>
+          {title && <p class="journey-clamp text-xs text-gray-300 leading-relaxed">{title}</p>}
+          {codes.length > 0 && (
+            <div class="flex flex-wrap gap-1 mt-2">
+              {codes.map((code) => (
+                <span class="px-2 py-0.5 rounded-full bg-white/10 text-gray-400 text-[10px]">
+                  {prefectureByCode(code)?.shortName}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </a>
+    );
+  })}
+</div>
+
+<style>
+  .journey-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

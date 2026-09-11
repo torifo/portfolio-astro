@@ -4,20 +4,26 @@
 
 ## 📁 ディレクトリ構成
 
+### superpowers/specs/
+機能の設計書
+
+- **[2026-09-11-journey-instagram-design.md](./superpowers/specs/2026-09-11-journey-instagram-design.md)** - Journey × Instagram 連携
+  - 都道府県の解決パイプライン（raw + 辞書 + override の純関数）
+  - 外部依存を任意レイヤに置く方針
+  - 調査で覆った事実の記録
+
 ### deployment/
 デプロイメントとバージョン管理に関するドキュメント
 
 - **[DEPLOYMENT.md](./deployment/DEPLOYMENT.md)** - デプロイ手順とワークフロー
-  - VPS環境とWSL環境での作業手順
-  - バージョンタグ管理
-  - ロールバック手順
-  - 安全なデプロイフロー
+  - main への push で本番が入れ替わる仕組み（GitHub Actions）
+  - 必要な GitHub Secrets
+  - push 前に手元で CI と同じビルドを再現する方法
+  - ロールバック手順とイメージ容量の注意
 
-- **[STABLE_VERSION.md](./deployment/STABLE_VERSION.md)** - 安定版バージョンの記録
-  - 現在の安定版情報
-  - 解決済み問題の履歴
-  - 利用可能なDockerイメージタグ
-  - ロールバック手順
+- **[STABLE_VERSION.md](./deployment/STABLE_VERSION.md)** - 戻せるイメージタグの記録
+  - 稼働中のタグの調べ方
+  - 過去の版と、それが何を含むか
 
 ### troubleshooting/
 トラブルシューティングガイド
@@ -37,5 +43,5 @@
 ルートディレクトリにある関連ドキュメント：
 
 - **[README.md](../README.md)** - プロジェクトのメインREADME
-- **[ToDo.md](../ToDo.md)** - タスク管理とTODOリスト
 - **[README_astro.md](../README_astro.md)** - Astroフレームワークのテンプレートドキュメント
+- **[data/ontology/README.md](../data/ontology/README.md)** - 地名オントロジーと県境データの再生成手順

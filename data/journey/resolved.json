@@ -1,0 +1,10630 @@
+{
+ "policy": "gps",
+ "posts": {
+  "17857837452611905": {
+   "prefCodes": [
+    "42"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "長崎",
+   "tagPrefCodes": [
+    "42"
+   ],
+   "gpsPrefCode": "42"
+  },
+  "18090175756649306": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "郷土の森博物館",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18060874606992259": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "郷土の森博物館",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17985647720827429": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "郷土の森博物館",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18341583514268903": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18572402701068724": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name",
+   "evidence": "秋田県",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18090187283424005": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18127363609825537": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18030264539893022": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18093744293410659": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18033771689657105": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "17945701590290984": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18103899776195226": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18110605418035883": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18280588711289218": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18083654216293783": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18123330098503603": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18115472047979178": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "17902092060602830": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18622166047010142": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "17903105949553116": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "17973003288130967": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18624149293007323": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18343280566266969": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "岩手県",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18430438525196739": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18029974643839613": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18099657481997446": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "17990510120844501": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "17977561853907907": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18126570790707098": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18105772184583836": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "override",
+   "evidence": "18105772184583836",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": null
+  },
+  "17983181643066918": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "17954833833231432": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18127198586507821": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18623896282010179": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18083517095302939": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "17957438541180312": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18134592832593345": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "18161784295443500": {
+   "prefCodes": [
+    "05"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "05"
+  },
+  "17864301501682835": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18169525303410625": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "深大寺",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18097155596111157": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "トーマス列車本栖湖経由富士芝桜祭り参戦旅 ⊃ 本栖湖",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18078956537163269": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18060782675695690": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18113668933762851": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17860246065631922": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18053679209774938": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18092334830267394": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18075885719215401": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18199958989345870": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "ontology",
+   "evidence": "本栖湖",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18061599713449713": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "ontology-substring",
+   "evidence": "トーマス列車本栖湖経由富士芝桜祭り参戦旅 ⊃ 本栖湖",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18061871162438599": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17963718558111191": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "ontology-substring",
+   "evidence": "トーマス列車本栖湖経由富士芝桜祭り参戦旅 ⊃ 本栖湖",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18113118166697845": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "ontology",
+   "evidence": "あしかがフラワーパーク",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18093208481276326": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "ontology",
+   "evidence": "あしかがフラワーパーク",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18113377120793710": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "ontology",
+   "evidence": "あしかがフラワーパーク",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "17974200171009948": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "ontology",
+   "evidence": "あしかがフラワーパーク",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18019632158828988": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "ひたち海浜公園あしかがフラワーパークを巡るHISツアー ⊃ あしかがフラワーパーク",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18128222470519757": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "ontology",
+   "evidence": "ひたち海浜公園",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "17920749390292749": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "ontology",
+   "evidence": "ひたち海浜公園",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "17852438832634415": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "ontology",
+   "evidence": "ひたち海浜公園",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "17967919956043319": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "ontology",
+   "evidence": "ひたち海浜公園",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "18090836750172951": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "ひたち海浜公園",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18589690492003303": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "ontology",
+   "evidence": "国営ひたち海浜公園",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "18177486130389221": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "ontology",
+   "evidence": "あしかがフラワーパーク",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18051821768039862": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "ひたち海浜公園",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18051232016198208": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17969871855043461": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "淵野辺",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18059093144454496": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "ontology",
+   "evidence": "八千穂高原スキー場",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17853967716690805": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "横須賀",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18008952404851657": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "三笠",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18004685216908980": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "三笠",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18047730662549445": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "猿島",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18519320152078714": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology-substring",
+   "evidence": "3度目の横須賀2度目の猿島散策と初の軍港めぐり体験旅 ⊃ 横須賀",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18047337146723742": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "横須賀",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18000268526871641": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17935000977195648": {
+   "prefCodes": [
+    "07"
+   ],
+   "method": "ontology",
+   "evidence": "スパリゾートハワイアンズ",
+   "tagPrefCodes": [
+    "07"
+   ],
+   "gpsPrefCode": "07"
+  },
+  "18083455250581819": {
+   "prefCodes": [
+    "07"
+   ],
+   "method": "ontology",
+   "evidence": "スパリゾートハワイアンズ",
+   "tagPrefCodes": [
+    "07"
+   ],
+   "gpsPrefCode": "07"
+  },
+  "18115771972736353": {
+   "prefCodes": [
+    "07"
+   ],
+   "method": "gps",
+   "evidence": "07",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "07"
+  },
+  "18040144982556159": {
+   "prefCodes": [
+    "07"
+   ],
+   "method": "ontology",
+   "evidence": "スパリゾートハワイアンズ",
+   "tagPrefCodes": [
+    "07"
+   ],
+   "gpsPrefCode": "07"
+  },
+  "18108033226830235": {
+   "prefCodes": [
+    "07"
+   ],
+   "method": "ontology",
+   "evidence": "スパリゾートハワイアンズ",
+   "tagPrefCodes": [
+    "07"
+   ],
+   "gpsPrefCode": "07"
+  },
+  "18133951600471337": {
+   "prefCodes": [
+    "07"
+   ],
+   "method": "gps",
+   "evidence": "07",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "07"
+  },
+  "18010747817844720": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "日本庭園",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "18076116080636887": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "ontology-substring",
+   "evidence": "守谷サービスエリア ⊃ 守谷",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "17954890203094452": {
+   "prefCodes": [
+    "10"
+   ],
+   "method": "ontology",
+   "evidence": "草津温泉",
+   "tagPrefCodes": [
+    "10"
+   ],
+   "gpsPrefCode": "10"
+  },
+  "17917402887304052": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18369091060203567": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "18145116421483906": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "18176635288349719": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "18112070209787569": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "pref-name",
+   "evidence": "沖縄",
+   "tagPrefCodes": [
+    "47"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "17923516902260419": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "17881942635499072": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "17853001827638708": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "17950946604110122": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "18084920513206802": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "18116369491636374": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "17953948014096130": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "18098535481789814": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": null
+  },
+  "18074126912629379": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "17941812099172889": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "17847576516676570": {
+   "prefCodes": [
+    "47"
+   ],
+   "method": "pref-name",
+   "evidence": "沖縄",
+   "tagPrefCodes": [
+    "47"
+   ],
+   "gpsPrefCode": "47"
+  },
+  "18085871125997574": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "沖縄",
+   "tagPrefCodes": [
+    "47"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18067849751664432": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18062667056670892": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18119660413544762": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17861695260547511": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18081722165057552": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17894649714288837": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18035328323717150": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17929402506233244": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18076466483136508": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18072662186199413": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17871292266570078": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18087953105238539": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18098727362509282": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18107057212845405": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18096596179838110": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": null
+  },
+  "18099025531965108": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17967876698878533": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18096262702990899": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "茨城",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18317191465252937": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18084554503905195": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17866055310483722": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17967294260977603": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17882794530392209": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18100685038652870": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18093506041800886": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18180589558353550": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17861859762501232": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18085984111913613": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18098098147675527": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18088886986884116": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18056085209222118": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18073175734900248": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18080332051797582": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17963865593817557": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18018801758777181": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18069582968327541": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18056797499373670": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17933332989073549": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17859055230445839": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18071189192072331": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18231941260293343": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17878548621241246": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "17975417606886141": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18128850151443585": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18059445131005302": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18535297888006454": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18502872121017338": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18068088173501990": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18092673157613403": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18068209061050534": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18027233522679885": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18129116581425400": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18052559444061304": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18069979351745680": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": "46"
+  },
+  "18028545938422476": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "pref-name",
+   "evidence": "鹿児島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": null
+  },
+  "18053972900014064": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17892048408232041": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18502869664033996": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17848081551461976": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "立川",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18159030613357882": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology-substring",
+   "evidence": "運転練習助手席鳩ノ巣奥多摩払沢の滝神戸岩車旅編 ⊃ 払沢の滝",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18498474208000940": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18125170261435747": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18006798017756736": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "払沢の滝",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18063703523063557": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18118771540460699": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18031715579351337": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "奥多摩湖",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17847807978460778": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "奥多摩",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17971173503846673": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "ontology",
+   "evidence": "道の駅たばやま",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18060731150512282": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "奥多摩湖",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17923442586064431": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "鳩ノ巣駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17964857714883066": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18053520485214569": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17890541190228401": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18027255785437009": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18365653804127297": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18049350422520064": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18350319304194221": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18071552965686795": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "日本庭園",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18010128026529539": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18030374123649975": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18298442611208286": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18051731606518945": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "高尾山",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17870679741322642": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "高尾山",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17844498246441197": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "京都",
+   "tagPrefCodes": [
+    "26"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18165266824334660": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "八王子",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17854779888349535": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "大橋",
+   "tagPrefCodes": [
+    "35"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17851844034411155": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17927309589012976": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "双葉",
+   "tagPrefCodes": [
+    "07"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18046809080059916": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "八王子",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18348903070152847": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18047159732206231": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17885983020122188": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18060614480500095": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18058455572497589": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18164232058336902": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "羽田神社",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18041140982588030": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "秋葉原",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17878118004254988": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "秋葉原",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18046387541353798": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18057706691019377": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18147095407364563": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18065215237927320": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18056189576478042": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17897080317145246": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18114698263453962": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18152251162358669": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18077938357653659": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18176844370314367": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "17854078680385101": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "17935518062853014": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "ontology",
+   "evidence": "名栗湖",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18075870646570005": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "17998917449567459": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "長沼",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17889916035177759": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "長沼",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18168114415318070": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "長沼",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17917628991027234": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "ontology",
+   "evidence": "名栗湖",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "17976023318667194": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "谷",
+   "tagPrefCodes": [
+    "40"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17910680058063203": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "箱根",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18057402922785265": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology-substring",
+   "evidence": "ロマンスカーで向かう箱根登山電車旅 ⊃ 箱根",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17942970428936597": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "森",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18051464234500867": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology-substring",
+   "evidence": "ロマンスカーで向かう箱根登山電車旅 ⊃ 箱根",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18057712168757538": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "箱根",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17967364736699871": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "箱根",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17943068261797358": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "箱根",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18158829190330215": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "箱根湯本",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18353460205126085": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "箱根湯本",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17910665480961529": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18052070371772215": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "箱根",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18072368242647992": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18035098730123437": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "ontology",
+   "evidence": "甲州",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17859943050251487": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology-substring",
+   "evidence": "青い富士山カレー ⊃ 富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17895647046032656": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18187622122307428": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18040170380194285": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17931034526938037": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "雷電",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17961494378697288": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology-substring",
+   "evidence": "豊田八王子間 ⊃ 八王子",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17905398104962356": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "長沼橋 ⊃ 長沼",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18384921307100147": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "浜松駅",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17890861701056080": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "浜松",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18019534889361855": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology-substring",
+   "evidence": "ゆるキャン聖地巡礼旅浜松編 ⊃ 浜松",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17843049279375599": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "鳥居",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18055795903767740": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18375787387111941": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17881452855099151": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "新浜松駅",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17845620321365692": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18012546251474157": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18053423146989026": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "浜松駅",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18014887931418931": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18021292493328456": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "浜名湖",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18051961585824824": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18028431329416011": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18048722144476649": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "牧之原",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18026967623375327": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18038598758258329": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "名古屋",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18051624853985859": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "ontology",
+   "evidence": "志摩",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18016248617371854": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18016433288381162": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18043802485919643": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "ontology",
+   "evidence": "伊勢おはらい町通り",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17924952971878503": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18038139371337323": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18328053559157759": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17949500126886529": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17860922091224198": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17861018958278781": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18048138236028891": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18138091093368503": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "ontology-substring",
+   "evidence": "名古屋経由伊勢志摩スカイラインドライブスペイン村旅 ⊃ 伊勢志摩",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18335029045145771": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18062344987701176": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17934705143947772": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18029763980161292": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18045649022509368": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17874714216127089": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18115898725374957": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17931008447843365": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17931010427842716": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17854470537300174": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "17934541799824923": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "pref-name",
+   "evidence": "三重",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "24"
+  },
+  "18081568180536135": {
+   "prefCodes": [
+    "23"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "伊勢志摩",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": "23"
+  },
+  "18047904400999985": {
+   "prefCodes": [
+    "23"
+   ],
+   "method": "ontology",
+   "evidence": "名古屋城",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": "23"
+  },
+  "18046831361071798": {
+   "prefCodes": [
+    "23"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "ひまわり",
+   "tagPrefCodes": [
+    "42"
+   ],
+   "gpsPrefCode": "23"
+  },
+  "18041692799157313": {
+   "prefCodes": [
+    "23"
+   ],
+   "method": "ontology",
+   "evidence": "名古屋",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": "23"
+  },
+  "18022773080258486": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "南アルプス",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18070022821714975": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17942876786881894": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18034490522047584": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18117223687404729": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18115216846410280": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17855710131243360": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17861872413267858": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18038770030987976": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18076169641564449": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18012214601388449": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18074249785605287": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18040299200141411": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "みやこ",
+   "tagPrefCodes": [
+    "40"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18013709177349256": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17983728395741334": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17856660303276366": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18249675226256487": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18365876221105390": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "ontology",
+   "evidence": "飛騨高山",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18044477384043536": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "飛騨高山経由下呂温泉への車旅編 ⊃ 飛騨高山",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18106080943428825": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18061709836680277": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17942345753778980": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18087511519497638": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17881371756139807": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17880144564119706": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18041438144493047": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18035945641997579": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17888311947037019": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17896606368074914": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17965305716702050": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18035683700333909": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18069107872716750": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "秋葉原",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18035187647122829": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "熱海",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17880277611055132": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "三島駅",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18088566181479006": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "駿河湾",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17873928849088798": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "沼津港",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18052190032830014": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "沼津港",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17986850951560230": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "駿河湾",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18018733943208319": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "沼津",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17887647342017228": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18465531631060904": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology",
+   "evidence": "犬吠埼",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18008354774431545": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17940922199887233": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18045972202971523": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17896529034065835": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18007990637422856": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17868255174198233": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18063296545586177": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "pref-name",
+   "evidence": "茨城",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "18026440889461386": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "pref-name",
+   "evidence": "茨城",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "17998243772670351": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "pref-name",
+   "evidence": "茨城",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "18241452463282272": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "pref-name",
+   "evidence": "茨城",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": "08"
+  },
+  "18012169382319996": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "伊豆",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18054080665699909": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17882983014097641": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18011609627299267": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "月",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18061194421609627": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18061194421609627",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18065258716577539": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17923427474824874": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17931867347909632": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18028909304192498": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17877481635069097": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18021083450170141": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18056240419690288": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18018954602424248": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18036510494316183": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18027620741068394": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "両国",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17979327590709759": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18057907432644006": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "両国",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18071287594542664": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "両国",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18081324376444948": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "両国",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18038239171892806": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18038239171892806",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18086089951443201": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18086089951443201",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18042836983825426": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18108421387377848": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18008206781397569": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18165603289307558": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17926761227857644": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17985879146653879": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18026638214097571": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "大和",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18068707807512752": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17887583727041595": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "ontology",
+   "evidence": "高川山",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17973848957585641": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "ontology",
+   "evidence": "高川山",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18433074889036324": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18025030253284177": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "trip-inherit",
+   "evidence": "遊具"
+  },
+  "17896402193932663": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology-substring",
+   "evidence": "多摩平の森 ⊃ 多摩",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17993835128464282": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17998742684368079": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17942008838708427": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18020622353017850": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18020622353017850",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17930822708848011": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17996361455398185": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "下北沢",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17917444082822611": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "下北沢",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18025312228932283": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "下北沢",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18311245060144542": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "東郷寺",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17889608463062352": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18093447322446404": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18039340357846830": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18018649370214958": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "17920520438913110": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18044313640751679": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18035892637766922": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18002043050611165": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18002043050611165",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18111710431346110": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18107746075377869": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18084251929412415": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18006097697163047": {
+   "prefCodes": [
+    "15"
+   ],
+   "method": "pref-name",
+   "evidence": "新潟",
+   "tagPrefCodes": [
+    "15"
+   ],
+   "gpsPrefCode": "15"
+  },
+  "18004354802289157": {
+   "prefCodes": [
+    "10"
+   ],
+   "method": "gps",
+   "evidence": "10",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "10"
+  },
+  "17985020333654440": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17949014765681559": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17970861599710548": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "錦糸町駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18024863972298950": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18434619448015829": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "pref-name",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": "04"
+  },
+  "18085950082445542": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18004195664295007": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17843501280214319": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森県",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18023862650294541": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18062351251537096": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18295814431085452": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "17899307147989036": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18016564418260497": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": null
+  },
+  "17967212564714143": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "17996314184355629": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18060035332556063": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "17996510525352676": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18041329819765802": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "秋田",
+   "tagPrefCodes": [
+    "05"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18050160928718021": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "17994636008389870": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "17883186899979823": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17860901667118649": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18047004250655918": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18051059023625714": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "17949536366673257": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18036639166880592": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18090268114390335": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18028478168055866": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18027164386869801": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18043788757743281": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18351338533103086": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18015836612194284": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18056483029605345": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "善知鳥神社",
+   "tagPrefCodes": [
+    "15"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18318603673121446": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "ontology",
+   "evidence": "弘前",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18018016028330927": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "ontology-substring",
+   "evidence": "東北きゅんパス旅 ⊃ 東北",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "18029084578971805": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "ontology",
+   "evidence": "弘前駅",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "17919141011806545": {
+   "prefCodes": [
+    "02"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "02"
+  },
+  "17866895964099057": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東北きゅんパス旅 ⊃ 東北",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "18054793735593788": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東北きゅんパス旅 ⊃ 東北",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "18047159881641983": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "ontology",
+   "evidence": "盛岡城",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "18032260369789543": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "ontology",
+   "evidence": "もりおか啄木・賢治青春館",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "18076714186465116": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "岩手",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "18232579903252978": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "岩手",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "18061295314532443": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "ontology",
+   "evidence": "盛岡駅",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": null
+  },
+  "17999495237576005": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "ontology",
+   "evidence": "盛岡駅",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "17921810078867222": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "ontology",
+   "evidence": "盛岡駅",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "17941350974801408": {
+   "prefCodes": [
+    "03"
+   ],
+   "method": "pref-name",
+   "evidence": "岩手",
+   "tagPrefCodes": [
+    "03"
+   ],
+   "gpsPrefCode": "03"
+  },
+  "17852131500146873": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "青森",
+   "tagPrefCodes": [
+    "02"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17921077973868938": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17921344319895315": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18068744065499294": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17999076110533168": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "18014818721196225": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18118714153349351": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology-substring",
+   "evidence": "スラッシュ川崎 ⊃ 川崎",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17884869765007748": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "18046690951651649": {
+   "prefCodes": [
+    "10"
+   ],
+   "method": "pref-name",
+   "evidence": "群馬",
+   "tagPrefCodes": [
+    "10"
+   ],
+   "gpsPrefCode": "10"
+  },
+  "18014415266041013": {
+   "prefCodes": [
+    "10"
+   ],
+   "method": "pref-name",
+   "evidence": "群馬",
+   "tagPrefCodes": [
+    "10"
+   ],
+   "gpsPrefCode": "10"
+  },
+  "17872309158067140": {
+   "prefCodes": [
+    "10"
+   ],
+   "method": "pref-name",
+   "evidence": "群馬",
+   "tagPrefCodes": [
+    "10"
+   ],
+   "gpsPrefCode": "10"
+  },
+  "18260638111234417": {
+   "prefCodes": [
+    "10"
+   ],
+   "method": "pref-name",
+   "evidence": "群馬",
+   "tagPrefCodes": [
+    "10"
+   ],
+   "gpsPrefCode": "10"
+  },
+  "17888050452005706": {
+   "prefCodes": [
+    "10"
+   ],
+   "method": "pref-name",
+   "evidence": "群馬",
+   "tagPrefCodes": [
+    "10"
+   ],
+   "gpsPrefCode": "10"
+  },
+  "18013926923197042": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "下北沢",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18025664885002374": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "pref-name",
+   "evidence": "大阪",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "27"
+  },
+  "18026332859004775": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "pref-name",
+   "evidence": "大阪",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": null
+  },
+  "18261988675226117": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "trip-inherit",
+   "evidence": "海遊館"
+  },
+  "18113748178335462": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "pref-name",
+   "evidence": "大阪",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "27"
+  },
+  "17977487792674368": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "pref-name",
+   "evidence": "大阪",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "27"
+  },
+  "17894579927994846": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "pref-name",
+   "evidence": "大阪",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "27"
+  },
+  "18070246771495814": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "18422436457047768": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "18084806314439954": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "大阪",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "27"
+  },
+  "18035417761725743": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "18098231641397912": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "18018208988478061": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "17982848111653644": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "17898751811900249": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "17989240424466394": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "18002438129270276": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "17929595144838379": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "大阪",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "27"
+  },
+  "17847496677187450": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "17860285599087890": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "17855385720149981": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "17874561816063348": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "17908704710849054": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "上方温泉一休♨️ ⊃ 上方",
+   "tagPrefCodes": [
+    "26"
+   ],
+   "gpsPrefCode": "27"
+  },
+  "18021220376295753": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "override",
+   "evidence": "18021220376295753",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": null
+  },
+  "18038642065789097": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "27"
+  },
+  "18044593018646760": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "pref-name",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "17893941788989968": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "ontology",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17880293520044695": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18045931162649050": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17930725271835603": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18303901525153088": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "ontology",
+   "evidence": "諏訪湖",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17940834764795794": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18048646918614688": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18318898816192784": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18016163222171380": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18050161585544589": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18176985442288623": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18176985442288623",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17983982792474869": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18051701320568764": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18051701320568764",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17847068505146078": {
+   "prefCodes": [
+    "28"
+   ],
+   "method": "gps",
+   "evidence": "28",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "28"
+  },
+  "17893261046986231": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18028382092883330": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17871504714044525": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18409162075049377": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17955654764718133": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17968751366677759": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18057838441513504": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17991598796580769": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17991242243591327": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17859769497077557": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18411840022007333": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18026757679966010": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "override",
+   "evidence": "18026757679966010",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": null
+  },
+  "18016239785473879": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17961297734711889": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18021882104073143": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17843080551175268": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17847099588159924": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18332580436109215": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17925971408763114": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18345104605102817": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18012565436511378": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18302888590147829": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17994764150542318": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17923840295849539": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17855624196116449": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18043176742585548": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18048736369528433": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18019091665814755": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17893439234977756": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18000676538411333": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17858982120014014": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18047967769527602": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18139125406312086": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18016872608144210": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18030354445633992": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "pref-name",
+   "evidence": "埼玉県",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "18019229269808187": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "17944711508713731": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "11"
+  },
+  "17940121172754347": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "17900782058799153": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18006957959104365": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18010874341971990": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "17985228794281407": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18013581046810864": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "17978537552574850": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "17991925829347479": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18036924196588304": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "pref-name",
+   "evidence": "栃木県",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": "09"
+  },
+  "18203645188272269": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "override",
+   "evidence": "18203645188272269",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "17875618067984441": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "override",
+   "evidence": "17875618067984441",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": null
+  },
+  "18028254250586344": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18287541799178141": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18019436620782912": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川県",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18007303936969526": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川県",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": null
+  },
+  "17995403774216507": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17984294690410575": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18287392408179668": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17995769954225917": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18002720687089587": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18001731194498226": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "高幡不動駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18035757604576429": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "ontology",
+   "evidence": "飛騨高山",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18000320873320449": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18393920923050535": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17948465297705494": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18013761829936022": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18201241081262853": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17956463060557798": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18025993528630724": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "17989486913194573": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18038753158565208": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18006851290970559": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18007500214841823": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18289304200123064": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18003742886039339": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18069507535421940": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18005081888014298": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18387774382019092": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "高尾山",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17972304188419809": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "ontology-substring",
+   "evidence": "飛騨高山バスターミナル ⊃ 飛騨高山",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18026917384595482": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": null
+  },
+  "18216737299247118": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18078179617393529": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18237112534208270": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18028742794560862": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18014686459874177": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18207844264254281": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17901436595854906": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18027003388628160": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "gps",
+   "evidence": "21",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "21"
+  },
+  "17995711685482399": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17895114437895926": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": null
+  },
+  "18281083285196313": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17959223426518902": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18102093610343834": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18010997308925404": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "17972987279544516": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18021492319706250": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "pref-name",
+   "evidence": "岐阜県",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
+  },
+  "18006792913986814": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野県",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "17971344692554916": {
+   "prefCodes": [
+    "23"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "長野県",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "23"
+  },
+  "17997653654133540": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野県",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18093417430369208": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野県",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17886001775865366": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野県",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17874133382920999": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野県",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18008429674946090": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野県",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "17974249136534247": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name",
+   "evidence": "長野県",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18045337780506338": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "18198321898276715": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17847175947063435": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17961469178644741": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18293135536133376": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17903976320778097": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18044896351503853": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17882439422941030": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17988216569147052": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18314730157100385": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "17980394810296980": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18036949069554414": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18009568024923317": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18038433958559353": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18303969535141734": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18025114048646752": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18031028290529386": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18025993372643996": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18279330529149502": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18002072003044599": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18024032269631925": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "17973860417598951": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "17981152604426854": {
+   "prefCodes": [
+    "39"
+   ],
+   "method": "pref-name",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "39"
+  },
+  "18022616077659643": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "17989706270256619": {
+   "prefCodes": [
+    "28"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "28"
+  },
+  "17992918565049697": {
+   "prefCodes": [
+    "39"
+   ],
+   "method": "pref-name",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "39"
+  },
+  "18004090759863892": {
+   "prefCodes": [
+    "39"
+   ],
+   "method": "pref-name",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "39"
+  },
+  "18008267575784829": {
+   "prefCodes": [
+    "39"
+   ],
+   "method": "pref-name",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "39"
+  },
+  "18096104569356496": {
+   "prefCodes": [
+    "39"
+   ],
+   "method": "pref-name",
+   "evidence": "高知県",
+   "tagPrefCodes": [
+    "39"
+   ],
+   "gpsPrefCode": "39"
+  },
+  "18004388557959770": {
+   "prefCodes": [
+    "36"
+   ],
+   "method": "pref-name",
+   "evidence": "徳島県",
+   "tagPrefCodes": [
+    "36"
+   ],
+   "gpsPrefCode": "36"
+  },
+  "18000387583908254": {
+   "prefCodes": [
+    "39"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "徳島県",
+   "tagPrefCodes": [
+    "36"
+   ],
+   "gpsPrefCode": "39"
+  },
+  "17915394764720552": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17979547841447394": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17969622644419172": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "gps",
+   "evidence": "37",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "37"
+  },
+  "17972075819556205": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17989127240105081": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18007497535794685": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17999594605911031": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "gps",
+   "evidence": "37",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "37"
+  },
+  "17999957525310014": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18013285345842284": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17882855990930983": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17986649099340280": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18007818760808054": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18366961576068500": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "pref-name",
+   "evidence": "香川県",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "17984378171180172": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "高松駅",
+   "tagPrefCodes": [
+    "17"
+   ],
+   "gpsPrefCode": "37"
+  },
+  "18235342804228084": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "サンライズ瀬戸 ⊃ 瀬戸",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18012324340859824": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "サンライズ瀬戸 ⊃ 瀬戸",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17878978652946429": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "サンライズ瀬戸 ⊃ 瀬戸",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17986183235152215": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "サンライズ瀬戸 ⊃ 瀬戸",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18016893271744439": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "27"
+  },
+  "18231991864211839": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18044122234499866": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "神奈川",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18289140076193057": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18364280353067874": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18004899139947298": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "18024566458625141": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17971812740580654": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology-substring",
+   "evidence": "銚子電鉄の旅 ⊃ 銚子",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18005215765799609": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology-substring",
+   "evidence": "銚子電鉄の旅 ⊃ 銚子",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18230330497210651": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology-substring",
+   "evidence": "銚子電鉄の旅 ⊃ 銚子",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17987446280246262": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology-substring",
+   "evidence": "銚子電鉄の旅 ⊃ 銚子",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17977206545269460": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology-substring",
+   "evidence": "銚子電鉄の旅 ⊃ 銚子",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18009750364855056": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology",
+   "evidence": "ロズウェル",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17902304477830011": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology-substring",
+   "evidence": "銚子電鉄の旅 ⊃ 銚子",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17921563139682199": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology-substring",
+   "evidence": "銚子電鉄の旅 ⊃ 銚子",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17966295659445405": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "ontology-substring",
+   "evidence": "銚子電鉄の旅 ⊃ 銚子",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18009486427889121": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17991157610485697": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17991157610485697",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18004108246898659": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17963929070461927": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18082852747375398": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "caption-place",
+   "evidence": "多摩セン",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18051801814494843": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17974463924331531": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17967023438616115": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18227185327237841": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18227185327237841",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18032016904487051": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18032016904487051",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18186388354262907": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17992632404106079": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17992632404106079",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17989298725998904": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17989298725998904",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17962829921437040": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18010151161667852": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17989959953377396": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18002382703767163": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18002382703767163",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17984659610480659": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17984659610480659",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17972942243256372": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17965175705344363": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17902741262798839": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17902741262798839",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17944693577535734": {
+   "prefCodes": [
+    "13",
+    "14",
+    "19"
+   ],
+   "method": "caption-place",
+   "evidence": "多摩川",
+   "tagPrefCodes": [
+    "13",
+    "14",
+    "19"
+   ],
+   "gpsPrefCode": null
+  },
+  "17987090468006068": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18010432045704098": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18105121522318065": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18105121522318065",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17864722149019138": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18005819683940886": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18036463063528151": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17998588105904143": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18025231267616648": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18000499049037125": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17995849553155034": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17925835322764893": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17978246765285839": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17993083346326582": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18004699126965816": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "17985379946463395": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "18088078423368861": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18005605102817266": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18251844214095308": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18251844214095308",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17941193903655629": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17994180379974699": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17857088321975921": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18069880204387861": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17991875876008425": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18015496978809518": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17993176139021822": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17946543185580980": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17890384178887413": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17858917569000973": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17980832978066214": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17896543043854365": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18205065703249778": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17977639514287441": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18005688136938344": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17967246158441799": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18235463086170317": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18363309397071661": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18002981851999970": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17892971585864425": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18049797985479234": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18376143184018540": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17994040274180245": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18026687713608895": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17999952779020886": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18021474802639018": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18244698046200146": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17896123946853715": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18020656522724482": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17959848950504935": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18053245192459860": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17890005533894597": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18016714639697028": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17990086154237769": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18244910731203337": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17912508740723904": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18002226646982151": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17935688039707121": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17940435836606436": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17977945403261442": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17977945403261442",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17978008535254885": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17892639284809564": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18008206084745316": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17922175418769527": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17974635026316447": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17982636956368331": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17925115256708801": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17986353878101097": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "17990625548180289": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "17935306757619145": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "18092590387324629": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "17941956587596534": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "17962173326480282": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "18004381630794140": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "18010862104715490": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "17965287161422178": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "18297502987119572": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "18073816345367027": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "17978524646234521": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "18004957414913737": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "17990997833023626": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "17890515662813916": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps",
+   "evidence": "12",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "12"
+  },
+  "18000478942996997": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17992219018974270": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "override",
+   "evidence": "17992219018974270",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": null
+  },
+  "17993483795292395": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18026151994583627": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18009266623833424": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17896335155783672": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18363641749066947": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18012138235636597": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18101599267321862": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17990477842976716": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18103346104326345": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17984995433507741": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17961690512427410": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17923237901740331": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17849413515010673": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17972156366285320": {
+   "prefCodes": [
+    "29"
+   ],
+   "method": "gps",
+   "evidence": "29",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "29"
+  },
+  "17977104524164707": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17977104524164707",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18185954845263707": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18004153336859505": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17999002021820414": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17999002021820414",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17983935380224198": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17983935380224198",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18112711987313521": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17992326353030159": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18052582507420524": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17973959969230687": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17994436310013653": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17967298622329066": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "山口",
+   "tagPrefCodes": [
+    "35"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18224568202233215": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "caption-place",
+   "evidence": "南大沢駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18070706716382867": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18000020968791886": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18027708445476991": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18027708445476991",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17995230565842964": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17988994745082274": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18011871175649039": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17985876326128675": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17972636456204896": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17972636456204896",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17963378798384859": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17963378798384859",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18007951351620925": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18007951351620925",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17960342036304765": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17960342036304765",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18352562923036352": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18352562923036352",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18074722651361737": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18074722651361737",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17951015249563527": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17951015249563527",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17966482457347062": {
+   "prefCodes": [
+    "23"
+   ],
+   "method": "caption-place",
+   "evidence": "あま",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": null
+  },
+  "18015520477644959": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18094639336326834": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18031818310512000": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17923273298635760": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18006417526704945": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17876850824844052": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17864589479945771": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17887733858841628": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18012675337591652": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17869076600926154": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18005008888826981": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18162147217305221": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17956610873448731": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18003088051816475": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18094416349330476": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17872404530860563": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17950207280626727": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17996901370779403": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "18002553613829759": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "18210159352222500": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "18005056768776643": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "override",
+   "evidence": "18005056768776643",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": null
+  },
+  "18232778392203977": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17960326274373242": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "gps",
+   "evidence": "11",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "11"
+  },
+  "17867035457929987": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17996994229777606": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18364112422036815": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17957984567415614": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18049168711444037": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17861486699955255": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17847100703992971": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "18020993239564300": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17983682332992522": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17860407122921305": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17958453707537572": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17995757341812203": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17898714467797943": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17941754297648252": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17855159207931537": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17910643616748298": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "18296058088100858": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "18001023796773137": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "22"
+  },
+  "18008768959594368": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "18013452724609905": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17976311393484255": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17976923582230872": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17995145461746126": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17879738783805606": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17908246865765577": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "山梨県",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "19"
+  },
+  "17870344412851517": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "18005180530677395": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17908080125674450": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17925510323597050": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "17978861452917048": {
+   "prefCodes": [
+    "10"
+   ],
+   "method": "gps",
+   "evidence": "10",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "10"
+  },
+  "17968705454095702": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "18076921336348190": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "gps",
+   "evidence": "19",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "19"
+  },
+  "18170762260277086": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "18179948629281385": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17851210787964302": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17867188559879345": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17959162049424655": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17959162049424655",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17978695789897588": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "caption-place",
+   "evidence": "南大沢駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17866392044893705": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17866392044893705",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17917651670697980": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17995105936786264": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "17996685148645233": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "caption-place",
+   "evidence": "多磨霊園駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18213508339246336": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17899015583797615": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18211621504222585": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17990819551886913": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17879057051879164": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17946921512456075": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "18039418192467911": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": "20"
+  },
+  "18263722846145583": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18006683959776060": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18012524227724670": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17875677659914022": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17895087962823291": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17863460555958154": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17994559993971620": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17972234429384302": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "gps",
+   "evidence": "21",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "21"
+  },
+  "18023361367567379": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18297486580110695": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17885536514809388": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17881398179891663": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18065958094394274": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17976330269356940": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "17871624821876658": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18079751779369182": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18054112789764800": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "渋谷",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18047463286820865": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "目黒天空庭園",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17975976185613937": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "渋谷",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18054831538787578": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "日本庭園",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18033747916946954": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "渋谷",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18030784058328519": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "渋谷",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17965537520652471": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18054265417692150": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "渋谷",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18086897485468197": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18055393825707183": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "京王稲田堤駅",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17928618161647803": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "override",
+   "evidence": "17928618161647803",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "18060317290627723": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "17889385751999324": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18013156514301242": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18026833424515655": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18077175442524021": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18017020967594973": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18048481420885460": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "pref-name",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "12"
+  },
+  "18018431381188137": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18085683991470264": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "中野島駅",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18278569630126187": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17891131652850639": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17968920974455079": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "山梨",
+   "tagPrefCodes": [
+    "19"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18000062161820311": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17867330216860155": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17917822844689972": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "override",
+   "evidence": "17917822844689972",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "17966748656211252": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17946632321541961": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "caption-place",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "17971046525151437": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "18244654900157960": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18244654900157960",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18325503610177578": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology-substring",
+   "evidence": "東中野公園 ⊃ 東中野",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18052548664775569": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18035952251296400": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "京王多摩センター駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18035566010288199": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "乞田川",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18022099850461467": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "乞田川",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18032019584164116": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "京王永山駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17957466647420723": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18041674207808998": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "浅間山",
+   "tagPrefCodes": [
+    "10",
+    "20"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18143808955328995": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18061098670719388": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18072418936534450": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18278385238111743": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "caption-place",
+   "evidence": "日の出",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18039996493823149": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18051870220774267": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17862025521193225": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17928334397807775": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18026624810212951": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18015603506595705": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18024321380517613": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17891376554982014": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18437542678000727": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18051706234806714": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17849556447222275": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18245151733250771": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "17876768430101853": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": "14"
+  },
+  "18037154515444984": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17974954717992884": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18015377641554246": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17956349252317110": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17966370287152143": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18099172855313122": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17965355789160484": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18070464907546674": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18109706557402789": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "馬車道",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17852585124236173": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17986036282935529": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18088703215419599": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17882835597086475": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "唐木田",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18422190640066871": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "稲城",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17945526002703752": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "多摩川原橋",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17979487367330232": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "矢野口駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17893033166731255": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18009333274587315": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17898352028772212": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17985955391214463": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18049358476495128": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "17863472781006257": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18267389944192296": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18074945872348707": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18003275230629295": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17970830420076824": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18031391029465451": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18217731253247180": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17971956092485098": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18077904463396862": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17948354738553722": {
+   "prefCodes": [
+    "24"
+   ],
+   "method": "caption-place",
+   "evidence": "12",
+   "tagPrefCodes": [
+    "24"
+   ],
+   "gpsPrefCode": null
+  },
+  "18020594599472365": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18240732484086378": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17857572869923906": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17948354819406574": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17964046088343436": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17976383836973176": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "18201955561245877": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  },
+  "17981549164888178": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18080084587364830": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17961222359233962": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18001322962657965": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17959057784271893": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "18237116617166745": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "17981503855890081": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "18067696495340473": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "17949370583392562": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17964387878176259": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17965067105468796": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18013088701730026": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17872475630862441": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18021818563520118": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18240214771091460": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17974094210112840": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18004261537680751": {
+   "prefCodes": [
+    "09"
+   ],
+   "method": "caption-place",
+   "evidence": "ひょうたん池",
+   "tagPrefCodes": [
+    "09"
+   ],
+   "gpsPrefCode": null
+  },
+  "17977114835074423": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京都",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "13"
+  },
+  "18023208544560526": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17904974603668434": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17996299393706659": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17957481425247983": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "override",
+   "evidence": "17957481425247983",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18017645752516809": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "override",
+   "evidence": "18017645752516809",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "17983738960790069": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "18094297642310103": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "18070643728358507": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17984034250917534": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "17888752391787186": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "18279992686104218": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "18006751354565927": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "18003826054555398": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "17960040941352803": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "17960175443174839": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "gps",
+   "evidence": "14",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "14"
+  }
+ }
+}

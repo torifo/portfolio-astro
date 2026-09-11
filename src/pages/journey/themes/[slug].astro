@@ -1,0 +1,61 @@
+---
+// テーマの個別ページ。同じ投稿が県ページ・旅ページにも出るのは仕様。
+import Layout from '../../../layouts/Layout.astro';
+import DetailHeader from '../../../components/DetailHeader.astro';
+import PostGrid from '../../../components/journey/PostGrid.astro';
+import { themes, postsForTheme, prefectureByCode, type Theme } from '../../../lib/journey';
+
+export async function getStaticPaths() {
+  return themes.map((theme) => ({ params: { slug: theme.slug }, props: { theme } }));
+}
+
+interface Props {
+  theme: Theme;
+}
+
+const { theme } = Astro.props;
+const posts = postsForTheme(theme);
+const visited = theme.prefCodes.map((code) => prefectureByCode(code)).filter(Boolean);
+const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))].sort();
+---
+
+<Layout title={`${theme.title} - Toriforium Portfolio`} description={`${theme.title}の記録 ${posts.length}件`}>
+  <DetailHeader title={theme.title} backHref="/journey/themes/" backLabel="テーマ一覧に戻る" />
+
+  <main class="pt-24 pb-16 relative z-10">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="text-center mb-10">
+        <p class="text-xs text-gray-500 mb-2">テーマ</p>
+        <h1 class="text-3xl md:text-4xl font-bold gradient-text mb-3">{theme.title}</h1>
+        {theme.lead && <p class="text-gray-400 mb-3">{theme.lead}</p>}
+        <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-400">
+          <span class="px-3 py-1 glass rounded-full">{posts.length}件</span>
+          {years.length > 0 && (
+            <span class="px-3 py-1 glass rounded-full">
+              {years.length === 1 ? `${years[0]}年` : `${years[0]}年〜${years[years.length - 1]}年`}
+            </span>
+          )}
+          <span class="px-3 py-1 glass rounded-full">{visited.length}県</span>
+        </div>
+      </div>
+
+      <section class="mb-8">
+        <h2 class="text-sm font-semibold text-gray-400 mb-2">撮った県</h2>
+        <div class="flex flex-wrap gap-2">
+          {visited.map((prefecture) => (
+            <a
+              href={`/journey/${prefecture!.slug}/`}
+              class="px-3 py-1.5 rounded-full bg-white/10 text-gray-200 text-xs hover:bg-white/20 transition-colors"
+            >
+              {prefecture!.name}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <PostGrid posts={posts} />
+    </div>
+  </main>
+</Layout>
