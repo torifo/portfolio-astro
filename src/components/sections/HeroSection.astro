@@ -26,7 +26,7 @@ const profile = await fetchProfile();
 
       <!-- メインタイトル -->
       <div class="mb-6 animate-fade-in-up animation-delay-2000">
-        <h1 class="text-5xl md:text-7xl font-bold mb-4">
+        <h1 class="hero-title font-bold mb-4">
           <span class="gradient-text-cyan">とりふぉりうむ</span>
           <br>
           <span class="text-white">ポートフォリオ</span>
@@ -91,5 +91,15 @@ const profile = await fetchProfile();
   /* セクション固有のスタイル */
   #hero {
     background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+  }
+
+  /* どちらの行も7文字。固定サイズだと狭い画面で「とりふぉりう／む」のように
+     1文字だけ折り返してしまうので、画面幅に追従させて必ず1行に収める。
+     CJK は1文字1emなので 11.5vw × 7 ≒ 80.5vw となり、左右の余白(各24px)を
+     引いた幅に収まる。上限は従来のデスクトップ表示(72px)に合わせてある。 */
+  .hero-title {
+    font-size: clamp(1.75rem, 11.5vw, 4.5rem);
+    line-height: 1.15;
+    white-space: nowrap;
   }
 </style>
