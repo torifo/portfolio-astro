@@ -1,316 +1,80 @@
-# デプロイメントワークフロー
+# デプロイ手順 / Deployment
 
-## 概要
+## 要点
 
-このプロジェクトは以下の2つの環境で構成されています：
+**`main` に push すると本番が入れ替わります。** 承認の関門はありません。
+GitHub Actions がビルドから VPS への反映まで一気に行います。
 
-- **デプロイ環境 (VPS)**: `/home/ubuntu/Web/portfolio-astro` - 修正・追加作業を行う環境
-- **ビルド環境 (WSL)**: `ssh toriforiumu@wsl` - ビルドとコンテナプッシュを行う環境
+本番: https://portorifo.riumu.net
 
-## デプロイ手順
+## 経路
 
-### 1. デプロイ環境での作業 (VPS)
+```
+main に push（または Actions から workflow_dispatch）
+  │
+  └─ .github/workflows/deploy.yml
+       ├─ タグを作る         TZ=Asia/Tokyo date +%Y%m%d-%H%M   例: 20260908-0902
+       ├─ .env を作る        Secrets から PUBLIC_MICROCMS_* を書き出す
+       │                     （Astro は PUBLIC_* をビルド時に静的出力へ埋め込むため、
+       │                       Dockerfile の builder 段階で必要）
+       ├─ docker build       ghcr.io/torifo/portfolio-astro に :タグ と :latest
+       ├─ docker push        両方のタグを GHCR へ
+       └─ VPS へ SSH         cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh タグ
+                               └─ docker compose pull → down → up -d → 起動確認
+```
+
+`deploy.sh` と `docker-compose.yml` は VPS 上の
+`/home/ubuntu/Web/portfolio-astro/` にあり、リポジトリ内のものと同じ内容です。
+**Actions はそこで `git pull` しません。** イメージを差し替えるだけなので、
+VPS 上のチェックアウトが古くても動作に影響はありません。
+
+## 必要な GitHub Secrets
+
+| 名前 | 用途 |
+|---|---|
+| `GHCR_TOKEN` | GHCR への push |
+| `VPS_HOST` / `VPS_USER` / `VPS_SSH_KEY` | VPS への SSH |
+| `PUBLIC_MICROCMS_API_KEY` | ビルド時の microCMS 取得 |
+| `PUBLIC_MICROCMS_SERVICE_DOMAIN` | 同上 |
+
+## 手元での確認
+
+push 前に、CI と同じ経路で作ったイメージを確かめられます。**ワーキングツリーではなく git の中身からビルドする**のが要点で、これで追跡漏れを検出できます。
 
 ```bash
-# 現在の環境: /home/ubuntu/Web/portfolio-astro
-# 1. コードの修正・追加を行う
-# 2. 変更をコミット
-git add .
-git commit -m "feat: your changes description"
+rm -rf /tmp/ci_sim && mkdir -p /tmp/ci_sim
+git archive <ブランチ> | tar -x -C /tmp/ci_sim
+cp .env /tmp/ci_sim/.env
+cd /tmp/ci_sim && docker build -t portfolio-ci-test:local .
 
-# 3. GitHubにプッシュ
-git push origin deploy/docker-setup
+docker run -d --name pf-test -p 8099:80 portfolio-ci-test:local
+curl -I http://localhost:8099/
+docker rm -f pf-test
 ```
 
-### 2. ビルド環境での作業 (WSL)
+## ロールバック
 
 ```bash
-# SSH接続
-ssh toriforiumu@wsl
-
-# プロジェクトディレクトリに移動
-cd portfolio-astro
-
-# 最新のコードをプル
-git pull origin deploy/docker-setup
-
-# 依存関係のインストール（必要に応じて）
-# npm ci
-
-# .envファイルの確認・作成
-# PUBLIC_MICROCMS_API_KEY=your_api_key
-# PUBLIC_MICROCMS_SERVICE_DOMAIN=your_service_domain
-
-# ビルド実行
-npm run build
-
-# Dockerイメージのビルド
-docker build -t portfolio-frontend .
-
-# GitHub Container Registryにログイン
-# docker login ghcr.io -u torifo -p YOUR_GITHUB_TOKEN(完了済み)
-
-# イメージにタグ付け
-docker tag portfolio-frontend ghcr.io/torifo/portfolio-astro:latest
-
-# GitHub Container Registryにプッシュ
-docker push ghcr.io/torifo/portfolio-astro:latest
+ssh <VPS>
+cd /home/ubuntu/Web/portfolio-astro
+./deploy.sh <戻したいタグ>
 ```
 
-### 3. デプロイ環境での最終作業 (VPS)
+タグの一覧は
+[GHCR のパッケージ画面](https://github.com/torifo/portfolio-astro/pkgs/container/portfolio-astro)
+か、Actions の各実行のジョブサマリーで確認できます。
+
+## イメージ容量に注意
+
+デプロイのたびに日付タグが増えます。Journey のサムネ 1,013枚を含むため、イメージは約190MBあります。VPS のストレージは有限なので、古いタグはときどき整理してください（稼働中のイメージは消さないこと）。
 
 ```bash
-# 現在の環境: /home/ubuntu/Web/portfolio-astro
-# 新しいDockerイメージをプル
-docker pull ghcr.io/torifo/portfolio-astro:latest
-
-# 現在のコンテナを停止・削除（必要に応じて）
-docker compose down
-
-# 新しいコンテナを起動
-docker compose up -d
-
-# コンテナの状態確認
-docker compose ps
-docker compose logs portfolio-frontend
+docker images ghcr.io/torifo/portfolio-astro --format '{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'
+docker inspect --format='{{.Config.Image}}' portfolio-frontend   # 稼働中のタグ
 ```
 
-## 自動化の段階的改善案
-
-### Phase 1: 通知システム
-- ビルド完了時にSlack/Discord通知
-- デプロイ完了時に通知
-
-### Phase 2: 部分的自動化
-- GitHub Actionsでビルド環境への自動デプロイ
-- Webhookを使用したVPS環境への通知
-
-### Phase 3: 完全自動化
-- プッシュ時の完全自動デプロイパイプライン
-- ロールバック機能
-
-## 現在のコンテナ情報
-
-- **イメージ**: `ghcr.io/torifo/portfolio-astro:latest`
-- **コンテナ名**: `portfolio-frontend`
-- **ドメイン**: `portorifo.riumu.net`
-- **ネットワーク**: `global-proxy-network`
-
-## トラブルシューティング
-
-### コンテナが起動しない場合
-```bash
-# ログを確認
-docker compose logs portfolio-frontend
-
-# .envファイルの確認
-cat .env
-
-# ネットワークの確認
-docker network ls
-```
-
-### イメージプルエラーの場合
-```bash
-# 認証情報の確認
-docker login ghcr.io
-
-# 手動でのイメージプル
-docker pull ghcr.io/torifo/portfolio-astro:latest
-```
-
-## 安全なデプロイ手順（バージョンタグ管理）
-
-### 概要
-
-`:latest`タグを直接上書きすると、問題発生時のロールバックが困難です。
-バージョンタグと環境変数を使用することで、現在の安定版を保護しながら新しいビルドをテストできます。
-
-**docker-compose.yml の設定:**
-```yaml
-image: ghcr.io/torifo/portfolio-astro:${IMAGE_TAG:-latest}
-```
-環境変数`IMAGE_TAG`でバージョンを指定。未設定時は`latest`を使用。
-
----
-
-### WSL環境での作業（ビルドとプッシュ）
-
-**環境**: `ssh toriforiumu@wsl` → `cd portfolio-astro`
-
-**注意点**:
-- 必ず最新のコードをプルしてからビルド
-- バージョンタグは日付ベース（YYYYMMDD-HHMM形式）
-- **:latestタグは更新しない**（テスト完了後のみ）
-
-```bash
-# 1. 最新コードをプル
-git pull origin deploy/docker-setup
-
-# 2. ビルド実行
-npm run build
-
-# 3. バージョンタグを生成してDockerイメージをビルド
-VERSION=$(date +%Y%m%d-%H%M)
-docker build -t ghcr.io/torifo/portfolio-astro:${VERSION} .
-
-# 4. GHCRにバージョンタグをプッシュ（:latestは更新しない）
-docker push ghcr.io/torifo/portfolio-astro:${VERSION}
-
-# 5. バージョン番号を記録（VPSで使用）
-echo "Pushed version: ${VERSION}"
-```
-
----
-
-### VPS環境での作業（テストとデプロイ）
-
-**環境**: `/home/ubuntu/Web/portfolio-astro`
-
-**注意点**:
-- WSLで表示されたバージョン番号を正確に使用
-- docker composeコマンドで環境変数を指定
-- テスト完了後のみ:latestタグを更新
-
-#### ステップ1: 新バージョンのテスト
-
-```bash
-# 1. バージョン番号を設定（WSLで表示された値）
-VERSION="20250113-1430"  # 例
-
-# 2. 新しいイメージをプル
-IMAGE_TAG=${VERSION} docker compose pull
-
-# 3. 現在のコンテナを停止
-docker compose down
-
-# 4. 新バージョンで起動
-IMAGE_TAG=${VERSION} docker compose up -d
-
-# 5. 動作確認
-docker compose ps
-docker compose logs -f portfolio-frontend
-# ブラウザで確認: https://portorifo.riumu.net
-```
-
-#### ステップ2: 問題なければ:latestタグを更新（WSL環境で実行）
-
-```bash
-# WSL環境に戻る
-ssh toriforiumu@wsl
-cd portfolio-astro
-
-# テスト済みバージョンに:latestタグを付与
-VERSION="20250113-1430"
-docker tag ghcr.io/torifo/portfolio-astro:${VERSION} ghcr.io/torifo/portfolio-astro:latest
-docker push ghcr.io/torifo/portfolio-astro:latest
-```
-
-#### ステップ3: VPS環境で:latestに切り替え
-
-```bash
-# VPS環境
-docker compose down
-docker compose pull  # :latestを取得
-docker compose up -d
-```
-
----
-
-### ロールバック手順
-
-**テスト中に問題を発見した場合:**
-
-```bash
-# VPS環境
-docker compose down
-
-# 環境変数なしで起動（自動的に:latestを使用）
-docker compose up -d
-
-# 既存の安定版が起動する
-```
-
-**特定バージョンにロールバックする場合:**
-
-```bash
-# VPS環境
-docker compose down
-
-# 以前の安定版バージョンを指定
-IMAGE_TAG=20250110-1200 docker compose pull
-IMAGE_TAG=20250110-1200 docker compose up -d
-```
-
-**利用可能なバージョンを確認:**
-
-```bash
-# GHCRのバージョン一覧を確認
-# https://github.com/torifo/portfolio-astro/pkgs/container/portfolio-astro
-
-# ローカルのイメージ確認
-docker images ghcr.io/torifo/portfolio-astro
-```
-
----
-
-## 従来のデプロイ手順（参考）
-
-<details>
-<summary>従来の:latest直接更新方式（クリックして展開）</summary>
-
-### 1. デプロイ環境での作業 (VPS)
-
-```bash
-# 現在の環境: /home/ubuntu/Web/portfolio-astro
-git add .
-git commit -m "feat: your changes description"
-git push origin deploy/docker-setup
-```
-
-### 2. ビルド環境での作業 (WSL)
-
-```bash
-ssh toriforiumu@wsl
-cd portfolio-astro
-
-git pull origin deploy/docker-setup
-npm run build
-
-docker build -t portfolio-frontend .
-docker tag portfolio-frontend ghcr.io/torifo/portfolio-astro:latest
-docker push ghcr.io/torifo/portfolio-astro:latest
-```
-
-### 3. デプロイ環境での最終作業 (VPS)
-
-```bash
-docker compose pull
-docker compose down
-docker compose up -d
-docker compose ps
-docker compose logs portfolio-frontend
-```
-
-**注意**: この方法では問題発生時のロールバックが困難です。
-
-</details>
-
----
-
-## 注意事項
-
-### VPS環境（デプロイ環境）
-- テスト時は必ず`IMAGE_TAG`環境変数でバージョンを指定
-- 本番適用前に必ず動作確認
-- ロールバック時は環境変数なしで起動（:latestを使用）
-
-### WSL環境（ビルド環境）
-- 必ず最新のコードをプルしてからビルド実行
-- バージョンタグを記録（VPSでの作業に必要）
-- :latestタグの更新はテスト完了後のみ
-
-### デプロイ全般
-- .envファイルの環境変数が正しく設定されていることを確認
-- docker composeコマンドでGHCRからイメージを取得
-- 問題発生時は即座にロールバック可能
+## 履歴
+
+以前は WSL でビルドして `deploy/docker-setup` ブランチを経由する手作業でしたが、
+`b0ce778`「本番デプロイをActionsで完結させる」で自動化されました。
+`deploy/docker-setup` ブランチは現役ではありません。

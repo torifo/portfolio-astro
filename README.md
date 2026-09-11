@@ -56,20 +56,37 @@ AstroとTypeScriptを使用して構築されたモダンなポートフォリ�
 │   │       ├── AboutSection.astro    # 自己紹介・経歴タイムライン（Profile API連携・タグフィルター）
 │   │       ├── SkillsSection.astro   # 技術スキル（Skills API・固定カテゴリ順・レベルソート・アンカーID）
 │   │       ├── OpusSection.astro     # 作品・プロジェクト（Opus API・カテゴリフィルター・スキルタグ）
-│   │       ├── JourneySection.astro  # 日本8地方・都道府県別旅記録
+│   │       ├── JourneySection.astro  # 日本8地方・都道府県別旅記録（旅・聖地巡礼・テーマへの入口）
 │   │       └── GamesSection.astro    # ゲーム関連（Games API連携）
+│   │   └── journey/
+│   │       └── PostGrid.astro    # 投稿サムネ一覧（県・旅・聖地巡礼・テーマで共用）
 │   ├── lib/
-│   │   └── microcms.ts           # microCMS API共通ユーティリティ（型定義・fetch関数・SKILL_CATEGORY_SLUG）
+│   │   ├── microcms.ts           # microCMS API共通ユーティリティ（型定義・fetch関数・SKILL_CATEGORY_SLUG）
+│   │   └── journey.ts            # Journey のビルド時データ読み出し（外部サービスを呼ばない）
 │   ├── layouts/
 │   │   └── Layout.astro          # 基本レイアウト
 │   ├── pages/
 │   │   ├── index.astro           # メインページ
-│   │   └── opus/
-│   │       └── [slug].astro      # Opus詳細ページ（getStaticPaths自動生成）
+│   │   ├── opus/
+│   │   │   └── [slug].astro      # Opus詳細ページ（getStaticPaths自動生成）
+│   │   └── journey/
+│   │       ├── [slug].astro      # 都道府県ページ（訪問済み39県）
+│   │       ├── trips/            # 旅の一覧と個別ページ（年別／地方別の切り替え）
+│   │       ├── pilgrimage/       # 聖地巡礼の一覧と作品ページ
+│   │       └── themes/           # テーマの一覧と個別ページ
 │   └── styles/
 │       └── global.css            # グローバルスタイル
-├── public/                       # 静的ファイル・画像
-├── .github/workflows/            # GitHub Actions設定
+├── public/
+│   ├── images/                   # 静的画像
+│   └── journey/thumbs/           # 投稿サムネ 1,013枚（480px webp・自前保存）
+├── data/
+│   ├── ontology/                 # 地名オントロジーと県境ポリゴン（機械生成・候補源）
+│   └── journey/                  # 投稿・判定結果・辞書・旅・聖地巡礼・テーマ
+├── scripts/
+│   ├── ontology/                 # オントロジーと県境データの生成
+│   ├── ingest/                   # エクスポート取り込み・サムネ生成・permalink取得
+│   └── journey/                  # 都道府県の解決・旅/聖地巡礼/テーマの抽出
+├── .github/workflows/            # GitHub Actions設定（main への push で本番デプロイ）
 ├── docker-compose.yml            # Docker Compose設定
 ├── Dockerfile                    # マルチステージビルド設定
 └── nginx.conf                    # Nginx設定
@@ -85,18 +102,28 @@ AstroとTypeScriptを使用して構築されたモダンなポートフォリ�
 
 #### デプロイフロー
 
-```
-WSL (ローカル)
-  └─ build-push.sh (*gitignore)
-       ├─ docker build → ghcr.io/torifo/portfolio-astro:{tag}
-       └─ docker push → GHCR
+**`main` への push がそのまま本番デプロイです。** 承認の関門はありません。
 
-VPS (root@162.43.88.107)
-  └─ /home/ubuntu/Web/portfolio-astro/
-       └─ ./deploy.sh {tag}  →  docker pull & docker compose up -d
+```
+main に push / workflow_dispatch
+  └─ .github/workflows/deploy.yml
+       ├─ タグ生成（JST の YYYYMMDD-HHMM）
+       ├─ Secrets から .env を作成（Astro は PUBLIC_* をビルド時に埋め込むため）
+       ├─ docker build → :{タグ} と :latest を GHCR へ push
+       └─ VPS へ SSH → /home/ubuntu/Web/portfolio-astro/deploy.sh {タグ}
+                          └─ docker compose pull → down → up -d
 ```
 
-> `build-push.sh` はローカル開発者専用スクリプトのため `.gitignore` に記載し追跡外としています。
+ロールバックは VPS で1コマンドです。タグは
+[GHCR のパッケージ画面](https://github.com/torifo/portfolio-astro/pkgs/container/portfolio-astro)
+か Actions のジョブサマリーで確認できます。
+
+```bash
+cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <戻したいタグ>
+```
+
+必要な GitHub Secrets: `GHCR_TOKEN` / `VPS_HOST` / `VPS_USER` / `VPS_SSH_KEY` /
+`PUBLIC_MICROCMS_API_KEY` / `PUBLIC_MICROCMS_SERVICE_DOMAIN`
 
 ### 🌟 コンテンツセクション
 
@@ -106,7 +133,7 @@ VPS (root@162.43.88.107)
 | **About** | 自己紹介・経歴タイムライン・Connect | microCMS Profile API（タグフィルター対応）|
 | **Skills** | 技術スキル（8カテゴリ固定順・レベルソート） | microCMS Skills API |
 | **Opus** | 作品・プロジェクト・詳細ページ・スキルタグ | microCMS Opus API（カテゴリフィルター対応）|
-| **Journey** | 日本8地方・都道府県別旅記録 | 静的データ（訪問済み管理）|
+| **Journey** | 日本8地方・都道府県別旅記録／旅・聖地巡礼・テーマ | ローカルJSON（Instagram エクスポート由来・ビルド時に外部呼び出しなし）|
 | **Games** | ゲーム関連情報・SNSリンク | microCMS Games API |
 
 ### 🔌 microCMS API連携
@@ -128,7 +155,11 @@ VPS (root@162.43.88.107)
 - [x] About経歴タイムライン タグフィルター（Academic / Technology / Opus / Pulse / Community）
 - [x] OpusのrelatedSkillタグ表示（カテゴリ別グループ・Skillsセクションへのアンカーリンク）
 - [x] 日の出・日没APIによる自動テーマ切り替え（JSTの日付変わりでキャッシュ自動リセット）
-- [x] Journey 8地方・都道府県別訪問管理（静的データ・訪問済み地方を動的カウント）
+- [x] Journey 8地方・都道府県別訪問管理（訪問済み地方を動的カウント）
+- [x] Journey × Instagram 連携（投稿1,013件・都道府県100%解決・LLM呼び出しなし）
+- [x] 都道府県ページ自動生成（`/journey/[slug]`・訪問済み39県）
+- [x] 旅・聖地巡礼・テーマの各ページ（4つの軸は重ね掛け・同じ投稿が複数ページに出る）
+- [x] 投稿サムネの自前保存（480px webp・Instagram の media URL 失効対策）
 - [x] Footerビルド時刻自動表示
 - [x] GHCR Docker イメージ管理
 
@@ -172,16 +203,28 @@ A modern portfolio website built with Astro and TypeScript. Features microCMS AP
 
 #### Deployment Flow
 
-```
-Local WSL
-  └─ build-push.sh (*gitignored)
-       ├─ docker build → ghcr.io/torifo/portfolio-astro:{tag}
-       └─ docker push → GHCR
+**Pushing to `main` deploys to production.** There is no approval gate.
 
-VPS (root@162.43.88.107)
-  └─ /home/ubuntu/Web/portfolio-astro/
-       └─ ./deploy.sh {tag}  →  docker pull & docker compose up -d
 ```
+push to main / workflow_dispatch
+  └─ .github/workflows/deploy.yml
+       ├─ tag from JST date (YYYYMMDD-HHMM)
+       ├─ write .env from secrets (Astro inlines PUBLIC_* at build time)
+       ├─ docker build → push :{tag} and :latest to GHCR
+       └─ ssh to VPS → /home/ubuntu/Web/portfolio-astro/deploy.sh {tag}
+                          └─ docker compose pull → down → up -d
+```
+
+Rollback is one command on the VPS. Tags are listed on the
+[GHCR package page](https://github.com/torifo/portfolio-astro/pkgs/container/portfolio-astro)
+and in each Actions job summary.
+
+```bash
+cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <tag>
+```
+
+Required GitHub secrets: `GHCR_TOKEN`, `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`,
+`PUBLIC_MICROCMS_API_KEY`, `PUBLIC_MICROCMS_SERVICE_DOMAIN`
 
 ### 🔌 microCMS API
 
