@@ -16,19 +16,35 @@ import collections
 import datetime as dt
 import json
 import pathlib
+import statistics
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from gazetteer import Gazetteer  # noqa: E402
+from gazetteer import Gazetteer, normalize  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 JOURNEY = ROOT / "data" / "journey"
 
-# 旅とみなす条件。数字は実データの分布から決めた（2投稿以上のタグ960件のうち、
-# 期間14日以内に収まるものが571件、10文字以上は58件）。
+# 旅とみなす条件。
+#
+# **期間が効く。** 汎用タグ（散策・自然・空）は年をまたいで散るのに対し、旅タグは
+# 数日から数週間に収まる。以前はタグの文字数でも絞っていたが、それは当て推量で、
+# 「#東北きゅんパス旅」(8文字・49投稿・2日) のような明らかな旅を落としていた。
+# 文字数の条件は外し、期間で切る。四国旅のような3週間の旅も拾えるよう30日まで許す。
 MIN_POSTS = 3
-MAX_SPAN_DAYS = 14
-MIN_TAG_LENGTH = 10
+MAX_SPAN_DAYS = 30
+
+# **旅タグは、それが出た日の投稿をほぼ全部覆う。** 本人が旅ごとに付ける一文まるごとの
+# タグは、その日に上げた投稿すべてに付く。一方「#あじさい」「#彫刻」のような被写体の
+# タグは、同じ日の他の投稿には付かない。
+#
+# 期間全体での被覆率ではなく日ごとに見るのが要点。長い旅の期間には別の旅が挟まる
+# ことがあり（四国旅の21日間には上高地とディズニーが混ざっていた）、期間で測ると
+# 55% まで落ちて弾かれてしまう。日ごとなら 98% になる。
+#
+# 実データでは 四国旅98% / 東北きゅんパス旅100% / あじさい巡り96% に対し、
+# テーマパーク52% / あじさい37% / 彫刻24% / 探検9% と、はっきり分かれた。
+MIN_DAY_COVERAGE = 0.8
 
 
 def slugify(date, pref_slug, taken):
@@ -50,6 +66,7 @@ def main():
     args = parser.parse_args()
 
     posts = json.loads((JOURNEY / "posts.json").read_text(encoding="utf-8"))["posts"]
+    posts_per_day = collections.Counter(p["date"] for p in posts)
     resolved = json.loads((JOURNEY / "resolved.json").read_text(encoding="utf-8"))["posts"]
     pref_slug = {
         p["code"]: p["slug"]
@@ -65,13 +82,20 @@ def main():
 
     candidates = []
     for tag, group in by_tag.items():
-        if len(group) < MIN_POSTS or len(tag) < MIN_TAG_LENGTH:
+        if len(group) < MIN_POSTS:
             continue
         dates = sorted(dt.date.fromisoformat(p["date"]) for p in group)
         if (dates[-1] - dates[0]).days > MAX_SPAN_DAYS:
             continue
-        # タグそのものが地名なら、それは旅ではなく場所。
-        if gaz.lookup(tag):
+        # タグそのものが地名・県名なら、それは旅ではなく場所。
+        if gaz.lookup(tag) or normalize(tag) in gaz.pref_terms:
+            continue
+        # このタグが出た日ごとに、その日の投稿をどれだけ覆っているか。旅の名前なら高い。
+        tagged_per_day = collections.Counter(p["date"] for p in group)
+        coverage = statistics.mean(
+            count / posts_per_day[day] for day, count in tagged_per_day.items()
+        )
+        if coverage < MIN_DAY_COVERAGE:
             continue
         counts = collections.Counter(
             code for p in group for code in (resolved[p["id"]]["prefCodes"] or [])
@@ -80,19 +104,22 @@ def main():
             continue
         candidates.append((dates[0], dates[-1], tag, group, counts))
 
-    # 同じ日程に重なる候補は同じ旅を指している。「ユニバーサルスタジオジャパン」
+    # 同じ日程の候補は同じ旅を指している。「ユニバーサルスタジオジャパン」
     # 「ホテルユニバーサルポート」「スーパーニンテンドーワールド」は 2024-02-14〜16 の
     # 一つの旅であって三つではない。投稿数の最も多いタグを旅の名前とし、
     # 残りはその旅の中の立ち寄り先として spots に畳む。
+    #
+    # **併合は「内側に収まる」ときだけ。** 期間が重なるだけで併合し、さらに
+    # 併合のたびに期間を広げると、別々の旅が数珠つなぎになる（与論島の旅が
+    # 1か月前の海ほたるドライブまで飲み込んだ）。旅の期間は主役のタグが決め、
+    # 広げない。
     candidates.sort(key=lambda c: (-len(c[3]), c[0]))
     clusters = []
     for start, end, tag, group, counts in candidates:
         for cluster in clusters:
-            if start <= cluster["end"] and cluster["start"] <= end:
+            if cluster["start"] <= start and end <= cluster["end"]:
                 cluster["spots"].append(tag)
                 cluster["group"] = {p["id"]: p for p in [*cluster["group"].values(), *group]}
-                cluster["start"] = min(cluster["start"], start)
-                cluster["end"] = max(cluster["end"], end)
                 break
         else:
             clusters.append(
@@ -124,7 +151,9 @@ def main():
     if args.merge and args.out.exists():
         previous = {t["tag"]: t for t in json.loads(args.out.read_text(encoding="utf-8"))["trips"]}
 
-    taken, trips = set(), []
+    # 引き継いだ slug も先に押さえておかないと、新しい旅と衝突する。
+    taken = {t["slug"] for t in previous.values() if t.get("slug")}
+    trips = []
     for start, end, tag, group, counts, spots in candidates:
         old = previous.get(tag, {})
         if old.get("hidden"):

@@ -66,7 +66,7 @@ cd /home/ubuntu/Web/portfolio-astro
 
 ## イメージ容量に注意
 
-デプロイのたびに日付タグが増えます。Journey のサムネ 1,013枚を含むため、イメージは約190MBあります。VPS のストレージは有限なので、古いタグはときどき整理してください（稼働中のイメージは消さないこと）。
+デプロイのたびに日付タグが増えます。Journey のサムネ 1,013枚を含むため、イメージは約115MBあります（サムネを入れる前は約70MB）。VPS のストレージは有限なので、古いタグはときどき整理してください（稼働中のイメージは消さないこと）。
 
 ```bash
 docker images ghcr.io/torifo/portfolio-astro --format '{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'
