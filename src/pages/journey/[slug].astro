@@ -1,0 +1,130 @@
+---
+// 都道府県ページ。訪問済みの県すべてに用意し、投稿がまだ無い県は掲載予定として出す。
+import Layout from '../../layouts/Layout.astro';
+import DetailHeader from '../../components/DetailHeader.astro';
+import PostGrid from '../../components/journey/PostGrid.astro';
+import {
+  prefectures,
+  postsForPrefecture,
+  tripsForPrefecture,
+  worksForPrefecture,
+  themesForPrefecture,
+  formatRange,
+  type Prefecture,
+} from '../../lib/journey';
+
+export async function getStaticPaths() {
+  return prefectures
+    .filter((prefecture) => prefecture.visited)
+    .map((prefecture) => ({ params: { slug: prefecture.slug }, props: { prefecture } }));
+}
+
+interface Props {
+  prefecture: Prefecture;
+}
+
+const { prefecture } = Astro.props;
+const posts = postsForPrefecture(prefecture.code);
+const trips = tripsForPrefecture(prefecture.code);
+const works = worksForPrefecture(prefecture.code);
+const themes = themesForPrefecture(prefecture.code);
+
+// 料理・食べ物のタグは県のハイライトとして拾う。地名ではないので判定には使っていない。
+const FOOD = /(グルメ|ラーメン|そば|うどん|寿司|鮨|丼|定食|カフェ|スイーツ|ソフトクリーム|プリン|団子|餅|酒|ビール|弁当)/;
+const foodTags = [...new Set(posts.flatMap((post) => post.hashtags).filter((tag) => FOOD.test(tag)))].slice(0, 12);
+
+const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))].sort();
+const yearLabel =
+  years.length === 0 ? '' : years.length === 1 ? `${years[0]}年` : `${years[0]}年〜${years[years.length - 1]}年`;
+---
+
+<Layout
+  title={`${prefecture.name}の記録 - Toriforium Portfolio`}
+  description={`${prefecture.name}で撮った写真${posts.length}件。${prefecture.note ?? ''}`}
+>
+  <DetailHeader title={prefecture.name} backHref="/#journey" backLabel="旅の記録に戻る" />
+
+  <main class="pt-24 pb-16 relative z-10">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="text-center mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold gradient-text mb-3">{prefecture.name}</h1>
+        {prefecture.note && <p class="text-gray-400 mb-3">{prefecture.note}</p>}
+        <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-400">
+          <span class="px-3 py-1 glass rounded-full">投稿{posts.length}件</span>
+          {yearLabel && <span class="px-3 py-1 glass rounded-full">{yearLabel}</span>}
+          {trips.length > 0 && <span class="px-3 py-1 glass rounded-full">旅{trips.length}件</span>}
+        </div>
+      </div>
+
+      {foodTags.length > 0 && (
+        <section class="mb-10">
+          <h2 class="text-lg font-semibold text-white mb-3">この県で食べたもの</h2>
+          <div class="flex flex-wrap gap-2">
+            {foodTags.map((tag) => (
+              <span class="px-3 py-1 rounded-full bg-amber-500/15 text-amber-200 text-xs">#{tag}</span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {trips.length > 0 && (
+        <section class="mb-10">
+          <h2 class="text-lg font-semibold text-white mb-3">この県を含む旅</h2>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {trips.map((trip) => (
+              <a href={`/journey/trips/${trip.slug}/`} class="glass rounded-xl p-4 hover-lift block">
+                <div class="text-sm text-white font-medium mb-1">{trip.title}</div>
+                <div class="text-xs text-gray-500">
+                  {formatRange(trip.start, trip.end)}・{trip.postCount}件
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {works.length > 0 && (
+        <section class="mb-10">
+          <h2 class="text-lg font-semibold text-white mb-3">この県の聖地巡礼</h2>
+          <div class="flex flex-wrap gap-2">
+            {works.map((work) => (
+              <a
+                href={`/journey/pilgrimage/${work.slug}/`}
+                class="px-3 py-1.5 rounded-full bg-violet-500/15 text-violet-200 text-xs hover:bg-violet-500/25 transition-colors"
+              >
+                {work.title}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {themes.length > 0 && (
+        <section class="mb-10">
+          <h2 class="text-lg font-semibold text-white mb-3">この県で撮ったもの</h2>
+          <div class="flex flex-wrap gap-2">
+            {themes.map((theme) => (
+              <a
+                href={`/journey/themes/${theme.slug}/`}
+                class="px-3 py-1.5 rounded-full bg-cyan-500/15 text-cyan-200 text-xs hover:bg-cyan-500/25 transition-colors"
+              >
+                {theme.title}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <div class="section-divider"></div>
+
+      {posts.length > 0 ? (
+        <PostGrid posts={posts} omitPrefCode={prefecture.code} />
+      ) : (
+        <div class="glass rounded-2xl p-10 text-center">
+          <p class="text-gray-300 mb-2">{prefecture.name}は訪れましたが、写真はまだ整理中です。</p>
+          <p class="text-gray-500 text-sm">今後掲載予定</p>
+        </div>
+      )}
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,71 @@
+---
+// 旅ページ。旅グループタグ（本人が旅ごとに付けている一文まるごとのタグ）でまとめる。
+import Layout from '../../../layouts/Layout.astro';
+import DetailHeader from '../../../components/DetailHeader.astro';
+import PostGrid from '../../../components/journey/PostGrid.astro';
+import {
+  trips,
+  postsForTrip,
+  prefectureByCode,
+  formatRange,
+  type Trip,
+} from '../../../lib/journey';
+
+export async function getStaticPaths() {
+  return trips.map((trip) => ({ params: { slug: trip.slug }, props: { trip } }));
+}
+
+interface Props {
+  trip: Trip;
+}
+
+const { trip } = Astro.props;
+const posts = postsForTrip(trip).slice().sort((a, b) => a.date.localeCompare(b.date));
+const visited = trip.allPrefCodes.map((code) => prefectureByCode(code)).filter(Boolean);
+const days = [...new Set(posts.map((post) => post.date))];
+---
+
+<Layout title={`${trip.title} - Toriforium Portfolio`} description={`${formatRange(trip.start, trip.end)}の旅・${posts.length}件`}>
+  <DetailHeader title={trip.title} backHref="/#journey" backLabel="旅の記録に戻る" />
+
+  <main class="pt-24 pb-16 relative z-10">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="text-center mb-10">
+        <h1 class="text-2xl md:text-3xl font-bold gradient-text-cyan mb-3">{trip.title}</h1>
+        <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-400">
+          <span class="px-3 py-1 glass rounded-full">{formatRange(trip.start, trip.end)}</span>
+          <span class="px-3 py-1 glass rounded-full">{days.length}日・{posts.length}件</span>
+        </div>
+      </div>
+
+      <section class="mb-8">
+        <h2 class="text-sm font-semibold text-gray-400 mb-2">通った県</h2>
+        <div class="flex flex-wrap gap-2">
+          {visited.map((prefecture) => (
+            <a
+              href={`/journey/${prefecture!.slug}/`}
+              class="px-3 py-1.5 rounded-full bg-white/10 text-gray-200 text-xs hover:bg-white/20 transition-colors"
+            >
+              {prefecture!.name}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {trip.spots.length > 0 && (
+        <section class="mb-8">
+          <h2 class="text-sm font-semibold text-gray-400 mb-2">立ち寄り先</h2>
+          <div class="flex flex-wrap gap-2">
+            {trip.spots.map((spot) => (
+              <span class="px-3 py-1 rounded-full bg-cyan-500/15 text-cyan-200 text-xs">#{spot}</span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <div class="section-divider"></div>
+
+      <PostGrid posts={posts} />
+    </div>
+  </main>
+</Layout>

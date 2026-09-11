@@ -1,0 +1,65 @@
+---
+// テーマの一覧。被写体でまとめる軸で、県・旅・聖地巡礼とは重ね掛けになる。
+import Layout from '../../../layouts/Layout.astro';
+import DetailHeader from '../../../components/DetailHeader.astro';
+import { themes, postsForTheme, thumbUrl, prefectureByCode } from '../../../lib/journey';
+
+const cards = themes.map((theme) => ({
+  theme,
+  covers: postsForTheme(theme).slice(0, 4),
+}));
+const postTotal = themes.reduce((sum, theme) => sum + theme.postCount, 0);
+---
+
+<Layout title="テーマ - Toriforium Portfolio" description={`${themes.length}のテーマ・${postTotal}件の投稿`}>
+  <DetailHeader title="テーマ" backHref="/#journey" backLabel="ポートフォリオに戻る" />
+
+  <main class="pt-24 pb-16 relative z-10">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold gradient-text mb-3">テーマ</h1>
+        <p class="text-gray-400 text-sm">土地ではなく、撮ったものでまとめています</p>
+        <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-400 mt-4">
+          <span class="px-3 py-1 glass rounded-full">{themes.length}のテーマ</span>
+          <span class="px-3 py-1 glass rounded-full">{postTotal}件の投稿</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {cards.map(({ theme, covers }) => (
+          <a href={`/journey/themes/${theme.slug}/`} class="glass rounded-2xl overflow-hidden hover-lift block group">
+            <div class="grid grid-cols-4 gap-px bg-white/5">
+              {covers.map((post) => (
+                <img
+                  src={thumbUrl(post)}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ))}
+            </div>
+            <div class="p-5">
+              <div class="flex items-baseline justify-between mb-1">
+                <span class="text-white font-semibold text-lg">{theme.title}</span>
+                <span class="text-gray-500 text-xs">{theme.postCount}件</span>
+              </div>
+              {theme.lead && <p class="text-gray-400 text-sm mb-3">{theme.lead}</p>}
+              <div class="flex flex-wrap gap-1">
+                {theme.prefCodes.slice(0, 5).map((code) => {
+                  const prefecture = prefectureByCode(code);
+                  return prefecture ? (
+                    <span class="px-2 py-0.5 rounded-full bg-white/10 text-gray-400 text-[10px]">{prefecture.shortName}</span>
+                  ) : null;
+                })}
+                {theme.prefCodes.length > 5 && (
+                  <span class="px-2 py-0.5 text-gray-500 text-[10px]">ほか{theme.prefCodes.length - 5}県</span>
+                )}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

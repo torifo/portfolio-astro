@@ -1,0 +1,45 @@
+---
+// 聖地巡礼の一覧。作品ごとにまとめている。
+import Layout from '../../../layouts/Layout.astro';
+import DetailHeader from '../../../components/DetailHeader.astro';
+import { works, prefectureByCode, formatRange } from '../../../lib/journey';
+
+const postTotal = works.reduce((sum, work) => sum + work.postCount, 0);
+---
+
+<Layout title="聖地巡礼 - Toriforium Portfolio" description={`${works.length}作品・${postTotal}件の投稿`}>
+  <DetailHeader title="聖地巡礼" backHref="/#journey" backLabel="ポートフォリオに戻る" />
+
+  <main class="pt-24 pb-16 relative z-10">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold gradient-text mb-3">聖地巡礼</h1>
+        <p class="text-gray-400 text-sm">作品の舞台を訪ねた記録です</p>
+        <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-400 mt-4">
+          <span class="px-3 py-1 glass rounded-full">{works.length}作品</span>
+          <span class="px-3 py-1 glass rounded-full">{postTotal}件の投稿</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        {works.map((work) => (
+          <a
+            href={`/journey/pilgrimage/${work.slug}/`}
+            class="glass rounded-2xl p-5 hover-lift block border border-violet-500/20"
+          >
+            <div class="text-white font-medium mb-2">{work.title}</div>
+            <div class="text-gray-500 text-xs mb-3">{formatRange(work.start, work.end)}・{work.postCount}件</div>
+            <div class="flex flex-wrap gap-1">
+              {work.prefCodes.slice(0, 5).map((code) => {
+                const prefecture = prefectureByCode(code);
+                return prefecture ? (
+                  <span class="px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-200 text-[10px]">{prefecture.shortName}</span>
+                ) : null;
+              })}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

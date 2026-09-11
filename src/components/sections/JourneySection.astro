@@ -1,128 +1,30 @@
 ---
-// JourneySection.astro - 旅の記録セクション（8地方・都道府県別）
+// JourneySection.astro - 旅の記録セクション
+//
+// 都道府県（8地方）・旅・聖地巡礼の3本立て。3つの軸は排他ではなく、
+// 同じ投稿が県ページにも旅ページにも聖地巡礼ページにも出るのは仕様。
+//
+// 47都道府県のデータは data/journey/prefectures.json に移してある
+// （以前はこのファイルにベタ書きしていた）。投稿との対応は
+// scripts/journey/resolve.py が作る resolved.json が持つ。
+import {
+  regions,
+  trips,
+  works,
+  themes,
+  posts,
+  postCountByPrefecture,
+} from '../../lib/journey';
 
-interface Prefecture {
-  name: string;
-  visited: boolean;
-  note?: string;
-}
+const allPrefectures = regions.flatMap((region) => region.prefectures);
+const visitedCount = allPrefectures.filter((p) => p.visited).length;
+const totalCount = allPrefectures.length;
+const visitedRegionCount = regions.filter((r) => r.prefectures.some((p) => p.visited)).length;
+const postCount = posts.length;
+const tripPostCount = trips.reduce((sum, trip) => sum + trip.postCount, 0);
+const workPostCount = works.reduce((sum, work) => sum + work.postCount, 0);
+const themePostCount = themes.reduce((sum, theme) => sum + theme.postCount, 0);
 
-interface Region {
-  name: string;
-  en: string;
-  gradient: string;
-  prefectures: Prefecture[];
-}
-
-const regions: Region[] = [
-  {
-    name: '北海道',
-    en: 'Hokkaido',
-    gradient: 'from-sky-500 to-blue-700',
-    prefectures: [
-      { name: '北海道', visited: true, note: '知床・富良野・釧路湿原' },
-    ],
-  },
-  {
-    name: '東北',
-    en: 'Tohoku',
-    gradient: 'from-emerald-500 to-green-700',
-    prefectures: [
-      { name: '青森', visited: true, note: '奥入瀬渓流・白神山地' },
-      { name: '岩手', visited: true },
-      { name: '宮城', visited: true, note: '松島' },
-      { name: '秋田', visited: true },
-      { name: '山形', visited: false },
-      { name: '福島', visited: true, note: '磐梯山・裏磐梯' },
-    ],
-  },
-  {
-    name: '関東',
-    en: 'Kanto',
-    gradient: 'from-indigo-500 to-purple-700',
-    prefectures: [
-      { name: '東京', visited: true, note: '在学中' },
-      { name: '神奈川', visited: true, note: '鎌倉・江ノ島' },
-      { name: '埼玉', visited: true },
-      { name: '千葉', visited: true },
-      { name: '茨城', visited: true },
-      { name: '栃木', visited: true },
-      { name: '群馬', visited: true },
-    ],
-  },
-  {
-    name: '中部',
-    en: 'Chubu',
-    gradient: 'from-orange-500 to-red-700',
-    prefectures: [
-      { name: '新潟', visited: true },
-      { name: '富山', visited: true },
-      { name: '石川', visited: true },
-      { name: '福井', visited: true },
-      { name: '山梨', visited: true, note: '富士山・富士五湖' },
-      { name: '長野', visited: true, note: '北アルプス・槍ヶ岳' },
-      { name: '岐阜', visited: true, note: '白川郷' },
-      { name: '静岡', visited: true, note: '富士山麓' },
-      { name: '愛知', visited: true },
-    ],
-  },
-  {
-    name: '近畿',
-    en: 'Kinki',
-    gradient: 'from-pink-500 to-rose-700',
-    prefectures: [
-      { name: '三重', visited: true },
-      { name: '滋賀', visited: false },
-      { name: '京都', visited: true, note: '嵐山・金閣寺' },
-      { name: '大阪', visited: true },
-      { name: '兵庫', visited: true, note: '有馬温泉' },
-      { name: '奈良', visited: true, note: '春日大社・吉野山' },
-      { name: '和歌山', visited: true },
-    ],
-  },
-  {
-    name: '中国',
-    en: 'Chugoku',
-    gradient: 'from-teal-500 to-cyan-700',
-    prefectures: [
-      { name: '鳥取', visited: false },
-      { name: '島根', visited: false },
-      { name: '岡山', visited: false },
-      { name: '広島', visited: true, note: '宮島・厳島神社' },
-      { name: '山口', visited: true },
-    ],
-  },
-  {
-    name: '四国',
-    en: 'Shikoku',
-    gradient: 'from-lime-500 to-green-700',
-    prefectures: [
-      { name: '徳島', visited: true },
-      { name: '香川', visited: true, note: 'うどん県' },
-      { name: '愛媛', visited: true, note: '道後温泉' },
-      { name: '高知', visited: true },
-    ],
-  },
-  {
-    name: '九州・沖縄',
-    en: 'Kyushu / Okinawa',
-    gradient: 'from-yellow-500 to-orange-700',
-    prefectures: [
-      { name: '福岡', visited: true },
-      { name: '佐賀', visited: true },
-      { name: '長崎', visited: true },
-      { name: '熊本', visited: false },
-      { name: '大分', visited: false },
-      { name: '宮崎', visited: false },
-      { name: '鹿児島', visited: true },
-      { name: '沖縄', visited: true, note: '石垣島・竹富島' },
-    ],
-  },
-];
-
-const visitedCount = regions.flatMap(r => r.prefectures).filter(p => p.visited).length;
-const totalCount = regions.flatMap(r => r.prefectures).length;
-const visitedRegionCount = regions.filter(r => r.prefectures.some(p => p.visited)).length;
 ---
 
 <section id="journey" class="py-20 relative">
@@ -157,28 +59,35 @@ const visitedRegionCount = regions.filter(r => r.prefectures.some(p => p.visited
             <!-- 都道府県バッジ -->
             <div class="p-4">
               <div class="flex flex-wrap gap-2">
-                {region.prefectures.map((pref) => (
-                  <div
-                    class={`group/pref relative`}
+                {region.prefectures.map((pref) => {
+                  const count = postCountByPrefecture[pref.code] ?? 0;
+                  const Tag = pref.visited ? 'a' : 'div';
+                  return (
+                  <Tag
+                    class="group/pref relative"
+                    href={pref.visited ? `/journey/${pref.slug}/` : undefined}
                     title={pref.note ?? pref.name}
                   >
-                    <span class={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
+                    <span class={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
                       pref.visited
-                        ? 'bg-white/20 text-white border border-white/30'
+                        ? 'bg-white/20 text-white border border-white/30 hover:bg-white/30'
                         : 'bg-white/5 text-gray-500 border border-white/10'
                     }`}>
-                      {pref.name}
-                      {pref.visited && (
+                      {pref.shortName}
+                      {count > 0 ? (
+                        <span class="ml-1 text-white/60 text-[10px]">{count}</span>
+                      ) : pref.visited ? (
                         <span class="ml-1 text-green-400 text-xs">✓</span>
-                      )}
+                      ) : null}
                     </span>
                     {pref.note && (
                       <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover/pref:opacity-100 transition-opacity pointer-events-none z-10">
                         {pref.note}
                       </div>
                     )}
-                  </div>
-                ))}
+                  </Tag>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -186,10 +95,43 @@ const visitedRegionCount = regions.filter(r => r.prefectures.some(p => p.visited
       })}
     </div>
 
+    <!-- 旅・聖地巡礼・テーマは見出しだけ置いて詳細ページへ送る（セクションが長くなりすぎるため） -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="/journey/trips/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group">
+        <div>
+          <div class="text-2xl font-bold gradient-text-cyan mb-1">旅の記録</div>
+          <div class="text-gray-400 text-sm">{trips.length}件の旅・{tripPostCount}件の投稿</div>
+        </div>
+        <svg class="w-6 h-6 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+
+      <a href="/journey/pilgrimage/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group border border-violet-500/20">
+        <div>
+          <div class="text-2xl font-bold gradient-text mb-1">聖地巡礼</div>
+          <div class="text-gray-400 text-sm">{works.length}作品・{workPostCount}件の投稿</div>
+        </div>
+        <svg class="w-6 h-6 text-gray-500 group-hover:text-violet-300 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+
+      <a href="/journey/themes/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group">
+        <div>
+          <div class="text-2xl font-bold gradient-text-cyan mb-1">テーマ</div>
+          <div class="text-gray-400 text-sm">{themes.length}のテーマ・{themePostCount}件の投稿</div>
+        </div>
+        <svg class="w-6 h-6 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
     <!-- Instagram リンクバナー -->
     <div class="mt-12 text-center">
       <a
-        href="https://www.instagram.com/a_man_who_pursue_nature/"
+        href="https://www.instagram.com/a_traveler_who_pursue_nature/"
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-3 px-8 py-4 glass rounded-2xl hover:bg-white/10 transition-colors group"
@@ -198,7 +140,7 @@ const visitedRegionCount = regions.filter(r => r.prefectures.some(p => p.visited
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
         </svg>
         <div class="text-left">
-          <div class="text-white font-semibold text-sm">@a_man_who_pursue_nature</div>
+          <div class="text-white font-semibold text-sm">@a_traveler_who_pursue_nature</div>
           <div class="text-gray-400 text-xs">旅の写真をInstagramで公開中</div>
         </div>
         <svg class="w-4 h-4 text-gray-400 group-hover:text-white transition-colors ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,7 +150,7 @@ const visitedRegionCount = regions.filter(r => r.prefectures.some(p => p.visited
     </div>
 
     <!-- 統計 -->
-    <div class="mt-10 grid grid-cols-3 gap-6">
+    <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text-cyan mb-2">{visitedCount}</div>
         <p class="text-gray-300 text-sm">訪問済み都道府県</p>
@@ -220,6 +162,10 @@ const visitedRegionCount = regions.filter(r => r.prefectures.some(p => p.visited
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text-cyan mb-2">{visitedRegionCount}</div>
         <p class="text-gray-300 text-sm">訪問済み地方</p>
+      </div>
+      <div class="text-center glass p-6 rounded-2xl hover-lift">
+        <div class="text-3xl font-bold gradient-text mb-2">{postCount}</div>
+        <p class="text-gray-300 text-sm">記録した投稿</p>
       </div>
     </div>
   </div>

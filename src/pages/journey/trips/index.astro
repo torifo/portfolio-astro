@@ -1,0 +1,131 @@
+---
+// 旅の一覧。年別と地方別を両方出しておき、切り替えは表示の出し分けだけで済ませる
+// （完全静的ビルドなので、並び替えのためにサーバーを持たない）。
+import Layout from '../../../layouts/Layout.astro';
+import DetailHeader from '../../../components/DetailHeader.astro';
+import { trips, regions, prefectureByCode, regionForPrefCode, formatRange } from '../../../lib/journey';
+
+const byYear = trips.reduce<Record<string, typeof trips>>((acc, trip) => {
+  (acc[trip.start.slice(0, 4)] ??= []).push(trip);
+  return acc;
+}, {});
+const years = Object.keys(byYear).sort().reverse();
+
+// 旅は複数県にまたがるので、主役の県（投稿が最も多い県）の地方に置く。
+const byRegion = trips.reduce<Record<string, typeof trips>>((acc, trip) => {
+  const region = regionForPrefCode(trip.prefCodes[0]);
+  if (region) (acc[region.name] ??= []).push(trip);
+  return acc;
+}, {});
+const regionOrder = regions.map((r) => r).filter((r) => byRegion[r.name]?.length);
+
+const postTotal = trips.reduce((sum, trip) => sum + trip.postCount, 0);
+---
+
+<Layout title="旅の記録 - Toriforium Portfolio" description={`${trips.length}件の旅・${postTotal}件の投稿`}>
+  <DetailHeader title="旅の記録" backHref="/#journey" backLabel="ポートフォリオに戻る" />
+
+  <main class="pt-24 pb-16 relative z-10">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold gradient-text-cyan mb-3">旅の記録</h1>
+        <p class="text-gray-400 text-sm">旅ごとに付けているタグでまとめています</p>
+        <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-400 mt-4">
+          <span class="px-3 py-1 glass rounded-full">{trips.length}件の旅</span>
+          <span class="px-3 py-1 glass rounded-full">{postTotal}件の投稿</span>
+        </div>
+      </div>
+
+      <div class="flex justify-center mb-10">
+        <div class="glass rounded-full p-1 inline-flex gap-1" role="tablist" aria-label="並び順">
+          <button type="button" data-view="year" role="tab" aria-selected="true" class="journey-tab px-5 py-2 rounded-full text-sm transition-colors">年別</button>
+          <button type="button" data-view="region" role="tab" aria-selected="false" class="journey-tab px-5 py-2 rounded-full text-sm transition-colors">地方別</button>
+        </div>
+      </div>
+
+      <div id="view-year">
+        {years.map((year) => (
+          <section class="mb-10">
+            <h2 class="text-lg font-semibold text-white mb-4">{year}年</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {byYear[year].map((trip) => (
+                <a href={`/journey/trips/${trip.slug}/`} class="glass rounded-2xl p-5 hover-lift block">
+                  <div class="text-white font-medium text-sm leading-relaxed mb-2">{trip.title}</div>
+                  <div class="text-gray-500 text-xs mb-3">{formatRange(trip.start, trip.end)}・{trip.postCount}件</div>
+                  <div class="flex flex-wrap gap-1">
+                    {trip.allPrefCodes.slice(0, 5).map((code) => {
+                      const prefecture = prefectureByCode(code);
+                      return prefecture ? (
+                        <span class="px-2 py-0.5 rounded-full bg-white/10 text-gray-400 text-[10px]">{prefecture.shortName}</span>
+                      ) : null;
+                    })}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <div id="view-region" hidden>
+        {regionOrder.map((region) => (
+          <section class="mb-10">
+            <div class={`inline-block bg-gradient-to-r ${region.gradient} px-4 py-1.5 rounded-full mb-4`}>
+              <span class="text-white font-semibold text-sm">{region.name}</span>
+              <span class="text-white/70 text-xs ml-2">{byRegion[region.name].length}件</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {byRegion[region.name]
+                .slice()
+                .sort((a, b) => b.start.localeCompare(a.start))
+                .map((trip) => (
+                  <a href={`/journey/trips/${trip.slug}/`} class="glass rounded-2xl p-5 hover-lift block">
+                    <div class="text-white font-medium text-sm leading-relaxed mb-2">{trip.title}</div>
+                    <div class="text-gray-500 text-xs mb-3">{formatRange(trip.start, trip.end)}・{trip.postCount}件</div>
+                    <div class="flex flex-wrap gap-1">
+                      {trip.allPrefCodes.slice(0, 5).map((code) => {
+                        const prefecture = prefectureByCode(code);
+                        return prefecture ? (
+                          <span class="px-2 py-0.5 rounded-full bg-white/10 text-gray-400 text-[10px]">{prefecture.shortName}</span>
+                        ) : null;
+                      })}
+                    </div>
+                  </a>
+                ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .journey-tab {
+    color: rgb(156 163 175);
+  }
+  .journey-tab[aria-selected='true'] {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+</style>
+
+<script>
+  // 並び順の切り替え。ページ遷移なしで表示だけ入れ替える。
+  const setup = () => {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.journey-tab');
+    if (!tabs.length) return;
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const view = tab.dataset.view;
+        tabs.forEach((other) => other.setAttribute('aria-selected', String(other === tab)));
+        const year = document.getElementById('view-year');
+        const region = document.getElementById('view-region');
+        if (year) year.hidden = view !== 'year';
+        if (region) region.hidden = view !== 'region';
+      });
+    });
+  };
+  setup();
+  document.addEventListener('astro:page-load', setup);
+</script>
