@@ -14,9 +14,8 @@ main に push（または Actions から workflow_dispatch）
   │
   └─ .github/workflows/deploy.yml
        ├─ タグを作る         TZ=Asia/Tokyo date +%Y%m%d-%H%M   例: 20260908-0902
-       ├─ .env を作る        Secrets から PUBLIC_MICROCMS_* を書き出す
-       │                     （Astro は PUBLIC_* をビルド時に静的出力へ埋め込むため、
-       │                       Dockerfile の builder 段階で必要）
+       ├─ microCMS を取得    scripts/ingest/fetch_microcms.mjs → data/microcms/*.json
+       │                     失敗した分はコミット済みの前回分が残る
        ├─ docker build       ghcr.io/torifo/portfolio-astro に :タグ と :latest
        ├─ docker push        両方のタグを GHCR へ
        └─ VPS へ SSH         cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh タグ

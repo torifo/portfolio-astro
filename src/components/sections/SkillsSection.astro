@@ -1,9 +1,8 @@
 ---
 // SkillsSection.astro - スキル紹介セクション
 
-// microCMS APIからスキルデータを取得
-const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
-const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+// スキルデータは data/microcms/skills.json から読む（ビルドは microCMS を呼ばない）
+import { loadSkills } from '../../lib/microcms';
 
 interface Skill {
   id: string;
@@ -19,27 +18,8 @@ interface Skill {
   usedIn: { id: string; title: string; }[];
 }
 
-interface SkillsResponse {
-  contents: Skill[];
-  totalCount: number;
-}
 
-let skills: Skill[] = [];
-
-try {
-  const response = await fetch(`${SERVICE_DOMAIN}skills?limit=100`, {
-    headers: {
-      'X-MICROCMS-API-KEY': MICROCMS_API_KEY,
-    },
-  });
-  
-  if (response.ok) {
-    const data: SkillsResponse = await response.json();
-    skills = data.contents;
-  }
-} catch (error) {
-  console.error('Failed to fetch skills:', error);
-}
+const skills: Skill[] = loadSkills() as Skill[];
 
 // レベル別の説明とスタイル
 const levelConfig = {

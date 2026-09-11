@@ -2,10 +2,8 @@
 // GamesSection.astro - ゲームセクション（microCMS連携）
 
 import GameSNS from '../GameSNS.astro';
-
-// microCMS APIからゲームデータを取得
-const MICROCMS_API_KEY = import.meta.env.PUBLIC_MICROCMS_API_KEY;
-const SERVICE_DOMAIN = import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN;
+// ゲームデータは data/microcms/games.json から読む（ビルドは microCMS を呼ばない）
+import { loadGames } from '../../lib/microcms';
 
 interface Game {
   id: string;
@@ -34,27 +32,8 @@ interface Game {
   }[] | null;
 }
 
-interface GamesResponse {
-  contents: Game[];
-  totalCount: number;
-}
 
-let games: Game[] = [];
-
-try {
-  const response = await fetch(`${SERVICE_DOMAIN}games?limit=100`, {
-    headers: {
-      'X-MICROCMS-API-KEY': MICROCMS_API_KEY,
-    },
-  });
-  
-  if (response.ok) {
-    const data: GamesResponse = await response.json();
-    games = data.contents.reverse();
-  }
-} catch (error) {
-  console.error('Failed to fetch games:', error);
-}
+const games: Game[] = loadGames<Game>().reverse();
 
 // カラーパターン
 const colorPatterns = [
