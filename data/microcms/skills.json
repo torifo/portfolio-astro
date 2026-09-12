@@ -3,9 +3,9 @@
   {
    "id": "vlnz15-2mma",
    "createdAt": "2026-04-29T07:51:28.249Z",
-   "updatedAt": "2026-04-29T07:51:28.249Z",
+   "updatedAt": "2026-09-12T07:33:54.475Z",
    "publishedAt": "2026-04-29T07:51:28.249Z",
-   "revisedAt": "2026-04-29T07:51:28.249Z",
+   "revisedAt": "2026-09-12T07:33:54.475Z",
    "name": "Svelte",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/96621a10fe994467a30767863ab245ca/svelte-logo.svg",
@@ -229,7 +229,7 @@
      "relatedLinks": []
     }
    ],
-   "level": 3
+   "level": 4
   },
   {
    "id": "7th6p7f8lw",
@@ -994,9 +994,9 @@
   {
    "id": "ynnurir19",
    "createdAt": "2026-02-24T03:46:21.445Z",
-   "updatedAt": "2026-04-27T14:32:13.632Z",
+   "updatedAt": "2026-09-12T07:34:39.511Z",
    "publishedAt": "2026-02-24T03:46:21.445Z",
-   "revisedAt": "2026-04-27T14:32:13.632Z",
+   "revisedAt": "2026-09-12T07:34:39.511Z",
    "name": "PWA",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/2de2f4d149064fceabc45a6fedae2c08/pwa.svg",
@@ -1007,7 +1007,7 @@
     "Web技術 / アーキテクチャ / ネットワーク"
    ],
    "usedIn": [],
-   "level": 3
+   "level": 4
   },
   {
    "id": "jycm2ow_ks02",
