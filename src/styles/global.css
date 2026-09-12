@@ -286,6 +286,14 @@ body.light-mode .bg-black\/80.text-white {
   color: #ffffff !important;
 }
 
+/* グラデーションの塗りの上も白のまま。ヘッダーの Contact、ヒーローの CTA、
+   Opus 詳細のボタンが、上の .text-white を一律に濃くする規則に巻き込まれて
+   濃い色の上の黒文字になっていた。使っているのは cyan/blue/purple の 500〜600
+   だけなので、まとめて白に戻してよい。 */
+body.light-mode [class*="bg-gradient-to-"].text-white {
+  color: #ffffff !important;
+}
+
 /* テーマ切り替え - ナイトモード */
 body.night-mode {
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
