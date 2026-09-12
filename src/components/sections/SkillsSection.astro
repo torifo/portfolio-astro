@@ -39,6 +39,13 @@ const levelConfig = {
        detail: ['日常的に', '使っている'], short: '日常的に使っている' },
 };
 
+// 「PostgreSQL (PostGIS / pg_bigm / ltree)」のように括弧で補足を持つ名前は、
+// そのまま1行に流すとカードの中で不格好に折れる。括弧の中は2行目に落として小さく出す。
+const splitName = (name: string) => {
+  const m = name.match(/^(.+?)\s*[（(]\s*(.+?)\s*[)）]\s*$/);
+  return m ? { main: m[1], note: m[2] } : { main: name, note: null };
+};
+
 // カテゴリ別にスキルをグループ化
 const skillsByCategory = skills.reduce((acc, skill) => {
   skill.category.forEach(cat => {
@@ -151,7 +158,14 @@ const sortedCategories = Object.entries(skillsByCategory).sort(([a], [b]) => {
                       </div>
                     )}
                   </div>
-                  <h4 class="text-white font-semibold mb-2">{skill.name}</h4>
+                  <h4 class="text-white font-semibold mb-2 leading-tight">
+                    {splitName(skill.name).main}
+                    {splitName(skill.name).note && (
+                      <span class="block mt-1 text-[10px] font-normal text-gray-400 leading-snug">
+                        {splitName(skill.name).note}
+                      </span>
+                    )}
+                  </h4>
                   {/* 名前が何行になってもバーの位置が揃うよう、バーと数値はカード下端に寄せる */}
                   <div class="mt-auto">
                     <div class="w-full bg-gray-700 rounded-full h-3 mb-2">
