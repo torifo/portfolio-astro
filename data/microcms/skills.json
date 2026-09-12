@@ -833,10 +833,10 @@
   {
    "id": "dncpvhiwnstj",
    "createdAt": "2026-02-24T04:53:58.717Z",
-   "updatedAt": "2026-09-12T16:09:15.926Z",
+   "updatedAt": "2026-09-12T16:40:48.517Z",
    "publishedAt": "2026-02-24T04:53:58.717Z",
-   "revisedAt": "2026-09-12T16:09:15.926Z",
-   "name": "WebHook / Server-Sent Events",
+   "revisedAt": "2026-09-12T16:40:48.517Z",
+   "name": "WebHook (Server-Sent Events)",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/d44289e5ac6d431ba5052d4467c2749d/webhook-seeklogo.svg",
     "height": 2448,
