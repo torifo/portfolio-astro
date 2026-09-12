@@ -47,10 +47,49 @@
 
   // ローカルストレージのキー
   const SUNRISE_SUNSET_CACHE_KEY = 'sunrise-sunset-cache';
+  const THEME_PREFERENCE_KEY = 'theme-preference';
+
+  type ThemePreference = 'light' | 'dark' | 'auto';
 
   // JSTの今日の日付を YYYY/M/D 形式で返す
   function getTodayJST(): string {
     return new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
+  }
+
+  // JSTの今日を YYYY-MM-DD で返す（APIに渡す用）
+  function getTodayJSTForApi(): string {
+    return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Tokyo' });
+  }
+
+  // 日の出・日没APIのURL。
+  // **日付を明示するのが要点。** 省略すると API は現在のUTC日付で答えるため、
+  // JST 00:00〜09:00 のアクセスでは前日の値が返る。それを「JSTの今日」として
+  // 保存すると、その日は一日中「日没を過ぎている」と判定されてナイトモードから
+  // 戻らなくなる。
+  function sunApiUrl(): string {
+    return `https://api.sunrise-sunset.org/json?lat=${LATITUDE}&lng=${LONGITUDE}&formatted=0&date=${getTodayJSTForApi()}`;
+  }
+
+  // 保存されたテーマの選択を読む。未設定は自動。
+  function getThemePreference(): ThemePreference {
+    try {
+      const saved = localStorage.getItem(THEME_PREFERENCE_KEY);
+      return saved === 'light' || saved === 'dark' ? saved : 'auto';
+    } catch {
+      return 'auto';
+    }
+  }
+
+  function saveThemePreference(preference: ThemePreference): void {
+    try {
+      if (preference === 'auto') {
+        localStorage.removeItem(THEME_PREFERENCE_KEY);
+      } else {
+        localStorage.setItem(THEME_PREFERENCE_KEY, preference);
+      }
+    } catch {
+      // プライベートブラウジング等で書けなくても動作は続ける
+    }
   }
 
   // 時刻のフォーマット関数
@@ -86,6 +125,17 @@
 
       // JSTの今日の日付と一致しない場合は無効（日付をまたぐと時刻がずれるため）
       if (data.date !== getTodayJST()) {
+        localStorage.removeItem(SUNRISE_SUNSET_CACHE_KEY);
+        return null;
+      }
+
+      // 中身が保存日と合っているかも確かめる。
+      // 以前は日付を指定せずにAPIを呼んでいたため、JST 00:00〜09:00 のアクセスでは
+      // 前日の日の出・日没が「今日」として保存されていた。その状態だと一日中
+      // 日没を過ぎた判定になる。ここで捨てれば、既に壊れている端末もすぐ直る。
+      const asJSTDate = (iso: string) =>
+        new Date(iso).toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
+      if (asJSTDate(data.sunrise) !== data.date || asJSTDate(data.sunset) !== data.date) {
         localStorage.removeItem(SUNRISE_SUNSET_CACHE_KEY);
         return null;
       }
@@ -126,7 +176,7 @@
         console.log('キャッシュから日の出・日没時間を取得しました');
       } else {
         // キャッシュがない場合、APIから取得
-        const response = await fetch(`https://api.sunrise-sunset.org/json?lat=${LATITUDE}&lng=${LONGITUDE}&formatted=0`);
+        const response = await fetch(sunApiUrl());
 
         if (!response.ok) {
           throw new Error(`APIリクエストに失敗しました: ${response.status}`);
@@ -170,7 +220,16 @@
   }
 
   // テーマ切り替え&日の出日没時間表示関数（自動モード用）
+  //
+  // 手動でライト/ダークを選んでいるときは、時刻表示だけ更新してテーマには触らない。
+  // 以前はここが無条件に走っていたため、手動で選んでも1分後の定期実行で自動判定に
+  // 戻されていた。
   async function setThemeBasedOnSunriseSunset(): Promise<void> {
+    if (getThemePreference() !== 'auto') {
+      await updateSunTimes();
+      updateThemeIcon();
+      return;
+    }
     try {
       let sunriseUTC: Date;
       let sunsetUTC: Date;
@@ -185,7 +244,7 @@
         console.log('キャッシュから日の出・日没時間を取得しました');
       } else {
         // キャッシュがない場合、APIから取得
-        const response = await fetch(`https://api.sunrise-sunset.org/json?lat=${LATITUDE}&lng=${LONGITUDE}&formatted=0`);
+        const response = await fetch(sunApiUrl());
 
         if (!response.ok) {
           throw new Error(`APIリクエストに失敗しました: ${response.status}`);
@@ -294,9 +353,17 @@
   }
 
   // 初期テーマを設定する関数（即座に実行）
+  //
+  // 保存された選択があればそれを使う。ページをまたいでも、リロードしても引き継がれる。
+  // 以前は保存自体をしておらず、毎回自動モードで始まっていた。
   function initializeTheme(): void {
-    // リロード時は常に自動モードでスタート
-    // キャッシュまたはデフォルトでテーマを設定
+    const preference = getThemePreference();
+    if (preference !== 'auto') {
+      applyManualTheme(preference);
+      return;
+    }
+
+    // 自動モード。キャッシュまたはデフォルトでテーマを設定
     const cached = getCachedSunriseSunset();
     if (cached) {
       const nowUTC = new Date();
@@ -343,11 +410,11 @@
     button.addEventListener('click', (event) => {
       const selectedTheme = (event.currentTarget as HTMLButtonElement).getAttribute('data-theme');
 
-      if (selectedTheme === 'light') {
-        applyManualTheme('light');
-      } else if (selectedTheme === 'dark') {
-        applyManualTheme('dark');
+      if (selectedTheme === 'light' || selectedTheme === 'dark') {
+        saveThemePreference(selectedTheme);
+        applyManualTheme(selectedTheme);
       } else if (selectedTheme === 'auto') {
+        saveThemePreference('auto');
         setThemeBasedOnSunriseSunset();
       }
 
