@@ -96,9 +96,11 @@ def main():
 
     previous = {}
     if args.merge and args.out.exists():
-        previous = {
-            w["title"]: w for w in json.loads(args.out.read_text(encoding="utf-8"))["works"]
-        }
+        # 引くのは候補名（aliases）。title を正式名称に直すと機械が出す名前と
+        # 一致しなくなるので、title で引くと手直しごと作り直されてしまう。
+        for work in json.loads(args.out.read_text(encoding="utf-8"))["works"]:
+            for key in [work["title"], *work.get("aliases", [])]:
+                previous.setdefault(normalize(key), work)
 
     # 候補のうち十分な投稿があるものを、長い名前から順に確定させる。
     # 「ヤマノススメ聖地巡礼」より「ヤマノススメ」が残るよう剥がしてあるので、
@@ -113,7 +115,7 @@ def main():
         ]
         if len(group) < MIN_POSTS:
             continue
-        old = previous.get(title, {})
+        old = previous.get(key, {})
         if old.get("hidden"):
             assigned.update(p["id"] for p in group)
             continue

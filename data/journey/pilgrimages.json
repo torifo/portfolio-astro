@@ -2,7 +2,7 @@
  "works": [
   {
    "slug": "yurucamp",
-   "title": "ゆるキャン",
+   "title": "ゆるキャン△",
    "aliases": [
     "ゆるキャン"
    ],
@@ -70,7 +70,7 @@
   },
   {
    "slug": "oregairu",
-   "title": "俺ガイル",
+   "title": "やはり俺の青春ラブコメはまちがっている。",
    "aliases": [
     "俺ガイル"
    ],
@@ -103,7 +103,7 @@
   },
   {
    "slug": "okitsura",
-   "title": "沖ツラ",
+   "title": "沖縄で好きになった子が方言すぎてツラすぎる",
    "aliases": [
     "沖ツラ"
    ],
@@ -140,7 +140,7 @@
   },
   {
    "slug": "bocchi-the-rock",
-   "title": "ぼざろ",
+   "title": "ぼっち・ざ・ろっく！",
    "aliases": [
     "ぼざろ"
    ],
