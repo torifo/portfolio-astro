@@ -7,12 +7,12 @@ import ThemeToggle from './ThemeToggle.astro';
   <nav class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
       <!-- ロゴ -->
-      <div class="flex items-center space-x-2">
+      <a href="/" id="header-logo" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
         <div class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center">
           <img src="/images/toriforium_circle.png" alt="Toriforiumu Logo" class="w-full h-full object-cover">
         </div>
         <span class="text-white font-semibold text-lg">Toriforiumu</span>
-      </div>
+      </a>
       
       <!-- タブレット・デスクトップナビゲーション -->
       <div class="hidden lg:flex items-center space-x-6">
@@ -26,7 +26,7 @@ import ThemeToggle from './ThemeToggle.astro';
         <a href="#journey" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Journey</a>
         <a href="#games" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Games</a>
         
-        <a href="#connect" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 hover-lift">
+        <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 hover-lift">
           Contact
         </a>
       </div>
@@ -72,7 +72,7 @@ import ThemeToggle from './ThemeToggle.astro';
         <a href="#journey" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">Journey</a>
         <a href="#games" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs px-1">Games</a>
         
-        <a href="#connect" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 py-1 rounded text-xs">
+        <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 py-1 rounded text-xs">
           Contact
         </a>
       </div>
@@ -133,7 +133,7 @@ import ThemeToggle from './ThemeToggle.astro';
         <a href="#opus" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Opus</a>
         <a href="#journey" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Journey</a>
         <a href="#games" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2">Games</a>
-        <a href="#connect" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 mt-2 text-center">
+        <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 mt-2 text-center">
           Contact
         </a>
       </div>
