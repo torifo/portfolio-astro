@@ -125,7 +125,7 @@ const sortedCategories = Object.entries(skillsByCategory).sort(([a], [b]) => {
             {categorySkills.map((skill) => {
               const config = levelConfig[skill.level as keyof typeof levelConfig];
               return (
-                <div class="text-center group">
+                <div class="text-center group flex flex-col h-full">
                   <div class="w-16 h-16 mx-auto mb-3 bg-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform p-1">
                     {skill.icon ? (
                       <img 
@@ -140,13 +140,16 @@ const sortedCategories = Object.entries(skillsByCategory).sort(([a], [b]) => {
                     )}
                   </div>
                   <h4 class="text-white font-semibold mb-2">{skill.name}</h4>
-                  <div class="w-full bg-gray-700 rounded-full h-3 mb-2">
-                    <div 
-                      class={`bg-gradient-to-r ${config.color} h-3 rounded-full transition-all duration-500`}
-                      style={`width: ${config.width}`}
-                    ></div>
+                  {/* 名前が何行になってもバーの位置が揃うよう、バーと数値はカード下端に寄せる */}
+                  <div class="mt-auto">
+                    <div class="w-full bg-gray-700 rounded-full h-3 mb-2">
+                      <div 
+                        class={`bg-gradient-to-r ${config.color} h-3 rounded-full transition-all duration-500`}
+                        style={`width: ${config.width}`}
+                      ></div>
+                    </div>
+                    <span class="text-xs text-gray-400 block">{config.label}</span>
                   </div>
-                  <span class="text-xs text-gray-400 block">{config.label}</span>
                 </div>
               );
             })}
