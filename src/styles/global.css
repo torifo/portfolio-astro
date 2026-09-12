@@ -214,6 +214,64 @@ body.light-mode .text-cyan-400 {
   color: #0c4a6e !important;
 }
 
+/* ライトモードで読めなかった色の補正。
+   既存の上書きは text-white / text-gray-300 / text-gray-400 / text-cyan-400 しか
+   面倒を見ておらず、Journey や Opus の案内で使っている色（都道府県バッジの件数、
+   淡いシアンやすみれ色のリンク）がそのまま薄い前景のまま残っていた。
+   ダークモードの見た目は変えず、ライトモードだけ濃くする。 */
+body.light-mode .text-white\/60 {
+  color: rgba(17, 24, 39, 0.7) !important;
+}
+
+body.light-mode .text-white\/70 {
+  color: rgba(17, 24, 39, 0.75) !important;
+}
+
+body.light-mode .text-gray-200 {
+  color: #111827 !important;
+}
+
+body.light-mode .text-gray-500 {
+  color: #4b5563 !important;
+}
+
+body.light-mode .text-cyan-200,
+body.light-mode .text-cyan-300 {
+  color: #0e5a7a !important;
+}
+
+body.light-mode .group:hover .group-hover\:text-cyan-200,
+body.light-mode .group:hover .group-hover\:text-cyan-300 {
+  color: #0c4a6e !important;
+}
+
+body.light-mode .text-violet-200,
+body.light-mode .text-violet-300 {
+  color: #5b21b6 !important;
+}
+
+body.light-mode .text-amber-200 {
+  color: #92400e !important;
+}
+
+/* 淡い塗りのバッジは、ライトモードだと背景に溶けるので少し締める */
+body.light-mode .bg-white\/10,
+body.light-mode .bg-white\/20 {
+  background-color: rgba(17, 24, 39, 0.08) !important;
+}
+
+body.light-mode .bg-cyan-500\/15 {
+  background-color: rgba(14, 90, 122, 0.12) !important;
+}
+
+body.light-mode .bg-violet-500\/15 {
+  background-color: rgba(91, 33, 182, 0.12) !important;
+}
+
+body.light-mode .bg-amber-500\/15 {
+  background-color: rgba(146, 64, 14, 0.12) !important;
+}
+
 /* テーマ切り替え - ナイトモード */
 body.night-mode {
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
