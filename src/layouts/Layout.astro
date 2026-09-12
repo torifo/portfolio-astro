@@ -8,6 +8,10 @@ interface Props {
 }
 
 const { title, description = 'モダンで高速なポートフォリオサイト' } = Astro.props;
+
+// og:image は絶対URLでないとSNS側が解決できない（相対パスだと画像が出ない）。
+const ogImage = new URL('/og-image.jpg', Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <html lang="ja">
@@ -24,7 +28,8 @@ const { title, description = 'モダンで高速なポートフォリオサイ�
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

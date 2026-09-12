@@ -1,0 +1,129 @@
+---
+// privacy-policy.astro - フッターからリンクされていたが実体が無かったページ。
+// 記述はこのサイトの実装に合わせている:
+//   - 解析ツールは入れていない（Google AdSense のみ）
+//   - お問い合わせフォームは mailto: を開くだけで、入力内容はこのサイトへ送られない
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const updated = '2026年9月13日';
+---
+
+<Layout
+  title="プライバシーポリシー | Toriforiumu"
+  description="当サイトにおける個人情報・Cookie・広告配信の取り扱いについて"
+>
+  <Header />
+
+  <div class="min-h-screen pt-24 pb-16 relative">
+    <div class="container mx-auto px-6 max-w-3xl">
+
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-4">プライバシーポリシー</h1>
+        <p class="text-gray-400 text-sm">最終更新: {updated}</p>
+      </div>
+
+      <div class="glass rounded-2xl p-8 md:p-10 space-y-10">
+
+        <section>
+          <p class="text-gray-300 leading-relaxed">
+            当サイト（Toriforiumu Portfolio）は、個人が運営するポートフォリオサイトです。閲覧者の情報の取り扱いについて、以下のとおり定めます。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold text-white mb-4">1. 取得する情報</h2>
+          <h3 class="text-base font-semibold text-cyan-400 mb-2">アクセスログ</h3>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            当サイトを配信しているサーバーは、一般的なWebサーバーと同様に、アクセス日時・IPアドレス・ブラウザの種類・参照元URLなどを記録します。これらは障害の調査とサイトの改善のためにのみ利用し、個人を特定する目的では利用しません。
+          </p>
+          <h3 class="text-base font-semibold text-cyan-400 mb-2">Cookie</h3>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            当サイトは広告配信のためにCookieを利用します。詳細は「2. 広告配信について」に記載します。ブラウザの設定でCookieを無効にして閲覧することもできます。
+          </p>
+          <h3 class="text-base font-semibold text-cyan-400 mb-2">お問い合わせの内容</h3>
+          <p class="text-gray-300 leading-relaxed">
+            お問い合わせページのフォームは、入力内容をもとにお使いのメールソフトを開くだけの仕組みです。入力された内容が当サイトのサーバーへ送信されたり、保存されたりすることはありません。実際にメールをお送りいただいた場合、その内容と差出人のメールアドレスは、返信および相談への対応のためにのみ利用します。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold text-white mb-4">2. 広告配信について</h2>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            当サイトは第三者配信の広告サービスとして Google AdSense を利用しています。
+            Googleを含む第三者配信事業者は、Cookieを使用して、閲覧者の過去のアクセス情報に基づいた広告を表示することがあります。
+          </p>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            パーソナライズ広告は、
+            <a
+              href="https://www.google.com/settings/ads"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-cyan-400 hover:underline"
+              >Google の広告設定</a
+            >から無効にできます。
+          </p>
+          <p class="text-gray-300 leading-relaxed">
+            第三者配信事業者によるCookieの利用については、
+            <a
+              href="https://policies.google.com/technologies/ads"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-cyan-400 hover:underline"
+              >Google のポリシーと規約</a
+            >をご確認ください。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold text-white mb-4">3. 解析ツールについて</h2>
+          <p class="text-gray-300 leading-relaxed">
+            当サイトでは、Google Analytics などのアクセス解析ツールは利用していません。将来的に導入する場合は、このページに追記します。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold text-white mb-4">4. 第三者への提供</h2>
+          <p class="text-gray-300 leading-relaxed">
+            取得した情報を第三者へ提供することはありません。ただし、法令に基づく開示請求があった場合はこの限りではありません。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold text-white mb-4">5. 免責事項</h2>
+          <p class="text-gray-300 leading-relaxed">
+            当サイトに掲載する情報は正確であるよう努めていますが、その完全性や正確性を保証するものではありません。また、当サイトからリンクした外部サイトの内容や、そこでの情報の取り扱いについては責任を負いかねます。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold text-white mb-4">6. 本ポリシーの変更</h2>
+          <p class="text-gray-300 leading-relaxed">
+            本ポリシーの内容は、必要に応じて予告なく変更することがあります。変更後の内容は、このページに掲載した時点から適用されます。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-bold text-white mb-4">7. お問い合わせ</h2>
+          <p class="text-gray-300 leading-relaxed">
+            本ポリシーに関するお問い合わせは、<a href="/contact" class="text-cyan-400 hover:underline">お問い合わせページ</a>からご連絡ください。
+          </p>
+        </section>
+
+      </div>
+
+      <div class="text-center mt-10">
+        <a
+          href="/"
+          class="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 hover-lift font-semibold"
+        >
+          トップへ戻る
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
