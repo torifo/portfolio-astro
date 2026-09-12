@@ -78,13 +78,13 @@ AstroとTypeScriptを使用して構築されたモダンなポートフォリ�
 │       └── global.css            # グローバルスタイル
 ├── public/
 │   ├── images/                   # 静的画像
-│   └── journey/thumbs/           # 投稿サムネ 1,013枚（480px webp・自前保存）
+│   └── journey/thumbs/           # 投稿サムネ 1,017枚（480px webp・自前保存）
 ├── data/
 │   ├── ontology/                 # 地名オントロジーと県境ポリゴン（機械生成・候補源）
 │   └── journey/                  # 投稿・判定結果・辞書・旅・聖地巡礼・テーマ
 ├── scripts/
 │   ├── ontology/                 # オントロジーと県境データの生成
-│   ├── ingest/                   # エクスポート取り込み・サムネ生成・permalink取得
+│   ├── ingest/                   # エクスポート取り込み・API増分取り込み・サムネ生成・permalink取得
 │   └── journey/                  # 都道府県の解決・旅/聖地巡礼/テーマの抽出
 ├── .github/workflows/            # GitHub Actions設定（main への push で本番デプロイ）
 ├── docker-compose.yml            # Docker Compose設定
@@ -133,7 +133,7 @@ cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <戻したいタグ>
 | **About** | 自己紹介・経歴タイムライン・Connect | microCMS Profile API（タグフィルター対応）|
 | **Skills** | 技術スキル（8カテゴリ固定順・レベルソート） | microCMS Skills API |
 | **Opus** | 作品・プロジェクト・詳細ページ・スキルタグ | microCMS Opus API（カテゴリフィルター対応）|
-| **Journey** | 日本8地方・都道府県別旅記録／旅・聖地巡礼・テーマ | ローカルJSON（Instagram エクスポート由来・ビルド時に外部呼び出しなし）|
+| **Journey** | 日本8地方・都道府県別旅記録／旅・聖地巡礼・テーマ | ローカルJSON（Instagram エクスポート＋API増分・ビルド時に外部呼び出しなし）|
 | **Games** | ゲーム関連情報・SNSリンク | microCMS Games API |
 
 ### 🔌 microCMS API連携
@@ -144,6 +144,29 @@ cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <戻したいタグ>
 - **Skills** (`/skills`): 技術スキル一覧・カテゴリ・レベル・アイコン・使用作品（`usedIn`）
 - **Games** (`/games`): ゲーム情報・関連SNS・タグ
 - 全API呼び出しはビルド時のみ実行（SSG）→ APIキーは最終HTMLに含まれない
+
+### 📸 Journey データの更新
+
+Instagram のデータは2つの経路で入る。ビルド自体は外部を一切呼ばない。
+
+```bash
+# 新着だけを API から取り込む（エクスポートの再取得が要らない）
+npm run journey:sync
+
+# 手元のエクスポート zip から作り直す（EXIF の GPS が取れるのはこちらだけ）
+python3 scripts/ingest/parse_export.py <エクスポートの展開先>
+python3 scripts/ingest/build_thumbs.py
+python3 scripts/ingest/fetch_permalinks.py
+npm run journey:build
+```
+
+`journey:sync` は `posts.json` に無い ID だけを拾うので、何度流しても同じ結果になる。
+API は EXIF の GPS を返さないため、県の判定はタグとキャプション頼りになる
+（直近300件では GPS だけが手がかりだった投稿は7件）。判定できなかったものは
+`resolve.py --report` が一覧に出すので、`data/journey/overrides.json` で埋める。
+
+アクセストークンは `~/dev/.env.dev`（リポジトリ外）から読む。60日で失効するが、
+`permalinks.json` に書いたあとはビルドが参照しないのでサイトは壊れない。
 
 ### ✅ 実装済み機能
 
@@ -156,10 +179,11 @@ cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <戻したいタグ>
 - [x] OpusのrelatedSkillタグ表示（カテゴリ別グループ・Skillsセクションへのアンカーリンク）
 - [x] 日の出・日没APIによる自動テーマ切り替え（JSTの日付変わりでキャッシュ自動リセット）
 - [x] Journey 8地方・都道府県別訪問管理（訪問済み地方を動的カウント）
-- [x] Journey × Instagram 連携（投稿1,013件・都道府県100%解決・LLM呼び出しなし）
+- [x] Journey × Instagram 連携（投稿1,017件・都道府県100%解決・LLM呼び出しなし）
 - [x] 都道府県ページ自動生成（`/journey/[slug]`・訪問済み39県）
 - [x] 旅・聖地巡礼・テーマの各ページ（4つの軸は重ね掛け・同じ投稿が複数ページに出る）
 - [x] 投稿サムネの自前保存（480px webp・Instagram の media URL 失効対策）
+- [x] 新規投稿の増分取り込み（`npm run journey:sync`・エクスポート再取得なしで追いつく）
 - [x] Footerビルド時刻自動表示
 - [x] GHCR Docker イメージ管理
 
