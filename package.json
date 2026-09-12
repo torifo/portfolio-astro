@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "journey:sync": "python3 scripts/ingest/sync_instagram.py && npm run journey:build",
+    "journey:build": "python3 scripts/journey/resolve.py && python3 scripts/journey/build_trips.py --merge && python3 scripts/journey/build_pilgrimages.py --merge && python3 scripts/journey/build_themes.py"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",

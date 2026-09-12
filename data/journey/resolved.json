@@ -45,6 +45,58 @@
    ],
    "gpsPrefCode": "13"
   },
+  "17992896837044068": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology-substring",
+   "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編 ⊃ よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": null
+  },
+  "17908767918520863": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": null
+  },
+  "18004188884992216": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": null
+  },
+  "18123957406883048": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": null
+  },
   "18341583514268903": {
    "prefCodes": [
     "13",
