@@ -237,10 +237,10 @@
   {
    "id": "hzkv5fnct",
    "createdAt": "2026-09-12T10:00:42.552Z",
-   "updatedAt": "2026-09-12T12:32:09.248Z",
+   "updatedAt": "2026-09-12T14:15:59.788Z",
    "publishedAt": "2026-09-12T11:04:11.282Z",
-   "revisedAt": "2026-09-12T12:32:09.248Z",
-   "name": "WebGPU",
+   "revisedAt": "2026-09-12T14:15:59.788Z",
+   "name": "WebGPU (WGSL)",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/fd1ddd6e512b42bd96d2bffb8e726040/webgpu.png",
     "height": 256,
@@ -305,24 +305,6 @@
    ],
    "usedIn": [],
    "level": 2
-  },
-  {
-   "id": "xszw9dahxa",
-   "createdAt": "2026-09-12T09:58:28.004Z",
-   "updatedAt": "2026-09-12T12:11:24.110Z",
-   "publishedAt": "2026-09-12T11:04:11.36Z",
-   "revisedAt": "2026-09-12T12:11:24.110Z",
-   "name": "WGSL",
-   "icon": {
-    "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/cd42078c7b83458e9ffc56aca4942313/wgsl.png",
-    "height": 256,
-    "width": 256
-   },
-   "category": [
-    "プログラミング言語"
-   ],
-   "usedIn": [],
-   "level": 4
   },
   {
    "id": "tptbs0htal9c",
@@ -9857,7 +9839,7 @@
    "level": 1
   }
  ],
- "totalCount": 86,
+ "totalCount": 85,
  "offset": 0,
  "limit": 100
 }
