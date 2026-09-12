@@ -272,6 +272,20 @@ body.light-mode .bg-amber-500\/15 {
   background-color: rgba(146, 64, 14, 0.12) !important;
 }
 
+/* 暗い塗りの上に載る文字は、ライトモードでも白のまま。
+   .text-white を一律に濃くしていたため、ツールチップ（bg-gray-800）やギャラリーの
+   送り矢印・Reelバッジ（bg-black/60）が暗い背景に暗い文字になって読めなかった。 */
+body.light-mode .bg-gray-700.text-white,
+body.light-mode .bg-gray-800.text-white,
+body.light-mode .bg-gray-900.text-white,
+body.light-mode .bg-black\/20.text-white,
+body.light-mode .bg-black\/30.text-white,
+body.light-mode .bg-black\/50.text-white,
+body.light-mode .bg-black\/60.text-white,
+body.light-mode .bg-black\/80.text-white {
+  color: #ffffff !important;
+}
+
 /* テーマ切り替え - ナイトモード */
 body.night-mode {
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);

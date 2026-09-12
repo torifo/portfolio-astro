@@ -385,14 +385,23 @@
   // 初期テーマを即座に適用（フラッシュ防止）
   initializeTheme();
 
+  // ViewTransitions のページ遷移では <body> の class が新しいページのものに
+  // 差し替わり、実行時に付けた light-mode / night-mode が消える。スクリプトは
+  // モジュールなので再実行されず、テーマが初期状態に戻ってしまう。
+  // 描画前の after-swap で付け直す。
+  document.addEventListener('astro:after-swap', initializeTheme);
+
   // グローバル関数として登録（Header.astroから呼び出せるように）
   (window as any).setThemeBasedOnSunriseSunset = setThemeBasedOnSunriseSunset;
 
-  // テーマドロップダウンメニューの制御
+  // テーマドロップダウンの結線。遷移で要素が入れ替わるため、毎回やり直す。
+  // 同じ要素に二重で登録しないよう、済んだものには印を付ける。
+  function bindThemeControls(): void {
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const themeDropdown = document.querySelector('.theme-dropdown');
 
-  if (themeToggleBtn && themeDropdown) {
+  if (themeToggleBtn && themeDropdown && !themeToggleBtn.dataset.bound) {
+    themeToggleBtn.dataset.bound = '1';
     themeToggleBtn.addEventListener('click', () => {
       themeDropdown.classList.toggle('hidden');
     });
@@ -406,7 +415,9 @@
   }
 
   // ドロップダウンメニューでテーマ選択
-  document.querySelectorAll('.theme-dropdown button').forEach(button => {
+  document.querySelectorAll<HTMLButtonElement>('.theme-dropdown button').forEach(button => {
+    if (button.dataset.bound) return;
+    button.dataset.bound = '1';
     button.addEventListener('click', (event) => {
       const selectedTheme = (event.currentTarget as HTMLButtonElement).getAttribute('data-theme');
 
@@ -424,22 +435,26 @@
       }
     });
   });
+  }
 
-  // 初回読み込み時の処理
-  document.addEventListener('DOMContentLoaded', () => {
-    // 現在時刻の定期的な更新
+  // ページごとの初期化。遷移後は要素が差し替わっているので、そのつど繋ぎ直す。
+  function setupPage(): void {
+    bindThemeControls();
     updateCurrentTime();
-    setInterval(updateCurrentTime, 1000);
-
-    // 日の出・日没時間を常に取得・表示（全モード共通）
     updateSunTimes();
-
-    // テーマを自動適用（常に自動モード）
     setThemeBasedOnSunriseSunset();
-
-    // 初回アイコン更新
     updateThemeIcon();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupPage, { once: true });
+  } else {
+    setupPage();
+  }
+  document.addEventListener('astro:page-load', setupPage);
+
+  // 時計の更新は1度だけ仕掛ける（遷移のたびに増やさない）
+  setInterval(updateCurrentTime, 1000);
 
   // 定期的に日の出・日没時間を更新（5分ごと - 全モード共通）
   setInterval(() => {
