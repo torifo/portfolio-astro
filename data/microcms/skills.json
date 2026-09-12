@@ -3,9 +3,9 @@
   {
    "id": "rf60t2y6kkvg",
    "createdAt": "2026-09-12T10:08:07.550Z",
-   "updatedAt": "2026-09-12T11:04:11.351Z",
+   "updatedAt": "2026-09-12T11:29:35.213Z",
    "publishedAt": "2026-09-12T11:04:11.351Z",
-   "revisedAt": "2026-09-12T11:04:11.351Z",
+   "revisedAt": "2026-09-12T11:29:35.213Z",
    "name": "WatermelonDB",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/998cafea694c4ba092c9b901a631ca28/watermelondb.png",
@@ -16,7 +16,7 @@
     "データベース"
    ],
    "usedIn": [],
-   "level": 3
+   "level": 0
   },
   {
    "id": "111vfcpzp",
@@ -39,9 +39,9 @@
   {
    "id": "z26fah_4jt",
    "createdAt": "2026-09-12T10:07:11.218Z",
-   "updatedAt": "2026-09-12T11:04:11.338Z",
+   "updatedAt": "2026-09-12T11:30:00.488Z",
    "publishedAt": "2026-09-12T11:04:11.338Z",
-   "revisedAt": "2026-09-12T11:04:11.338Z",
+   "revisedAt": "2026-09-12T11:30:00.488Z",
    "name": "Homebrew (tap配布)",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/b3771bd85b444f08a858740a2e70f190/homebrew.png",
@@ -57,9 +57,9 @@
   {
    "id": "x_s9jn6vx3t",
    "createdAt": "2026-09-12T10:06:30.440Z",
-   "updatedAt": "2026-09-12T11:04:11.277Z",
+   "updatedAt": "2026-09-12T11:30:09.844Z",
    "publishedAt": "2026-09-12T11:04:11.277Z",
-   "revisedAt": "2026-09-12T11:04:11.277Z",
+   "revisedAt": "2026-09-12T11:30:09.844Z",
    "name": "Cloudflare Pages",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/86d9903eceb240b2baef00d0eec66272/cloudflare-pages.png",
@@ -70,14 +70,14 @@
     "デプロイ・インフラ・OS"
    ],
    "usedIn": [],
-   "level": 3
+   "level": 1
   },
   {
    "id": "pp7qkw2a4xb7",
    "createdAt": "2026-09-12T10:06:02.327Z",
-   "updatedAt": "2026-09-12T11:04:11.326Z",
+   "updatedAt": "2026-09-12T11:30:19.356Z",
    "publishedAt": "2026-09-12T11:04:11.326Z",
-   "revisedAt": "2026-09-12T11:04:11.326Z",
+   "revisedAt": "2026-09-12T11:30:19.356Z",
    "name": "Deno Deploy",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/21c789e8ea5044068d1c8982c31d98f0/deno-deploy.png",
@@ -88,7 +88,7 @@
     "デプロイ・インフラ・OS"
    ],
    "usedIn": [],
-   "level": 3
+   "level": 4
   },
   {
    "id": "of0u9ogw719g",
