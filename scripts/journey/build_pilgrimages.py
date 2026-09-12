@@ -105,7 +105,7 @@ def main():
     # 候補のうち十分な投稿があるものを、長い名前から順に確定させる。
     # 「ヤマノススメ聖地巡礼」より「ヤマノススメ」が残るよう剥がしてあるので、
     # ここでは投稿数の多い順に取り、既に割り当てた投稿は再利用しない。
-    works, assigned = [], set()
+    works, hidden_works, assigned = [], [], set()
     for title, _ in sorted(titles.items(), key=lambda kv: (-kv[1], kv[0])):
         key = normalize(title)
         group = [
@@ -116,26 +116,27 @@ def main():
         if len(group) < MIN_POSTS:
             continue
         old = previous.get(key, {})
-        if old.get("hidden"):
-            assigned.update(p["id"] for p in group)
-            continue
         assigned.update(p["id"] for p in group)
         dates = sorted(dt.date.fromisoformat(p["date"]) for p in group)
         counts = collections.Counter(
             code for p in group for code in (resolved[p["id"]]["prefCodes"] or [])
         )
-        works.append(
-            {
-                "slug": old.get("slug") or SLUGS.get(title, f"work-{len(works) + 1}"),
-                "title": old.get("title") or title,
-                "aliases": old.get("aliases") or [title],
-                "postCount": len(group),
-                "start": dates[0].isoformat(),
-                "end": dates[-1].isoformat(),
-                "prefCodes": [code for code, _ in counts.most_common()],
-                "postIds": [p["id"] for p in group],
-            }
-        )
+        record = {
+            "slug": old.get("slug") or SLUGS.get(title, f"work-{len(works) + 1}"),
+            "title": old.get("title") or title,
+            "aliases": old.get("aliases") or [title],
+            "postCount": len(group),
+            "start": dates[0].isoformat(),
+            "end": dates[-1].isoformat(),
+            "prefCodes": [code for code, _ in counts.most_common()],
+            "postIds": [p["id"] for p in group],
+        }
+        if old.get("hidden"):
+            # 除外の印は書き戻す。落とすと次の --merge で印ごと消えて作品が復活する。
+            # サイト側（journey.ts）が hidden を弾くので、残してもページにはならない。
+            hidden_works.append({**record, "hidden": True})
+            continue
+        works.append(record)
 
     works.sort(key=lambda w: -w["postCount"])
     leftovers = [
@@ -149,7 +150,10 @@ def main():
         if p["id"] not in assigned
     ]
     args.out.write_text(
-        json.dumps({"works": works, "unassigned": leftovers}, ensure_ascii=False, indent=1) + "\n",
+        json.dumps(
+            {"works": works + hidden_works, "unassigned": leftovers}, ensure_ascii=False, indent=1
+        )
+        + "\n",
         encoding="utf-8",
     )
     print(f"{args.out} に作品 {len(works)} 件（聖地タグのある投稿 {len(holy_posts)} 件）")
@@ -157,6 +161,8 @@ def main():
     for w in works:
         where = "/".join(pref[c] for c in w["prefCodes"][:3])
         print(f"  {w['postCount']:3d}投稿  {w['start']}〜{w['end']}  {where:<18} {w['title']}")
+    for w in hidden_works:
+        print(f"  （除外）{w['postCount']:3d}投稿  {w['title']}")
     unassigned = [p for p in holy_posts if p["id"] not in assigned]
     if unassigned:
         print(f"\n  作品に束ねられなかった投稿 {len(unassigned)} 件:")

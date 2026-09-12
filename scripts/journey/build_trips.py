@@ -153,10 +153,12 @@ def main():
 
     # 引き継いだ slug も先に押さえておかないと、新しい旅と衝突する。
     taken = {t["slug"] for t in previous.values() if t.get("slug")}
-    trips = []
+    trips, hidden_trips = [], []
     for start, end, tag, group, counts, spots in candidates:
         old = previous.get(tag, {})
         if old.get("hidden"):
+            # 除外の印は書き戻す。落とすと次の --merge で印ごと消えて旅が復活する。
+            hidden_trips.append(old)
             continue
         # 件数が多い順の県。1件しか無い県は立ち寄りなので主役から外す。
         main = [code for code, n in counts.most_common() if n > 1] or [counts.most_common(1)[0][0]]
@@ -175,7 +177,8 @@ def main():
         )
 
     args.out.write_text(
-        json.dumps({"trips": trips}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
+        json.dumps({"trips": trips + hidden_trips}, ensure_ascii=False, indent=1) + "\n",
+        encoding="utf-8",
     )
     covered = len({p["id"] for c in candidates for p in c[3]})
     print(f"{args.out} に旅 {len(trips)} 件（投稿 {covered} 件をカバー）")
