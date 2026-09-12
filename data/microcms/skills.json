@@ -3,9 +3,9 @@
   {
    "id": "rf60t2y6kkvg",
    "createdAt": "2026-09-12T10:08:07.550Z",
-   "updatedAt": "2026-09-12T11:29:35.213Z",
+   "updatedAt": "2026-09-12T11:38:38.722Z",
    "publishedAt": "2026-09-12T11:04:11.351Z",
-   "revisedAt": "2026-09-12T11:29:35.213Z",
+   "revisedAt": "2026-09-12T11:38:38.722Z",
    "name": "WatermelonDB",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/998cafea694c4ba092c9b901a631ca28/watermelondb.png",
@@ -1406,9 +1406,9 @@
   {
    "id": "8y_--r0ivr9",
    "createdAt": "2026-02-24T03:55:15.674Z",
-   "updatedAt": "2026-02-24T03:55:15.674Z",
+   "updatedAt": "2026-09-12T11:43:26.536Z",
    "publishedAt": "2026-02-24T03:55:15.674Z",
-   "revisedAt": "2026-02-24T03:55:15.674Z",
+   "revisedAt": "2026-09-12T11:43:26.536Z",
    "name": "Prolog",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/3b413e1502ae40f0bbacb80cccea8022/prolog-seeklogo.png",
@@ -1614,7 +1614,7 @@
      ]
     }
    ],
-   "level": 3
+   "level": 2
   },
   {
    "id": "ynnurir19",
