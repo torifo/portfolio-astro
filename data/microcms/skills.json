@@ -145,24 +145,6 @@
    "level": 4
   },
   {
-   "id": "gjeaooabq8go",
-   "createdAt": "2026-09-12T10:03:08.558Z",
-   "updatedAt": "2026-09-12T12:03:57.067Z",
-   "publishedAt": "2026-09-12T11:04:11.322Z",
-   "revisedAt": "2026-09-12T12:03:57.067Z",
-   "name": "View Transitions",
-   "icon": {
-    "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/d3510c683fd24b30b94a1fcb51563004/view-transitions.png",
-    "height": 256,
-    "width": 256
-   },
-   "category": [
-    "Web技術 / アーキテクチャ / ネットワーク"
-   ],
-   "usedIn": [],
-   "level": 2
-  },
-  {
    "id": "vo2d89r0zc",
    "createdAt": "2026-09-12T10:02:38.987Z",
    "updatedAt": "2026-09-12T12:32:09.318Z",
@@ -179,24 +161,6 @@
    ],
    "usedIn": [],
    "level": 4
-  },
-  {
-   "id": "3hc82uigx4dt",
-   "createdAt": "2026-09-12T10:02:09.886Z",
-   "updatedAt": "2026-09-12T12:03:43.676Z",
-   "publishedAt": "2026-09-12T11:04:11.308Z",
-   "revisedAt": "2026-09-12T12:03:43.676Z",
-   "name": "Server-Sent Events",
-   "icon": {
-    "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/aac86585b8ad4acdb54c2a30ad5e40db/server-sent-events.png",
-    "height": 256,
-    "width": 256
-   },
-   "category": [
-    "Web技術 / アーキテクチャ / ネットワーク"
-   ],
-   "usedIn": [],
-   "level": 3
   },
   {
    "id": "xzr6p9pcu9p",
@@ -869,10 +833,10 @@
   {
    "id": "dncpvhiwnstj",
    "createdAt": "2026-02-24T04:53:58.717Z",
-   "updatedAt": "2026-09-12T11:57:10.164Z",
+   "updatedAt": "2026-09-12T16:09:15.926Z",
    "publishedAt": "2026-02-24T04:53:58.717Z",
-   "revisedAt": "2026-09-12T11:57:10.164Z",
-   "name": "WebHook",
+   "revisedAt": "2026-09-12T16:09:15.926Z",
+   "name": "WebHook / Server-Sent Events",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/d44289e5ac6d431ba5052d4467c2749d/webhook-seeklogo.svg",
     "height": 2448,
@@ -882,7 +846,7 @@
     "Web技術 / アーキテクチャ / ネットワーク"
    ],
    "usedIn": [],
-   "level": 2
+   "level": 3
   },
   {
    "id": "pyvbnhgfh",
@@ -9221,10 +9185,10 @@
   {
    "id": "623hejtdzo26",
    "createdAt": "2025-07-30T15:54:13.145Z",
-   "updatedAt": "2026-09-12T11:51:10.941Z",
+   "updatedAt": "2026-09-12T16:09:15.914Z",
    "publishedAt": "2025-07-30T17:06:13.744Z",
-   "revisedAt": "2026-09-12T11:51:10.941Z",
-   "name": "CSS",
+   "revisedAt": "2026-09-12T16:09:15.914Z",
+   "name": "CSS (View Transitions)",
    "icon": {
     "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/573bd51bd0844daba202f8a76e656066/CSS3_logo_and_wordmark.svg",
     "height": 546,
@@ -9839,7 +9803,7 @@
    "level": 1
   }
  ],
- "totalCount": 85,
+ "totalCount": 83,
  "offset": 0,
  "limit": 100
 }
