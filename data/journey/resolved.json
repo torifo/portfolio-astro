@@ -5430,12 +5430,14 @@
   },
   "17847068505146078": {
    "prefCodes": [
-    "28"
+    "13"
    ],
-   "method": "gps",
-   "evidence": "28",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "28"
+   "method": "override",
+   "evidence": "17847068505146078",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   },
   "17893261046986231": {
    "prefCodes": [
@@ -6808,14 +6810,14 @@
   },
   "17989706270256619": {
    "prefCodes": [
-    "28"
+    "39"
    ],
-   "method": "gps-over-tag",
-   "evidence": "高知県",
+   "method": "override",
+   "evidence": "17989706270256619",
    "tagPrefCodes": [
     "39"
    ],
-   "gpsPrefCode": "28"
+   "gpsPrefCode": null
   },
   "17992918565049697": {
    "prefCodes": [
@@ -8370,12 +8372,14 @@
   },
   "17972156366285320": {
    "prefCodes": [
-    "29"
+    "13"
    ],
-   "method": "gps",
-   "evidence": "29",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "29"
+   "method": "override",
+   "evidence": "17972156366285320",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   },
   "17977104524164707": {
    "prefCodes": [
