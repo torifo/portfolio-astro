@@ -45,6 +45,41 @@
    ],
    "gpsPrefCode": "13"
   },
+  "17983496447888980": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "curated",
+   "evidence": "usj",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": null
+  },
+  "17941161294085351": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "curated",
+   "evidence": "usj",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": null
+  },
+  "17935060236383615": {
+   "prefCodes": [
+    "13",
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "よみうりランド",
+   "tagPrefCodes": [
+    "13",
+    "14"
+   ],
+   "gpsPrefCode": null
+  },
   "17992896837044068": {
    "prefCodes": [
     "13",
@@ -5045,18 +5080,22 @@
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "ホテルユニバーサルポート",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "18422436457047768": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "ユニバーサルスタジオジャパン",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "18084806314439954": {
@@ -5074,63 +5113,77 @@
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "ホテルユニバーサルポート",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "18098231641397912": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "USJ",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "18018208988478061": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "USJ",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "17982848111653644": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "USJ",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "17898751811900249": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "USJ",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "17989240424466394": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "ユニバーサルスタジオジャパン",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "18002438129270276": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "スーパーニンテンドーワールド",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "17929595144838379": {
@@ -5148,27 +5201,33 @@
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "USJ",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "17860285599087890": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "USJ",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "17855385720149981": {
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "USJ",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "17874561816063348": {
@@ -5206,9 +5265,11 @@
    "prefCodes": [
     "27"
    ],
-   "method": "gps",
-   "evidence": "27",
-   "tagPrefCodes": null,
+   "method": "curated",
+   "evidence": "ホテルユニバーサルポート",
+   "tagPrefCodes": [
+    "27"
+   ],
    "gpsPrefCode": "27"
   },
   "18044593018646760": {
