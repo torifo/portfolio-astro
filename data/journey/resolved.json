@@ -1401,12 +1401,12 @@
   },
   "18098535481789814": {
    "prefCodes": [
-    "46"
+    "47"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "18098535481789814",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": null
   },
