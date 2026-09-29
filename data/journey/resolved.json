@@ -2627,6 +2627,17 @@
    ],
    "gpsPrefCode": "11"
   },
+  "17917628991027234": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "ontology",
+   "evidence": "名栗湖",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": "11"
+  },
   "17935518062853014": {
    "prefCodes": [
     "11"
@@ -2681,17 +2692,6 @@
     "01"
    ],
    "gpsPrefCode": "13"
-  },
-  "17917628991027234": {
-   "prefCodes": [
-    "11"
-   ],
-   "method": "ontology",
-   "evidence": "名栗湖",
-   "tagPrefCodes": [
-    "11"
-   ],
-   "gpsPrefCode": "11"
   },
   "17976023318667194": {
    "prefCodes": [
