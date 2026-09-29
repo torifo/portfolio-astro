@@ -64,9 +64,11 @@ def decided_by_trip_tag(post, resolved, gaz, trip_tags):
     for tag in drop:
         caption = caption.replace("#" + tag, " ")
     stripped = {**post, "hashtags": [t for t in post["hashtags"] if t not in drop], "caption": caption}
-    codes, _, evidence = resolve_post(stripped, gaz, {})
+    codes, method, evidence = resolve_post(stripped, gaz, {})
     if codes and set(codes) != set(resolved.get("prefCodes") or []):
-        return codes, evidence
+        # 除いた側の根拠が部分一致のときは、そう書き添える（「PICASSO」の中の「pi」のような外れもあるため）
+        partial = method in ("pref-name-caption", "ontology-substring")
+        return codes, evidence + ("（部分一致）" if partial else "")
     return None
 
 
