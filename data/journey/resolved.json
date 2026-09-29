@@ -47,12 +47,12 @@
   },
   "18119929730513166": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "横浜公園",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
