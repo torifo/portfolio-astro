@@ -153,8 +153,9 @@ def main():
                 )
 
     thumb = f"https://raw.githubusercontent.com/{args.repo}/{args.sha}/public/journey/thumbs/{{}}.webp"
-    check_summary = f"要確認の点検は **{len(warnings)} 件**。" if warnings else "点検で気になる点は無い。"
-    lines = [f"Instagram の新着 **{len(new)} 件**を取り込んだ。{check_summary}", ""]
+    # 要確認は点検の数ではなく投稿の数で数える（表の行数と合わせる）
+    review_count = len({p["id"] for p, _, _ in warnings})
+    lines = [f"新着 **{len(new)} 件**・要確認 **{review_count} 件**", ""]
 
     if warnings:
         lines += ["## 要確認", "", "| | 投稿 | 点検内容 |", "|---|---|---|"]
@@ -209,8 +210,6 @@ def main():
         "- 撮影日が違う：`data/journey/date_overrides.json` に `\"投稿ID\": \"YYYY-MM-DD\"`",
         "- 修正後に `npm run journey:build` を実行し、コミット",
         "",
-        "Claude に頼むなら「PR の ○○ を △△ に直して」。",
-        "",
         "</details>",
     ]
     if args.notes is not None:
@@ -218,9 +217,9 @@ def main():
 
     args.out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     args.summary.write_text(
-        json.dumps({"new": len(new), "warnings": len(warnings)}, ensure_ascii=False), encoding="utf-8"
+        json.dumps({"new": len(new), "warnings": review_count}, ensure_ascii=False), encoding="utf-8"
     )
-    print(f"新着 {len(new)} 件 / 要確認 {len(warnings)} 件")
+    print(f"新着 {len(new)} 件 / 要確認 {review_count} 件")
 
 
 if __name__ == "__main__":
