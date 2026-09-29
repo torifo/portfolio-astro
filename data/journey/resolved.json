@@ -7081,14 +7081,14 @@
   },
   "18016893271744439": {
    "prefCodes": [
-    "27"
+    "13"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "18016893271744439",
    "tagPrefCodes": [
     "13"
    ],
-   "gpsPrefCode": "27"
+   "gpsPrefCode": null
   },
   "18231991864211839": {
    "prefCodes": [

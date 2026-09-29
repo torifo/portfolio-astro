@@ -113,11 +113,17 @@ def main():
     # 併合のたびに期間を広げると、別々の旅が数珠つなぎになる（与論島の旅が
     # 1か月前の海ほたるドライブまで飲み込んだ）。旅の期間は主役のタグが決め、
     # 広げない。
+
+    # 期間に収まるだけでは旅の合間の別行動まで拾う（四国旅が 9/19 のディズニーを
+    # 飲み込んでいた）。主役が投稿している日に重なることも要る。
     candidates.sort(key=lambda c: (-len(c[3]), c[0]))
     clusters = []
     for start, end, tag, group, counts in candidates:
+        dates = {dt.date.fromisoformat(p["date"]) for p in group}
         for cluster in clusters:
-            if cluster["start"] <= start and end <= cluster["end"]:
+            if cluster["start"] <= start and end <= cluster["end"] and all(
+                any(abs((d - base).days) <= 1 for base in cluster["dates"]) for d in dates
+            ):
                 cluster["spots"].append(tag)
                 cluster["group"] = {p["id"]: p for p in [*cluster["group"].values(), *group]}
                 break
@@ -128,6 +134,8 @@ def main():
                     "end": end,
                     "tag": tag,
                     "group": {p["id"]: p for p in group},
+                    # 畳み込みの判定は主役タグの日付だけで行う（数珠つなぎを防ぐため広げない）
+                    "dates": dates,
                     "spots": [],
                 }
             )
