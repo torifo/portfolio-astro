@@ -46,6 +46,26 @@ MAX_SPAN_DAYS = 30
 # テーマパーク52% / あじさい37% / 彫刻24% / 探検9% と、はっきり分かれた。
 MIN_DAY_COVERAGE = 0.8
 
+# 旅の日付が3日以上飛んだら、そこから先は別の塊とみなす。
+MAX_GAP_DAYS = 2
+
+
+def dense_span(dates):
+    """旅の期間。日付の連続した塊のうち最大のものを返す。
+
+    キャプションに日付が無い投稿は投稿日時で日付を埋めるため、旅の写真を後日
+    上げると旅が何週間にも伸びる（四国旅は9/24に上げた1件で3週間になっていた）。
+    """
+    blocks, current = [], [dates[0]]
+    for prev, day in zip(dates, dates[1:]):
+        if (day - prev).days > MAX_GAP_DAYS:
+            blocks.append(current)
+            current = []
+        current.append(day)
+    blocks.append(current)
+    best = max(blocks, key=lambda b: (len(b), -b[0].toordinal()))
+    return best[0], best[-1]
+
 
 def slugify(date, pref_slug, taken):
     """2025-06-akita の形。同じ月・同じ県の旅が複数あれば連番を足す。"""
@@ -102,7 +122,8 @@ def main():
         )
         if not counts:
             continue
-        candidates.append((dates[0], dates[-1], tag, group, counts))
+        start, end = dense_span(dates)
+        candidates.append((start, end, tag, group, counts))
 
     # 同じ日程の候補は同じ旅を指している。「ユニバーサルスタジオジャパン」
     # 「ホテルユニバーサルポート」「スーパーニンテンドーワールド」は 2024-02-14〜16 の

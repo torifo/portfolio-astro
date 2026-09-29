@@ -45,6 +45,226 @@
    ],
    "gpsPrefCode": "13"
   },
+  "18115319986995805": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17909614998536466": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18105623849615921": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17886585144653805": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18139631521606743": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18110500283136034": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18106475687605246": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18088454291422144": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18101582147200745": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18122776288886581": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18125114356836436": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18618882238043488": {
+   "prefCodes": [
+    "14"
+   ],
+   "method": "ontology",
+   "evidence": "八景島シーパラダイス",
+   "tagPrefCodes": [
+    "14"
+   ],
+   "gpsPrefCode": null
+  },
+  "17902256028566768": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18151807537549746": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18113620672824361": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18162059485482777": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18138944806593987": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18116487388962323": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18056715770575927": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "大阪",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": null
+  },
+  "18108223256178233": {
+   "prefCodes": [
+    "27"
+   ],
+   "method": "curated",
+   "evidence": "ユニバ",
+   "tagPrefCodes": [
+    "27"
+   ],
+   "gpsPrefCode": null
+  },
   "17983496447888980": {
    "prefCodes": [
     "27"
@@ -6150,17 +6370,6 @@
    ],
    "gpsPrefCode": "13"
   },
-  "18025993528630724": {
-   "prefCodes": [
-    "38"
-   ],
-   "method": "pref-name",
-   "evidence": "愛媛県",
-   "tagPrefCodes": [
-    "38"
-   ],
-   "gpsPrefCode": "38"
-  },
   "17989486913194573": {
    "prefCodes": [
     "13"
@@ -6732,6 +6941,17 @@
    "gpsPrefCode": "38"
   },
   "18025993372643996": {
+   "prefCodes": [
+    "38"
+   ],
+   "method": "pref-name",
+   "evidence": "愛媛県",
+   "tagPrefCodes": [
+    "38"
+   ],
+   "gpsPrefCode": "38"
+  },
+  "18025993528630724": {
    "prefCodes": [
     "38"
    ],
