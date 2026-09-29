@@ -2,6 +2,9 @@ name: Journey sync
 
 # Instagram の新着を取り込んで PR を作る。マージすると Deploy to Production が本番へ出す。
 on:
+  schedule:
+    # 毎朝8時（JST）。GitHub の定時は数分〜数十分遅れることがある
+    - cron: '0 23 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
