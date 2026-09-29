@@ -35,7 +35,9 @@ notify() { # notify <タイトル> <本文>
   osascript -e "display notification \"$2\" with title \"$1\"" >/dev/null 2>&1 || true
 }
 
+DIED=0
 die() { # die <理由>
+  DIED=1
   log "中断: $1"
   notify "Journey 同期に失敗" "$1"
   exit 1
@@ -44,6 +46,12 @@ die() { # die <理由>
 BRANCH=""
 PUSHED=0
 cleanup() {
+  local rc=$?
+  # die を通らずに落ちた（set -u の未定義変数など）ときも、黙って終わらせない
+  if [ "$rc" -ne 0 ] && [ "$DIED" = "0" ]; then
+    log "予期しない終了（終了コード ${rc}）。直前のエラーはこのログにある"
+    notify "Journey 同期が途中で止まった" "終了コード ${rc}。ログを確認する"
+  fi
   cd "$REPO" 2>/dev/null || return
   [ -d "$WT" ] && git worktree remove --force "$WT" >/dev/null 2>&1
   # push していない作業ブランチは残さない
@@ -52,6 +60,8 @@ cleanup() {
 }
 
 mkdir -p "$(dirname "$LOG")" "$WORK"
+# エラー出力もログに残す（手で走らせたときに見落として原因を失わないため）
+exec 2> >(tee -a "$LOG" >&2)
 
 # mkdir はアトミックなので排他に使える
 if ! mkdir "$LOCK" 2>/dev/null; then
@@ -161,7 +171,8 @@ git push -q -u origin "$BRANCH" || die "git push に失敗"
 PUSHED=1
 
 title="Journey: 新着 $added 件（$(date +%Y-%m-%d)）"
-[ "$warnings" -gt 0 ] && title="$title・要確認 $warnings 件"
+# 変数名の直後に全角文字を置くと、日本語ロケールの bash は変数名の続きとして読む（${} で区切る）
+[ "$warnings" -gt 0 ] && title="${title}・要確認 ${warnings} 件"
 url="$(gh pr create --base main --head "$BRANCH" --title "$title" --body-file "$WORK/report.md")" \
   || die "PR を作れない（ブランチ $BRANCH は push 済み）"
 
