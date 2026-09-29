@@ -1,0 +1,134 @@
+name: Journey sync
+
+# Instagram の新着を取り込んで PR を作る。マージすると Deploy to Production が本番へ出す。
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: PR を作らず本文だけ出す（トークンの延命もしない）
+        type: boolean
+        default: false
+      base:
+        description: 起点のコミット。試すときだけ古いコミットを渡す（空なら main）
+        type: string
+        default: ''
+
+# 定時と手動が重なっても同期 PR を二重に作らない
+concurrency:
+  group: journey-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  BASE: ${{ inputs.base || 'origin/main' }}
+  DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+
+    # 手で直している最中の PR に重ねない
+    - name: Skip while a sync PR is open
+      id: open
+      run: |
+        url="$(gh pr list --state open --json url,headRefName \
+          --jq '[.[] | select(.headRefName | startswith("journey/sync-"))][0].url // empty')"
+        if [ -n "$url" ]; then
+          echo "未マージの同期 PR があるので見送る: $url" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "skip=true" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Install image tools
+      if: steps.open.outputs.skip != 'true'
+      run: sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick webp ffmpeg >/dev/null
+
+    # 60日で失効するので毎回延命し、新しい値を secret に書き戻す（GITHUB_TOKEN は secret を書けない）
+    - name: Check and refresh the Instagram token
+      if: steps.open.outputs.skip != 'true'
+      env:
+        TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+        WRITE_TOKEN: ${{ secrets.GHCR_TOKEN }}
+      run: |
+        [ -n "$TOKEN" ] || { echo "::error::secret INSTAGRAM_ACCESS_TOKEN が無い"; exit 1; }
+        me="$(curl -s --max-time 30 "https://graph.instagram.com/v21.0/me?fields=id&access_token=$TOKEN")"
+        if printf '%s' "$me" | grep -q '"error"'; then
+          code="$(printf '%s' "$me" | python3 -c 'import sys,json;print(json.load(sys.stdin)["error"].get("code",""))')"
+          [ "$code" = "190" ] && { echo "::error::トークンが失効した。Meta コンソールで再発行して secret を更新する"; exit 1; }
+          echo "::error::Instagram API がアクセスを拒否した (code $code)。アプリの状態を確認する"; exit 1
+        fi
+        if ! GH_TOKEN="$WRITE_TOKEN" gh secret list >/dev/null 2>&1; then
+          msg="GHCR_TOKEN では secret を書き戻せない（repo 権限が要る）"
+          [ "$DRY_RUN" = "true" ] && echo "::warning::$msg" || { echo "::error::$msg"; exit 1; }
+        else
+          echo "GHCR_TOKEN で secret を書き戻せる"
+        fi
+        if [ "$DRY_RUN" = "true" ]; then
+          echo "トークンは有効。dry_run なので延命しない"
+          echo "INSTAGRAM_ACCESS_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          exit 0
+        fi
+        new="$(curl -s --max-time 30 "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=$TOKEN" \
+          | python3 -c 'import sys,json;print(json.load(sys.stdin).get("access_token",""))')"
+        if [ -n "$new" ] && [ "$new" != "$TOKEN" ]; then
+          echo "::add-mask::$new"
+          printf '%s' "$new" | GH_TOKEN="$WRITE_TOKEN" gh secret set INSTAGRAM_ACCESS_TOKEN
+          echo "トークンを延命して secret を更新した（ここから60日）"
+          TOKEN="$new"
+        fi
+        echo "INSTAGRAM_ACCESS_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+
+    - name: Sync from Instagram
+      if: steps.open.outputs.skip != 'true'
+      id: sync
+      run: |
+        branch="journey/sync-$(TZ=Asia/Tokyo date +%Y%m%d-%H%M)"
+        git checkout -q -b "$branch" "$BASE"
+        # 試すときもデータだけ古いコミットから取り、取り込みの手順は main のものを使う
+        [ "$BASE" = "origin/main" ] || git checkout -q origin/main -- scripts package.json
+        count() { python3 -c 'import json;print(len(json.load(open("data/journey/posts.json"))["posts"]))'; }
+        before="$(count)"
+        npm run journey:sync
+        after="$(count)"
+        # 減るのは API が壊れた応答を返したときくらい
+        [ "$after" -ge "$before" ] || { echo "::error::投稿数が $before から $after に減った"; exit 1; }
+        if [ -z "$(git status --porcelain -- data/journey public/journey/thumbs)" ]; then
+          echo "新着なし" | tee -a "$GITHUB_STEP_SUMMARY"
+          exit 0
+        fi
+        echo "branch=$branch" >> "$GITHUB_OUTPUT"
+        echo "before=$before" >> "$GITHUB_OUTPUT"
+        echo "added=$((after - before))" >> "$GITHUB_OUTPUT"
+
+    - name: Open a pull request
+      if: steps.sync.outputs.branch != ''
+      env:
+        BRANCH: ${{ steps.sync.outputs.branch }}
+        BEFORE: ${{ steps.sync.outputs.before }}
+        ADDED: ${{ steps.sync.outputs.added }}
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add -- data/journey public/journey/thumbs
+        git commit -q -m "Ingest $ADDED new post(s) from Instagram" -m "---" \
+          -m "Instagram の新着 $ADDED 件を取り込んだ（$BEFORE → $((BEFORE + ADDED)) 件）。"
+        python3 scripts/journey/sync_report.py --root . --base "$BASE" --repo "$GITHUB_REPOSITORY" \
+          --sha "$(git rev-parse HEAD)" --out "$RUNNER_TEMP/report.md" --summary "$RUNNER_TEMP/summary.json"
+        cat "$RUNNER_TEMP/report.md" >> "$GITHUB_STEP_SUMMARY"
+        if [ "$DRY_RUN" = "true" ]; then
+          echo "dry_run なので push も PR もしない"
+          exit 0
+        fi
+        warnings="$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["warnings"])' "$RUNNER_TEMP/summary.json")"
+        title="Journey: 新着 ${ADDED} 件（$(TZ=Asia/Tokyo date +%Y-%m-%d)）"
+        [ "$warnings" -gt 0 ] && title="${title}・要確認 ${warnings} 件"
+        git push -q -u origin "$BRANCH"
+        gh pr create --base main --head "$BRANCH" --title "$title" --body-file "$RUNNER_TEMP/report.md"

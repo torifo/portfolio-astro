@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import shutil
 import subprocess
 import sys
 import zipfile
@@ -69,8 +70,9 @@ def to_webp(data, destination, size, suffix, quality):
             return False, frame.stderr.decode()[:160]
         data = frame.stdout
 
+    # Linux の apt で入る ImageMagick 6 には magick が無く convert になる（Actions で動かすため）
     result = subprocess.run(
-        ["magick", "-", "-auto-orient", "-resize", f"{size}x{size}>", "-quality", str(quality),
+        [shutil.which("magick") or "convert", "-", "-auto-orient", "-resize", f"{size}x{size}>", "-quality", str(quality),
          f"webp:{destination}"],
         input=data,
         capture_output=True,

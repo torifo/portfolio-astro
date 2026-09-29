@@ -187,6 +187,10 @@ def main():
             for key, value in json.loads(gps_path.read_text(encoding="utf-8")).items()
             if not key.startswith("_")
         }
+    # 座標が無い環境（Actions など）では、GPS が効いた判定を前回分から引き継ぐ（落とすと約240件が変わる）
+    previous = {}
+    if not coordinates and args.out.exists():
+        previous = json.loads(args.out.read_text(encoding="utf-8"))["posts"]
     gaz = Gazetteer()
     boundaries = Boundaries()
     # overrides.json は投稿ID・タグ名のどちらをキーにしてもよい。先頭が _ のキーは覚書。
@@ -209,6 +213,11 @@ def main():
                 "tagPrefCodes": codes,
                 "gpsPrefCode": None,
             }
+            continue
+
+        kept = previous.get(post["id"])
+        if kept and kept.get("gpsPrefCode"):
+            results[post["id"]] = kept
             continue
 
         tag_codes, method, evidence = resolve_post(post, gaz, overrides)
@@ -283,17 +292,21 @@ def main():
                 if post["hashtags"]:
                     print(f"            tags: {' '.join('#' + t for t in post['hashtags'][:8])}")
 
-    print(f"\n  GPS とタグの食い違い: {len(conflicts)} 件 -> {args.out.with_name('conflicts.json').name}")
+    if coordinates:
+        print(f"\n  GPS とタグの食い違い: {len(conflicts)} 件 -> {args.out.with_name('conflicts.json').name}")
+    else:
+        print("\n  座標が無いので GPS の判定は前回分を引き継いだ（conflicts.json はそのまま）")
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(
         json.dumps({"policy": args.policy, "posts": results}, ensure_ascii=False, indent=1) + "\n",
         encoding="utf-8",
     )
-    # 人が裁定して overrides.json に落とすための一覧。
-    args.out.with_name("conflicts.json").write_text(
-        json.dumps(conflicts, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
-    )
+    # 人が裁定して overrides.json に落とすための一覧。座標が無いと食い違いを検出できないので書き換えない
+    if coordinates:
+        args.out.with_name("conflicts.json").write_text(
+            json.dumps(conflicts, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
+        )
 
 
 if __name__ == "__main__":
