@@ -46,6 +46,12 @@ MAX_SPAN_DAYS = 30
 # テーマパーク52% / あじさい37% / 彫刻24% / 探検9% と、はっきり分かれた。
 MIN_DAY_COVERAGE = 0.8
 
+# 長い名前の旅タグは、同じ日に無関係な投稿が挟まっても落とさない（#電車旅 のような短い汎用タグは除く）
+NAMED_TRIP_SUFFIXES = ("旅", "編", "旅行", "ツアー", "巻")
+NAMED_TRIP_MIN_LENGTH = 8
+NAMED_TRIP_MIN_POSTS = 5
+NAMED_TRIP_MIN_COVERAGE = 0.5
+
 # 旅の日付が3日以上飛んだら、そこから先は別の塊とみなす。
 MAX_GAP_DAYS = 2
 
@@ -115,7 +121,12 @@ def main():
         coverage = statistics.mean(
             count / posts_per_day[day] for day, count in tagged_per_day.items()
         )
-        if coverage < MIN_DAY_COVERAGE:
+        named = (
+            tag.endswith(NAMED_TRIP_SUFFIXES)
+            and len(tag) >= NAMED_TRIP_MIN_LENGTH
+            and len(group) >= NAMED_TRIP_MIN_POSTS
+        )
+        if coverage < (NAMED_TRIP_MIN_COVERAGE if named else MIN_DAY_COVERAGE):
             continue
         counts = collections.Counter(
             code for p in group for code in (resolved[p["id"]]["prefCodes"] or [])
