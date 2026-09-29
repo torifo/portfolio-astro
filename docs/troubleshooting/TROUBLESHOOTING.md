@@ -10,6 +10,7 @@
 - [API関連の問題](#api関連の問題)
 - [コンポーネントの問題](#コンポーネントの問題)
 - [テーマ機能の問題](#テーマ機能の問題)
+- [Journey（Instagram 同期）の問題](#journeyinstagram-同期の問題)
 
 ## 開発環境の問題
 
@@ -129,20 +130,22 @@ sudo kill <PID>
 
 ### microCMS APIエラー
 
-**症状**: スキルデータやゲームデータが表示されない
+**症状**: microCMS で直した内容がサイトに出ない
+
+microCMS は**ビルドの前に** `scripts/ingest/fetch_microcms.mjs` が取得して `data/microcms/*.json` に置き、
+ビルドはそのファイルを読むだけです（ブラウザからは呼びません）。取得に失敗した分は前回の
+ファイルが残るので、サイトは壊れずに古い内容のまま出ます。
 
 **解決方法**:
 ```bash
-# APIキーの確認
-echo $PUBLIC_MICROCMS_API_KEY
-
-# ドメインの確認
-echo $PUBLIC_MICROCMS_SERVICE_DOMAIN
-
-# ブラウザの開発者ツールでネットワークタブを確認
-# 401エラー: APIキーが無効
-# 404エラー: ドメインが間違っている
+node scripts/ingest/fetch_microcms.mjs
+# 「据置  skills: HTTP 401」→ API キーが無効。手元の .env のキーが古い可能性がある
+#   （本番は GitHub Secrets のキーを使うので、手元だけ 401 でもデプロイは通る）
+# 「据置  …: HTTP 404」→ PUBLIC_MICROCMS_SERVICE_DOMAIN が違う
 ```
+
+microCMS の変更を本番に出すには、デプロイを走らせる必要があります（microCMS を直しただけでは
+変わりません）。`gh workflow run "Deploy to Production" --ref main`
 
 ### Sunrise Sunset APIエラー
 
@@ -254,6 +257,29 @@ console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
 console.log(new Date().toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'}));
 ```
 
+### ライトモードで色が一色になる・白い文字が黒くなる
+
+**症状**: 夜は色分けされているのに、昼（ライトモード）だけ背景のグラデーションが全部同じ紫になる。
+白いはずの文字が黒くなる
+
+**原因**: `src/styles/global.css` が `body.light-mode` の下で、次のクラスを `!important` で塗り替えている。
+
+- `.bg-gradient-to-r` → 一律で cyan→violet のグラデーション（本来はボタン向け）
+- `.text-white` `.text-white/70` など → 暗い灰色
+- `.glass` → 白っぽい半透明
+
+**解決方法**: 昼も夜も同じ色にしたい要素では、塗り替えの対象にならないクラスを使う。
+
+- グラデーションは Tailwind v4 の `bg-linear-to-r`（`bg-gradient-to-r` と同じ見た目で、塗り替えの対象外）
+- 白い文字は `text-slate-50`
+- 地方グリッドのヘッダーと海外の枠はこの方法で書いている（`JourneySection.astro`）
+
+```javascript
+// 計算後の色をモード別に確かめる
+document.body.classList.add('light-mode');
+getComputedStyle(el).backgroundImage;
+```
+
 ### CSSスタイルが適用されない
 
 **症状**: ライトモードでの文字が見えない
@@ -266,6 +292,68 @@ console.log(new Date().toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'}));
 /* CSSファイルの再読み込み */
 /* Ctrl+F5 または Cmd+Shift+R */
 ```
+
+## Journey（Instagram 同期）の問題
+
+同期は GitHub Actions の「Journey sync」が毎朝8時（JST）に回し、新着があれば PR を作ります。
+仕組みは [DEPLOYMENT.md](../deployment/DEPLOYMENT.md) と
+[設計書の 2026-09-29 改訂](../superpowers/specs/2026-09-11-journey-instagram-design.md) を参照。
+
+### 同期の PR ができない
+
+- **未マージの同期 PR がある**: 新しい PR は作らずに見送る（手で直している最中を上書きしないため）。
+  先の PR をマージするか閉じると、次の実行で新着をまとめて拾う
+- **新着が無い**: Actions の実行のサマリーに「新着なし」と出る
+- 失敗していれば Actions の実行ログの赤いステップを見る
+
+### トークンが失効した（code 190）
+
+60日で失効する。毎回延命しているので通常は起きないが、定時実行が長く止まっていると起きる。
+Meta for Developers でアプリ `torifo-journey` のユースケース（Instagram）を開き、
+API のセットアップ画面（URL に `selected_tab=API-Setup`）でトークンを生成し直して、secret を更新する。
+
+```bash
+gh secret set INSTAGRAM_ACCESS_TOKEN   # 値は貼り付け（画面に残さない）
+```
+
+### Instagram API がアクセスを拒否する（code 200）
+
+トークンではなくアプリ側の問題。Meta for Developers の「必要なアクション」とアプリの
+アラートを確認する。2026-09 には本人確認を済ませたら解消した。
+
+### 毎朝の同期が止まった
+
+公開リポジトリの定時実行は、60日間コミットが無いと GitHub が自動で止める。止まる前にメールが届く。
+Actions の「Journey sync」を開き、「Enable workflow」で再開する。手動実行（Run workflow）は
+止まっていても使える。
+
+### 「GHCR_TOKEN では secret を書き戻せない」
+
+延長したトークンを secret に書き戻すのに `GHCR_TOKEN` を使っている。このトークンが secret を
+書き換えられないと止まる。GitHub の Settings → Developer settings → Personal access tokens で、
+`GHCR_TOKEN` に使っているトークンの権限を足す。
+
+- classic トークン: scope に `repo` を足す（トークンの値は変わらないので secret はそのまま）
+- fine-grained トークン: このリポジトリの「Secrets」を Read and write にする
+
+### 県・撮影日が違う
+
+PR のブランチで次のファイルを直し、`npm run journey:build` してコミットする。
+Instagram 側のキャプションを直しても、取り込み済みの投稿には届かない。
+
+| 直したいもの | ファイル |
+|---|---|
+| 県 | `data/journey/overrides.json`（投稿ID またはタグ） |
+| 撮影日 | `data/journey/date_overrides.json`（投稿ID） |
+
+手元で直すときは、撮影地の座標（`data/journey/gps.json`、Git に入っていない）がある環境で
+`journey:build` を流す。PR のブランチを別の作業ツリーに出すなら、`gps.json` と
+`data/ontology/places.json` をそこへリンクしてから流す。
+
+### プロフィールの投稿数とサイトの件数が1件ずれる
+
+「フィードにも共有」をオフにしたリールは、プロフィールの投稿数に入らないが API では取れる。
+2023-07-18 のリール「たまたま撮った桜道」がこれに当たる。取り込みの誤りではない。
 
 ## 一般的な解決手順
 

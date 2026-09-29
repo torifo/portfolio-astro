@@ -18,9 +18,14 @@ main に push（または Actions から workflow_dispatch）
        │                     失敗した分はコミット済みの前回分が残る
        ├─ docker build       ghcr.io/torifo/portfolio-astro に :タグ と :latest
        ├─ docker push        両方のタグを GHCR へ
-       └─ VPS へ SSH         cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh タグ
-                               └─ docker compose pull → down → up -d → 起動確認
+       ├─ VPS へ SSH         cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh タグ
+       │                       └─ docker compose pull → down → up -d → 起動確認
+       └─ キャッシュを commit 取得した data/microcms/*.json を main に戻す
+                             （data/microcms/** は paths-ignore なので再発火しない）
 ```
+
+配信は nginx（`nginx.conf`）。**存在しない URL には 404 を返し、`404.astro` を表示します。**
+以前はどの URL にもトップを 200 で返していたため、リンク切れに気づけませんでした。
 
 `deploy.sh` と `docker-compose.yml` は VPS 上の
 `/home/ubuntu/Web/portfolio-astro/` にあり、リポジトリ内のものと同じ内容です。
@@ -31,10 +36,42 @@ VPS 上のチェックアウトが古くても動作に影響はありません�
 
 | 名前 | 用途 |
 |---|---|
-| `GHCR_TOKEN` | GHCR への push |
+| `GHCR_TOKEN` | GHCR への push。Journey 同期では延長した Instagram トークンを secret に書き戻すのにも使う（repo 権限が要る） |
 | `VPS_HOST` / `VPS_USER` / `VPS_SSH_KEY` | VPS への SSH |
 | `PUBLIC_MICROCMS_API_KEY` | ビルド時の microCMS 取得 |
 | `PUBLIC_MICROCMS_SERVICE_DOMAIN` | 同上 |
+| `INSTAGRAM_ACCESS_TOKEN` | Journey 同期。実行のたびに延長されて書き換わる |
+
+リポジトリ設定 **Settings → Actions → General →「Allow GitHub Actions to create and approve pull requests」はオン**
+にしてあります（Journey 同期が PR を作るため）。
+
+## Journey の同期（Instagram → PR）
+
+```
+毎朝 8:00 JST（cron: 0 23 * * *）/ Actions の「Journey sync」→ Run workflow
+  │
+  └─ .github/workflows/journey-sync.yml
+       ├─ 未マージの同期 PR（journey/sync-*）があれば見送る
+       ├─ Instagram トークンを延命 → secret INSTAGRAM_ACCESS_TOKEN に書き戻す
+       ├─ npm run journey:sync            新着の取り込み・判定・旅/聖地巡礼/テーマの再生成
+       ├─ 新着が無ければ終わり
+       └─ journey/sync-日付 に commit → push → PR（本文は scripts/journey/sync_report.py）
+```
+
+**PR をマージすると、main への push として上の本番デプロイが走ります。** PR を作った時点では
+何も公開されません。直すときは PR のブランチで `data/journey/overrides.json` などを直して push
+してからマージします。
+
+- 手動実行の入力 `dry_run` を付けると、PR を作らず本文だけを Actions のサマリーに出す
+  （トークンも延命しない）。`base` に古いコミットを渡すと、そこから新着がある状態を再現できる。
+  古い `base` で `dry_run` を外すと、古いデータの PR ができてマージで巻き戻るので必ず付けること
+- Actions には撮影地の座標（`gps.json`、公開しない）が無い。GPS で決まった判定は前回の結果を引き継ぐ
+- サムネイル変換のため、実行のたびに ImageMagick と ffmpeg を apt で入れる
+- **公開リポジトリの定時実行は、60日間コミットが無いと GitHub が自動で止めます。** 止まる前にメールが来て、
+  Actions の「Journey sync」から再開できます（手動実行は止まっていても使えます）
+
+手元から同じことをするなら `bash scripts/journey/auto_sync.sh`（`--dry-run` あり）。
+別の作業ツリーで行うので、手元の変更には触りません。
 
 ## 手元での確認
 
@@ -65,7 +102,7 @@ cd /home/ubuntu/Web/portfolio-astro
 
 ## イメージ容量に注意
 
-デプロイのたびに日付タグが増えます。Journey のサムネ 1,013枚を含むため、イメージは約115MBあります（サムネを入れる前は約70MB）。VPS のストレージは有限なので、古いタグはときどき整理してください（稼働中のイメージは消さないこと）。
+デプロイのたびに日付タグが増えます。Journey のサムネ（1,000枚超）を含むため、イメージは約115MBあります（サムネを入れる前は約70MB）。VPS のストレージは有限なので、古いタグはときどき整理してください（稼働中のイメージは消さないこと）。
 
 ```bash
 docker images ghcr.io/torifo/portfolio-astro --format '{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'

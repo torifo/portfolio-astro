@@ -38,7 +38,7 @@ AstroとTypeScriptを使用して構築されたモダンなポートフォリ�
 - **自動テーマ切り替え**: 日の出・日没時刻に基づくライト/ダークモード（JSTキャッシュ管理）
 - **リアルタイム時計**: ヘッダーにJST時刻をリアルタイム表示
 - **ビルド時刻表示**: フッターにビルド日時を自動埋め込み（JST）
-- **Instagram連携**: Journey セクションで旅の写真アカウントとリンク
+- **Journey（Instagram 連携）**: 旅の写真を都道府県・旅・聖地巡礼・テーマの4つの軸で閲覧。新着は毎朝 GitHub Actions が取り込んで PR にする
 
 ### 📁 プロジェクト構造
 
@@ -98,7 +98,8 @@ AstroとTypeScriptを使用して構築されたモダンなポートフォリ�
 - **Dockerイメージ**: `ghcr.io/torifo/portfolio-astro:latest`
 - **ビルド方式**: マルチステージ（ビルダー → Nginx Alpine）
 - **Webサーバー**: Nginx on Alpine Linux
-- **環境変数**: microCMS API設定を `.env` で管理（git追跡外）
+- **環境変数**: microCMS API設定を `.env` で管理（git追跡外。CI では GitHub Secrets）
+- **存在しない URL**: nginx が 404 を返し、`404.astro` を表示する
 
 #### デプロイフロー
 
@@ -108,10 +109,11 @@ AstroとTypeScriptを使用して構築されたモダンなポートフォリ�
 main に push / workflow_dispatch
   └─ .github/workflows/deploy.yml
        ├─ タグ生成（JST の YYYYMMDD-HHMM）
-       ├─ Secrets から .env を作成（Astro は PUBLIC_* をビルド時に埋め込むため）
+       ├─ microCMS を data/microcms/*.json に取得（失敗した分は前回分が残る）
        ├─ docker build → :{タグ} と :latest を GHCR へ push
-       └─ VPS へ SSH → /home/ubuntu/Web/portfolio-astro/deploy.sh {タグ}
-                          └─ docker compose pull → down → up -d
+       ├─ VPS へ SSH → /home/ubuntu/Web/portfolio-astro/deploy.sh {タグ}
+       │                  └─ docker compose pull → down → up -d
+       └─ 取得した microCMS を main にコミット（data/microcms は paths-ignore なので再発火しない）
 ```
 
 ロールバックは VPS で1コマンドです。タグは
@@ -123,7 +125,8 @@ cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <戻したいタグ>
 ```
 
 必要な GitHub Secrets: `GHCR_TOKEN` / `VPS_HOST` / `VPS_USER` / `VPS_SSH_KEY` /
-`PUBLIC_MICROCMS_API_KEY` / `PUBLIC_MICROCMS_SERVICE_DOMAIN`
+`PUBLIC_MICROCMS_API_KEY` / `PUBLIC_MICROCMS_SERVICE_DOMAIN` / `INSTAGRAM_ACCESS_TOKEN`
+（Journey の同期用。詳細は [DEPLOYMENT.md](docs/deployment/DEPLOYMENT.md)）
 
 ### 🌟 コンテンツセクション
 
@@ -147,26 +150,46 @@ cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <戻したいタグ>
 
 ### 📸 Journey データの更新
 
-Instagram のデータは2つの経路で入る。ビルド自体は外部を一切呼ばない。
+**新着は GitHub Actions が取り込んで PR にする。** 確認してマージすると本番に出る。
+ビルド自体は外部を一切呼ばない。
+
+```
+毎朝 8:00 JST（または Actions の「Journey sync」→ Run workflow）
+  └─ 新着を取り込み、県・旅を判定 → journey/sync-日付 の PR を作る
+       本文: 新着の一覧（サムネ・リンク・判定された県）/ 要確認 / 旅の変化
+```
+
+PR の「要確認」は、本番で実際に起きた誤りの型を機械で探したもの
+（旅タグの語で県が決まった、初めての県、旅の期間外、撮影日が不明、など）。
+直すときは PR のブランチで次のファイルを直し、`npm run journey:build` してコミットする。
+
+| 直したいもの | ファイル | 書き方 |
+|---|---|---|
+| 県 | `data/journey/overrides.json` | `"投稿ID": ["13"]` または `"タグ": ["14"]`（タグならそのタグの投稿すべてに効く） |
+| 撮影日 | `data/journey/date_overrides.json` | `"投稿ID": "2023-09-05"` |
+| 再利用できる地名 | `data/journey/gazetteer.json` | `"地名": ["27"]` |
+
+Instagram 側のキャプションを直しても、取り込み済みの投稿には届かない（新着しか読まないため）。
+
+手元で回す場合:
 
 ```bash
-# 新着だけを API から取り込む（エクスポートの再取得が要らない）
+# 新着だけを API から取り込む（トークンは環境変数か ~/dev/.env.dev）
 npm run journey:sync
 
-# 手元のエクスポート zip から作り直す（EXIF の GPS が取れるのはこちらだけ）
+# 同期 PR を手元から作る（別の作業ツリーで行うので手元は触らない）
+bash scripts/journey/auto_sync.sh            # --dry-run で PR を作らない
+
+# エクスポート zip から作り直す（EXIF の GPS が取れるのはこちらだけ）
 python3 scripts/ingest/parse_export.py <エクスポートの展開先>
 python3 scripts/ingest/build_thumbs.py
 python3 scripts/ingest/fetch_permalinks.py
 npm run journey:build
 ```
 
-`journey:sync` は `posts.json` に無い ID だけを拾うので、何度流しても同じ結果になる。
-API は EXIF の GPS を返さないため、県の判定はタグとキャプション頼りになる
-（直近300件では GPS だけが手がかりだった投稿は7件）。判定できなかったものは
-`resolve.py --report` が一覧に出すので、`data/journey/overrides.json` で埋める。
-
-アクセストークンは `~/dev/.env.dev`（リポジトリ外）から読む。60日で失効するが、
-`permalinks.json` に書いたあとはビルドが参照しないのでサイトは壊れない。
+撮影地の座標（`data/journey/gps.json`）は公開しないので Git に入れていない。Actions など
+座標が無い環境では、GPS で決まった判定を前回の結果から引き継ぐ（座標がある環境と結果は同じ）。
+仕組みの詳細は [設計書の 2026-09-29 改訂](docs/superpowers/specs/2026-09-11-journey-instagram-design.md) にある。
 
 ### ✅ 実装済み機能
 
@@ -178,12 +201,13 @@ API は EXIF の GPS を返さないため、県の判定はタグとキャプ�
 - [x] About経歴タイムライン タグフィルター（Academic / Technology / Opus / Pulse / Community）
 - [x] OpusのrelatedSkillタグ表示（カテゴリ別グループ・Skillsセクションへのアンカーリンク）
 - [x] 日の出・日没APIによる自動テーマ切り替え（JSTの日付変わりでキャッシュ自動リセット）
-- [x] Journey 8地方・都道府県別訪問管理（訪問済み地方を動的カウント）
-- [x] Journey × Instagram 連携（投稿1,017件・都道府県100%解決・LLM呼び出しなし）
+- [x] Journey 8地方・都道府県別訪問管理（訪問済み地方を動的カウント・地方の形のシルエット・9枠目に海外）
+- [x] Journey × Instagram 連携（投稿1,041件・都道府県100%解決・LLM呼び出しなし）
 - [x] 都道府県ページ自動生成（`/journey/[slug]`・訪問済み39県）
-- [x] 旅・聖地巡礼・テーマの各ページ（4つの軸は重ね掛け・同じ投稿が複数ページに出る）
+- [x] 旅・聖地巡礼・テーマの各ページ（旅32件・聖地巡礼6作品・テーマ13。同じ投稿が複数ページに出る）
 - [x] 投稿サムネの自前保存（480px webp・Instagram の media URL 失効対策）
-- [x] 新規投稿の増分取り込み（`npm run journey:sync`・エクスポート再取得なしで追いつく）
+- [x] 新着の自動取り込み（毎朝 GitHub Actions が PR を作り、確認してマージ・手動実行も可）
+- [x] 存在しない URL は 404 を返す（`404.astro`）・プライバシーポリシー・利用規約
 - [x] Footerビルド時刻自動表示
 - [x] GHCR Docker イメージ管理
 
@@ -218,6 +242,7 @@ A modern portfolio website built with Astro and TypeScript. Features microCMS AP
 - **Auto Theme**: Light/dark mode based on Tokyo sunrise/sunset times (cache resets at JST midnight)
 - **Real-time Clock**: JST time in header
 - **Build Timestamp**: Build date auto-embedded in footer
+- **Journey (Instagram)**: Browse travel photos by prefecture, trip, anime pilgrimage and theme. GitHub Actions ingests new posts every morning and opens a pull request for review
 
 ### 🐳 Docker & Deployment
 
@@ -233,7 +258,7 @@ A modern portfolio website built with Astro and TypeScript. Features microCMS AP
 push to main / workflow_dispatch
   └─ .github/workflows/deploy.yml
        ├─ tag from JST date (YYYYMMDD-HHMM)
-       ├─ write .env from secrets (Astro inlines PUBLIC_* at build time)
+       ├─ fetch microCMS into data/microcms/*.json (keeps the last good copy on failure)
        ├─ docker build → push :{tag} and :latest to GHCR
        └─ ssh to VPS → /home/ubuntu/Web/portfolio-astro/deploy.sh {tag}
                           └─ docker compose pull → down → up -d
@@ -248,7 +273,14 @@ cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <tag>
 ```
 
 Required GitHub secrets: `GHCR_TOKEN`, `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`,
-`PUBLIC_MICROCMS_API_KEY`, `PUBLIC_MICROCMS_SERVICE_DOMAIN`
+`PUBLIC_MICROCMS_API_KEY`, `PUBLIC_MICROCMS_SERVICE_DOMAIN`, `INSTAGRAM_ACCESS_TOKEN`
+
+#### Journey Sync
+
+`.github/workflows/journey-sync.yml` runs every morning at 8:00 JST (or on demand via
+*Run workflow*). It ingests new Instagram posts, resolves prefectures and trips, and opens a
+`journey/sync-*` pull request with automated checks. Merging it deploys as usual. See
+[docs/deployment/DEPLOYMENT.md](docs/deployment/DEPLOYMENT.md) for details.
 
 ### 🔌 microCMS API
 

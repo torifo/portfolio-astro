@@ -11,13 +11,17 @@
   - 都道府県の解決パイプライン（raw + 辞書 + override の純関数）
   - 外部依存を任意レイヤに置く方針
   - 調査で覆った事実の記録
+  - 2026-09-29 改訂: 毎朝の同期と PR での確認、PR の点検、座標が無い環境での判定、
+    人の指定の置き場（県・撮影日）、旅の判定規則、海外の枠と地方シルエット
 
 ### deployment/
 デプロイメントとバージョン管理に関するドキュメント
 
 - **[DEPLOYMENT.md](./deployment/DEPLOYMENT.md)** - デプロイ手順とワークフロー
   - main への push で本番が入れ替わる仕組み（GitHub Actions）
-  - 必要な GitHub Secrets
+  - Journey の同期（毎朝 Instagram の新着を取り込んで PR にする）
+  - 必要な GitHub Secrets とリポジトリ設定
+  - 存在しない URL の 404
   - push 前に手元で CI と同じビルドを再現する方法
   - ロールバック手順とイメージ容量の注意
 
@@ -34,7 +38,8 @@
   - Docker関連の問題
   - API関連の問題
   - コンポーネントの問題
-  - テーマ機能の問題
+  - テーマ機能の問題（ライトモードで色が上書きされる件を含む）
+  - Journey（Instagram 同期）の問題
 
 ---
 
@@ -44,4 +49,4 @@
 
 - **[README.md](../README.md)** - プロジェクトのメインREADME
 - **[README_astro.md](../README_astro.md)** - Astroフレームワークのテンプレートドキュメント
-- **[data/ontology/README.md](../data/ontology/README.md)** - 地名オントロジーと県境データの再生成手順
+- **[data/ontology/README.md](../data/ontology/README.md)** - 地名オントロジーと県境データの再生成手順・地方シルエットの作り方
