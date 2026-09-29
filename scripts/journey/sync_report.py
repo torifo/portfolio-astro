@@ -22,9 +22,21 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from gazetteer import Gazetteer  # noqa: E402
 from resolve import resolve_post  # noqa: E402
 
-# 一文まるごとの旅タグ。build_trips.py の NAMED_TRIP_* と同じ見分け方
+# build_trips.py の NAMED_TRIP_* と同じ見分け方（片方だけ変えると判定が食い違う）
 TRIP_SUFFIXES = ("旅", "編", "旅行", "ツアー", "巻")
 TRIP_MIN_LENGTH = 8
+METHOD_LABELS = {
+    "override": "手動指定",
+    "pref-name": "県名タグ",
+    "pref-name-caption": "本文の県名",
+    "curated": "辞書",
+    "ontology": "地名",
+    "ontology-substring": "地名（部分一致）",
+    "gps": "GPS",
+    "gps-over-tag": "GPS（タグと不一致）",
+    "trip-inherit": "旅から継承",
+    "caption-place": "本文の地名",
+}
 
 
 def load(root, rel):
@@ -41,7 +53,7 @@ def load_base(root, ref, rel):
 def first_line(caption):
     for line in (caption or "").replace("⁡", "").splitlines():
         line = line.strip()
-        # 先頭の日付行とタグだけの行は飛ばす
+        # 日付やタグだけの行を投稿名にしない。
         if not line or line.startswith("#") or re.fullmatch(r"[\d\-/年月日~〜 ]+", line):
             continue
         return line[:40]
@@ -66,7 +78,7 @@ def decided_by_trip_tag(post, resolved, gaz, trip_tags):
     stripped = {**post, "hashtags": [t for t in post["hashtags"] if t not in drop], "caption": caption}
     codes, method, evidence = resolve_post(stripped, gaz, {})
     if codes and set(codes) != set(resolved.get("prefCodes") or []):
-        # 除いた側の根拠が部分一致のときは、そう書き添える（「PICASSO」の中の「pi」のような外れもあるため）
+        # 部分一致の候補を確かな地名と誤解させない。
         partial = method in ("pref-name-caption", "ontology-substring")
         return codes, evidence + ("（部分一致）" if partial else "")
     return None
@@ -80,6 +92,7 @@ def main():
     parser.add_argument("--sha", required=True, help="サムネイルを指すコミット")
     parser.add_argument("--out", type=pathlib.Path, required=True)
     parser.add_argument("--summary", type=pathlib.Path, required=True, help="件数を JSON で書く")
+    parser.add_argument("--notes", type=pathlib.Path, help="PR で直した内容の Markdown ファイル")
     args = parser.parse_args()
 
     root = args.root
@@ -102,55 +115,60 @@ def main():
     def pref_names(codes):
         return "・".join(prefs[c] for c in codes) or "（未解決）"
 
-    warnings = []  # (投稿, 見出し, 説明)
+    def trip_period(trip):
+        return trip["start"] if trip["start"] == trip["end"] else f"{trip['start']}〜{trip['end']}"
+
+    warnings = []
     for p in new:
         r = resolved[p["id"]]
         codes = r.get("prefCodes") or []
         if not codes:
-            warnings.append((p, "県が決まらない", "タグ・本文から都道府県を特定できなかった"))
+            warnings.append((p, "県が不明", "タグ・本文から県を特定できない"))
         for c in codes:
             if base_count[c] == 0:
-                warnings.append((p, "初めての県", f"{prefs[c]}に入る最初の投稿。本当にそこで撮ったか"))
+                warnings.append((p, "初めての県", f"{prefs[c]}の最初の投稿。撮影地を確認"))
         other = decided_by_trip_tag(p, r, gaz, trip_tags)
         if other:
             alt, evidence = other
             warnings.append(
                 (
                     p,
-                    "旅タグの語で県が決まった",
+                    "旅タグで県を判定",
                     f"「{r['evidence']}」で{pref_names(codes)}になったが、旅タグを除くと「{evidence}」から{pref_names(alt)}",
                 )
             )
         if p.get("date_source") == "upload":
-            warnings.append((p, "撮影日が不明", "キャプションに日付が無く、投稿した日を撮影日にしている"))
+            warnings.append((p, "撮影日が不明", "本文に日付が無いため、投稿日を使用"))
         for tag in p["hashtags"] or []:
             trip = trip_of_tag.get(tag)
             if not trip:
                 continue
             if not (trip["start"] <= p["date"] <= trip["end"]):
                 warnings.append(
-                    (p, "旅の期間から外れた日付", f"旅「{trip['title'][:24]}」は {trip['start']}〜{trip['end']}")
+                    (p, "旅の期間外", f"旅「{trip['title'][:24]}」は {trip_period(trip)}")
                 )
             if codes and not set(codes) & set(trip["prefCodes"]):
                 warnings.append(
-                    (p, "旅の中で浮いている県", f"旅「{trip['title'][:24]}」の主な県は{pref_names(trip['prefCodes'])}")
+                    (p, "旅の主な県と不一致", f"旅「{trip['title'][:24]}」の主な県は{pref_names(trip['prefCodes'])}")
                 )
 
     thumb = f"https://raw.githubusercontent.com/{args.repo}/{args.sha}/public/journey/thumbs/{{}}.webp"
-    lines = [f"Instagram の新着 **{len(new)} 件**を取り込みました。問題が無ければマージすると本番に出ます。", ""]
+    check_summary = f"要確認の点検は **{len(warnings)} 件**。" if warnings else "点検で気になる点は無い。"
+    lines = [f"Instagram の新着 **{len(new)} 件**を取り込んだ。{check_summary}", ""]
 
-    lines += [f"## 要確認 {len(warnings)} 件", ""]
     if warnings:
-        lines += ["| | 投稿 | 点検 | 内容 |", "|---|---|---|---|"]
+        lines += ["## 要確認", "", "| | 投稿 | 点検内容 |", "|---|---|---|"]
+        checks_by_post = collections.defaultdict(list)
         for p, head, detail in warnings:
+            checks_by_post[p["id"]].append(f"**{head}**：{detail}")
+        for post_id, checks in checks_by_post.items():
+            p = posts[post_id]
             link = permalinks.get(p["id"], "")
             lines.append(
                 f'| <img src="{thumb.format(p["id"])}" width="64"> | [{first_line(p.get("caption"))}]({link})<br>`{p["id"]}` '
-                f"| **{head}** | {detail} |"
+                f"| {'<br>'.join(checks)} |"
             )
-    else:
-        lines.append("自動の点検では気になる点はありませんでした。")
-    lines.append("")
+        lines.append("")
 
     lines += [f"## 新着 {len(new)} 件", "", "| | 日付 | 内容 | 県 | 根拠 |", "|---|---|---|---|---|"]
     for p in new:
@@ -158,37 +176,45 @@ def main():
         link = permalinks.get(p["id"], "")
         date = p["date"] + ("" if p.get("date_source") != "upload" else " ※")
         lines.append(
-            f'| <img src="{thumb.format(p["id"])}" width="64"> | {date} | [{first_line(p.get("caption"))}]({link}) '
-            f"| {pref_names(r.get('prefCodes') or [])} | {r['method']} |"
+            f'| <img src="{thumb.format(p["id"])}" width="64"> | {date} | [{first_line(p.get("caption"))}]({link})<br>`{p["id"]}` '
+            f"| {pref_names(r.get('prefCodes') or [])} | {METHOD_LABELS.get(r['method'], r['method'])} |"
         )
-    lines += ["", "※ はキャプションに日付が無く、投稿した日を撮影日にしているもの。", ""]
+    lines.append("")
+    if any(p.get("date_source") == "upload" for p in new):
+        lines += ["※ 本文に日付が無いため、投稿日を撮影日として使用。", ""]
 
     trip_lines = []
     now = {t["tag"]: t for t in trips}
     for tag, t in now.items():
         old = base_trips.get(tag)
         if old is None:
-            trip_lines.append(f"- 新しい旅：**{t['title']}**（{t['start']}〜{t['end']}・{t['postCount']}件・`{t['slug']}`）")
+            trip_lines.append(f"- 新規：**{t['title']}**（{trip_period(t)}・{t['postCount']}件・`{t['slug']}`）")
         elif old["postCount"] != t["postCount"] or (old["start"], old["end"]) != (t["start"], t["end"]):
             trip_lines.append(
-                f"- 変化：{t['title']}　{old['postCount']}件 → {t['postCount']}件（{t['start']}〜{t['end']}）"
+                f"- 更新：{t['title']}　{old['postCount']}件 → {t['postCount']}件（{trip_period(t)}）"
             )
     for tag, old in base_trips.items():
         if tag not in now:
             trip_lines.append(f"- **無くなった旅**：{old['title']}（`{old['slug']}` の URL が消える）")
-    lines += ["## 旅の変化", ""] + (trip_lines or ["変化なし"]) + [""]
+    if trip_lines:
+        lines += ["## 旅の変化", ""] + trip_lines + [""]
 
     lines += [
-        "## 直すとき",
+        "<details>",
+        "<summary>直すとき</summary>",
         "",
-        "このブランチに直してから push し、マージする。",
+        "このブランチで修正し、push してからマージする。",
         "",
         "- 県が違う：`data/journey/overrides.json` に `\"投稿ID\": [\"県コード\"]`",
         "- 撮影日が違う：`data/journey/date_overrides.json` に `\"投稿ID\": \"YYYY-MM-DD\"`",
-        "- 直したら `npm run journey:build` を流してコミット",
+        "- 修正後に `npm run journey:build` を実行し、コミット",
         "",
-        "Claude に頼むなら「PR の ○○ を △△ に直して」で通じます。",
+        "Claude に頼むなら「PR の ○○ を △△ に直して」。",
+        "",
+        "</details>",
     ]
+    if args.notes is not None:
+        lines += ["", "## このPRで直したこと", "", args.notes.read_text(encoding="utf-8").strip()]
 
     args.out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     args.summary.write_text(
