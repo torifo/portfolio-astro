@@ -2224,6 +2224,17 @@
    ],
    "gpsPrefCode": "12"
   },
+  "18348903070152847": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "gps-over-tag",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": "12"
+  },
   "18053520485214569": {
    "prefCodes": [
     "12"
@@ -2417,17 +2428,6 @@
     "13"
    ],
    "gpsPrefCode": "13"
-  },
-  "18348903070152847": {
-   "prefCodes": [
-    "12"
-   ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": "12"
   },
   "18047159732206231": {
    "prefCodes": [
