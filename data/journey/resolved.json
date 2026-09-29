@@ -47,122 +47,122 @@
   },
   "18115319986995805": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "17909614998536466": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18105623849615921": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "17886585144653805": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18139631521606743": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18110500283136034": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18106475687605246": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18088454291422144": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18101582147200745": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18122776288886581": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18125114356836436": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
@@ -170,7 +170,7 @@
    "prefCodes": [
     "14"
    ],
-   "method": "ontology",
+   "method": "override",
    "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
     "14"
@@ -179,67 +179,67 @@
   },
   "17902256028566768": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18151807537549746": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18113620672824361": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18162059485482777": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18138944806593987": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18116487388962323": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "八景島シーパラダイス",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
@@ -587,14 +587,14 @@
   },
   "18029974643839613": {
    "prefCodes": [
-    "13"
+    "05"
    ],
-   "method": "gps-over-tag",
-   "evidence": "秋田",
+   "method": "override",
+   "evidence": "18029974643839613",
    "tagPrefCodes": [
     "05"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "18099657481997446": {
    "prefCodes": [
@@ -1436,78 +1436,78 @@
    "prefCodes": [
     "46"
    ],
-   "method": "gps-over-tag",
-   "evidence": "沖縄",
-   "tagPrefCodes": [
-    "47"
-   ],
-   "gpsPrefCode": "46"
-  },
-  "18067849751664432": {
-   "prefCodes": [
-    "14"
-   ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
+  },
+  "18067849751664432": {
+   "prefCodes": [
+    "46"
+   ],
+   "method": "override",
+   "evidence": "与論島",
+   "tagPrefCodes": [
+    "46"
+   ],
+   "gpsPrefCode": null
   },
   "18062667056670892": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18119660413544762": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17861695260547511": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18081722165057552": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17894649714288837": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18035328323717150": {
    "prefCodes": [
@@ -1524,85 +1524,85 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18076466483136508": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18072662186199413": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17871292266570078": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18087953105238539": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18098727362509282": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18107057212845405": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18096596179838110": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
@@ -1610,157 +1610,157 @@
   },
   "18099025531965108": {
    "prefCodes": [
-    "14"
+    "46"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "17967876698878533": {
    "prefCodes": [
-    "14"
+    "46"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18096262702990899": {
    "prefCodes": [
-    "14"
+    "46"
    ],
-   "method": "gps-over-tag",
-   "evidence": "茨城",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
-    "08"
+    "46"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18317191465252937": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18084554503905195": {
    "prefCodes": [
-    "14"
+    "46"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "17866055310483722": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17967294260977603": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17882794530392209": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18100685038652870": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18093506041800886": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18180589558353550": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17861859762501232": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18085984111913613": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18098098147675527": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18088886986884116": {
    "prefCodes": [
@@ -1777,89 +1777,89 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18073175734900248": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18080332051797582": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17963865593817557": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18018801758777181": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18069582968327541": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "18056797499373670": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17933332989073549": {
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name",
-   "evidence": "鹿児島",
+   "method": "override",
+   "evidence": "与論島",
    "tagPrefCodes": [
     "46"
    ],
-   "gpsPrefCode": "46"
+   "gpsPrefCode": null
   },
   "17859055230445839": {
    "prefCodes": [
@@ -2228,78 +2228,78 @@
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18053520485214569": {
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "17890541190228401": {
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18027255785437009": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18365653804127297": {
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18049350422520064": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18350319304194221": {
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18071552965686795": {
    "prefCodes": [
@@ -3619,78 +3619,78 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18061709836680277": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "17942345753778980": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18087511519497638": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "17881371756139807": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "17880144564119706": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18041438144493047": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18035945641997579": {
    "prefCodes": [
@@ -3718,34 +3718,34 @@
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "17965305716702050": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18035683700333909": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18069107872716750": {
    "prefCodes": [
@@ -5868,69 +5868,69 @@
   },
   "18345104605102817": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "18012565436511378": {
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18302888590147829": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "17994764150542318": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "東京ディズニーシー",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "17923840295849539": {
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "17855624196116449": {
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "舞浜",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "12"
+   "gpsPrefCode": null
   },
   "18043176742585548": {
    "prefCodes": [
@@ -6405,58 +6405,58 @@
   },
   "18007500214841823": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーランド",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "18289304200123064": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーランド",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "18003742886039339": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーランド",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "18069507535421940": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーランド",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "18005081888014298": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "東京ディズニーランド",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "18387774382019092": {
    "prefCodes": [
@@ -7761,14 +7761,14 @@
   },
   "17998588105904143": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "千葉",
+   "method": "override",
+   "evidence": "17998588105904143",
    "tagPrefCodes": [
     "12"
    ],
-   "gpsPrefCode": "13"
+   "gpsPrefCode": null
   },
   "18025231267616648": {
    "prefCodes": [
