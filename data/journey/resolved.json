@@ -49,8 +49,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "18107070299462226",
    "tagPrefCodes": [
     "13"
    ],
@@ -60,8 +60,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "18128607274794218",
    "tagPrefCodes": [
     "13"
    ],
@@ -69,23 +69,23 @@
   },
   "18091396307661559": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "18091396307661559",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
   "18134609896573973": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "override",
+   "evidence": "18134609896573973",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },
@@ -6295,12 +6295,12 @@
   },
   "17984294690410575": {
    "prefCodes": [
-    "13"
+    "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology",
+   "evidence": "猿島",
    "tagPrefCodes": [
-    "13"
+    "14"
    ],
    "gpsPrefCode": null
   },

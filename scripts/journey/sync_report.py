@@ -147,9 +147,11 @@ def main():
                 warnings.append(
                     (p, "旅の期間外", f"旅「{trip['title'][:24]}」は {trip_period(trip)}")
                 )
-            if codes and not set(codes) & set(trip["prefCodes"]):
+            # 新着込みで組み直した旅と比べると新着自身で一致してしまうので、main の旅と比べる。人が決めた県は点検しない
+            known = base_trips.get(tag, trip)
+            if codes and r.get("method") != "override" and not set(codes) & set(known["prefCodes"]):
                 warnings.append(
-                    (p, "旅の主な県と不一致", f"旅「{trip['title'][:24]}」の主な県は{pref_names(trip['prefCodes'])}")
+                    (p, "旅の主な県と不一致", f"旅「{trip['title'][:24]}」の主な県は{pref_names(known['prefCodes'])}")
                 )
 
     thumb = f"https://raw.githubusercontent.com/{args.repo}/{args.sha}/public/journey/thumbs/{{}}.webp"
