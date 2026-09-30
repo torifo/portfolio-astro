@@ -45,6 +45,50 @@
    ],
    "gpsPrefCode": "13"
   },
+  "18107070299462226": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18128607274794218": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18091396307661559": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18134609896573973": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
   "18119929730513166": {
    "prefCodes": [
     "14"
