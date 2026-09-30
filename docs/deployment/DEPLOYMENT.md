@@ -48,7 +48,7 @@ VPS 上のチェックアウトが古くても動作に影響はありません�
 ## Journey の同期（Instagram → PR）
 
 ```
-毎朝 8:00 JST（cron: 0 23 * * *）/ Actions の「Journey sync」→ Run workflow
+毎朝 7:17 JST（cron: 17 22 * * *）/ Actions の「Journey sync」→ Run workflow
   │
   └─ .github/workflows/journey-sync.yml
        ├─ 未マージの同期 PR（journey/sync-*）があれば見送る

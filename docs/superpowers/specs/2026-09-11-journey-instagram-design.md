@@ -595,7 +595,7 @@ ID体系が変わったときの保険として残す。
 ## 同期の運用
 
 ```
-毎朝 8:00 JST（または Actions の Run workflow）
+毎朝 7:17 JST（または Actions の Run workflow）
   └─ .github/workflows/journey-sync.yml
        ├─ 未マージの同期 PR（journey/sync-*）があれば見送る   … 手で直している最中を上書きしない
        ├─ Instagram トークンを延命し、secret に書き戻す
