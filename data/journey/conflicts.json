@@ -1,38 +1,74 @@
 [
  {
-  "id": "17903105949553116",
+  "id": "17902092060602830",
   "date": "2025-06-16",
-  "caption": "2025-06-16 / 八幡平 展望台",
+  "caption": "2025-06-16 / 物語が始まりそうな遊歩道 大深沢展望台",
   "hashtags": [
    "新幹線セール2泊3日の梅雨シーズン秋田観光旅",
+   "遊歩道",
+   "散策",
    "八幡平",
-   "展望台",
-   "ドラゴンアイ",
-   "自然スポット"
-  ],
-  "tagPrefCodes": [
-   "05"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "秋田",
-  "gpsPrefCode": "03"
- },
- {
-  "id": "18343280566266969",
-  "date": "2025-06-16",
-  "caption": "2025-06-16 / 十和田八幡平国立公園 県境（秋田県・岩手県）",
-  "hashtags": [
-   "新幹線セール2泊3日の梅雨シーズン秋田観光旅",
-   "県境",
-   "十和田八幡平国立公園",
-   "八幡平",
-   "ドラゴンアイ"
+   "大深沢展望台"
   ],
   "tagPrefCodes": [
    "03"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "岩手県",
+  "tagMethod": "ontology",
+  "tagEvidence": "八幡平",
+  "gpsPrefCode": "05"
+ },
+ {
+  "id": "18622166047010142",
+  "date": "2025-06-16",
+  "caption": "2025-06-16 / ドラゴンアイ in 八幡平",
+  "hashtags": [
+   "新幹線セール2泊3日の梅雨シーズン秋田観光旅",
+   "ドラゴンアイ",
+   "八幡平",
+   "湖",
+   "山の上"
+  ],
+  "tagPrefCodes": [
+   "03"
+  ],
+  "tagMethod": "ontology",
+  "tagEvidence": "八幡平",
+  "gpsPrefCode": "05"
+ },
+ {
+  "id": "17973003288130967",
+  "date": "2025-06-16",
+  "caption": "2025-06-16 / ドラゴンアイ in 八幡平",
+  "hashtags": [
+   "新幹線セール2泊3日の梅雨シーズン秋田観光旅",
+   "ドラゴンアイ",
+   "八幡平",
+   "グラデーション",
+   "自然"
+  ],
+  "tagPrefCodes": [
+   "03"
+  ],
+  "tagMethod": "ontology",
+  "tagEvidence": "八幡平",
+  "gpsPrefCode": "05"
+ },
+ {
+  "id": "18624149293007323",
+  "date": "2025-06-16",
+  "caption": "2025-06-16 / ドラゴンアイ",
+  "hashtags": [
+   "新幹線セール2泊3日の梅雨シーズン秋田観光旅",
+   "ドラゴンアイ",
+   "八幡平",
+   "夏の雪",
+   "県境"
+  ],
+  "tagPrefCodes": [
+   "03"
+  ],
+  "tagMethod": "ontology",
+  "tagEvidence": "八幡平",
   "gpsPrefCode": "05"
  },
  {
@@ -181,24 +217,6 @@
   "gpsPrefCode": "14"
  },
  {
-  "id": "18010747817844720",
-  "date": "2025-03-11",
-  "caption": "2025-03-11 / 友部サービスエリア（ミニ日本庭園あり）",
-  "hashtags": [
-   "学割ハワイアンズモノリスタワー宿泊スマホ水没事件の巻",
-   "友部サービスエリア",
-   "サービスエリア",
-   "日本庭園",
-   "庭園"
-  ],
-  "tagPrefCodes": [
-   "27"
-  ],
-  "tagMethod": "ontology",
-  "tagEvidence": "日本庭園",
-  "gpsPrefCode": "08"
- },
- {
   "id": "17917402887304052",
   "date": "2025-03-06",
   "caption": "2025-03-06 / 那覇は生憎の雨、でも雲の上はいつも晴れ（to羽田）",
@@ -210,83 +228,11 @@
    "ソラシドエア"
   ],
   "tagPrefCodes": [
-   "46"
+   "47"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
+  "tagMethod": "ontology",
+  "tagEvidence": "那覇空港",
   "gpsPrefCode": "13"
- },
- {
-  "id": "18369091060203567",
-  "date": "2025-03-06",
-  "caption": "2025-03-06 / 那覇空港 & ポーケチャサンド",
-  "hashtags": [
-   "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編",
-   "めんそーれ沖縄",
-   "またんめんそ〜れ",
-   "那覇空港",
-   "琉球サンド三兄弟"
-  ],
-  "tagPrefCodes": [
-   "46"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
-  "gpsPrefCode": "47"
- },
- {
-  "id": "18145116421483906",
-  "date": "2025-03-06",
-  "caption": "2025-03-06 / 沖縄唯一の鉄道:ゆいレール（県庁前➡那覇空港）",
-  "hashtags": [
-   "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編",
-   "ゆいレール",
-   "県庁前",
-   "那覇空港行き",
-   "沖縄唯一"
-  ],
-  "tagPrefCodes": [
-   "46"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
-  "gpsPrefCode": "47"
- },
- {
-  "id": "18176635288349719",
-  "date": "2025-03-05",
-  "caption": "2025-03-05 / 若狭 食堂（沖縄料理の店）",
-  "hashtags": [
-   "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編",
-   "若狭食堂",
-   "沖縄料理の店",
-   "沖縄グルメ",
-   "沖縄料理"
-  ],
-  "tagPrefCodes": [
-   "46"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
-  "gpsPrefCode": "47"
- },
- {
-  "id": "17923516902260419",
-  "date": "2025-03-05",
-  "caption": "2025-03-05 / うるマルシェ（沖縄といえばサーターアンダギー）",
-  "hashtags": [
-   "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編",
-   "うるマルシェ",
-   "サーターアンダギー",
-   "沖ツラ聖地巡礼",
-   "沖縄で好きになった子が方言すぎてツラすぎる"
-  ],
-  "tagPrefCodes": [
-   "46"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
-  "gpsPrefCode": "47"
  },
  {
   "id": "17881942635499072",
@@ -302,26 +248,8 @@
   "tagPrefCodes": [
    "46"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
-  "gpsPrefCode": "47"
- },
- {
-  "id": "17853001827638708",
-  "date": "2025-03-05",
-  "caption": "2025-03-05 / 果報バンタ（絶景ポイント）",
-  "hashtags": [
-   "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編",
-   "果報バンタ",
-   "絶景ポイント",
-   "kafubanta",
-   "うるま市"
-  ],
-  "tagPrefCodes": [
-   "46"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
+  "tagMethod": "ontology-substring",
+  "tagEvidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
   "gpsPrefCode": "47"
  },
  {
@@ -338,44 +266,8 @@
   "tagPrefCodes": [
    "46"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
-  "gpsPrefCode": "47"
- },
- {
-  "id": "18084920513206802",
-  "date": "2025-03-05",
-  "caption": "2025-03-05 / 沖ツラ聖地巡礼 : うるま市",
-  "hashtags": [
-   "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編",
-   "沖ツラ",
-   "沖ツラ聖地巡礼",
-   "うるま市",
-   "沖縄で好きになった子が方言すぎてツラすぎる"
-  ],
-  "tagPrefCodes": [
-   "46"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
-  "gpsPrefCode": "47"
- },
- {
-  "id": "18116369491636374",
-  "date": "2025-03-05",
-  "caption": "2025-03-05 / 和洋菓子と惣菜の店 ふくや",
-  "hashtags": [
-   "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編",
-   "沖ツラグルメ",
-   "スイーツ",
-   "うるま市",
-   "沖縄で好きになった子が方言すぎてツラすぎる"
-  ],
-  "tagPrefCodes": [
-   "46"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
+  "tagMethod": "ontology-substring",
+  "tagEvidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
   "gpsPrefCode": "47"
  },
  {
@@ -392,8 +284,8 @@
   "tagPrefCodes": [
    "46"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
+  "tagMethod": "ontology-substring",
+  "tagEvidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
   "gpsPrefCode": "47"
  },
  {
@@ -410,22 +302,8 @@
   "tagPrefCodes": [
    "46"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
-  "gpsPrefCode": "47"
- },
- {
-  "id": "17941812099172889",
-  "date": "2025-03-04",
-  "caption": "2025-03-04 / 沖縄の夜散歩",
-  "hashtags": [
-   "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編"
-  ],
-  "tagPrefCodes": [
-   "46"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "鹿児島",
+  "tagMethod": "ontology-substring",
+  "tagEvidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
   "gpsPrefCode": "47"
  },
  {
@@ -466,30 +344,9 @@
   "tagPrefCodes": [
    "13"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "東京",
+  "tagMethod": "ontology-substring",
+  "tagEvidence": "東京ベイ舞浜ホテルファーストリゾート ⊃ 東京",
   "gpsPrefCode": "12"
- },
- {
-  "id": "18071552965686795",
-  "date": "2025-02-15",
-  "caption": "2025-2-15 / 【京王】百草園: 梅まつり （ライトアップ）",
-  "hashtags": [
-   "京王百草園梅まつり",
-   "梅まつり",
-   "百草園",
-   "百草園梅まつり",
-   "京王百草園",
-   "梅",
-   "祭り",
-   "小さな和散歩"
-  ],
-  "tagPrefCodes": [
-   "27"
-  ],
-  "tagMethod": "ontology",
-  "tagEvidence": "日本庭園",
-  "gpsPrefCode": "13"
  },
  {
   "id": "17844498246441197",
@@ -527,10 +384,10 @@
    "展望駐車場"
   ],
   "tagPrefCodes": [
-   "35"
+   "45"
   ],
-  "tagMethod": "ontology",
-  "tagEvidence": "大橋",
+  "tagMethod": "ontology-substring",
+  "tagEvidence": "八ヶ岳高原大橋北詰展望駐車場 ⊃ 高原",
   "gpsPrefCode": "19"
  },
  {
@@ -639,48 +496,6 @@
   "gpsPrefCode": "13"
  },
  {
-  "id": "17976023318667194",
-  "date": "2024-11-04",
-  "caption": "2024-11-4 / 堂ヶ島渓谷遊歩道",
-  "hashtags": [
-   "ロマンスカーで向かう箱根登山電車旅",
-   "渓谷",
-   "遊歩道",
-   "堂ヶ島渓谷遊歩道",
-   "渓谷遊歩道",
-   "堂ヶ島",
-   "堂ヶ島渓谷",
-   "散策"
-  ],
-  "tagPrefCodes": [
-   "40"
-  ],
-  "tagMethod": "ontology",
-  "tagEvidence": "谷",
-  "gpsPrefCode": "14"
- },
- {
-  "id": "17942970428936597",
-  "date": "2024-11-04",
-  "caption": "2024-11-4 / 彫刻の森美術館（Part2）",
-  "hashtags": [
-   "ロマンスカーで向かう箱根登山電車旅",
-   "彫刻の森美術館",
-   "彫刻の森",
-   "美術館",
-   "ちょうこくのもり",
-   "美術品",
-   "彫刻",
-   "像"
-  ],
-  "tagPrefCodes": [
-   "22"
-  ],
-  "tagMethod": "ontology",
-  "tagEvidence": "森",
-  "gpsPrefCode": "14"
- },
- {
   "id": "17910665480961529",
   "date": "2024-11-04",
   "caption": "2024-11-4 / ロマンスカー: スーパーはこね（新宿~小田急~箱根湯本）",
@@ -740,27 +555,6 @@
   "tagMethod": "ontology-substring",
   "tagEvidence": "長沼橋 ⊃ 長沼",
   "gpsPrefCode": "13"
- },
- {
-  "id": "17843049279375599",
-  "date": "2024-09-30",
-  "caption": "2024-9-30 / 弁天島海辺公園: ゆるキャン△ 浜松・浜名湖",
-  "hashtags": [
-   "ゆるキャン聖地巡礼旅浜松編",
-   "弁天島海辺公園",
-   "ゆるキャンパネル",
-   "ゆるキャングッズ",
-   "ゆるキャン聖地",
-   "巡礼",
-   "ゆるキャンシーズン2",
-   "鳥居"
-  ],
-  "tagPrefCodes": [
-   "23"
-  ],
-  "tagMethod": "ontology",
-  "tagEvidence": "鳥居",
-  "gpsPrefCode": "22"
  },
  {
   "id": "18048722144476649",
@@ -823,27 +617,6 @@
   ],
   "tagMethod": "ontology",
   "tagEvidence": "伊勢志摩",
-  "gpsPrefCode": "23"
- },
- {
-  "id": "18046831361071798",
-  "date": "2024-09-16",
-  "caption": "2024-9-16 / ひまわりスカイガーデン2024 in 大名古屋ビルヂング",
-  "hashtags": [
-   "名古屋経由伊勢志摩スカイラインドライブスペイン村旅",
-   "ひまわりスカイガーデン2024",
-   "ひまわりスカイガーデン",
-   "ひまわり",
-   "スカイガーデン",
-   "2024",
-   "大名古屋ビルヂング",
-   "大名古屋ビルヂングスカイガーデン"
-  ],
-  "tagPrefCodes": [
-   "42"
-  ],
-  "tagMethod": "ontology",
-  "tagEvidence": "ひまわり",
   "gpsPrefCode": "23"
  },
  {
@@ -924,8 +697,8 @@
   "tagPrefCodes": [
    "13"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "東京",
+  "tagMethod": "ontology-substring",
+  "tagEvidence": "アンバサダーホテルシーグランドニッコー東京ベイ舞浜 ⊃ 東京",
   "gpsPrefCode": "12"
  },
  {
@@ -945,8 +718,8 @@
   "tagPrefCodes": [
    "13"
   ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "東京",
+  "tagMethod": "ontology-substring",
+  "tagEvidence": "アンバサダーホテルシーグランドニッコー東京ベイ舞浜 ⊃ 東京",
   "gpsPrefCode": "12"
  },
  {
@@ -1068,78 +841,6 @@
   "tagMethod": "ontology",
   "tagEvidence": "善知鳥神社",
   "gpsPrefCode": "02"
- },
- {
-  "id": "17866895964099057",
-  "date": "2024-03-04",
-  "caption": "2024年3月4日 / ぴょんぴょん舎（本場の盛岡冷麺）",
-  "hashtags": [
-   "東北きゅんパス旅",
-   "きゅんパス",
-   "ぴょんぴょん舎",
-   "盛岡冷麺"
-  ],
-  "tagPrefCodes": [
-   "02"
-  ],
-  "tagMethod": "ontology-substring",
-  "tagEvidence": "東北きゅんパス旅 ⊃ 東北",
-  "gpsPrefCode": "03"
- },
- {
-  "id": "18054793735593788",
-  "date": "2024-03-04",
-  "caption": "2024年3月4日 / BAY盛岡店（インスタ映え写真）",
-  "hashtags": [
-   "東北きゅんパス旅",
-   "きゅんパス",
-   "BAY盛岡",
-   "チュロス"
-  ],
-  "tagPrefCodes": [
-   "02"
-  ],
-  "tagMethod": "ontology-substring",
-  "tagEvidence": "東北きゅんパス旅 ⊃ 東北",
-  "gpsPrefCode": "03"
- },
- {
-  "id": "17852131500146873",
-  "date": "2024-03-04",
-  "caption": "2024年3月4日 / 東北新幹線やまびこ（本場の青森林檎を求めて東北へ）",
-  "hashtags": [
-   "東北きゅんパス旅",
-   "東北新幹線やまびこ",
-   "東北新幹線",
-   "やまびこ",
-   "新幹線",
-   "東京駅",
-   "盛岡駅",
-   "きゅんパス"
-  ],
-  "tagPrefCodes": [
-   "02"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "青森",
-  "gpsPrefCode": "13"
- },
- {
-  "id": "17908704710849054",
-  "date": "2024-02-14",
-  "caption": "2024年2月14日 / 上方温泉一休 〜夜行バスの疲れを癒しに〜",
-  "hashtags": [
-   "上方温泉一休",
-   "上方温泉一休♨️",
-   "温泉",
-   "ユニバ周辺"
-  ],
-  "tagPrefCodes": [
-   "26"
-  ],
-  "tagMethod": "ontology-substring",
-  "tagEvidence": "上方温泉一休♨️ ⊃ 上方",
-  "gpsPrefCode": "27"
  },
  {
   "id": "17925971408763114",
@@ -1450,44 +1151,6 @@
   "tagMethod": "pref-name-caption",
   "tagEvidence": "山梨",
   "gpsPrefCode": "22"
- },
- {
-  "id": "18054831538787578",
-  "date": "2023-03-08",
-  "caption": "2023-3-8 / 明治天皇行幸所西郷邸内",
-  "hashtags": [
-   "明治天皇行幸所西郷邸",
-   "天皇行幸所西郷邸",
-   "庭園",
-   "庭園内",
-   "日本庭園",
-   "渋谷",
-   "散歩",
-   "散策"
-  ],
-  "tagPrefCodes": [
-   "27"
-  ],
-  "tagMethod": "ontology",
-  "tagEvidence": "日本庭園",
-  "gpsPrefCode": "13"
- },
- {
-  "id": "18018431381188137",
-  "date": "2023-03-02",
-  "caption": "2023-3-2 / 錦糸町駅ホームから見る東京スカイツリー",
-  "hashtags": [
-   "錦糸町駅",
-   "東京スカイツリー",
-   "ホーム",
-   "千葉行き"
-  ],
-  "tagPrefCodes": [
-   "12"
-  ],
-  "tagMethod": "pref-name-caption",
-  "tagEvidence": "千葉",
-  "gpsPrefCode": "13"
  },
  {
   "id": "17968920974455079",

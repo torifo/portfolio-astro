@@ -5,8 +5,8 @@
    "prefCodes": [
     "42"
    ],
-   "method": "pref-name-caption",
-   "evidence": "長崎",
+   "method": "ontology",
+   "evidence": "ハウステンボス",
    "tagPrefCodes": [
     "42"
    ],
@@ -302,8 +302,8 @@
    "prefCodes": [
     "27"
    ],
-   "method": "pref-name-caption",
-   "evidence": "大阪",
+   "method": "ontology-substring",
+   "evidence": "大阪駅 ⊃ 大阪",
    "tagPrefCodes": [
     "27"
    ],
@@ -435,8 +435,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "角館駅",
    "tagPrefCodes": [
     "05"
    ],
@@ -446,8 +446,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "角館",
    "tagPrefCodes": [
     "05"
    ],
@@ -457,8 +457,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "角館",
    "tagPrefCodes": [
     "05"
    ],
@@ -468,8 +468,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "乳頭温泉郷",
    "tagPrefCodes": [
     "05"
    ],
@@ -479,8 +479,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology-substring",
+   "evidence": "新幹線セール2泊3日の梅雨シーズン秋田観光旅 ⊃ 秋田",
    "tagPrefCodes": [
     "05"
    ],
@@ -490,8 +490,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology-substring",
+   "evidence": "新幹線セール2泊3日の梅雨シーズン秋田観光旅 ⊃ 秋田",
    "tagPrefCodes": [
     "05"
    ],
@@ -501,8 +501,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "角館",
    "tagPrefCodes": [
     "05"
    ],
@@ -512,8 +512,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "田沢湖",
    "tagPrefCodes": [
     "05"
    ],
@@ -523,8 +523,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "御座石神社",
    "tagPrefCodes": [
     "05"
    ],
@@ -534,8 +534,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "田沢湖",
    "tagPrefCodes": [
     "05"
    ],
@@ -556,8 +556,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology-substring",
+   "evidence": "新幹線セール2泊3日の梅雨シーズン秋田観光旅 ⊃ 秋田",
    "tagPrefCodes": [
     "05"
    ],
@@ -567,10 +567,10 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "gps-over-tag",
+   "evidence": "八幡平",
    "tagPrefCodes": [
-    "05"
+    "03"
    ],
    "gpsPrefCode": "05"
   },
@@ -578,10 +578,10 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "gps-over-tag",
+   "evidence": "八幡平",
    "tagPrefCodes": [
-    "05"
+    "03"
    ],
    "gpsPrefCode": "05"
   },
@@ -589,10 +589,10 @@
    "prefCodes": [
     "03"
    ],
-   "method": "gps-over-tag",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "八幡平",
    "tagPrefCodes": [
-    "05"
+    "03"
    ],
    "gpsPrefCode": "03"
   },
@@ -600,10 +600,10 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "gps-over-tag",
+   "evidence": "八幡平",
    "tagPrefCodes": [
-    "05"
+    "03"
    ],
    "gpsPrefCode": "05"
   },
@@ -611,10 +611,10 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "gps-over-tag",
+   "evidence": "八幡平",
    "tagPrefCodes": [
-    "05"
+    "03"
    ],
    "gpsPrefCode": "05"
   },
@@ -622,19 +622,19 @@
    "prefCodes": [
     "05"
    ],
-   "method": "gps-over-tag",
-   "evidence": "岩手県",
+   "method": "override",
+   "evidence": "18343280566266969",
    "tagPrefCodes": [
-    "03"
+    "05"
    ],
-   "gpsPrefCode": "05"
+   "gpsPrefCode": null
   },
   "18430438525196739": {
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "角館駅",
    "tagPrefCodes": [
     "05"
    ],
@@ -655,8 +655,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "ポートタワーセリオン",
    "tagPrefCodes": [
     "05"
    ],
@@ -666,8 +666,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "入道崎",
    "tagPrefCodes": [
     "05"
    ],
@@ -677,8 +677,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "男鹿半島",
    "tagPrefCodes": [
     "05"
    ],
@@ -688,8 +688,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "男鹿半島",
    "tagPrefCodes": [
     "05"
    ],
@@ -710,8 +710,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology-substring",
+   "evidence": "新幹線セール2泊3日の梅雨シーズン秋田観光旅 ⊃ 秋田",
    "tagPrefCodes": [
     "05"
    ],
@@ -721,8 +721,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology-substring",
+   "evidence": "新幹線セール2泊3日の梅雨シーズン秋田観光旅 ⊃ 秋田",
    "tagPrefCodes": [
     "05"
    ],
@@ -732,8 +732,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "男鹿",
    "tagPrefCodes": [
     "05"
    ],
@@ -754,8 +754,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "土崎駅",
    "tagPrefCodes": [
     "05"
    ],
@@ -765,8 +765,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "久保田城跡",
    "tagPrefCodes": [
     "05"
    ],
@@ -776,8 +776,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "千秋公園",
    "tagPrefCodes": [
     "05"
    ],
@@ -787,8 +787,8 @@
    "prefCodes": [
     "05"
    ],
-   "method": "pref-name-caption",
-   "evidence": "秋田",
+   "method": "ontology",
+   "evidence": "秋田駅",
    "tagPrefCodes": [
     "05"
    ],
@@ -1282,11 +1282,9 @@
    "prefCodes": [
     "08"
    ],
-   "method": "gps-over-tag",
-   "evidence": "日本庭園",
-   "tagPrefCodes": [
-    "27"
-   ],
+   "method": "gps",
+   "evidence": "08",
+   "tagPrefCodes": null,
    "gpsPrefCode": "08"
   },
   "18076116080636887": {
@@ -1316,9 +1314,9 @@
     "13"
    ],
    "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "evidence": "那覇空港",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "13"
   },
@@ -1326,10 +1324,10 @@
    "prefCodes": [
     "47"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "那覇空港",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "47"
   },
@@ -1337,10 +1335,10 @@
    "prefCodes": [
     "47"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "pref-name-caption",
+   "evidence": "沖縄",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "47"
   },
@@ -1348,10 +1346,10 @@
    "prefCodes": [
     "47"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "pref-name-caption",
+   "evidence": "沖縄",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "47"
   },
@@ -1370,10 +1368,10 @@
    "prefCodes": [
     "47"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "pref-name-caption",
+   "evidence": "沖縄",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "47"
   },
@@ -1382,7 +1380,7 @@
     "47"
    ],
    "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "evidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
    "tagPrefCodes": [
     "46"
    ],
@@ -1392,10 +1390,10 @@
    "prefCodes": [
     "47"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "うるま市",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "47"
   },
@@ -1404,7 +1402,7 @@
     "47"
    ],
    "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "evidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
    "tagPrefCodes": [
     "46"
    ],
@@ -1414,10 +1412,10 @@
    "prefCodes": [
     "47"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "うるま市",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "47"
   },
@@ -1425,10 +1423,10 @@
    "prefCodes": [
     "47"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "うるま市",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "47"
   },
@@ -1437,7 +1435,7 @@
     "47"
    ],
    "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "evidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
    "tagPrefCodes": [
     "46"
    ],
@@ -1459,7 +1457,7 @@
     "47"
    ],
    "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "evidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
    "tagPrefCodes": [
     "46"
    ],
@@ -1469,10 +1467,10 @@
    "prefCodes": [
     "47"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鹿児島",
+   "method": "pref-name-caption",
+   "evidence": "沖縄",
    "tagPrefCodes": [
-    "46"
+    "47"
    ],
    "gpsPrefCode": "47"
   },
@@ -1568,8 +1566,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology-substring",
+   "evidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
    "tagPrefCodes": [
     "46"
    ],
@@ -1821,8 +1819,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology-substring",
+   "evidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
    "tagPrefCodes": [
     "46"
    ],
@@ -1920,8 +1918,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "与論",
    "tagPrefCodes": [
     "46"
    ],
@@ -1953,8 +1951,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "桜島",
    "tagPrefCodes": [
     "46"
    ],
@@ -2008,8 +2006,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "鶴丸城",
    "tagPrefCodes": [
     "46"
    ],
@@ -2019,8 +2017,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "桜島",
    "tagPrefCodes": [
     "46"
    ],
@@ -2030,8 +2028,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "桜島",
    "tagPrefCodes": [
     "46"
    ],
@@ -2041,8 +2039,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology",
+   "evidence": "鶴丸城",
    "tagPrefCodes": [
     "46"
    ],
@@ -2052,8 +2050,8 @@
    "prefCodes": [
     "46"
    ],
-   "method": "pref-name-caption",
-   "evidence": "鹿児島",
+   "method": "ontology-substring",
+   "evidence": "成田鹿児島与論島沖縄羽田フェリー飛行機ヶ浜調査旅編 ⊃ 与論島",
    "tagPrefCodes": [
     "46"
    ],
@@ -2162,8 +2160,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology",
+   "evidence": "あきる野市",
    "tagPrefCodes": [
     "13"
    ],
@@ -2173,8 +2171,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology",
+   "evidence": "あきる野市",
    "tagPrefCodes": [
     "13"
    ],
@@ -2195,8 +2193,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology",
+   "evidence": "払沢の滝",
    "tagPrefCodes": [
     "13"
    ],
@@ -2273,7 +2271,7 @@
     "12"
    ],
    "method": "gps-over-tag",
-   "evidence": "東京",
+   "evidence": "東京ベイ舞浜ホテルファーストリゾート ⊃ 東京",
    "tagPrefCodes": [
     "13"
    ],
@@ -2360,11 +2358,9 @@
    "prefCodes": [
     "13"
    ],
-   "method": "gps-over-tag",
-   "evidence": "日本庭園",
-   "tagPrefCodes": [
-    "27"
-   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
    "gpsPrefCode": "13"
   },
   "18010128026529539": {
@@ -2447,9 +2443,9 @@
     "19"
    ],
    "method": "gps-over-tag",
-   "evidence": "大橋",
+   "evidence": "八ヶ岳高原大橋北詰展望駐車場 ⊃ 高原",
    "tagPrefCodes": [
-    "35"
+    "45"
    ],
    "gpsPrefCode": "19"
   },
@@ -2752,10 +2748,10 @@
    "prefCodes": [
     "14"
    ],
-   "method": "gps-over-tag",
-   "evidence": "谷",
+   "method": "ontology",
+   "evidence": "宮ノ下",
    "tagPrefCodes": [
-    "40"
+    "14"
    ],
    "gpsPrefCode": "14"
   },
@@ -2785,10 +2781,10 @@
    "prefCodes": [
     "14"
    ],
-   "method": "gps-over-tag",
-   "evidence": "森",
+   "method": "ontology-substring",
+   "evidence": "ロマンスカーで向かう箱根登山電車旅 ⊃ 箱根",
    "tagPrefCodes": [
-    "22"
+    "14"
    ],
    "gpsPrefCode": "14"
   },
@@ -3016,10 +3012,10 @@
    "prefCodes": [
     "22"
    ],
-   "method": "gps-over-tag",
-   "evidence": "鳥居",
+   "method": "ontology-substring",
+   "evidence": "ゆるキャン聖地巡礼旅浜松編 ⊃ 浜松",
    "tagPrefCodes": [
-    "23"
+    "22"
    ],
    "gpsPrefCode": "22"
   },
@@ -3443,10 +3439,10 @@
    "prefCodes": [
     "23"
    ],
-   "method": "gps-over-tag",
-   "evidence": "ひまわり",
+   "method": "ontology",
+   "evidence": "名古屋",
    "tagPrefCodes": [
-    "42"
+    "23"
    ],
    "gpsPrefCode": "23"
   },
@@ -3752,7 +3748,7 @@
     "12"
    ],
    "method": "gps-over-tag",
-   "evidence": "東京",
+   "evidence": "アンバサダーホテルシーグランドニッコー東京ベイ舞浜 ⊃ 東京",
    "tagPrefCodes": [
     "13"
    ],
@@ -3763,7 +3759,7 @@
     "12"
    ],
    "method": "gps-over-tag",
-   "evidence": "東京",
+   "evidence": "アンバサダーホテルシーグランドニッコー東京ベイ舞浜 ⊃ 東京",
    "tagPrefCodes": [
     "13"
    ],
@@ -4132,8 +4128,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology",
+   "evidence": "隅田川",
    "tagPrefCodes": [
     "13"
    ],
@@ -4143,8 +4139,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology",
+   "evidence": "隅田川",
    "tagPrefCodes": [
     "13"
    ],
@@ -4165,8 +4161,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology",
+   "evidence": "両国",
    "tagPrefCodes": [
     "13"
    ],
@@ -4187,8 +4183,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology",
+   "evidence": "浅草橋",
    "tagPrefCodes": [
     "13"
    ],
@@ -5000,11 +4996,9 @@
    "prefCodes": [
     "02"
    ],
-   "method": "ontology-substring",
-   "evidence": "東北きゅんパス旅 ⊃ 東北",
-   "tagPrefCodes": [
-    "02"
-   ],
+   "method": "gps",
+   "evidence": "02",
+   "tagPrefCodes": null,
    "gpsPrefCode": "02"
   },
   "18029084578971805": {
@@ -5033,10 +5027,10 @@
    "prefCodes": [
     "03"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東北きゅんパス旅 ⊃ 東北",
+   "method": "ontology-substring",
+   "evidence": "盛岡冷麺 ⊃ 盛岡",
    "tagPrefCodes": [
-    "02"
+    "03"
    ],
    "gpsPrefCode": "03"
   },
@@ -5044,10 +5038,10 @@
    "prefCodes": [
     "03"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東北きゅんパス旅 ⊃ 東北",
+   "method": "ontology-substring",
+   "evidence": "BAY盛岡 ⊃ 盛岡",
    "tagPrefCodes": [
-    "02"
+    "03"
    ],
    "gpsPrefCode": "03"
   },
@@ -5143,10 +5137,10 @@
    "prefCodes": [
     "13"
    ],
-   "method": "gps-over-tag",
-   "evidence": "青森",
+   "method": "ontology",
+   "evidence": "東京駅",
    "tagPrefCodes": [
-    "02"
+    "13"
    ],
    "gpsPrefCode": "13"
   },
@@ -5377,8 +5371,8 @@
    "prefCodes": [
     "27"
    ],
-   "method": "pref-name-caption",
-   "evidence": "大阪",
+   "method": "curated",
+   "evidence": "ユニバーサルスタジオジャパン",
    "tagPrefCodes": [
     "27"
    ],
@@ -5465,8 +5459,8 @@
    "prefCodes": [
     "27"
    ],
-   "method": "pref-name-caption",
-   "evidence": "大阪",
+   "method": "curated",
+   "evidence": "ユニバーサルシティウォーク大阪",
    "tagPrefCodes": [
     "27"
    ],
@@ -5518,11 +5512,9 @@
    "prefCodes": [
     "27"
    ],
-   "method": "gps-over-tag",
-   "evidence": "上方温泉一休♨️ ⊃ 上方",
-   "tagPrefCodes": [
-    "26"
-   ],
+   "method": "gps",
+   "evidence": "27",
+   "tagPrefCodes": null,
    "gpsPrefCode": "27"
   },
   "18021220376295753": {
@@ -6418,8 +6410,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology-substring",
+   "evidence": "東京競馬場 ⊃ 東京",
    "tagPrefCodes": [
     "13"
    ],
@@ -7369,8 +7361,8 @@
    "prefCodes": [
     "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "神奈川",
+   "method": "ontology-substring",
+   "evidence": "神奈川観光 ⊃ 神奈川",
    "tagPrefCodes": [
     "14"
    ],
@@ -7380,8 +7372,8 @@
    "prefCodes": [
     "14"
    ],
-   "method": "pref-name-caption",
-   "evidence": "神奈川",
+   "method": "ontology-substring",
+   "evidence": "スラッシュ川崎 ⊃ 川崎",
    "tagPrefCodes": [
     "14"
    ],
@@ -7586,8 +7578,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology-substring",
+   "evidence": "東京観光 ⊃ 東京",
    "tagPrefCodes": [
     "13"
    ],
@@ -7597,8 +7589,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "ontology-substring",
+   "evidence": "東京観光 ⊃ 東京",
    "tagPrefCodes": [
     "13"
    ],
@@ -7807,8 +7799,8 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "千葉",
+   "method": "ontology-substring",
+   "evidence": "千葉観光 ⊃ 千葉",
    "tagPrefCodes": [
     "12"
    ],
@@ -7829,8 +7821,8 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "千葉",
+   "method": "ontology-substring",
+   "evidence": "千葉観光 ⊃ 千葉",
    "tagPrefCodes": [
     "12"
    ],
@@ -7840,8 +7832,8 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "千葉",
+   "method": "ontology-substring",
+   "evidence": "千葉観光 ⊃ 千葉",
    "tagPrefCodes": [
     "12"
    ],
@@ -7851,8 +7843,8 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "千葉",
+   "method": "ontology-substring",
+   "evidence": "千葉観光 ⊃ 千葉",
    "tagPrefCodes": [
     "12"
    ],
@@ -7862,8 +7854,8 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "千葉",
+   "method": "ontology-substring",
+   "evidence": "千葉観光 ⊃ 千葉",
    "tagPrefCodes": [
     "12"
    ],
@@ -7873,8 +7865,8 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "千葉",
+   "method": "ontology-substring",
+   "evidence": "千葉観光 ⊃ 千葉",
    "tagPrefCodes": [
     "12"
    ],
@@ -7917,8 +7909,8 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "千葉",
+   "method": "ontology-substring",
+   "evidence": "千葉観光 ⊃ 千葉",
    "tagPrefCodes": [
     "12"
    ],
@@ -7928,8 +7920,8 @@
    "prefCodes": [
     "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "千葉",
+   "method": "ontology-substring",
+   "evidence": "千葉観光 ⊃ 千葉",
    "tagPrefCodes": [
     "12"
    ],
@@ -9774,10 +9766,10 @@
    "prefCodes": [
     "13"
    ],
-   "method": "gps-over-tag",
-   "evidence": "日本庭園",
+   "method": "ontology",
+   "evidence": "渋谷",
    "tagPrefCodes": [
-    "27"
+    "13"
    ],
    "gpsPrefCode": "13"
   },
@@ -9935,10 +9927,10 @@
    "prefCodes": [
     "13"
    ],
-   "method": "gps-over-tag",
-   "evidence": "千葉",
+   "method": "ontology",
+   "evidence": "錦糸町駅",
    "tagPrefCodes": [
-    "12"
+    "13"
    ],
    "gpsPrefCode": "13"
   },
@@ -10175,8 +10167,8 @@
    "prefCodes": [
     "13"
    ],
-   "method": "caption-place",
-   "evidence": "日の出",
+   "method": "override",
+   "evidence": "18278385238111743",
    "tagPrefCodes": [
     "13"
    ],
@@ -10643,8 +10635,8 @@
    "prefCodes": [
     "24"
    ],
-   "method": "caption-place",
-   "evidence": "12",
+   "method": "override",
+   "evidence": "17948354738553722",
    "tagPrefCodes": [
     "24"
    ],

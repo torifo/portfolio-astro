@@ -20,11 +20,14 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from gazetteer import Gazetteer  # noqa: E402
-from resolve import resolve_post  # noqa: E402
+from resolve import date_line_text, resolve_post  # noqa: E402
 
 # build_trips.py の NAMED_TRIP_* と同じ見分け方（片方だけ変えると判定が食い違う）
 TRIP_SUFFIXES = ("旅", "編", "旅行", "ツアー", "巻")
 TRIP_MIN_LENGTH = 8
+# 同じ撮影日のほかの投稿がこの件数以上あり、この割合以上が同じ県なら、その県と違う新着を指摘する
+SAME_DAY_MIN = 2
+SAME_DAY_SHARE = 0.6
 METHOD_LABELS = {
     "override": "手動指定",
     "pref-name": "県名タグ",
@@ -36,6 +39,7 @@ METHOD_LABELS = {
     "gps-over-tag": "GPS（タグと不一致）",
     "trip-inherit": "旅から継承",
     "caption-place": "本文の地名",
+    "date-line-place": "日付の後ろの場所",
 }
 
 
@@ -111,6 +115,17 @@ def main():
 
     gaz = Gazetteer()
     trip_tags = {t["tag"] for t in trips}
+    by_date = collections.defaultdict(list)
+    for post_id, post in posts.items():
+        by_date[post["date"]].append(post_id)
+
+    def same_day_majority(post):
+        """同じ日のほかの投稿の多くが一つの県なら (県コード, 件数, 母数)。旅に入らない単発の投稿の誤りを拾う。"""
+        others = [resolved[i]["prefCodes"] for i in by_date[post["date"]] if i != post["id"] and resolved[i].get("prefCodes")]
+        if len(others) < SAME_DAY_MIN:
+            return None
+        code, hits = collections.Counter(c for codes in others for c in set(codes)).most_common(1)[0]
+        return (code, hits, len(others)) if hits / len(others) >= SAME_DAY_SHARE else None
 
     def pref_names(codes):
         return "・".join(prefs[c] for c in codes) or "（未解決）"
@@ -137,6 +152,13 @@ def main():
                     f"「{r['evidence']}」で{pref_names(codes)}になったが、旅タグを除くと「{evidence}」から{pref_names(alt)}",
                 )
             )
+        majority = same_day_majority(p) if codes and r.get("method") != "override" else None
+        if majority and majority[0] not in codes:
+            code, hits, total = majority
+            warnings.append((p, "同じ日の投稿と県が違う", f"同じ日の{total}件中{hits}件は{prefs[code]}"))
+        written = date_line_text(p)
+        if written and r.get("method") not in ("date-line-place", "override"):
+            warnings.append((p, "日付の後ろの場所を読めない", f"「{written}」から県を決められない"))
         if p.get("date_source") == "upload":
             warnings.append((p, "撮影日が不明", "本文に日付が無いため、投稿日を使用"))
         for tag in p["hashtags"] or []:

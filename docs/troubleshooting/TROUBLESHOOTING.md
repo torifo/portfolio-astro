@@ -346,6 +346,18 @@ Instagram 側のキャプションを直しても、取り込み済みの投稿�
 | 県 | `data/journey/overrides.json`（投稿ID またはタグ） |
 | 撮影日 | `data/journey/date_overrides.json`（投稿ID） |
 
+Instagram API は位置情報を返さないので、新着の県は本文とタグの文字だけで決まる。
+投稿のときに日付と同じ行へ場所を書くと、それを最優先で使う（2026-09-30 以降の投稿）。
+
+```
+2025-06-28 横浜
+東海汽船 東京湾クルーズ
+#八景島シーパラ東京湾クルーズ東京タワーてんこ盛り旅
+```
+
+読めなかったときは PR の要確認に「日付の後ろの場所を読めない」と出る。判定のルールを変えたら
+`python3 scripts/journey/eval_resolve.py` で精度の前後を比べる（`--save` → 変更 → `--compare`）。
+
 手元で直すときは、撮影地の座標（`data/journey/gps.json`、Git に入っていない）がある環境で
 `journey:build` を流す。PR のブランチを別の作業ツリーに出すなら、`gps.json` と
 `data/ontology/places.json` をそこへリンクしてから流す。
