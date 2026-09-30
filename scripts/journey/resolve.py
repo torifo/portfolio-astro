@@ -9,12 +9,17 @@
   L1 EXIF GPS        data/journey/gps.json の座標を県境ポリゴンで引く。
                      このファイルは公開しない（撮影地そのものなので）。
                      無ければこの層は黙って飛ばされ、辞書だけで判定が続く
-  L2 県名の直接一致  タグとキャプションに「秋田県」「秋田」が出てくる
+  L1b 日付の後ろの場所  「2025-06-28 横浜」のように日付と同じ行に書いた場所。
+                     2026-09-30 以降に投稿したものだけ（それより前の同じ行は題なので読まない）
+  L2 県名の直接一致  タグに「秋田県」「秋田」がある
   L3 gazetteer.json  人が育てる確定辞書
   L4 オントロジー    places.json の索引にタグが載っている
+  L4c 本文の県名     本文（タグの部分を除く）に県名が出てくる。地名タグより弱い
   L4b 部分一致       長い旅タグの中に地名が埋まっている
   L5 旅グループ継承  同じタグを持つ他の投稿が一つの県で一致している
   終端 unresolved
+
+層の順序と除外語は eval_resolve.py で前後を測って決めた（2026-09-30）。
 
 L6 の LLM はこの外側にいる。出力は必ず gazetteer.json を経由してから
 サイトに載るので、非定常な判定がビルドに混ざることはない。
@@ -25,11 +30,14 @@ import argparse
 import collections
 import json
 import pathlib
+import re
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "ingest"))
 from gazetteer import Gazetteer, normalize  # noqa: E402
 from geo import Boundaries  # noqa: E402
+from parse_export import LEADING_DATE  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
@@ -42,6 +50,16 @@ INHERIT_MIN = 2
 
 # 県名を含むが県を指さない語。本文から県名を拾う前に消す（東京湾は東京・神奈川・千葉にまたがる）
 NOT_PREFECTURE = ("東京湾",)
+
+# 本文の中のタグ。タグは L2〜L4 で完全一致を調べてあるので、本文の県名探しでは読まない
+HASHTAG = re.compile(r"#[^\s#]+")
+
+# 日付と同じ行に場所を書く決まりを始めた日。これより前の投稿の同じ行は題（「2023年9月6日 父母ヶ浜 Part3」）
+DATE_LINE_SINCE = "2026-09-30"
+# 日付の直後に続く期間の残り（「2024-9-14~15」の「~15」）
+DATE_TAIL = re.compile(r"^\s*[~〜\-–]\s*[\d年月日/.\-~〜]*")
+# 場所の区切り（「横浜・八景島」「横浜➝東京」「東京ディズニーシー（夜）」）
+PLACE_DELIM = re.compile(r"[\s・/／➝→⇒〜~、,，＆&()（）【】「」:：|｜]+")
 
 
 def decide(entries, gaz):
@@ -83,20 +101,53 @@ def find_override(post, gaz, overrides):
     return None
 
 
+def date_line_text(post):
+    """日付と同じ行に書いた場所。決まりを始める前の投稿と、日付で始まらない投稿は None。"""
+    if (post.get("uploaded_at") or "")[:10] < DATE_LINE_SINCE or not post["caption"]:
+        return None
+    first = post["caption"].splitlines()[0]
+    match = LEADING_DATE.match(first)
+    if not match:
+        return None
+    return HASHTAG.sub(" ", DATE_TAIL.sub("", normalize(first[match.end():]))).strip() or None
+
+
+def date_line_place(post, gaz):
+    """L1b 語ごとの完全一致を左から当て、無ければ部分一致を左から当てる（「横浜➝東京」なら横浜）。"""
+    text = date_line_text(post)
+    if not text:
+        return None, None, None
+    for word in NOT_PREFECTURE:
+        text = text.replace(word, " ")
+    for token in (t for t in PLACE_DELIM.split(text) if t):
+        pinned = gaz.overrides.get(token)  # タグで固定した施設名（東京ディズニーシー→千葉）も効かせる
+        codes = gaz.pref_terms.get(token) or (pinned if isinstance(pinned, list) else None)
+        codes = codes or gaz.curated.get(token) or decide(gaz.lookup(token), gaz)
+        if codes:
+            return sorted(set(codes)), "date-line-place", token
+    hits = [(text.find(t), -len(t), t, c) for t, c in gaz.pref_terms.items() if t in text]
+    for term, entries in gaz.find_in(text):
+        codes = decide(entries, gaz)
+        if codes:
+            hits.append((text.find(term), -len(term), term, codes))
+    if not hits:
+        return None, None, None
+    _, _, term, codes = min(hits)  # 左にあるもの、同じ位置なら長い語
+    return sorted(set(codes)), "date-line-place", term
+
+
 def resolve_post(post, gaz, overrides):
     tags = post["hashtags"]
+
+    codes, method, evidence = date_line_place(post, gaz)
+    if codes:
+        return codes, method, evidence
 
     # L2 県名の直接一致。タグを先に見る（キャプションより意図が明確）
     for tag in tags:
         codes = gaz.pref_terms.get(normalize(tag))
         if codes:
             return sorted(set(codes)), "pref-name", tag
-    caption = normalize(post["caption"])
-    for word in NOT_PREFECTURE:
-        caption = caption.replace(word, " ")
-    for term, codes in gaz.pref_terms.items():
-        if term in caption:
-            return sorted(set(codes)), "pref-name-caption", term
 
     # L3 人が育てた確定辞書
     for tag in tags:
@@ -109,6 +160,14 @@ def resolve_post(post, gaz, overrides):
         codes = decide(gaz.lookup(tag), gaz)
         if codes:
             return codes, "ontology", tag
+
+    # L4c 本文の県名。長い旅タグの一部（「…東京タワー…旅」の東京）を拾わないようタグを除いて読む
+    caption = HASHTAG.sub(" ", normalize(post["caption"]))
+    for word in NOT_PREFECTURE:
+        caption = caption.replace(word, " ")
+    for term, codes in gaz.pref_terms.items():
+        if term in caption:
+            return sorted(set(codes)), "pref-name-caption", term
 
     # L4b 旅タグの中に地名が埋まっている場合を拾う
     for tag in sorted(tags, key=len, reverse=True):

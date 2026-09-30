@@ -27,6 +27,8 @@ STOPWORDS = {
     "散策", "散歩", "自然", "ドライブ", "公園", "橋", "旅", "旅行", "観光", "風景",
     "写真", "景色", "神社", "寺", "城", "駅", "山", "海", "川", "湖", "滝", "温泉",
     "花", "桜", "紅葉", "雪", "夜景", "電車", "新幹線", "バス", "飛行機", "船",
+    # 2026-09-30 eval_resolve.py の誤りから。一般語・地方名・小さな集落の名前が本文やタグの中で当たっていた
+    "日本庭園", "東北", "上方", "離島", "空港前", "海岸", "日の出", "ひまわり", "大橋", "谷", "森", "鳥居", "東海",
 }
 
 # 部分一致で拾う最短の長さ。これ未満だと「旅」「山」のような語で誤爆する。
@@ -139,6 +141,8 @@ class Gazetteer:
         key = normalize(term)
         if not key or key in STOPWORDS or term in STOPWORDS:
             return
+        if re.fullmatch(r"[\d\s\-]+", key):
+            return  # 駅番号のような数字だけの別名（津駅の「12」）が「12月」に当たる
         bucket = self.terms.setdefault(key, [])
         if not any(e["qid"] == place["qid"] for e in bucket):
             bucket.append(place)
