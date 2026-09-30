@@ -40,6 +40,9 @@ DOMINANCE_FLOOR = 5
 # 旅グループ継承を許す最小の裏付け数。1件だけの一致では継承しない。
 INHERIT_MIN = 2
 
+# 県名を含むが県を指さない語。本文から県名を拾う前に消す（東京湾は東京・神奈川・千葉にまたがる）
+NOT_PREFECTURE = ("東京湾",)
+
 
 def decide(entries, gaz):
     """候補エントリ群から県コードを決める。決まらなければ None。
@@ -88,8 +91,11 @@ def resolve_post(post, gaz, overrides):
         codes = gaz.pref_terms.get(normalize(tag))
         if codes:
             return sorted(set(codes)), "pref-name", tag
+    caption = normalize(post["caption"])
+    for word in NOT_PREFECTURE:
+        caption = caption.replace(word, " ")
     for term, codes in gaz.pref_terms.items():
-        if term in normalize(post["caption"]):
+        if term in caption:
             return sorted(set(codes)), "pref-name-caption", term
 
     # L3 人が育てた確定辞書
