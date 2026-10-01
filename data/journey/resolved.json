@@ -45,6 +45,17 @@
    ],
    "gpsPrefCode": "13"
   },
+  "18128829475758900": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
   "18107070299462226": {
    "prefCodes": [
     "13"
