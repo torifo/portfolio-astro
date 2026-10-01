@@ -154,7 +154,7 @@ cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <戻したいタグ>
 ビルド自体は外部を一切呼ばない。
 
 ```
-毎朝 7:17 JST（または Actions の「Journey sync」→ Run workflow）
+毎日 2:47 JST（または Actions の「Journey sync」→ Run workflow）
   └─ 新着を取り込み、県・旅を判定 → journey/sync-日付 の PR を作る
        本文: 新着の一覧（サムネ・リンク・判定された県）/ 要確認 / 旅の変化
 ```
@@ -277,7 +277,7 @@ Required GitHub secrets: `GHCR_TOKEN`, `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`,
 
 #### Journey Sync
 
-`.github/workflows/journey-sync.yml` runs every morning at 7:17 JST (or on demand via
+`.github/workflows/journey-sync.yml` runs every night at 2:47 JST (or on demand via
 *Run workflow*). It ingests new Instagram posts, resolves prefectures and trips, and opens a
 `journey/sync-*` pull request with automated checks. Merging it deploys as usual. See
 [docs/deployment/DEPLOYMENT.md](docs/deployment/DEPLOYMENT.md) for details.

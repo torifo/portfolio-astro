@@ -295,7 +295,7 @@ getComputedStyle(el).backgroundImage;
 
 ## Journey（Instagram 同期）の問題
 
-同期は GitHub Actions の「Journey sync」が毎朝7:17（JST）に回し、新着があれば PR を作ります。
+同期は GitHub Actions の「Journey sync」が毎日2:47（JST）に回し（GitHub の定時は2〜3時間遅れることがある）、新着があれば PR を作ります。
 仕組みは [DEPLOYMENT.md](../deployment/DEPLOYMENT.md) と
 [設計書の 2026-09-29 改訂](../superpowers/specs/2026-09-11-journey-instagram-design.md) を参照。
 
