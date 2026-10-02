@@ -28,6 +28,8 @@ TRIP_MIN_LENGTH = 8
 # 同じ撮影日のほかの投稿がこの件数以上あり、この割合以上が同じ県なら、その県と違う新着を指摘する
 SAME_DAY_MIN = 2
 SAME_DAY_SHARE = 0.6
+# 人が県を決めた根拠。県の食い違いの点検（同じ日・旅の主な県）はしない
+DECIDED_BY_PERSON = ("override", "date-line-place")
 METHOD_LABELS = {
     "override": "手動指定",
     "pref-name": "県名タグ",
@@ -54,8 +56,11 @@ def load_base(root, ref, rel):
     return json.loads(out.stdout)
 
 
-def first_line(caption):
-    for line in (caption or "").replace("⁡", "").splitlines():
+def first_line(post):
+    lines = (post.get("caption") or "").replace("⁡", "").splitlines()
+    if date_line_text(post):
+        lines = lines[1:]  # 日付の行の続きは場所なので、題は次の行から取る
+    for line in lines:
         line = line.strip()
         # 日付やタグだけの行を投稿名にしない。
         if not line or line.startswith("#") or re.fullmatch(r"[\d\-/年月日~〜 ]+", line):
@@ -152,7 +157,7 @@ def main():
                     f"「{r['evidence']}」で{pref_names(codes)}になったが、旅タグを除くと「{evidence}」から{pref_names(alt)}",
                 )
             )
-        majority = same_day_majority(p) if codes and r.get("method") != "override" else None
+        majority = same_day_majority(p) if codes and r.get("method") not in DECIDED_BY_PERSON else None
         if majority and majority[0] not in codes:
             code, hits, total = majority
             warnings.append((p, "同じ日の投稿と県が違う", f"同じ日の{total}件中{hits}件は{prefs[code]}"))
@@ -171,7 +176,7 @@ def main():
                 )
             # 新着込みで組み直した旅と比べると新着自身で一致してしまうので、main の旅と比べる。人が決めた県は点検しない
             known = base_trips.get(tag, trip)
-            if codes and r.get("method") != "override" and not set(codes) & set(known["prefCodes"]):
+            if codes and r.get("method") not in DECIDED_BY_PERSON and not set(codes) & set(known["prefCodes"]):
                 warnings.append(
                     (p, "旅の主な県と不一致", f"旅「{trip['title'][:24]}」の主な県は{pref_names(known['prefCodes'])}")
                 )
@@ -190,7 +195,7 @@ def main():
             p = posts[post_id]
             link = permalinks.get(p["id"], "")
             lines.append(
-                f'| <img src="{thumb.format(p["id"])}" width="64"> | [{first_line(p.get("caption"))}]({link})<br>`{p["id"]}` '
+                f'| <img src="{thumb.format(p["id"])}" width="64"> | [{first_line(p)}]({link})<br>`{p["id"]}` '
                 f"| {'<br>'.join(checks)} |"
             )
         lines.append("")
@@ -201,7 +206,7 @@ def main():
         link = permalinks.get(p["id"], "")
         date = p["date"] + ("" if p.get("date_source") != "upload" else " ※")
         lines.append(
-            f'| <img src="{thumb.format(p["id"])}" width="64"> | {date} | [{first_line(p.get("caption"))}]({link})<br>`{p["id"]}` '
+            f'| <img src="{thumb.format(p["id"])}" width="64"> | {date} | [{first_line(p)}]({link})<br>`{p["id"]}` '
             f"| {pref_names(r.get('prefCodes') or [])} | {METHOD_LABELS.get(r['method'], r['method'])} |"
         )
     lines.append("")
