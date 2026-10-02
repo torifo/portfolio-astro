@@ -117,6 +117,7 @@ jobs:
         BRANCH: ${{ steps.sync.outputs.branch }}
         BEFORE: ${{ steps.sync.outputs.before }}
         ADDED: ${{ steps.sync.outputs.added }}
+        WRITE_TOKEN: ${{ secrets.GHCR_TOKEN }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -126,6 +127,8 @@ jobs:
         python3 scripts/journey/sync_report.py --root . --base "$BASE" --repo "$GITHUB_REPOSITORY" \
           --sha "$(git rev-parse HEAD)" --out "$RUNNER_TEMP/report.md" --summary "$RUNNER_TEMP/summary.json"
         cat "$RUNNER_TEMP/report.md" >> "$GITHUB_STEP_SUMMARY"
+        auto="$(python3 -c 'import json,sys;print(str(json.load(open(sys.argv[1]))["autoMerge"]).lower())' "$RUNNER_TEMP/summary.json")"
+        echo "自動マージ: $auto（新着がすべて日付の後ろの場所で決まり、要確認0件なら true）" | tee -a "$GITHUB_STEP_SUMMARY"
         if [ "$DRY_RUN" = "true" ]; then
           echo "dry_run なので push も PR もしない"
           exit 0
@@ -134,4 +137,9 @@ jobs:
         title="Journey: 新着 ${ADDED} 件（$(TZ=Asia/Tokyo date +%Y-%m-%d)）"
         [ "$warnings" -gt 0 ] && title="${title}・要確認 ${warnings} 件"
         git push -q -u origin "$BRANCH"
-        gh pr create --base main --head "$BRANCH" --title "$title" --body-file "$RUNNER_TEMP/report.md"
+        url="$(gh pr create --base main --head "$BRANCH" --title "$title" --body-file "$RUNNER_TEMP/report.md")"
+        echo "PR: $url" | tee -a "$GITHUB_STEP_SUMMARY"
+        [ "$auto" = "true" ] || exit 0
+        # GITHUB_TOKEN でマージした push では Deploy が起動しないので、個人トークンでマージして本番まで流す
+        GH_TOKEN="$WRITE_TOKEN" gh pr merge "$url" --rebase --delete-branch
+        echo "日付の後ろの場所だけで要確認も無いので、マージした（Deploy to Production が本番へ出す）" | tee -a "$GITHUB_STEP_SUMMARY"

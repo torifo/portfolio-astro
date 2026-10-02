@@ -184,6 +184,8 @@ def main():
     thumb = f"https://raw.githubusercontent.com/{args.repo}/{args.sha}/public/journey/thumbs/{{}}.webp"
     # 要確認は点検の数ではなく投稿の数で数える（表の行数と合わせる）
     review_count = len({p["id"] for p, _, _ in warnings})
+    # 新着がすべて日付の後ろに書いた場所で決まり、要確認も無ければ、人が見る点が無いのでマージまで進めてよい
+    auto_merge = bool(new) and review_count == 0 and all(resolved[p["id"]]["method"] == "date-line-place" for p in new)
     lines = [f"新着 **{len(new)} 件**・要確認 **{review_count} 件**", ""]
 
     if warnings:
@@ -246,9 +248,10 @@ def main():
 
     args.out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     args.summary.write_text(
-        json.dumps({"new": len(new), "warnings": review_count}, ensure_ascii=False), encoding="utf-8"
+        json.dumps({"new": len(new), "warnings": review_count, "autoMerge": auto_merge}, ensure_ascii=False),
+        encoding="utf-8",
     )
-    print(f"新着 {len(new)} 件 / 要確認 {review_count} 件")
+    print(f"新着 {len(new)} 件 / 要確認 {review_count} 件 / 自動マージ {'する' if auto_merge else 'しない'}")
 
 
 if __name__ == "__main__":
