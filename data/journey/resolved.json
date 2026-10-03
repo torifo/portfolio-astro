@@ -12,6 +12,171 @@
    ],
    "gpsPrefCode": "42"
   },
+  "18107367800616319": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "18130488436753562": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "18222943942340899": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "17882386071526358": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "17877316218632703": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "18130908955768464": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "17907552768560846": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "17989594259863649": {
+   "prefCodes": [
+    "07"
+   ],
+   "method": "date-line-place",
+   "evidence": "福島",
+   "tagPrefCodes": [
+    "07"
+   ],
+   "gpsPrefCode": null
+  },
+  "17982094572108793": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17901127542370722": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17997004545042376": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "郷土の森博物館",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17913147462534069": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18149851537552958": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18113097236601467": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "ontology",
+   "evidence": "郷土の森博物館",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17955781479254699": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
   "18090175756649306": {
    "prefCodes": [
     "13"
@@ -44,6 +209,28 @@
     "13"
    ],
    "gpsPrefCode": "13"
+  },
+  "18206400877372988": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17957427915234727": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   },
   "18128829475758900": {
    "prefCodes": [
