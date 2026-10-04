@@ -542,75 +542,69 @@
   },
   "17935060236383615": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-majority",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
    "gpsPrefCode": null
   },
   "17992896837044068": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-majority",
-   "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編 ⊃ よみうりランド",
+   "method": "override",
+   "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
    "gpsPrefCode": null
   },
   "17908767918520863": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-majority",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
    "gpsPrefCode": null
   },
   "18004188884992216": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-majority",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
    "gpsPrefCode": null
   },
   "18123957406883048": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-majority",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
    "gpsPrefCode": null
   },
   "18341583514268903": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18572402701068724": {
    "prefCodes": [
@@ -10356,168 +10350,157 @@
   },
   "18039996493823149": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
+   "method": "override",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18051870220774267": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
+   "method": "override",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "17862025521193225": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
+   "method": "override",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "17928334397807775": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "HANABIYORI",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18026624810212951": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "HANABIYORI",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18015603506595705": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "HANABIYORI",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18024321380517613": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "HANABIYORI",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "17891376554982014": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "HANA・BIYORI",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18437542678000727": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "HANA・BIYORI",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18051706234806714": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
+   "method": "override",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "17849556447222275": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
+   "method": "override",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18245151733250771": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
-   "evidence": "よみうりランド",
+   "method": "override",
+   "evidence": "HANA・BIYORI",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "17876768430101853": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "border-gps",
+   "method": "override",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
-    "13",
-    "14"
+    "13"
    ],
-   "gpsPrefCode": "14"
+   "gpsPrefCode": null
   },
   "18037154515444984": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "gps",
-   "evidence": "14",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "14"
+   "method": "override",
+   "evidence": "18037154515444984",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   },
   "17974954717992884": {
    "prefCodes": [
@@ -10548,12 +10531,14 @@
   },
   "17966370287152143": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "gps",
-   "evidence": "14",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "14"
+   "method": "override",
+   "evidence": "17966370287152143",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   },
   "18099172855313122": {
    "prefCodes": [
@@ -10566,12 +10551,14 @@
   },
   "17965355789160484": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "gps",
-   "evidence": "14",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "14"
+   "method": "override",
+   "evidence": "17965355789160484",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   },
   "18070464907546674": {
    "prefCodes": [
@@ -11170,12 +11157,14 @@
   },
   "17960175443174839": {
    "prefCodes": [
-    "14"
+    "13"
    ],
-   "method": "gps",
-   "evidence": "14",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "14"
+   "method": "override",
+   "evidence": "17960175443174839",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   }
  }
 }
