@@ -44,7 +44,9 @@ def is_holy(post, trip_tags):
 
 def summarize(record, group, resolved):
     """作品の postIds から件数・期間・県を埋める。"""
-    dates = sorted(dt.date.fromisoformat(p["date"]) for p in group)
+    # 期間は撮影日の分かる投稿から（年まで・不明の投稿は日付が並び順のためだけにある）。全部そうなら全件から
+    dated = [p for p in group if p["date_precision"] not in ("year", "unknown")] or group
+    dates = sorted(dt.date.fromisoformat(p["date"]) for p in dated)
     counts = collections.Counter(code for p in group for code in (resolved[p["id"]]["prefCodes"] or []))
     return {
         **record,

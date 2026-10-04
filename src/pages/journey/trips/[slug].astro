@@ -8,6 +8,7 @@ import {
   postsForTrip,
   prefectureByCode,
   formatRange,
+  hasDay,
   type Trip,
 } from '../../../lib/journey';
 
@@ -22,7 +23,7 @@ interface Props {
 const { trip } = Astro.props;
 const posts = postsForTrip(trip).slice().sort((a, b) => a.date.localeCompare(b.date));
 const visited = trip.allPrefCodes.map((code) => prefectureByCode(code)).filter(Boolean);
-const days = [...new Set(posts.map((post) => post.date))];
+const days = [...new Set(posts.filter(hasDay).map((post) => post.date))];
 ---
 
 <Layout title={`${trip.title} - Toriforium Portfolio`} description={`${formatRange(trip.start, trip.end)}の旅・${posts.length}件`}>

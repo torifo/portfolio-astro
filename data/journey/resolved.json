@@ -4241,14 +4241,10 @@
    "gpsPrefCode": null
   },
   "18061194421609627": {
-   "prefCodes": [
-    "13"
-   ],
+   "prefCodes": [],
    "method": "override",
    "evidence": "18061194421609627",
-   "tagPrefCodes": [
-    "13"
-   ],
+   "tagPrefCodes": [],
    "gpsPrefCode": null
   },
   "18065258716577539": {
@@ -4411,14 +4407,10 @@
    "gpsPrefCode": null
   },
   "18086089951443201": {
-   "prefCodes": [
-    "13"
-   ],
+   "prefCodes": [],
    "method": "override",
    "evidence": "18086089951443201",
-   "tagPrefCodes": [
-    "13"
-   ],
+   "tagPrefCodes": [],
    "gpsPrefCode": null
   },
   "18042836983825426": {
@@ -5384,15 +5376,6 @@
    ],
    "gpsPrefCode": "14"
   },
-  "17884869765007748": {
-   "prefCodes": [
-    "20"
-   ],
-   "method": "gps",
-   "evidence": "20",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "20"
-  },
   "18046690951651649": {
    "prefCodes": [
     "10"
@@ -6068,6 +6051,15 @@
    ],
    "gpsPrefCode": "20"
   },
+  "17884869765007748": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
   "18332580436109215": {
    "prefCodes": [
     "20"
@@ -6515,17 +6507,6 @@
    ],
    "gpsPrefCode": "13"
   },
-  "18035757604576429": {
-   "prefCodes": [
-    "21"
-   ],
-   "method": "ontology",
-   "evidence": "飛騨高山",
-   "tagPrefCodes": [
-    "21"
-   ],
-   "gpsPrefCode": "21"
-  },
   "18000320873320449": {
    "prefCodes": [
     "13"
@@ -6690,6 +6671,17 @@
     "13"
    ],
    "gpsPrefCode": "13"
+  },
+  "18035757604576429": {
+   "prefCodes": [
+    "21"
+   ],
+   "method": "ontology",
+   "evidence": "飛騨高山",
+   "tagPrefCodes": [
+    "21"
+   ],
+   "gpsPrefCode": "21"
   },
   "17972304188419809": {
    "prefCodes": [
@@ -7709,35 +7701,6 @@
    ],
    "gpsPrefCode": null
   },
-  "18004108246898659": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "gps",
-   "evidence": "13",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "13"
-  },
-  "17963929070461927": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "gps",
-   "evidence": "13",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "13"
-  },
-  "18082852747375398": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "caption-place",
-   "evidence": "多摩セン",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": null
-  },
   "18051801814494843": {
    "prefCodes": [
     "13"
@@ -7853,17 +7816,6 @@
    ],
    "gpsPrefCode": "14"
   },
-  "18002382703767163": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "override",
-   "evidence": "18002382703767163",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": null
-  },
   "17984659610480659": {
    "prefCodes": [
     "13"
@@ -7874,15 +7826,6 @@
     "13"
    ],
    "gpsPrefCode": null
-  },
-  "17972942243256372": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "gps",
-   "evidence": "13",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "13"
   },
   "17965175705344363": {
    "prefCodes": [
@@ -7927,26 +7870,6 @@
    "evidence": "13",
    "tagPrefCodes": null,
    "gpsPrefCode": "13"
-  },
-  "18010432045704098": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "gps",
-   "evidence": "13",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "13"
-  },
-  "18105121522318065": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "override",
-   "evidence": "18105121522318065",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": null
   },
   "17864722149019138": {
    "prefCodes": [
@@ -8103,14 +8026,10 @@
    "gpsPrefCode": "12"
   },
   "18251844214095308": {
-   "prefCodes": [
-    "13"
-   ],
+   "prefCodes": [],
    "method": "override",
    "evidence": "18251844214095308",
-   "tagPrefCodes": [
-    "13"
-   ],
+   "tagPrefCodes": [],
    "gpsPrefCode": null
   },
   "17941193903655629": {
@@ -8202,15 +8121,6 @@
    "evidence": "11",
    "tagPrefCodes": null,
    "gpsPrefCode": "11"
-  },
-  "17980832978066214": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "gps",
-   "evidence": "13",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "13"
   },
   "17896543043854365": {
    "prefCodes": [
@@ -8684,17 +8594,6 @@
    ],
    "gpsPrefCode": "12"
   },
-  "17992219018974270": {
-   "prefCodes": [
-    "11"
-   ],
-   "method": "override",
-   "evidence": "17992219018974270",
-   "tagPrefCodes": [
-    "11"
-   ],
-   "gpsPrefCode": null
-  },
   "17993483795292395": {
    "prefCodes": [
     "14"
@@ -8793,6 +8692,17 @@
    "evidence": "13",
    "tagPrefCodes": null,
    "gpsPrefCode": "13"
+  },
+  "18002382703767163": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18002382703767163",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   },
   "17923237901740331": {
    "prefCodes": [
@@ -8901,6 +8811,15 @@
    "tagPrefCodes": null,
    "gpsPrefCode": "19"
   },
+  "18010432045704098": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
   "17973959969230687": {
    "prefCodes": [
     "13"
@@ -8965,6 +8884,26 @@
    ],
    "method": "override",
    "evidence": "18027708445476991",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17972942243256372": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18105121522318065": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18105121522318065",
    "tagPrefCodes": [
     "13"
    ],
@@ -9296,6 +9235,17 @@
    "tagPrefCodes": null,
    "gpsPrefCode": "11"
   },
+  "17992219018974270": {
+   "prefCodes": [
+    "11"
+   ],
+   "method": "override",
+   "evidence": "17992219018974270",
+   "tagPrefCodes": [
+    "11"
+   ],
+   "gpsPrefCode": null
+  },
   "17960326274373242": {
    "prefCodes": [
     "11"
@@ -9597,15 +9547,6 @@
    "tagPrefCodes": null,
    "gpsPrefCode": "19"
   },
-  "18170762260277086": {
-   "prefCodes": [
-    "20"
-   ],
-   "method": "gps",
-   "evidence": "20",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "20"
-  },
   "18179948629281385": {
    "prefCodes": [
     "13"
@@ -9624,48 +9565,6 @@
    "tagPrefCodes": null,
    "gpsPrefCode": "13"
   },
-  "17867188559879345": {
-   "prefCodes": [
-    "20"
-   ],
-   "method": "gps",
-   "evidence": "20",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "20"
-  },
-  "17959162049424655": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "override",
-   "evidence": "17959162049424655",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": null
-  },
-  "17978695789897588": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "caption-place",
-   "evidence": "南大沢駅",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": null
-  },
-  "17866392044893705": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "override",
-   "evidence": "17866392044893705",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": null
-  },
   "17917651670697980": {
    "prefCodes": [
     "13"
@@ -9674,15 +9573,6 @@
    "evidence": "13",
    "tagPrefCodes": null,
    "gpsPrefCode": "13"
-  },
-  "17995105936786264": {
-   "prefCodes": [
-    "22"
-   ],
-   "method": "gps",
-   "evidence": "22",
-   "tagPrefCodes": null,
-   "gpsPrefCode": "22"
   },
   "17996685148645233": {
    "prefCodes": [
@@ -9759,6 +9649,15 @@
     "20"
    ],
    "gpsPrefCode": "20"
+  },
+  "17980832978066214": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
   },
   "18263722846145583": {
    "prefCodes": [
@@ -10167,17 +10066,6 @@
    "tagPrefCodes": null,
    "gpsPrefCode": "20"
   },
-  "17917822844689972": {
-   "prefCodes": [
-    "20"
-   ],
-   "method": "override",
-   "evidence": "17917822844689972",
-   "tagPrefCodes": [
-    "20"
-   ],
-   "gpsPrefCode": null
-  },
   "17966748656211252": {
    "prefCodes": [
     "20"
@@ -10186,18 +10074,6 @@
    "evidence": "20",
    "tagPrefCodes": null,
    "gpsPrefCode": "20"
-  },
-  "17946632321541961": {
-   "prefCodes": [
-    "19"
-   ],
-   "method": "border-majority",
-   "evidence": "富士山",
-   "tagPrefCodes": [
-    "19",
-    "22"
-   ],
-   "gpsPrefCode": null
   },
   "17971046525151437": {
    "prefCodes": [
@@ -10336,17 +10212,6 @@
     "13"
    ],
    "gpsPrefCode": "13"
-  },
-  "18278385238111743": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "override",
-   "evidence": "18278385238111743",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": null
   },
   "18039996493823149": {
    "prefCodes": [
@@ -10749,6 +10614,24 @@
    "tagPrefCodes": null,
    "gpsPrefCode": "13"
   },
+  "18170762260277086": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
+  "17867188559879345": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "gps",
+   "evidence": "20",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "20"
+  },
   "18031391029465451": {
    "prefCodes": [
     "13"
@@ -10796,6 +10679,17 @@
    ],
    "gpsPrefCode": null
   },
+  "17959162049424655": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17959162049424655",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
   "18020594599472365": {
    "prefCodes": [
     "13"
@@ -10804,6 +10698,28 @@
    "evidence": "13",
    "tagPrefCodes": null,
    "gpsPrefCode": "13"
+  },
+  "17978695789897588": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "caption-place",
+   "evidence": "南大沢駅",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17866392044893705": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "17866392044893705",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
   },
   "18240732484086378": {
    "prefCodes": [
@@ -10896,6 +10812,15 @@
    "gpsPrefCode": "13"
   },
   "17959057784271893": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "gps",
+   "evidence": "22",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "22"
+  },
+  "17995105936786264": {
    "prefCodes": [
     "22"
    ],
@@ -11052,6 +10977,35 @@
    "tagPrefCodes": null,
    "gpsPrefCode": "20"
   },
+  "18004108246898659": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "17963929070461927": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "gps",
+   "evidence": "13",
+   "tagPrefCodes": null,
+   "gpsPrefCode": "13"
+  },
+  "18082852747375398": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "caption-place",
+   "evidence": "多摩セン",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
   "17957481425247983": {
    "prefCodes": [
     "22"
@@ -11071,6 +11025,29 @@
    "evidence": "18017645752516809",
    "tagPrefCodes": [
     "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "17917822844689972": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "override",
+   "evidence": "17917822844689972",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "17946632321541961": {
+   "prefCodes": [
+    "19"
+   ],
+   "method": "border-majority",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
    ],
    "gpsPrefCode": null
   },
@@ -11161,6 +11138,17 @@
    ],
    "method": "override",
    "evidence": "17960175443174839",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18278385238111743": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "override",
+   "evidence": "18278385238111743",
    "tagPrefCodes": [
     "13"
    ],

@@ -3,7 +3,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import DetailHeader from '../../../components/DetailHeader.astro';
 import PostGrid from '../../../components/journey/PostGrid.astro';
-import { themes, postsForTheme, prefectureByCode, type Theme } from '../../../lib/journey';
+import { themes, postsForTheme, prefectureByCode, hasYear, type Theme } from '../../../lib/journey';
 
 export async function getStaticPaths() {
   return themes.map((theme) => ({ params: { slug: theme.slug }, props: { theme } }));
@@ -16,7 +16,7 @@ interface Props {
 const { theme } = Astro.props;
 const posts = postsForTheme(theme);
 const visited = theme.prefCodes.map((code) => prefectureByCode(code)).filter(Boolean);
-const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))].sort();
+const years = [...new Set(posts.filter(hasYear).map((post) => post.date.slice(0, 4)))].sort();
 ---
 
 <Layout title={`${theme.title} - Toriforium Portfolio`} description={`${theme.title}の記録 ${posts.length}件`}>

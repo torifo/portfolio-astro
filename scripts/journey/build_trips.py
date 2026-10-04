@@ -55,6 +55,9 @@ NAMED_TRIP_MIN_COVERAGE = 0.5
 # 旅の日付が3日以上飛んだら、そこから先は別の塊とみなす。
 MAX_GAP_DAYS = 2
 
+# 撮影日が年まで・不明の投稿（date_overrides.json の "2022" / "unknown"）。日付は並び順のためだけにある
+UNDATED = ("year", "unknown")
+
 
 def dense_span(dates):
     """旅の期間。日付の連続した塊のうち最大のものを返す。
@@ -92,10 +95,11 @@ def main():
     args = parser.parse_args()
 
     resolved = json.loads((JOURNEY / "resolved.json").read_text(encoding="utf-8"))["posts"]
-    # サイトに載せない投稿（日付の後ろに「趣味」）は旅の判定にも数えない
+    # サイトに載せない投稿（日付の後ろに「趣味」）は旅の判定にも数えない。
+    # 撮影日が年までの投稿・分からない投稿も、日ごとの判定を狂わせるので数えない（旅のページにはタグで出る）
     posts = [
         p for p in json.loads((JOURNEY / "posts.json").read_text(encoding="utf-8"))["posts"]
-        if not resolved.get(p["id"], {}).get("hidden")
+        if not resolved.get(p["id"], {}).get("hidden") and p["date_precision"] not in UNDATED
     ]
     posts_per_day = collections.Counter(p["date"] for p in posts)
     pref_slug = {

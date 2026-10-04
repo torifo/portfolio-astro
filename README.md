@@ -176,8 +176,9 @@ PR の「要確認」は、本番で実際に起きた誤りの型を機械で�
 
 | 直したいもの | ファイル | 書き方 |
 |---|---|---|
-| 県 | `data/journey/overrides.json` | `"投稿ID": ["13"]` または `"タグ": ["14"]`（タグならそのタグの投稿すべてに効く） |
-| 撮影日 | `data/journey/date_overrides.json` | `"投稿ID": "2023-09-05"` |
+| 県 | `data/journey/overrides.json` | `"投稿ID": ["13"]` または `"タグ": ["14"]`（タグならそのタグの投稿すべてに効く）。`[]` はどの県にも入れない（複数の場所の寄せ集めなど） |
+| 撮影日 | `data/journey/date_overrides.json` | `"投稿ID": "2023-09-05"`。月までなら `"2023-09"`、年までなら `"2022"`、分からなければ `"unknown"`（「日付不明」と出る） |
+| テーマ | `data/journey/themes.json` の `extraPostIds` | `["投稿ID"]`（タグの無い投稿をテーマに入れる） |
 | 再利用できる地名 | `data/journey/gazetteer.json` | `"地名": ["27"]` |
 | 聖地巡礼の作品 | `data/journey/pilgrimages.json` の `works` | `{"slug": "hyouka", "title": "氷菓", "aliases": []}`（タグに作品名か別名があればその作品に入る） |
 

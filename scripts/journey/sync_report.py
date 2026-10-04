@@ -30,6 +30,8 @@ SAME_DAY_MIN = 2
 SAME_DAY_SHARE = 0.6
 # 人が県を決めた根拠。県の食い違いの点検（同じ日・旅の主な県）はしない
 DECIDED_BY_PERSON = ("override", "date-line-place", "date-line-hidden")
+# 撮影日が年まで・不明の投稿（date_overrides.json の "2022" / "unknown"）。同じ日・旅の期間の点検に使わない
+UNDATED = ("year", "unknown")
 # 自動マージしてよい根拠（本人が日付の後ろに書いた場所、または「趣味」＝載せない）
 AUTO_MERGE_METHODS = ("date-line-place", "date-line-hidden")
 METHOD_LABELS = {
@@ -132,7 +134,8 @@ def main():
     trip_tags = {t["tag"] for t in trips}
     by_date = collections.defaultdict(list)
     for post_id, post in posts.items():
-        by_date[post["date"]].append(post_id)
+        if post.get("date_precision") not in UNDATED:
+            by_date[post["date"]].append(post_id)
 
     def same_day_majority(post):
         """同じ日のほかの投稿の多くが一つの県なら (県コード, 件数, 母数)。旅に入らない単発の投稿の誤りを拾う。"""
@@ -183,7 +186,7 @@ def main():
             trip = trip_of_tag.get(tag)
             if not trip:
                 continue
-            if not (trip["start"] <= p["date"] <= trip["end"]):
+            if p.get("date_precision") not in UNDATED and not (trip["start"] <= p["date"] <= trip["end"]):
                 warnings.append(
                     (p, "旅の期間外", f"旅「{trip['title'][:24]}」は {trip_period(trip)}")
                 )
@@ -278,7 +281,7 @@ def main():
         "このブランチで修正し、push してからマージする。",
         "",
         "- 県が違う：`data/journey/overrides.json` に `\"投稿ID\": [\"県コード\"]`",
-        "- 撮影日が違う：`data/journey/date_overrides.json` に `\"投稿ID\": \"YYYY-MM-DD\"`",
+        "- 撮影日が違う：`data/journey/date_overrides.json` に `\"投稿ID\": \"YYYY-MM-DD\"`（月まで `YYYY-MM`・年まで `YYYY`・不明 `unknown`）",
         "- 修正後に `npm run journey:build` を実行し、コミット",
         "",
         "</details>",

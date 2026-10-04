@@ -10,6 +10,7 @@ import {
   worksForPrefecture,
   themesForPrefecture,
   formatRange,
+  hasYear,
   type Prefecture,
 } from '../../lib/journey';
 
@@ -33,7 +34,7 @@ const themes = themesForPrefecture(prefecture.code);
 const FOOD = /(グルメ|ラーメン|そば|うどん|寿司|鮨|丼|定食|カフェ|スイーツ|ソフトクリーム|プリン|団子|餅|酒|ビール|弁当)/;
 const foodTags = [...new Set(posts.flatMap((post) => post.hashtags).filter((tag) => FOOD.test(tag)))].slice(0, 12);
 
-const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))].sort();
+const years = [...new Set(posts.filter(hasYear).map((post) => post.date.slice(0, 4)))].sort();
 const yearLabel =
   years.length === 0 ? '' : years.length === 1 ? `${years[0]}年` : `${years[0]}年〜${years[years.length - 1]}年`;
 ---

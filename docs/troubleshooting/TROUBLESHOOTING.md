@@ -352,8 +352,8 @@ Instagram 側のキャプションを直しても、取り込み済みの投稿�
 
 | 直したいもの | ファイル |
 |---|---|
-| 県 | `data/journey/overrides.json`（投稿ID またはタグ） |
-| 撮影日 | `data/journey/date_overrides.json`（投稿ID） |
+| 県 | `data/journey/overrides.json`（投稿ID またはタグ。`[]` はどの県にも入れない） |
+| 撮影日 | `data/journey/date_overrides.json`（投稿ID。`"2023-09-05"`、月まで `"2023-09"`、年まで `"2022"`、分からなければ `"unknown"`） |
 
 Instagram API は位置情報を返さないので、新着の県は本文とタグの文字だけで決まる。
 投稿のときに日付と同じ行へ場所を書くと、それを最優先で使う（2026-09-30 以降の投稿）。

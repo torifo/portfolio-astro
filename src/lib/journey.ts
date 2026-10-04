@@ -188,10 +188,25 @@ export function thumbUrl(post: Post): string {
   return `/journey/thumbs/${post.id}.webp`;
 }
 
-/** 「2025-06-15 〜 2025-06-17」/ 同日なら1つだけ。月までしか分からない投稿は「2025年6月」。 */
+/**
+ * 「2025年6月15日」。月までしか分からない投稿は「2025年6月」、年までは「2022年」。
+ * 撮影日が分からない投稿（date は投稿日で、並び順のためだけにある）は「日付不明」。
+ */
 export function formatDate(date: string, precision = 'day'): string {
   const [year, month, day] = date.split('-');
+  if (precision === 'unknown') return '日付不明';
+  if (precision === 'year') return `${year}年`;
   return precision === 'month' ? `${year}年${Number(month)}月` : `${year}年${Number(month)}月${Number(day)}日`;
+}
+
+/** 撮影した年が分かる投稿か（県・テーマのページの「2023年〜2025年」に数える）。 */
+export function hasYear(post: Post): boolean {
+  return post.datePrecision !== 'unknown';
+}
+
+/** 撮影した日が分かる投稿か（旅の「N日」に数える）。 */
+export function hasDay(post: Post): boolean {
+  return post.datePrecision !== 'unknown' && post.datePrecision !== 'year';
 }
 
 /**

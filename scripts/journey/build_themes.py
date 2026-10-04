@@ -14,6 +14,8 @@
 
 この軸は場所が分からない投稿の受け皿にもなる。「空の写真」は県が特定できなくても
 空のページには出せる。県軸から漏れたものをテーマ軸が拾う。
+
+タグの無い投稿は、テーマの extraPostIds に投稿IDを書けば入る（人が決める）。
 """
 from __future__ import annotations
 
@@ -57,14 +59,19 @@ def main():
         for tag in post["hashtags"]:
             by_tag[normalize(tag)].append(post)
 
+    by_id = {post["id"]: post for post in posts}
     claimed = set()
     for theme in document["themes"]:
         members, seen = [], set()
-        for tag in theme["tags"]:
-            for post in by_tag.get(normalize(tag), []):
-                if post["id"] not in seen:
-                    seen.add(post["id"])
-                    members.append(post)
+        for post_id in theme.get("extraPostIds", []):
+            if post_id not in by_id:
+                print(f"  extraPostIds に該当する投稿が無い（載せない投稿を含む）: {theme['title']} {post_id}")
+        tagged = (post for tag in theme["tags"] for post in by_tag.get(normalize(tag), []))
+        by_hand = (by_id[i] for i in theme.get("extraPostIds", []) if i in by_id)
+        for post in [*tagged, *by_hand]:
+            if post["id"] not in seen:
+                seen.add(post["id"])
+                members.append(post)
         members.sort(key=lambda p: p["date"], reverse=True)
         counts = collections.Counter(
             code for p in members for code in (resolved[p["id"]]["prefCodes"] or [])

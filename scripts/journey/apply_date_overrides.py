@@ -6,6 +6,14 @@
 
 sync は新着しか読まないので、Instagram 側のキャプションを直しても既にある投稿には
 届かない。人が直した日付をここで上書きする。journey:build の先頭で流す。
+
+値の書き方と精度（date_precision）:
+
+  "2023-05-03"  日まで（day）
+  "2023-05"     月まで（month）。日付は月初に寄せる
+  "2022"        年まで（year）。日付は1月1日に寄せる。サイトには「2022年」と出る
+  "unknown"     撮影日が分からない（unknown）。日付は投稿日のまま並び順にだけ使い、
+                サイトには「日付不明」と出す。県ページの年の範囲や旅の期間には数えない
 """
 from __future__ import annotations
 
@@ -13,9 +21,28 @@ import argparse
 import datetime as dt
 import json
 import pathlib
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 JOURNEY = ROOT / "data" / "journey"
+
+UNKNOWN = "unknown"
+
+
+def parse(want, post):
+    """指定の値から (日付, 精度)。書き間違いはここで落とす。"""
+    try:
+        if want == UNKNOWN:
+            return post["uploaded_at"][:10], "unknown"
+        if re.fullmatch(r"\d{4}", want):
+            return dt.date(int(want), 1, 1).isoformat(), "year"
+        if re.fullmatch(r"\d{4}-\d{2}", want):
+            return dt.date.fromisoformat(f"{want}-01").isoformat(), "month"
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", want):
+            return dt.date.fromisoformat(want).isoformat(), "day"
+    except (TypeError, ValueError):
+        pass  # 文字列でない値（引用符の付け忘れ）・存在しない日付（2023-02-30）
+    raise SystemExit(f"date_overrides.json の値が読めない: {post['id']}: {want!r}")
 
 
 def main():
@@ -40,12 +67,13 @@ def main():
         want = overrides.pop(post["id"], None)
         if want is None:
             continue
-        dt.date.fromisoformat(want)  # 書き間違いはここで落とす
-        if post["date"] != want:
+        date, precision = parse(want, post)
+        # 日付が同じでも精度だけ変わることがある（"unknown" は投稿日のまま）
+        if (post["date"], post["date_precision"], post["date_source"]) != (date, precision, "manual"):
             changed.append((post["id"], post["date"], want))
-            post["date"] = want
-        post["date_precision"] = "day"
-        post["date_source"] = "manual"
+            post["date"] = date
+            post["date_precision"] = precision
+            post["date_source"] = "manual"
     missing = list(overrides)
 
     if changed:
