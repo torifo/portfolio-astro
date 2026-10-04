@@ -7,8 +7,12 @@
 
   聖地巡礼に数える投稿  「聖地」を含むタグが投稿そのものに付いているもの。旅の名前のタグ
                         （「ゆるキャン聖地巡礼旅浜松編」のような…旅・…編）だけでは数えない
+  巡礼の旅              旅の名前に「巡礼」がある旅（「…WILLERの巡礼旅」）。旅の中に上の投稿が
+                        あればそれだけを数え（浜松編のさわやか・浜松城は外す）、1件も無ければ
+                        旅の投稿をすべて数える
   作品への振り分け      投稿のタグに作品名か別名が入っていれば、その作品に入れる。2つあれば両方
   作品名なし            聖地巡礼に数えるのにどの作品にも入らない投稿は「作品名なし」にまとめる
+                        （巡礼の旅も、作品名のタグを付けるまではここに入る）
 
 新しい作品は works に title・aliases・slug を足す。聖地巡礼の軸は都道府県・旅の軸と排他ではなく、
 同じ投稿が県ページにも旅ページにも聖地巡礼ページにも出るのは仕様。テーマの軸はこの絞り込みを持たない。
@@ -32,6 +36,9 @@ JOURNEY = ROOT / "data" / "journey"
 # 作品名の無い聖地巡礼をまとめる枠。works の中で untitled: true の1件
 UNTITLED = {"slug": "untitled", "title": "作品名なし", "aliases": [], "untitled": True}
 
+# 旅の名前にこの語があれば巡礼の旅（「…WILLERの巡礼旅」）
+PILGRIMAGE_TRIP_WORD = "巡礼"
+
 
 def is_trip_tag(tag, trip_tags):
     """旅の名前のタグ。登録済みの旅か、build_trips.py と同じ「…旅」「…編」で終わる長いタグ。"""
@@ -40,6 +47,24 @@ def is_trip_tag(tag, trip_tags):
 
 def is_holy(post, trip_tags):
     return any("聖地" in tag and not is_trip_tag(tag, trip_tags) for tag in post["hashtags"])
+
+
+def trip_members(trip, posts):
+    """旅のページに出る投稿（journey.ts の postsForTrip と同じく、旅のタグか立ち寄り先のタグ）。"""
+    tags = {trip["tag"], *trip.get("spots", [])}
+    return [p for p in posts if tags & set(p["hashtags"])]
+
+
+def pilgrimage_trip_posts(trips, posts, trip_tags):
+    """巡礼の旅のうち、「聖地」タグの投稿が1件も無い旅の投稿。旅ごと聖地巡礼に数える。"""
+    found = []
+    for trip in trips:
+        if trip.get("hidden") or PILGRIMAGE_TRIP_WORD not in trip["tag"]:
+            continue
+        members = trip_members(trip, posts)
+        if not any(is_holy(p, trip_tags) for p in members):
+            found.extend(members)
+    return found
 
 
 def summarize(record, group, resolved):
@@ -67,12 +92,18 @@ def main():
     posts = json.loads((JOURNEY / "posts.json").read_text(encoding="utf-8"))["posts"]
     resolved = json.loads((JOURNEY / "resolved.json").read_text(encoding="utf-8"))["posts"]
     posts = [p for p in posts if not resolved.get(p["id"], {}).get("hidden")]  # 日付の後ろに「趣味」は載せない
-    trip_tags = {t["tag"] for t in json.loads((JOURNEY / "trips.json").read_text(encoding="utf-8"))["trips"]}
+    trips = json.loads((JOURNEY / "trips.json").read_text(encoding="utf-8"))["trips"]
+    trip_tags = {t["tag"] for t in trips}
     dictionary = [
         w for w in json.loads(args.out.read_text(encoding="utf-8"))["works"] if not w.get("untitled")
     ]
 
     holy_posts = [p for p in posts if is_holy(p, trip_tags)]
+    seen = {p["id"] for p in holy_posts}
+    for post in pilgrimage_trip_posts(trips, posts, trip_tags):
+        if post["id"] not in seen:
+            seen.add(post["id"])
+            holy_posts.append(post)
     works, rest, assigned = [], [], set()
     for entry in dictionary:
         keys = [normalize(k) for k in [entry["title"], *entry.get("aliases", [])]]

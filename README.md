@@ -182,13 +182,17 @@ PR の「要確認」は、本番で実際に起きた誤りの型を機械で�
 | 再利用できる地名 | `data/journey/gazetteer.json` | `"地名": ["27"]` |
 | 聖地巡礼の作品 | `data/journey/pilgrimages.json` の `works` | `{"slug": "hyouka", "title": "氷菓", "aliases": []}`（タグに作品名か別名があればその作品に入る） |
 
-Instagram 側のキャプションを直しても、取り込み済みの投稿には届かない（新着しか読まないため）。
+Instagram 側のキャプションを直しても、同期（新着しか読まない）では取り込み済みの投稿に届かない。
+直したら `npm run journey:refresh` で読み直す（下記）。
 
 手元で回す場合:
 
 ```bash
 # 新着だけを API から取り込む（トークンは環境変数か ~/dev/.env.dev）
 npm run journey:sync
+
+# Instagram 側で直したキャプション・タグを、取り込み済みの投稿に読み直す（新着は足さない）
+npm run journey:refresh
 
 # 同期 PR を手元から作る（別の作業ツリーで行うので手元は触らない）
 bash scripts/journey/auto_sync.sh            # --dry-run で PR を作らない
