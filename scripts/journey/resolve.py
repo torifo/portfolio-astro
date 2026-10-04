@@ -63,6 +63,8 @@ DATE_TAIL = re.compile(r"^\s*[~〜\-–]\s*[\d年月日/.\-~〜]*")
 PLACE_DELIM = re.compile(r"[\s・/／➝→⇒〜~、,，＆&()（）【】「」:：|｜]+")
 # 日付の後ろにこの語を書いた投稿はサイトに載せない（旅と関係なく、載せたくない趣味の投稿）
 HIDE_WORDS = ("趣味",)
+# 県境の寄せ直しに使わない判定（人の指定・本人が書いた場所・GPS がもともと別の県を指したもの）
+BORDER_SKIP = ("override", "date-line-place", "date-line-hidden", "gps-over-tag", None)
 
 
 def decide(entries, gaz):
@@ -198,6 +200,37 @@ def resolve_caption_places(post, gaz):
         if codes:
             return codes, "caption-place", term
     return None, None, None
+
+
+def settle_borders(results):
+    """県境の場所（よみうりランド・富士山のように複数の県になる地名）の投稿を、2件以上あれば GPS の県に寄せる。
+
+    1件だけなら両方の県に出したままにする。GPS の無い投稿は、同じ場所の投稿の GPS で多い方の県に寄せる。
+    Actions では GPS の投稿が前回の結果（border-gps）のまま引き継がれるので、それも数に入れて同じ結果にする。
+    """
+    groups = collections.defaultdict(list)
+    for post_id, r in results.items():
+        if r.get("method") in BORDER_SKIP or len(r.get("tagPrefCodes") or []) < 2:
+            continue
+        groups[str(r["evidence"]).split(" ⊃ ")[-1]].append(post_id)
+    settled = 0
+    for ids in groups.values():
+        if len(ids) < 2:
+            continue
+        votes = collections.Counter(
+            results[i]["gpsPrefCode"] for i in ids if results[i].get("gpsPrefCode") in results[i]["tagPrefCodes"]
+        )
+        majority = votes.most_common(1)[0][0] if votes else None
+        for i in ids:
+            r = results[i]
+            if r.get("gpsPrefCode") in r["tagPrefCodes"]:
+                r["prefCodes"], r["method"] = [r["gpsPrefCode"]], "border-gps"
+            elif majority:
+                r["prefCodes"], r["method"] = [majority], "border-majority"
+            else:
+                continue
+            settled += 1
+    return settled
 
 
 def inherit(posts, results):
@@ -346,6 +379,7 @@ def main():
             "gpsPrefCode": gps_code,
         }
 
+    bordered = settle_borders(results)
     inherited = inherit(posts, results)
 
     resolved = sum(1 for r in results.values() if r["prefCodes"])
@@ -361,6 +395,7 @@ def main():
         print(f"  サイトに載せない: {hidden}（日付の後ろに「趣味」）")
     print(f"  未解決      : {unresolved} ({unresolved / total:.1%})")
     print(f"  うち旅グループ継承で埋まった: {inherited}")
+    print(f"  県境の場所を GPS に寄せた: {bordered}")
 
     by_method = collections.Counter(r["method"] for r in results.values() if r["prefCodes"])
     print("\n  内訳:")

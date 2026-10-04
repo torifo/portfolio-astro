@@ -45,6 +45,8 @@ METHOD_LABELS = {
     "caption-place": "本文の地名",
     "date-line-place": "日付の後ろの場所",
     "date-line-hidden": "日付の後ろの「趣味」",
+    "border-gps": "県境（GPS）",
+    "border-majority": "県境（同じ場所の GPS の多い県）",
 }
 
 

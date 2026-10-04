@@ -542,10 +542,9 @@
   },
   "17935060236383615": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-majority",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -555,10 +554,9 @@
   },
   "17992896837044068": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology-substring",
+   "method": "border-majority",
    "evidence": "夜のよみうりランドHANABIYORIホタル鑑賞編 ⊃ よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -568,10 +566,9 @@
   },
   "17908767918520863": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-majority",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -581,10 +578,9 @@
   },
   "18004188884992216": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-majority",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -594,10 +590,9 @@
   },
   "18123957406883048": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-majority",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -607,10 +602,9 @@
   },
   "18341583514268903": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -1027,10 +1021,9 @@
   },
   "18078956537163269": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -1040,10 +1033,9 @@
   },
   "18060782675695690": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -1053,10 +1045,9 @@
   },
   "18113668933762851": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -1066,10 +1057,9 @@
   },
   "17860246065631922": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -1079,10 +1069,9 @@
   },
   "18053679209774938": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -1092,10 +1081,9 @@
   },
   "18092334830267394": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -1105,10 +1093,9 @@
   },
   "18075885719215401": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -1140,10 +1127,9 @@
   },
   "18061871162438599": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -3098,10 +3084,9 @@
   },
   "17859943050251487": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology-substring",
+   "method": "border-gps",
    "evidence": "青い富士山カレー ⊃ 富士山",
    "tagPrefCodes": [
     "19",
@@ -4229,10 +4214,9 @@
   },
   "18054080665699909": {
    "prefCodes": [
-    "19",
     "22"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -5750,10 +5734,9 @@
   },
   "17893941788989968": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -10212,10 +10195,9 @@
   },
   "17946632321541961": {
    "prefCodes": [
-    "19",
-    "22"
+    "19"
    ],
-   "method": "caption-place",
+   "method": "border-majority",
    "evidence": "富士山",
    "tagPrefCodes": [
     "19",
@@ -10374,10 +10356,9 @@
   },
   "18039996493823149": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10387,10 +10368,9 @@
   },
   "18051870220774267": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10400,10 +10380,9 @@
   },
   "17862025521193225": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10413,10 +10392,9 @@
   },
   "17928334397807775": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10426,10 +10404,9 @@
   },
   "18026624810212951": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10439,10 +10416,9 @@
   },
   "18015603506595705": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10452,10 +10428,9 @@
   },
   "18024321380517613": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10465,10 +10440,9 @@
   },
   "17891376554982014": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10478,10 +10452,9 @@
   },
   "18437542678000727": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10491,10 +10464,9 @@
   },
   "18051706234806714": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10504,10 +10476,9 @@
   },
   "17849556447222275": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10517,10 +10488,9 @@
   },
   "18245151733250771": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
@@ -10530,10 +10500,9 @@
   },
   "17876768430101853": {
    "prefCodes": [
-    "13",
     "14"
    ],
-   "method": "ontology",
+   "method": "border-gps",
    "evidence": "よみうりランド",
    "tagPrefCodes": [
     "13",
