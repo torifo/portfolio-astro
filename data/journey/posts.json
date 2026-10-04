@@ -19743,8 +19743,8 @@
    "id": "17858982120014014",
    "kind": "post",
    "date": "2023-11-03",
-   "date_precision": "day",
-   "date_source": "upload",
+   "date_precision": "unknown",
+   "date_source": "manual",
    "uploaded_at": "2023-11-03T08:52:07+09:00",
    "caption": "いつも変わらない味の素スタジアムと武蔵野プラザ（日時不明）\n #味の素スタジアム  #武蔵野プラザ\n #東京都  #飛田給  #散歩  #水泳",
    "hashtags": [
