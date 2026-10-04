@@ -38,7 +38,7 @@ AstroとTypeScriptを使用して構築されたモダンなポートフォリ�
 - **自動テーマ切り替え**: 日の出・日没時刻に基づくライト/ダークモード（JSTキャッシュ管理）
 - **リアルタイム時計**: ヘッダーにJST時刻をリアルタイム表示
 - **ビルド時刻表示**: フッターにビルド日時を自動埋め込み（JST）
-- **Journey（Instagram 連携）**: 旅の写真を都道府県・旅・聖地巡礼・テーマの4つの軸で閲覧。新着は毎朝 GitHub Actions が取り込んで PR にする
+- **Journey（Instagram 連携）**: 旅の写真を都道府県・旅・聖地巡礼・テーマの4つの軸で閲覧。新着は毎日 GitHub Actions が取り込んで PR にし、本文の日付の後ろに場所を書いた投稿は自動でマージする
 
 ### 📁 プロジェクト構造
 
@@ -70,7 +70,7 @@ AstroとTypeScriptを使用して構築されたモダンなポートフォリ�
 │   │   ├── opus/
 │   │   │   └── [slug].astro      # Opus詳細ページ（getStaticPaths自動生成）
 │   │   └── journey/
-│   │       ├── [slug].astro      # 都道府県ページ（訪問済み39県）
+│   │       ├── [slug].astro      # 都道府県ページ（訪問済みの県すべて）
 │   │       ├── trips/            # 旅の一覧と個別ページ（年別／地方別の切り替え）
 │   │       ├── pilgrimage/       # 聖地巡礼の一覧と作品ページ
 │   │       └── themes/           # テーマの一覧と個別ページ
@@ -150,17 +150,28 @@ cd /home/ubuntu/Web/portfolio-astro && ./deploy.sh <戻したいタグ>
 
 ### 📸 Journey データの更新
 
-**新着は GitHub Actions が取り込んで PR にする。** 確認してマージすると本番に出る。
+**新着は GitHub Actions が取り込んで PR にする。** マージすると本番に出る。
 ビルド自体は外部を一切呼ばない。
 
 ```
-毎日 2:47 JST（または Actions の「Journey sync」→ Run workflow）
+毎日 2:47 JST（GitHub の遅れで実際は5〜7時ごろ。または Actions の「Journey sync」→ Run workflow）
   └─ 新着を取り込み、県・旅を判定 → journey/sync-日付 の PR を作る
-       本文: 新着の一覧（サムネ・リンク・判定された県）/ 要確認 / 旅の変化
+       本文: 要確認 / 新着の一覧（旅・撮影日ごと。サムネ・リンク・判定された県）/ 旅の変化
+       ├─ 日付の後ろに場所（または「趣味」）を書いた投稿だけで、要確認0件 → そのままマージ
+       ├─ それ以外 → PR を開いたまま（確認してマージ）
+       └─ 混ざる → 書いた側をマージし、残りを journey/sync-日付-hold の PR にする
+```
+
+Instagram API は位置情報を返さないので、投稿するときに本文の日付の行に場所を書く
+（2026-09-30 以降の投稿）。サイトに載せたくない投稿は「趣味」と書く。
+
+```
+2025-06-28 横浜        … 神奈川県（「横浜➝東京」なら先頭の横浜）。訪問済みの県なら最初の投稿でも自動マージ
+2025-10-04 趣味        … サイトに載せない（記録には残す）
 ```
 
 PR の「要確認」は、本番で実際に起きた誤りの型を機械で探したもの
-（旅タグの語で県が決まった、初めての県、旅の期間外、撮影日が不明、など）。
+（旅タグの語で県が決まった、初めての県、同じ日の投稿と県が違う、旅の期間外、撮影日が不明、など）。
 直すときは PR のブランチで次のファイルを直し、`npm run journey:build` してコミットする。
 
 | 直したいもの | ファイル | 書き方 |
@@ -185,11 +196,16 @@ python3 scripts/ingest/parse_export.py <エクスポートの展開先>
 python3 scripts/ingest/build_thumbs.py
 python3 scripts/ingest/fetch_permalinks.py
 npm run journey:build
+
+# 文字だけの県判定の精度を測る（判定の規則を変える前に --save、変えた後に --compare）
+python3 scripts/journey/eval_resolve.py
 ```
 
 撮影地の座標（`data/journey/gps.json`）は公開しないので Git に入れていない。Actions など
 座標が無い環境では、GPS で決まった判定を前回の結果から引き継ぐ（座標がある環境と結果は同じ）。
-仕組みの詳細は [設計書の 2026-09-29 改訂](docs/superpowers/specs/2026-09-11-journey-instagram-design.md) にある。
+仕組みの詳細は [設計書の 2026-09-29・2026-10-04 改訂](docs/superpowers/specs/2026-09-11-journey-instagram-design.md)、
+[精度改善の設計](docs/superpowers/specs/2026-09-30-journey-accuracy-design.md)、
+[PR の分割の設計](docs/superpowers/specs/2026-10-04-journey-sync-pr-split-design.md) にある。
 
 ### ✅ 実装済み機能
 
@@ -202,11 +218,13 @@ npm run journey:build
 - [x] OpusのrelatedSkillタグ表示（カテゴリ別グループ・Skillsセクションへのアンカーリンク）
 - [x] 日の出・日没APIによる自動テーマ切り替え（JSTの日付変わりでキャッシュ自動リセット）
 - [x] Journey 8地方・都道府県別訪問管理（訪問済み地方を動的カウント・地方の形のシルエット・9枠目に海外）
-- [x] Journey × Instagram 連携（投稿1,041件・都道府県100%解決・LLM呼び出しなし）
-- [x] 都道府県ページ自動生成（`/journey/[slug]`・訪問済み39県）
-- [x] 旅・聖地巡礼・テーマの各ページ（旅32件・聖地巡礼6作品・テーマ13。同じ投稿が複数ページに出る）
+- [x] Journey × Instagram 連携（投稿1,063件・都道府県100%解決・LLM呼び出しなし）
+- [x] 都道府県ページ自動生成（`/journey/[slug]`・訪問済み40県）
+- [x] 旅・聖地巡礼・テーマの各ページ（旅32件・聖地巡礼5作品・テーマ13。同じ投稿が複数ページに出る）
 - [x] 投稿サムネの自前保存（480px webp・Instagram の media URL 失効対策）
-- [x] 新着の自動取り込み（毎朝 GitHub Actions が PR を作り、確認してマージ・手動実行も可）
+- [x] 新着の自動取り込み（毎日 GitHub Actions が PR を作る・手動実行も可）
+- [x] 日付の後ろに場所を書いた投稿の自動マージ（混ざれば PR を分ける・「趣味」は載せない）
+- [x] 文字だけの県判定の精度測定（`eval_resolve.py`・誤り 8.4%）
 - [x] 存在しない URL は 404 を返す（`404.astro`）・プライバシーポリシー・利用規約
 - [x] Footerビルド時刻自動表示
 - [x] GHCR Docker イメージ管理
@@ -279,7 +297,9 @@ Required GitHub secrets: `GHCR_TOKEN`, `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`,
 
 `.github/workflows/journey-sync.yml` runs every night at 2:47 JST (or on demand via
 *Run workflow*). It ingests new Instagram posts, resolves prefectures and trips, and opens a
-`journey/sync-*` pull request with automated checks. Merging it deploys as usual. See
+`journey/sync-*` pull request with automated checks. Merging it deploys as usual. Posts whose
+caption names a place right after the date (or `趣味` to keep a post off the site) are merged
+automatically with `GHCR_TOKEN`; the rest stay open for review in a separate PR. See
 [docs/deployment/DEPLOYMENT.md](docs/deployment/DEPLOYMENT.md) for details.
 
 ### 🔌 microCMS API

@@ -297,7 +297,7 @@ getComputedStyle(el).backgroundImage;
 
 同期は GitHub Actions の「Journey sync」が毎日2:47（JST）に回し（GitHub の定時は2〜3時間遅れることがある）、新着があれば PR を作ります。
 仕組みは [DEPLOYMENT.md](../deployment/DEPLOYMENT.md) と
-[設計書の 2026-09-29 改訂](../superpowers/specs/2026-09-11-journey-instagram-design.md) を参照。
+[設計書の 2026-09-29・2026-10-04 改訂](../superpowers/specs/2026-09-11-journey-instagram-design.md) を参照。
 
 ### 同期の PR ができない
 
@@ -330,7 +330,7 @@ gh secret set INSTAGRAM_ACCESS_TOKEN   # 値は貼り付け（画面に残さな
 トークンではなくアプリ側の問題。Meta for Developers の「必要なアクション」とアプリの
 アラートを確認する。2026-09 には本人確認を済ませたら解消した。
 
-### 毎朝の同期が止まった
+### 毎日の同期が止まった
 
 公開リポジトリの定時実行は、60日間コミットが無いと GitHub が自動で止める。止まる前にメールが届く。
 Actions の「Journey sync」を開き、「Enable workflow」で再開する。手動実行（Run workflow）は
