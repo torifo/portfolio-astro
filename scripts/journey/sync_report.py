@@ -117,6 +117,9 @@ def main():
     base_trips = {t["tag"]: t for t in load_base(root, args.base, "data/journey/trips.json")["trips"]}
     permalinks = load(root, "data/journey/permalinks.json")
     prefs = {p["code"]: p["name"] for p in load(root, "data/ontology/prefectures.json")}
+    visited = {
+        p["code"] for region in load(root, "data/journey/prefectures.json")["regions"] for p in region["prefectures"] if p["visited"]
+    }
 
     new = sorted((posts[i] for i in posts if i not in base_posts), key=lambda p: (p["date"], p["id"]))
     base_count = collections.Counter(c for r in base_resolved.values() for c in (r.get("prefCodes") or []))
@@ -151,7 +154,8 @@ def main():
         if not codes:
             warnings.append((p, "県が不明", "タグ・本文から県を特定できない"))
         for c in codes:
-            if base_count[c] == 0:
+            # 日付の後ろに書いた県が訪問済み（prefectures.json）なら、最初の投稿でも本人の指定どおりとみなす
+            if base_count[c] == 0 and not (r.get("method") == "date-line-place" and c in visited):
                 warnings.append((p, "初めての県", f"{prefs[c]}の最初の投稿。撮影地を確認"))
         other = decided_by_trip_tag(p, r, gaz, trip_tags)
         if other:
