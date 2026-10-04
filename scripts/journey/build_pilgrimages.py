@@ -90,6 +90,7 @@ def main():
 
     posts = json.loads((JOURNEY / "posts.json").read_text(encoding="utf-8"))["posts"]
     resolved = json.loads((JOURNEY / "resolved.json").read_text(encoding="utf-8"))["posts"]
+    posts = [p for p in posts if not resolved.get(p["id"], {}).get("hidden")]  # 日付の後ろに「趣味」は載せない
 
     holy_posts = [p for p in posts if any(HOLY.search(t) for t in p["hashtags"])]
     titles = candidate_titles(holy_posts)

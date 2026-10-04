@@ -76,7 +76,7 @@ export interface Theme {
 }
 
 type RawPost = Post & { date_precision: string };
-type Resolution = { prefCodes: string[] | null; method: string | null; evidence: unknown };
+type Resolution = { prefCodes: string[] | null; method: string | null; evidence: unknown; hidden?: boolean };
 
 export const regions: Region[] = prefectureData.regions as Region[];
 export const prefectures: Prefecture[] = regions.flatMap((r) => r.prefectures);
@@ -88,10 +88,13 @@ export const themes: Theme[] = (themeData.themes as Theme[]).filter((t) => !t.hi
 
 const resolutions = resolvedData.posts as Record<string, Resolution>;
 
-export const posts: Post[] = (postData.posts as RawPost[]).map((p) => ({
-  ...p,
-  datePrecision: p.date_precision,
-}));
+// 日付の後ろに「趣味」と書いた投稿（hidden）はサイトのどこにも出さない
+export const posts: Post[] = (postData.posts as RawPost[])
+  .filter((p) => !resolutions[p.id]?.hidden)
+  .map((p) => ({
+    ...p,
+    datePrecision: p.date_precision,
+  }));
 
 const postsById = new Map(posts.map((p) => [p.id, p]));
 

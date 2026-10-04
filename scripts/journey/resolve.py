@@ -10,7 +10,8 @@
                      このファイルは公開しない（撮影地そのものなので）。
                      無ければこの層は黙って飛ばされ、辞書だけで判定が続く
   L1b 日付の後ろの場所  「2025-06-28 横浜」のように日付と同じ行に書いた場所。
-                     2026-09-30 以降に投稿したものだけ（それより前の同じ行は題なので読まない）
+                     2026-09-30 以降に投稿したものだけ（それより前の同じ行は題なので読まない）。
+                     「趣味」と書いた投稿はサイトに載せない（hidden。県にも旅にもテーマにも出さない）
   L2 県名の直接一致  タグに「秋田県」「秋田」がある
   L3 gazetteer.json  人が育てる確定辞書
   L4 オントロジー    places.json の索引にタグが載っている
@@ -60,6 +61,8 @@ DATE_LINE_SINCE = "2026-09-30"
 DATE_TAIL = re.compile(r"^\s*[~〜\-–]\s*[\d年月日/.\-~〜]*")
 # 場所の区切り（「横浜・八景島」「横浜➝東京」「東京ディズニーシー（夜）」）
 PLACE_DELIM = re.compile(r"[\s・/／➝→⇒〜~、,，＆&()（）【】「」:：|｜]+")
+# 日付の後ろにこの語を書いた投稿はサイトに載せない（旅と関係なく、載せたくない趣味の投稿）
+HIDE_WORDS = ("趣味",)
 
 
 def decide(entries, gaz):
@@ -119,7 +122,11 @@ def date_line_place(post, gaz):
         return None, None, None
     for word in NOT_PREFECTURE:
         text = text.replace(word, " ")
-    for token in (t for t in PLACE_DELIM.split(text) if t):
+    tokens = [t for t in PLACE_DELIM.split(text) if t]
+    hidden = next((t for t in tokens if t in HIDE_WORDS), None)
+    if hidden:
+        return [], "date-line-hidden", hidden
+    for token in tokens:
         pinned = gaz.overrides.get(token)  # タグで固定した施設名（東京ディズニーシー→千葉）も効かせる
         codes = gaz.pref_terms.get(token) or (pinned if isinstance(pinned, list) else None)
         codes = codes or gaz.curated.get(token) or decide(gaz.lookup(token), gaz)
@@ -140,7 +147,7 @@ def resolve_post(post, gaz, overrides):
     tags = post["hashtags"]
 
     codes, method, evidence = date_line_place(post, gaz)
-    if codes:
+    if method:  # 載せない指定は県が空のまま決まる
         return codes, method, evidence
 
     # L2 県名の直接一致。タグを先に見る（キャプションより意図が明確）
@@ -286,6 +293,16 @@ def main():
             continue
 
         tag_codes, method, evidence = resolve_post(post, gaz, overrides)
+        if method == "date-line-hidden":
+            results[post["id"]] = {
+                "prefCodes": [],
+                "method": method,
+                "evidence": evidence,
+                "hidden": True,
+                "tagPrefCodes": [],
+                "gpsPrefCode": None,
+            }
+            continue
 
         gps_code = None
         point = coordinates.get(post["id"])
@@ -332,13 +349,16 @@ def main():
     inherited = inherit(posts, results)
 
     resolved = sum(1 for r in results.values() if r["prefCodes"])
-    detached = sum(1 for r in results.values() if r["prefCodes"] == [])
+    hidden = sum(1 for r in results.values() if r.get("hidden"))
+    detached = sum(1 for r in results.values() if r["prefCodes"] == []) - hidden
     unresolved = sum(1 for r in results.values() if r["prefCodes"] is None)
     total = len(posts)
     print(f"投稿 {total} 件")
     print(f"  県が決まった: {resolved} ({resolved / total:.1%})   ※LLM 呼び出しゼロ")
     if detached:
         print(f"  県に属さない: {detached}（overrides で [] を指定したもの）")
+    if hidden:
+        print(f"  サイトに載せない: {hidden}（日付の後ろに「趣味」）")
     print(f"  未解決      : {unresolved} ({unresolved / total:.1%})")
     print(f"  うち旅グループ継承で埋まった: {inherited}")
 

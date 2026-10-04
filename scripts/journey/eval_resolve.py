@@ -45,7 +45,7 @@ def predict(posts, gaz):
             results[post["id"]] = {"prefCodes": override[0], "method": "override", "evidence": override[1]}
             continue
         codes, method, evidence = resolve_post(post, gaz, {})
-        if not codes:
+        if not codes and method != "date-line-hidden":
             codes, method, evidence = resolve_caption_places(post, gaz)
         results[post["id"]] = {"prefCodes": codes, "method": method, "evidence": evidence}
     inherit(posts, results)

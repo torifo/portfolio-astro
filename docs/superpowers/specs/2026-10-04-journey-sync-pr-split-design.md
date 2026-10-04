@@ -25,7 +25,8 @@
 
 ### 対象と保留
 
-- 自動マージの対象（auto）: 根拠が `date-line-place` で、要確認が1件も出ていない新着
+- 自動マージの対象（auto）: 根拠が `date-line-place` で、要確認が1件も出ていない新着。
+  日付の後ろに「趣味」と書いた投稿（`date-line-hidden`、サイトに載せない）も対象
 - 保留（hold）: それ以外の新着（場所の無い投稿、場所はあるが「初めての県」「旅の期間外」などが出た投稿）
 - `sync_report.py` は `--summary` に `autoIds`・`holdIds`（投稿IDの配列）を足す。`autoMerge` は
   「auto が1件以上で hold が0件」（今と同じ意味）

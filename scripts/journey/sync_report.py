@@ -29,7 +29,9 @@ TRIP_MIN_LENGTH = 8
 SAME_DAY_MIN = 2
 SAME_DAY_SHARE = 0.6
 # 人が県を決めた根拠。県の食い違いの点検（同じ日・旅の主な県）はしない
-DECIDED_BY_PERSON = ("override", "date-line-place")
+DECIDED_BY_PERSON = ("override", "date-line-place", "date-line-hidden")
+# 自動マージしてよい根拠（本人が日付の後ろに書いた場所、または「趣味」＝載せない）
+AUTO_MERGE_METHODS = ("date-line-place", "date-line-hidden")
 METHOD_LABELS = {
     "override": "手動指定",
     "pref-name": "県名タグ",
@@ -42,6 +44,7 @@ METHOD_LABELS = {
     "trip-inherit": "旅から継承",
     "caption-place": "本文の地名",
     "date-line-place": "日付の後ろの場所",
+    "date-line-hidden": "日付の後ろの「趣味」",
 }
 
 
@@ -142,6 +145,8 @@ def main():
     warnings = []
     for p in new:
         r = resolved[p["id"]]
+        if r.get("hidden"):
+            continue  # 載せないと本人が決めた投稿は点検しない
         codes = r.get("prefCodes") or []
         if not codes:
             warnings.append((p, "県が不明", "タグ・本文から県を特定できない"))
@@ -163,7 +168,7 @@ def main():
             code, hits, total = majority
             warnings.append((p, "同じ日の投稿と県が違う", f"同じ日の{total}件中{hits}件は{prefs[code]}"))
         written = date_line_text(p)
-        if written and r.get("method") not in ("date-line-place", "override"):
+        if written and r.get("method") not in DECIDED_BY_PERSON:
             warnings.append((p, "日付の後ろの場所を読めない", f"「{written}」から県を決められない"))
         if p.get("date_source") == "upload":
             warnings.append((p, "撮影日が不明", "本文に日付が無いため、投稿日を使用"))
@@ -186,7 +191,7 @@ def main():
     # 要確認は点検の数ではなく投稿の数で数える（表の行数と合わせる）
     review_ids = {p["id"] for p, _, _ in warnings}
     review_count = len(review_ids)
-    auto_ids = [p["id"] for p in new if resolved[p["id"]]["method"] == "date-line-place" and p["id"] not in review_ids]
+    auto_ids = [p["id"] for p in new if resolved[p["id"]]["method"] in AUTO_MERGE_METHODS and p["id"] not in review_ids]
     auto_id_set = set(auto_ids)
     hold_ids = [p["id"] for p in new if p["id"] not in auto_id_set]
     # 新着がすべて日付の後ろに書いた場所で決まり、要確認も無ければ、人が見る点が無いのでマージまで進めてよい
@@ -227,7 +232,8 @@ def main():
             date = p["date"] + ("" if p.get("date_source") != "upload" else " ※")
             lines.append(
                 f'| <img src="{thumb.format(p["id"])}" width="64"> | {date} | [{first_line(p)}]({link})<br>`{p["id"]}` '
-                f"| {pref_names(r.get('prefCodes') or [])} | {METHOD_LABELS.get(r['method'], r['method'])} |"
+                f"| {'（載せない）' if r.get('hidden') else pref_names(r.get('prefCodes') or [])} "
+                f"| {METHOD_LABELS.get(r['method'], r['method'])} |"
             )
         lines.append("")
     if any(p.get("date_source") == "upload" for p in new):

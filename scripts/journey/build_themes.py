@@ -49,6 +49,7 @@ def main():
 
     posts = json.loads((JOURNEY / "posts.json").read_text(encoding="utf-8"))["posts"]
     resolved = json.loads((JOURNEY / "resolved.json").read_text(encoding="utf-8"))["posts"]
+    posts = [p for p in posts if not resolved.get(p["id"], {}).get("hidden")]  # 日付の後ろに「趣味」は載せない
     document = json.loads(args.themes.read_text(encoding="utf-8"))
 
     by_tag = collections.defaultdict(list)

@@ -91,9 +91,13 @@ def main():
     )
     args = parser.parse_args()
 
-    posts = json.loads((JOURNEY / "posts.json").read_text(encoding="utf-8"))["posts"]
-    posts_per_day = collections.Counter(p["date"] for p in posts)
     resolved = json.loads((JOURNEY / "resolved.json").read_text(encoding="utf-8"))["posts"]
+    # サイトに載せない投稿（日付の後ろに「趣味」）は旅の判定にも数えない
+    posts = [
+        p for p in json.loads((JOURNEY / "posts.json").read_text(encoding="utf-8"))["posts"]
+        if not resolved.get(p["id"], {}).get("hidden")
+    ]
+    posts_per_day = collections.Counter(p["date"] for p in posts)
     pref_slug = {
         p["code"]: p["slug"]
         for region in json.loads((JOURNEY / "prefectures.json").read_text(encoding="utf-8"))["regions"]
