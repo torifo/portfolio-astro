@@ -2,7 +2,7 @@
 """Instagram 同期の PR 本文を作る。
 
 基準（既定は origin/main）と作業ツリーの data/journey を比べ、新着の投稿・旅の
-変化・自動の点検結果・直し方を Markdown で書く。auto_sync.sh が PR を作るときに使う。
+変化・自動の点検結果・直し方を Markdown で書く。open_sync_prs.sh（Actions）と auto_sync.sh（手元）が PR を作るときに使う。
 
 点検は、実際に本番へ出てから見つかった誤りの型をそのまま機械で探すもの。
 新着の投稿だけを見る（既存の投稿は一度人が見ているので、毎回同じ指摘を出さない）。
@@ -102,6 +102,7 @@ def main():
     parser.add_argument("--out", type=pathlib.Path, required=True)
     parser.add_argument("--summary", type=pathlib.Path, required=True, help="件数を JSON で書く")
     parser.add_argument("--notes", type=pathlib.Path, help="PR で直した内容の Markdown ファイル")
+    parser.add_argument("--preface", help="件数の直後に入れる段落")
     args = parser.parse_args()
 
     root = args.root
@@ -183,10 +184,16 @@ def main():
 
     thumb = f"https://raw.githubusercontent.com/{args.repo}/{args.sha}/public/journey/thumbs/{{}}.webp"
     # 要確認は点検の数ではなく投稿の数で数える（表の行数と合わせる）
-    review_count = len({p["id"] for p, _, _ in warnings})
+    review_ids = {p["id"] for p, _, _ in warnings}
+    review_count = len(review_ids)
+    auto_ids = [p["id"] for p in new if resolved[p["id"]]["method"] == "date-line-place" and p["id"] not in review_ids]
+    auto_id_set = set(auto_ids)
+    hold_ids = [p["id"] for p in new if p["id"] not in auto_id_set]
     # 新着がすべて日付の後ろに書いた場所で決まり、要確認も無ければ、人が見る点が無いのでマージまで進めてよい
-    auto_merge = bool(new) and review_count == 0 and all(resolved[p["id"]]["method"] == "date-line-place" for p in new)
+    auto_merge = bool(auto_ids) and not hold_ids
     lines = [f"新着 **{len(new)} 件**・要確認 **{review_count} 件**", ""]
+    if args.preface:
+        lines += [args.preface, ""]
 
     if warnings:
         lines += ["## 要確認", "", "| | 投稿 | 点検内容 |", "|---|---|---|"]
@@ -202,16 +209,27 @@ def main():
             )
         lines.append("")
 
-    lines += [f"## 新着 {len(new)} 件", "", "| | 日付 | 内容 | 県 | 根拠 |", "|---|---|---|---|---|"]
+    groups = collections.defaultdict(list)
     for p in new:
-        r = resolved[p["id"]]
-        link = permalinks.get(p["id"], "")
-        date = p["date"] + ("" if p.get("date_source") != "upload" else " ※")
-        lines.append(
-            f'| <img src="{thumb.format(p["id"])}" width="64"> | {date} | [{first_line(p)}]({link})<br>`{p["id"]}` '
-            f"| {pref_names(r.get('prefCodes') or [])} | {METHOD_LABELS.get(r['method'], r['method'])} |"
-        )
-    lines.append("")
+        tag = next((tag for tag in p["hashtags"] or [] if tag in trip_of_tag), None)  # 旅タグが2つあれば先に付いた方
+        groups[("trip", tag) if tag is not None else ("date", p["date"])].append(p)
+    lines += [f"## 新着 {len(new)} 件", ""]
+    for (kind, key), group in sorted(groups.items(), key=lambda item: item[1][0]["date"]):
+        if kind == "trip":
+            trip = trip_of_tag[key]
+            heading = f"{trip['title']}（{trip_period(trip)}・新着 {len(group)} 件）"
+        else:
+            heading = f"{key}（旅に入らない投稿）"
+        lines += [f"### {heading}", "", "| | 日付 | 内容 | 県 | 根拠 |", "|---|---|---|---|---|"]
+        for p in group:
+            r = resolved[p["id"]]
+            link = permalinks.get(p["id"], "")
+            date = p["date"] + ("" if p.get("date_source") != "upload" else " ※")
+            lines.append(
+                f'| <img src="{thumb.format(p["id"])}" width="64"> | {date} | [{first_line(p)}]({link})<br>`{p["id"]}` '
+                f"| {pref_names(r.get('prefCodes') or [])} | {METHOD_LABELS.get(r['method'], r['method'])} |"
+            )
+        lines.append("")
     if any(p.get("date_source") == "upload" for p in new):
         lines += ["※ 本文に日付が無いため、投稿日を撮影日として使用。", ""]
 
@@ -248,7 +266,10 @@ def main():
 
     args.out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     args.summary.write_text(
-        json.dumps({"new": len(new), "warnings": review_count, "autoMerge": auto_merge}, ensure_ascii=False),
+        json.dumps(
+            {"new": len(new), "warnings": review_count, "autoMerge": auto_merge, "autoIds": auto_ids, "holdIds": hold_ids},
+            ensure_ascii=False,
+        ),
         encoding="utf-8",
     )
     print(f"新着 {len(new)} 件 / 要確認 {review_count} 件 / 自動マージ {'する' if auto_merge else 'しない'}")

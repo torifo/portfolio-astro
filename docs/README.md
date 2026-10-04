@@ -15,6 +15,7 @@
     人の指定の置き場（県・撮影日）、旅の判定規則、海外の枠と地方シルエット
 - **[2026-09-30-journey-accuracy-design.md](./superpowers/specs/2026-09-30-journey-accuracy-design.md)** - Journey 県判定の精度改善
   - 文字だけの判定の精度を測る `eval_resolve.py`、判定の層の順序と除外語、日付の後ろの場所、同じ日の点検
+- **[2026-10-04-journey-sync-pr-split-design.md](./superpowers/specs/2026-10-04-journey-sync-pr-split-design.md)** - 同期PRのグループ表示と自動マージの分割
 
 ### deployment/
 デプロイメントとバージョン管理に関するドキュメント
