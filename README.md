@@ -179,6 +179,7 @@ PR の「要確認」は、本番で実際に起きた誤りの型を機械で�
 | 県 | `data/journey/overrides.json` | `"投稿ID": ["13"]` または `"タグ": ["14"]`（タグならそのタグの投稿すべてに効く） |
 | 撮影日 | `data/journey/date_overrides.json` | `"投稿ID": "2023-09-05"` |
 | 再利用できる地名 | `data/journey/gazetteer.json` | `"地名": ["27"]` |
+| 聖地巡礼の作品 | `data/journey/pilgrimages.json` の `works` | `{"slug": "hyouka", "title": "氷菓", "aliases": []}`（タグに作品名か別名があればその作品に入る） |
 
 Instagram 側のキャプションを直しても、取り込み済みの投稿には届かない（新着しか読まないため）。
 
@@ -220,7 +221,7 @@ python3 scripts/journey/eval_resolve.py
 - [x] Journey 8地方・都道府県別訪問管理（訪問済み地方を動的カウント・地方の形のシルエット・9枠目に海外）
 - [x] Journey × Instagram 連携（投稿1,063件・都道府県100%解決・LLM呼び出しなし）
 - [x] 都道府県ページ自動生成（`/journey/[slug]`・訪問済み40県）
-- [x] 旅・聖地巡礼・テーマの各ページ（旅32件・聖地巡礼5作品・テーマ13。同じ投稿が複数ページに出る）
+- [x] 旅・聖地巡礼・テーマの各ページ（旅32件・聖地巡礼11作品・テーマ13。同じ投稿が複数ページに出る）
 - [x] 投稿サムネの自前保存（480px webp・Instagram の media URL 失効対策）
 - [x] 新着の自動取り込み（毎日 GitHub Actions が PR を作る・手動実行も可）
 - [x] 日付の後ろに場所を書いた投稿の自動マージ（混ざれば PR を分ける・「趣味」は載せない）

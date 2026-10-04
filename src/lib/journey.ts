@@ -62,6 +62,8 @@ export interface Work {
   prefCodes: string[];
   postIds: string[];
   hidden?: boolean;
+  /** 作品名の無い聖地巡礼をまとめた枠（作品数には数えない） */
+  untitled?: boolean;
 }
 
 export interface Theme {
@@ -81,7 +83,10 @@ type Resolution = { prefCodes: string[] | null; method: string | null; evidence:
 export const regions: Region[] = prefectureData.regions as Region[];
 export const prefectures: Prefecture[] = regions.flatMap((r) => r.prefectures);
 export const trips: Trip[] = (tripData.trips as Trip[]).filter((t) => !t.hidden);
-export const works: Work[] = (pilgrimageData.works as Work[]).filter((w) => !w.hidden);
+// pilgrimages.json の works は作品の辞書も兼ねるので、投稿がまだ無い作品も入っている
+export const works: Work[] = (pilgrimageData.works as Work[]).filter((w) => !w.hidden && w.postCount > 0);
+/** 作品数。「作品名なし」の枠は数えない。 */
+export const workCount = works.filter((w) => !w.untitled).length;
 // テーマ軸。被写体でまとめる4つめの軸で、県・旅・聖地巡礼と重ね掛けになる。
 // 県が特定できない投稿もここには出せる（空の写真は場所が分からなくても空の記録）。
 export const themes: Theme[] = (themeData.themes as Theme[]).filter((t) => !t.hidden);

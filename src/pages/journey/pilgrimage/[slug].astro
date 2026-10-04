@@ -16,13 +16,14 @@ interface Props {
 const { work } = Astro.props;
 const posts = postsForWork(work).slice().sort((a, b) => b.date.localeCompare(a.date));
 const visited = work.prefCodes.map((code) => prefectureByCode(code)).filter(Boolean);
+const heading = work.untitled ? '作品名のない聖地巡礼' : `${work.title}の聖地巡礼`;
 ---
 
 <Layout
-  title={`${work.title}の聖地巡礼 - Toriforium Portfolio`}
-  description={`${work.title}の聖地巡礼${posts.length}件`}
+  title={`${heading} - Toriforium Portfolio`}
+  description={`${heading}${posts.length}件`}
 >
-  <DetailHeader title={`${work.title}の聖地巡礼`} backHref="/#journey" backLabel="旅の記録に戻る" />
+  <DetailHeader title={heading} backHref="/#journey" backLabel="旅の記録に戻る" />
 
   <main class="pt-24 pb-16 relative z-10">
     <div class="container mx-auto px-6 max-w-5xl">

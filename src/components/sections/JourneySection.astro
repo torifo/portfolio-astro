@@ -11,6 +11,7 @@ import {
   regions,
   trips,
   works,
+  workCount,
   themes,
   posts,
   postCountByPrefecture,
@@ -163,7 +164,7 @@ const themePostCount = themes.reduce((sum, theme) => sum + theme.postCount, 0);
       <a href="/journey/pilgrimage/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group border border-violet-500/20">
         <div>
           <div class="text-2xl font-bold gradient-text mb-1">聖地巡礼</div>
-          <div class="text-gray-400 text-sm">{works.length}作品・{workPostCount}件の投稿</div>
+          <div class="text-gray-400 text-sm">{workCount}作品・{workPostCount}件の投稿</div>
         </div>
         <svg class="w-6 h-6 text-gray-500 group-hover:text-violet-300 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

@@ -116,6 +116,7 @@ def main():
     resolved = load(root, "data/journey/resolved.json")["posts"]
     base_resolved = load_base(root, args.base, "data/journey/resolved.json")["posts"]
     trips = load(root, "data/journey/trips.json")["trips"]
+    works = [w for w in load(root, "data/journey/pilgrimages.json")["works"] if w.get("postCount") and not w.get("hidden")]
     base_trips = {t["tag"]: t for t in load_base(root, args.base, "data/journey/trips.json")["trips"]}
     permalinks = load(root, "data/journey/permalinks.json")
     prefs = {p["code"]: p["name"] for p in load(root, "data/ontology/prefectures.json")}
@@ -260,6 +261,15 @@ def main():
             trip_lines.append(f"- **無くなった旅**：{old['title']}（`{old['slug']}` の URL が消える）")
     if trip_lines:
         lines += ["## 旅の変化", ""] + trip_lines + [""]
+
+    # 聖地巡礼に入った新着と作品。作品名なしなら、作品として pilgrimages.json の works に足すかを決める
+    holy_lines = []
+    for p in new:
+        titles = [w["title"] for w in works if p["id"] in w["postIds"]]
+        if titles:
+            holy_lines.append(f"- [{first_line(p)}]({permalinks.get(p['id'], '')})：{'・'.join(titles)}")
+    if holy_lines:
+        lines += ["## 聖地巡礼", ""] + holy_lines + [""]
 
     lines += [
         "<details>",
