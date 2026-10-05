@@ -12,6 +12,39 @@
    ],
    "gpsPrefCode": "42"
   },
+  "18119605247061641": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "17907077508333715": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "18132880288588999": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
   "17947555263299434": {
    "prefCodes": [
     "04"
