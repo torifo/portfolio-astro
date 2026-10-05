@@ -269,11 +269,15 @@
    "aliases": [
     "ざつ旅"
    ],
-   "postCount": 0,
-   "start": null,
-   "end": null,
-   "prefCodes": [],
-   "postIds": []
+   "postCount": 1,
+   "start": "2035-07-08",
+   "end": "2035-07-08",
+   "prefCodes": [
+    "04"
+   ],
+   "postIds": [
+    "18165506755468869"
+   ]
   }
  ]
 }
