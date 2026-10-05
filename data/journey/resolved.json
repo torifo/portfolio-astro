@@ -1,6 +1,17 @@
 {
  "policy": "gps",
  "posts": {
+  "18165506755468869": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "ontology-substring",
+   "evidence": "日本三景松島への往復深夜バスWILLERの巡礼旅 ⊃ 松島",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
   "17857837452611905": {
    "prefCodes": [
     "42"
