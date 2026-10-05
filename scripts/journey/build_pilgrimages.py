@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """聖地巡礼のまとめを作る。作品ごとに投稿を束ね、data/journey/pilgrimages.json へ。
 
-作品の辞書は pilgrimages.json の works（title・aliases・slug・hidden）で、人が育てる。
+作品の辞書は pilgrimages.json の works（title・aliases・slug・spots・extraPostIds・hidden）で、人が育てる。
 機械は投稿を辞書の作品に振り分けるだけで、作品名を推し量らない（件数で作品を見分けると、
 1件だけの作品が落ち、旅の名前や「#パネル」のような同時タグが作品になってしまった）。
 
   聖地巡礼に数える投稿  「聖地」を含むタグが投稿そのものに付いているもの。旅の名前のタグ
                         （「ゆるキャン聖地巡礼旅浜松編」のような…旅・…編）だけでは数えない
   作品への振り分け      投稿のタグに作品名か別名が入っていれば、その作品に入れる。2つあれば両方
+  聖地の場所（spots）   作品の聖地として人が登録した場所のタグ。そのタグの投稿は聖地巡礼タグが無くても
+                        その作品に入れる（弱虫ペダルの伊勢志摩スカイライン）
+  extraPostIds          人が個別に入れる投稿。本文に「〇〇聖地巡礼」と書いてタグを付けていない投稿など
   作品名なし            聖地巡礼に数えるのにどの作品にも入らない投稿は「作品名なし」にまとめる
 
 新しい作品は works に title・aliases・slug を足す。聖地巡礼の軸は都道府県・旅の軸と排他ではなく、
@@ -73,12 +76,23 @@ def main():
     ]
 
     holy_posts = [p for p in posts if is_holy(p, trip_tags)]
+    holy_ids = {p["id"] for p in holy_posts}
+    by_id = {p["id"]: p for p in posts}
     works, rest, assigned = [], [], set()
     for entry in dictionary:
         keys = [normalize(k) for k in [entry["title"], *entry.get("aliases", [])]]
-        group = [p for p in holy_posts if any(k in normalize(t) for k in keys for t in p["hashtags"])]
+        spots = {normalize(s) for s in entry.get("spots", [])}
+        for post_id in entry.get("extraPostIds", []):
+            if post_id not in by_id:
+                print(f"  extraPostIds に該当する投稿が無い（載せない投稿を含む）: {entry['title']} {post_id}")
+        group = [
+            p for p in posts
+            if (p["id"] in holy_ids and any(k in normalize(t) for k in keys for t in p["hashtags"]))
+            or spots & {normalize(t) for t in p["hashtags"]}
+            or p["id"] in entry.get("extraPostIds", [])
+        ]
         assigned.update(p["id"] for p in group)
-        record = {k: entry[k] for k in ("slug", "title", "aliases") if k in entry}
+        record = {k: entry[k] for k in ("slug", "title", "aliases", "spots", "extraPostIds") if k in entry}
         if entry.get("hidden"):
             # 除外の印は書き戻す。サイト側（journey.ts）が hidden を弾く
             rest.append({**summarize(record, group, resolved), "hidden": True})
@@ -95,7 +109,7 @@ def main():
         json.dumps({"works": works + rest}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
     )
 
-    print(f"{args.out} に作品 {sum(1 for w in works if not w.get('untitled'))} 件（聖地巡礼に数える投稿 {len(holy_posts)} 件）")
+    print(f"{args.out} に作品 {sum(1 for w in works if not w.get('untitled'))} 件（聖地巡礼に数える投稿 {len(holy_ids | assigned)} 件）")
     pref = {p["code"]: p["name"] for p in json.loads((ROOT / "data" / "ontology" / "prefectures.json").read_text(encoding="utf-8"))}
     for w in works:
         where = "/".join(pref[c] for c in w["prefCodes"][:3])
