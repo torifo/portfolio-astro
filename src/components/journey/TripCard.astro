@@ -1,0 +1,57 @@
+---
+// 旅のカード。本人の画像（無ければ投稿のサムネ）を背景に敷き、下から暗くして文字を載せる。
+// 旅の一覧（年別・地方別）と県のページ（compact）で使う。文字は global.css の photo-* で白のまま出す。
+import { coverFor, formatRange, prefectureByCode, type Trip } from '../../lib/journey';
+
+interface Props {
+  trip: Trip;
+  compact?: boolean;
+}
+
+const { trip, compact = false } = Astro.props;
+const cover = coverFor(trip);
+const prefectures = compact
+  ? []
+  : trip.allPrefCodes.slice(0, 5).map((code) => prefectureByCode(code)).filter(Boolean);
+---
+
+<a
+  href={`/journey/trips/${trip.slug}/`}
+  class:list={[
+    'trip-card relative block overflow-hidden hover-lift group',
+    compact ? 'rounded-xl h-28' : 'rounded-2xl h-44 md:h-48',
+  ]}
+>
+  {cover && (
+    <img
+      src={cover.src}
+      srcset={cover.srcset}
+      sizes="(min-width: 768px) 480px, 100vw"
+      alt=""
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+  )}
+  <div class="absolute inset-0 bg-linear-to-t from-black/75 via-black/35 to-black/5"></div>
+  <div class:list={['relative h-full flex flex-col justify-end', compact ? 'p-4' : 'p-5']}>
+    <div class:list={['photo-title font-semibold leading-snug line-clamp-2', compact ? 'text-sm' : 'text-base']}>
+      {trip.title}
+    </div>
+    <div class="photo-meta text-xs mt-1">{formatRange(trip.start, trip.end)}・{trip.postCount}件</div>
+    {prefectures.length > 0 && (
+      <div class="flex flex-wrap gap-1 mt-2">
+        {prefectures.map((prefecture) => (
+          <span class="photo-chip px-2 py-0.5 rounded-full text-[10px]">{prefecture!.shortName}</span>
+        ))}
+      </div>
+    )}
+  </div>
+</a>
+
+<style>
+  /* 画像が読み込まれる前と、サムネも無い旅の地の色 */
+  .trip-card {
+    background: #0f172a;
+  }
+</style>

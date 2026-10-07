@@ -3,7 +3,8 @@
 // （完全静的ビルドなので、並び替えのためにサーバーを持たない）。
 import Layout from '../../../layouts/Layout.astro';
 import DetailHeader from '../../../components/DetailHeader.astro';
-import { trips, regions, prefectureByCode, regionForPrefCode, formatRange } from '../../../lib/journey';
+import TripCard from '../../../components/journey/TripCard.astro';
+import { trips, regions, regionForPrefCode } from '../../../lib/journey';
 
 const byYear = trips.reduce<Record<string, typeof trips>>((acc, trip) => {
   (acc[trip.start.slice(0, 4)] ??= []).push(trip);
@@ -49,18 +50,7 @@ const postTotal = trips.reduce((sum, trip) => sum + trip.postCount, 0);
             <h2 class="text-lg font-semibold text-white mb-4">{year}年</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               {byYear[year].map((trip) => (
-                <a href={`/journey/trips/${trip.slug}/`} class="glass rounded-2xl p-5 hover-lift block">
-                  <div class="text-white font-medium text-sm leading-relaxed mb-2">{trip.title}</div>
-                  <div class="text-gray-500 text-xs mb-3">{formatRange(trip.start, trip.end)}・{trip.postCount}件</div>
-                  <div class="flex flex-wrap gap-1">
-                    {trip.allPrefCodes.slice(0, 5).map((code) => {
-                      const prefecture = prefectureByCode(code);
-                      return prefecture ? (
-                        <span class="px-2 py-0.5 rounded-full bg-white/10 text-gray-400 text-[10px]">{prefecture.shortName}</span>
-                      ) : null;
-                    })}
-                  </div>
-                </a>
+                <TripCard trip={trip} />
               ))}
             </div>
           </section>
@@ -79,18 +69,7 @@ const postTotal = trips.reduce((sum, trip) => sum + trip.postCount, 0);
                 .slice()
                 .sort((a, b) => b.start.localeCompare(a.start))
                 .map((trip) => (
-                  <a href={`/journey/trips/${trip.slug}/`} class="glass rounded-2xl p-5 hover-lift block">
-                    <div class="text-white font-medium text-sm leading-relaxed mb-2">{trip.title}</div>
-                    <div class="text-gray-500 text-xs mb-3">{formatRange(trip.start, trip.end)}・{trip.postCount}件</div>
-                    <div class="flex flex-wrap gap-1">
-                      {trip.allPrefCodes.slice(0, 5).map((code) => {
-                        const prefecture = prefectureByCode(code);
-                        return prefecture ? (
-                          <span class="px-2 py-0.5 rounded-full bg-white/10 text-gray-400 text-[10px]">{prefecture.shortName}</span>
-                        ) : null;
-                      })}
-                    </div>
-                  </a>
+                  <TripCard trip={trip} />
                 ))}
             </div>
           </section>
