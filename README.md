@@ -181,6 +181,7 @@ PR の「要確認」は、本番で実際に起きた誤りの型を機械で�
 | テーマ | `data/journey/themes.json` の `extraPostIds` | `["投稿ID"]`（タグの無い投稿をテーマに入れる） |
 | 再利用できる地名 | `data/journey/gazetteer.json` | `"地名": ["27"]` |
 | 聖地巡礼の作品 | `data/journey/pilgrimages.json` の `works` | `{"slug": "hyouka", "title": "氷菓", "aliases": []}`（タグに作品名か別名があればその作品に入る）。聖地の場所のタグは `"spots"`、個別の投稿は `"extraPostIds"` に書くと、聖地巡礼タグがなくても入る |
+| 旅の背景画像 | `~/dev/data/trip-covers/<slug>.<拡張子>`（リポジトリの外） | 置いてから `npm run journey:covers`。EXIF を消した webp（800w・1600w）が `public/journey/trips/` にでき、一覧が `data/journey/trip_covers.json` に入る。画像がない旅は投稿のサムネで出る |
 
 Instagram 側のキャプションを直しても、同期（新着しか読まない）では取り込み済みの投稿に届かない。
 直したら `npm run journey:refresh` で読み直す（下記）。

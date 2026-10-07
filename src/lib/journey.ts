@@ -194,6 +194,8 @@ export interface TripCover {
   /** 本人の画像なら 800w・1600w。投稿のサムネで代えたときは無い */
   srcset?: string;
   own: boolean;
+  /** 4:3 以上の横長か。横長ならカードいっぱいに敷き、そうでなければ全体を見せて左右をぼかしでつなぐ */
+  wide: boolean;
 }
 
 const tripCovers = (coverData as { covers: Record<string, Record<string, [number, number]>> }).covers;
@@ -207,10 +209,11 @@ export function coverFor(trip: Trip): TripCover | null {
       src: `${base}-800.webp`,
       srcset: `${base}-800.webp ${own['800'][0]}w, ${base}-1600.webp ${own['1600'][0]}w`,
       own: true,
+      wide: own['800'][0] / own['800'][1] >= 4 / 3,
     };
   }
   const first = postsForTrip(trip).slice().sort((a, b) => a.date.localeCompare(b.date))[0];
-  return first ? { src: thumbUrl(first), own: false } : null;
+  return first ? { src: thumbUrl(first), own: false, wide: false } : null;
 }
 
 /**
