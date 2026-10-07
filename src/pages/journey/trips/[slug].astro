@@ -103,4 +103,9 @@ const cover = coverFor(trip);
   .trip-hero {
     background: #0f172a;
   }
+  /* 見出しは横に長く、左右の画像が大きく引き伸ばされて形が残るので、カードより強くぼかす */
+  .trip-hero .cover-backdrop {
+    filter: blur(28px) brightness(0.8);
+    transform: scale(1.15);
+  }
 </style>
