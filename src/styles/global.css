@@ -768,3 +768,17 @@ body.light-mode .opus-context th { background: rgba(0, 0, 0, 0.05); color: #1f29
 body.light-mode .opus-context th,
 body.light-mode .opus-context td { border-color: rgba(0, 0, 0, 0.12); }
 body.light-mode .opus-context hr { border-color: rgba(0, 0, 0, 0.1); }
+
+/* 写真の上の文字。ライトモードの上書き（.text-white や .bg-white\/10 を黒にする）を受けない名前で、白のまま出す */
+.photo-title {
+  color: #f8fafc;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.6);
+}
+.photo-meta {
+  color: rgb(248 250 252 / 0.85);
+}
+.photo-chip {
+  color: #f8fafc;
+  background: rgb(0 0 0 / 0.4);
+  border: 1px solid rgb(255 255 255 / 0.25);
+}

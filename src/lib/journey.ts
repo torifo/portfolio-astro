@@ -11,6 +11,7 @@ import tripData from '../../data/journey/trips.json';
 import pilgrimageData from '../../data/journey/pilgrimages.json';
 import permalinkData from '../../data/journey/permalinks.json';
 import themeData from '../../data/journey/themes.json';
+import coverData from '../../data/journey/trip_covers.json';
 
 export interface Prefecture {
   code: string;
@@ -186,6 +187,30 @@ export function hasPermalink(post: Post): boolean {
 /** 表紙サムネのURL。scripts/ingest/build_thumbs.py が public/journey/thumbs へ出す。 */
 export function thumbUrl(post: Post): string {
   return `/journey/thumbs/${post.id}.webp`;
+}
+
+export interface TripCover {
+  src: string;
+  /** 本人の画像なら 800w・1600w。投稿のサムネで代えたときは無い */
+  srcset?: string;
+  own: boolean;
+}
+
+const tripCovers = (coverData as { covers: Record<string, Record<string, [number, number]>> }).covers;
+
+/** 旅の背景画像。本人の画像（npm run journey:covers）が無ければ、旅のいちばん早い投稿のサムネで代える。 */
+export function coverFor(trip: Trip): TripCover | null {
+  const own = tripCovers[trip.slug];
+  if (own) {
+    const base = `/journey/trips/${trip.slug}`;
+    return {
+      src: `${base}-800.webp`,
+      srcset: `${base}-800.webp ${own['800'][0]}w, ${base}-1600.webp ${own['1600'][0]}w`,
+      own: true,
+    };
+  }
+  const first = postsForTrip(trip).slice().sort((a, b) => a.date.localeCompare(b.date))[0];
+  return first ? { src: thumbUrl(first), own: false } : null;
 }
 
 /**
