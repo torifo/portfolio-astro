@@ -30,8 +30,8 @@ const postCount = posts.length;
 const tripPostCount = trips.reduce((sum, trip) => sum + trip.postCount, 0);
 const workPostCount = works.reduce((sum, work) => sum + work.postCount, 0);
 const themePostCount = themes.reduce((sum, theme) => sum + theme.postCount, 0);
-// 新しい旅から3件。トップで旅の写真が見えるのはここだけ
-const recentTrips = [...trips].sort((a, b) => b.start.localeCompare(a.start)).slice(0, 3);
+// 旅の帯に並べる旅（新しい順）。トップで旅の写真が見えるのはここだけ
+const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
 
 ---
 
@@ -46,22 +46,42 @@ const recentTrips = [...trips].sort((a, b) => b.start.localeCompare(a.start)).sl
       </p>
     </div>
 
-    <!-- 最近の旅。写真が目に入るように地方の一覧より先に置く。
-         スマホで縦に3枚積むと長くなるので、横に流して1枚ずつ送る -->
-    {recentTrips.length > 0 && (
-      <div class="mb-12">
-        <div class="flex items-baseline justify-between gap-4 mb-4">
-          <h3 class="text-xl font-bold text-white">最近の旅</h3>
-          <a href="/journey/trips/" class="shrink-0 text-sm text-gray-400 hover:text-cyan-400 transition-colors">
-            すべての旅（{trips.length}件）→
-          </a>
+    <!-- 旅の帯。写真が目に入るように地方の一覧より先に置く。全部の旅を新しい順に横へ並べ、
+         端まで行っても途切れないよう同じ並びを2周ぶん置く（1周目は複製で、読み上げとタブ移動から外す）。
+         手でも横にスクロールでき、ふだんは時間で少しずつ右へ流れる。動きは下の <script> -->
+    {tripsByDate.length > 0 && (
+      <div class="mb-8">
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <h3 class="text-xl font-bold text-white">これまでの旅</h3>
+          <div class="flex items-center gap-2 shrink-0">
+            <button type="button" class="trip-reel-step glass rounded-full w-8 h-8 hidden sm:flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" data-step="-1" aria-label="前の旅へ">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button type="button" class="trip-reel-toggle glass rounded-full w-8 h-8 flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" aria-label="流れを止める">
+              <svg class="reel-icon-pause w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" /></svg>
+              <svg class="reel-icon-play w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+            </button>
+            <button type="button" class="trip-reel-step glass rounded-full w-8 h-8 hidden sm:flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" data-step="1" aria-label="次の旅へ">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <a href="/journey/trips/" class="ml-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+              一覧（{trips.length}件）→
+            </a>
+          </div>
         </div>
-        <div class="-mx-6 px-6 scroll-px-6 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-3 gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pt-1 pb-2 sm:p-0">
-          {recentTrips.map((trip) => (
-            <div class="w-[80%] shrink-0 snap-start sm:w-auto">
-              <TripCard trip={trip} />
-            </div>
-          ))}
+        <div class="trip-reel -mx-6 overflow-x-auto" data-trip-reel role="region" aria-label="これまでの旅（横にスクロールできます）">
+          <!-- 上下の余白は、カーソルを乗せたカードが浮く分（5px）と影の分。横にスクロールする箱は上下もはみ出しを切るため -->
+          <div class="flex w-max gap-4 px-6 pt-2 pb-6">
+            {[0, 1].map((copy) => (
+              <div class="flex gap-4" data-reel-set={copy} aria-hidden={copy === 0 ? 'true' : undefined}>
+                {tripsByDate.map((trip) => (
+                  <div class="w-[78vw] max-w-[320px] sm:w-[300px] shrink-0">
+                    <TripCard trip={trip} tabindex={copy === 0 ? -1 : undefined} />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )}
@@ -282,4 +302,155 @@ const recentTrips = [...trips].sort((a, b) => b.start.localeCompare(a.start)).sl
       radial-gradient(circle 150px at 100% 120%, #1e3a8a 0%, #1d4ed8 55%, #2563eb 80%, #38bdf8 92%, #e0f2fe 95%, rgb(56 189 248 / 0.35) 97%, transparent 100%),
       #060a1c;
   }
+
+  /* 旅の帯。左右の端を淡くして、まだ続いていることを見せる。スクロールバーは出さない
+     （途切れずにつながるので位置の目安にならない。PC は前後のボタン、スマホは指で動かす） */
+  .trip-reel {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    scrollbar-width: none;
+    /* global.css の scroll-behavior: smooth が効くと、毎フレーム位置を変えるたびに
+       なめらかな移動が始め直しになって流れない。帯の中だけ即時にする */
+    scroll-behavior: auto;
+  }
+  .trip-reel::-webkit-scrollbar {
+    display: none;
+  }
 </style>
+
+<script>
+  // 旅の帯。同じ並びを2周ぶん置き、端に近づいたら1周ぶん位置を戻して、途切れずにつながって見せる。
+  // ふだんは時間で少しずつ右へ流す（中身が右へ動く）。カーソルを乗せている間・触った直後・画面の外にある間は止め、
+  // 止めるボタンで止めたままにもできる。「動きを減らす」の設定の人には流さない。
+  const SPEED = 24; // 1秒に動かす px
+  const RESUME_DELAY = 2500; // 手で動かしたあと、流れを戻すまでの ms
+
+  const setup = () => {
+    const reel = document.querySelector<HTMLElement>('[data-trip-reel]');
+    if (!reel || reel.dataset.ready) return;
+    const sets = reel.querySelectorAll<HTMLElement>('[data-reel-set]');
+    if (sets.length < 2) return;
+    reel.dataset.ready = '1';
+
+    const toggle = document.querySelector<HTMLButtonElement>('.trip-reel-toggle');
+    const steps = document.querySelectorAll<HTMLButtonElement>('.trip-reel-step');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // 1周の長さ（2周目の先頭 - 1周目の先頭。間の余白を含む）
+    const period = () => sets[1].offsetLeft - sets[0].offsetLeft;
+    const inset = () => sets[0].offsetLeft;
+    // 1周の4分の1より左、または1と4分の1周より右へ出たら、1周ぶん戻す。見えている絵は同じなので気づかれない
+    const wrap = (value: number) => {
+      const p = period();
+      if (p <= 0) return value;
+      if (value < p * 0.25) return value + p;
+      if (value >= p * 1.25) return value - p;
+      return value;
+    };
+
+    // 2周目（読み上げの対象のほう）の先頭、いちばん新しい旅から始める
+    let pos = sets[1].offsetLeft - inset();
+    let target: number | null = null;
+    let last = 0;
+    let visible = true;
+    let hovering = false;
+    let holdUntil = 0;
+    let stopped = reduce.matches;
+    reel.scrollLeft = pos;
+
+    const render = () => {
+      if (!toggle) return;
+      toggle.setAttribute('aria-label', stopped ? '流れを再開する' : '流れを止める');
+      toggle.querySelector('.reel-icon-pause')?.classList.toggle('hidden', stopped);
+      toggle.querySelector('.reel-icon-play')?.classList.toggle('hidden', !stopped);
+    };
+    render();
+
+    const tick = (now: number) => {
+      if (!reel.isConnected) return; // ページを移ったら止める
+      const dt = last ? Math.min(now - last, 100) : 0;
+      last = now;
+      if (target !== null) {
+        // 前後のボタンで1枚ぶん送るときは、目標へなめらかに寄せる
+        const before = pos;
+        pos += (target - pos) * Math.min(1, dt / 120);
+        if (Math.abs(target - pos) < 0.5) {
+          pos = target;
+          target = null;
+        }
+        const wrapped = wrap(pos);
+        if (target !== null) target += wrapped - pos;
+        pos = wrapped;
+        if (pos !== before) reel.scrollLeft = pos;
+      } else if (!stopped && visible && !hovering && now >= holdUntil) {
+        pos = wrap(pos - (SPEED * dt) / 1000);
+        reel.scrollLeft = pos;
+      }
+      requestAnimationFrame(tick);
+    };
+
+    // 手で動かしたら、その位置を引き継ぐ（流している間の差は1px未満なので、2px を超えたら手で動かしたとみなす）
+    reel.addEventListener(
+      'scroll',
+      () => {
+        if (target !== null || Math.abs(reel.scrollLeft - pos) <= 2) return;
+        pos = reel.scrollLeft;
+        const wrapped = wrap(pos);
+        if (wrapped !== pos) {
+          pos = wrapped;
+          reel.scrollLeft = pos;
+        }
+      },
+      { passive: true },
+    );
+    const hold = () => {
+      holdUntil = performance.now() + RESUME_DELAY;
+    };
+    reel.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'mouse') hovering = true;
+    });
+    reel.addEventListener('pointerleave', () => {
+      hovering = false;
+    });
+    reel.addEventListener('pointerdown', hold);
+    reel.addEventListener('touchmove', hold, { passive: true });
+    reel.addEventListener('wheel', hold, { passive: true });
+    reel.addEventListener('focusin', () => {
+      hovering = true;
+    });
+    reel.addEventListener('focusout', () => {
+      hovering = false;
+    });
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    }).observe(reel);
+
+    toggle?.addEventListener('click', () => {
+      stopped = !stopped;
+      render();
+    });
+    reduce.addEventListener('change', () => {
+      stopped = reduce.matches;
+      render();
+    });
+    steps.forEach((button) => {
+      button.addEventListener('click', () => {
+        const card = sets[1].firstElementChild as HTMLElement | null;
+        const step = (card?.offsetWidth ?? 300) + 16;
+        const base = target ?? pos;
+        hold();
+        if (reduce.matches) {
+          pos = wrap(base + step * Number(button.dataset.step));
+          reel.scrollLeft = pos;
+        } else {
+          target = base + step * Number(button.dataset.step);
+        }
+      });
+    });
+
+    requestAnimationFrame(tick);
+  };
+
+  setup();
+  document.addEventListener('astro:page-load', setup);
+</script>
