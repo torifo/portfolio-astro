@@ -111,14 +111,16 @@ const getGridColumns = (itemCount: number) => {
             class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium transition-all hover:bg-white/20 cursor-pointer category-filter-btn active-filter"
             data-category="all"
             type="button"
+            aria-pressed="true"
           >
             All
           </button>
           {allCategories.map((category) => (
             <button
-              class={`px-4 py-2 ${getCategoryColor(category)} rounded-full text-sm font-medium transition-all hover:opacity-100 opacity-60 cursor-pointer category-filter-btn`}
+              class={`px-4 py-2 ${getCategoryColor(category)} rounded-full text-sm font-medium transition-all cursor-pointer category-filter-btn`}
               data-category={category}
               type="button"
+              aria-pressed="false"
             >
               {category}
             </button>
@@ -525,21 +527,17 @@ const getGridColumns = (itemCount: number) => {
         // ボタンのアクティブ状態を更新
         filterButtons.forEach(function(b) {
           b.classList.remove('active-filter');
+          b.setAttribute('aria-pressed', 'false');
           if (b.getAttribute('data-category') === 'all') {
             b.classList.remove('bg-white/30');
             b.classList.add('bg-white/10');
-          } else {
-            b.classList.add('opacity-60');
-            b.classList.remove('opacity-100');
           }
         });
         this.classList.add('active-filter');
+        this.setAttribute('aria-pressed', 'true');
         if (selectedCategory === 'all') {
           this.classList.remove('bg-white/10');
           this.classList.add('bg-white/30');
-        } else {
-          this.classList.remove('opacity-60');
-          this.classList.add('opacity-100');
         }
 
         // カードの表示/非表示を切り替え

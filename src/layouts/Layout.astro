@@ -5,12 +5,14 @@ import { ViewTransitions } from 'astro:transitions';
 interface Props {
   title: string;
   description?: string;
+  /** 共有したときの画像。無ければサイト共通の og-image.jpg */
+  image?: string;
 }
 
-const { title, description = 'モダンで高速なポートフォリオサイト' } = Astro.props;
+const { title, description = 'モダンで高速なポートフォリオサイト', image } = Astro.props;
 
 // og:image は絶対URLでないとSNS側が解決できない（相対パスだと画像が出ない）。
-const ogImage = new URL('/og-image.jpg', Astro.site).href;
+const ogImage = new URL(image ?? '/og-image.jpg', Astro.site).href;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 

@@ -272,6 +272,27 @@ body.light-mode .bg-amber-500\/15 {
   background-color: rgba(146, 64, 14, 0.12) !important;
 }
 
+/* 経歴・作品のタグ（bg-色-500/20 と text-色-300 の組）。昼の灰色の地では淡い文字が溶けて
+   読めなかったので、ライトモードだけ地を白く敷き、文字を同じ色相の濃い側にする */
+body.light-mode :is(#about, #opus, .opus-detail) :is(.bg-cyan-500\/20, .bg-purple-500\/20, .bg-indigo-500\/20, .bg-green-500\/20, .bg-orange-500\/20, .bg-pink-500\/20, .bg-yellow-500\/20, .bg-blue-500\/20, .bg-red-500\/20, .bg-gray-500\/20) {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+body.light-mode :is(#about, #opus, .opus-detail) .text-purple-300 { color: #6b21a8 !important; }
+body.light-mode :is(#about, #opus, .opus-detail) .text-indigo-300 { color: #3730a3 !important; }
+body.light-mode :is(#about, #opus, .opus-detail) .text-green-300 { color: #166534 !important; }
+body.light-mode :is(#about, #opus, .opus-detail) .text-orange-300 { color: #9a3412 !important; }
+body.light-mode :is(#about, #opus, .opus-detail) .text-pink-300 { color: #9d174d !important; }
+body.light-mode :is(#about, #opus, .opus-detail) .text-yellow-300 { color: #854d0e !important; }
+body.light-mode :is(#about, #opus, .opus-detail) .text-blue-300 { color: #1e40af !important; }
+body.light-mode :is(#about, #opus, .opus-detail) .text-red-300 { color: #991b1b !important; }
+
+/* 絞り込みの選択中は輪郭で示す。以前は選ばれていないチップを薄くしていたが、薄くすると読めない */
+.about-tag-btn[aria-pressed="true"],
+.category-filter-btn[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px currentColor;
+}
+
 /* 暗い塗りの上に載る文字は、ライトモードでも白のまま。
    .text-white を一律に濃くしていたため、ツールチップ（bg-gray-800）やギャラリーの
    送り矢印・Reelバッジ（bg-black/60）が暗い背景に暗い文字になって読めなかった。 */

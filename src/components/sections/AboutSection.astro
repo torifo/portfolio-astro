@@ -51,14 +51,16 @@ const getTagBadgeColor = (tag: string) => {
           class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium transition-all hover:bg-white/20 cursor-pointer about-tag-btn active-about-tag"
           data-tag="all"
           type="button"
+          aria-pressed="true"
         >
           All
         </button>
         {(['Academic', 'Technology', 'Opus', 'Pulse', 'Community'] as const).map((tag) => (
           <button
-            class={`px-4 py-2 ${getTagBadgeColor(tag)} rounded-full text-sm font-medium transition-all hover:opacity-100 opacity-60 cursor-pointer about-tag-btn`}
+            class={`px-4 py-2 ${getTagBadgeColor(tag)} rounded-full text-sm font-medium transition-all cursor-pointer about-tag-btn`}
             data-tag={tag}
             type="button"
+            aria-pressed="false"
           >
             {tag}
           </button>
@@ -207,21 +209,17 @@ const getTagBadgeColor = (tag: string) => {
         // ボタンのアクティブ状態を更新
         tagButtons.forEach(function (b) {
           b.classList.remove('active-about-tag');
+          b.setAttribute('aria-pressed', 'false');
           if (b.getAttribute('data-tag') === 'all') {
             b.classList.remove('bg-white/30');
             b.classList.add('bg-white/10');
-          } else {
-            b.classList.add('opacity-60');
-            b.classList.remove('opacity-100');
           }
         });
         this.classList.add('active-about-tag');
+        this.setAttribute('aria-pressed', 'true');
         if (selectedTag === 'all') {
           this.classList.remove('bg-white/10');
           this.classList.add('bg-white/30');
-        } else {
-          this.classList.remove('opacity-60');
-          this.classList.add('opacity-100');
         }
 
         // 経歴アイテムの表示/非表示
