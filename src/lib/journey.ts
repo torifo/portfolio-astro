@@ -195,6 +195,11 @@ export interface TripCover {
   src: string;
   /** 本人の画像なら 800w・1600w。投稿のサムネで代えたときは無い */
   srcset?: string;
+  /**
+   * 余白に敷く画像（本人の画像だけ）。端を鏡に映して上下左右に 0.75 倍ずつ延ばしてあるので、
+   * 手前の画像の 250% の大きさで中央に重ねると、延ばした部分が手前の画像の端から続く（build_trip_covers.py）
+   */
+  fill?: string;
   own: boolean;
   /**
    * 4:3 のカードにどう収めるか。どの形でも画像は全体を見せる。
@@ -223,6 +228,7 @@ export function coverFor(trip: Trip): TripCover | null {
     return {
       src: `${base}-800.webp`,
       srcset: `${base}-800.webp ${own['800'][0]}w, ${base}-1600.webp ${own['1600'][0]}w`,
+      fill: `${base}-fill.webp`,
       own: true,
       shape: shapeOf(own['800'][0], own['800'][1]),
     };

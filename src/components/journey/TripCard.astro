@@ -3,16 +3,20 @@
 // 旅の一覧（年別・地方別）と県のページ（compact）で使う。文字は global.css の photo-* で白のまま出す。
 //
 // 画像はどの形でも全体を見せる。ほぼ 4:3 ならカードいっぱいに敷く。正方形などは高さに合わせて真ん中に置き、
-// 左右の足りない部分は同じ画像をぼかして広げたもので埋め、画像の左右の端を透明にしてつなぐ（global.css の cover-*）。
-// 4:3 より横長（3:2 など）は幅に合わせ、上下を同じようにつなぐ（端に文字のある画像が切れていた）。
+// 4:3 より横長（3:2 など）は幅に合わせる（端に文字のある画像が切れていた）。
+// 足りない部分には、端を鏡に映して延ばした画像（cover.fill）を手前の画像とぴったり重なる位置に敷いてぼかし、
+// 手前の画像の端を透明にしてつなぐ（global.css の cover-*）。投稿のサムネで代えた旅は、同じ画像を広げてぼかす。
+// 手前と余白がずれないよう、ホバーの拡大は両方をまとめた枠にかける。
 import { coverFor, formatRange, prefectureByCode, type Trip } from '../../lib/journey';
 
 interface Props {
   trip: Trip;
   compact?: boolean;
+  /** トップの旅の帯の2周目（複製）のように、タブ移動から外すときは -1 */
+  tabindex?: number;
 }
 
-const { trip, compact = false } = Astro.props;
+const { trip, compact = false, tabindex } = Astro.props;
 const cover = coverFor(trip);
 const prefectures = compact
   ? []
@@ -22,37 +26,50 @@ const sizes = compact ? '(min-width: 768px) 310px, (min-width: 640px) 50vw, 100v
 
 <a
   href={`/journey/trips/${trip.slug}/`}
+  tabindex={tabindex}
   class:list={['trip-card relative block overflow-hidden hover-lift group aspect-[4/3]', compact ? 'rounded-xl' : 'rounded-2xl']}
 >
-  {cover && cover.shape !== 'fit' && (
-    <img
-      src={cover.src}
-      srcset={cover.srcset}
-      sizes={sizes}
-      alt=""
-      aria-hidden="true"
-      loading="lazy"
-      decoding="async"
-      class="cover-backdrop absolute inset-0 w-full h-full object-cover"
-    />
-  )}
   {cover && (
-    <img
-      src={cover.src}
-      srcset={cover.srcset}
-      sizes={sizes}
-      alt=""
-      loading="lazy"
-      decoding="async"
-      class:list={[
-        'absolute transition-transform duration-500 group-hover:scale-105',
-        cover.shape === 'fit'
-          ? 'inset-0 w-full h-full object-cover'
-          : cover.shape === 'wide'
-            ? 'cover-fade-y left-0 top-1/2 -translate-y-1/2 w-full h-auto'
-            : 'cover-fade top-0 left-1/2 -translate-x-1/2 h-full w-auto max-w-none',
-      ]}
-    />
+    <div class="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
+      {cover.shape !== 'fit' && (cover.fill ? (
+        <img
+          src={cover.fill}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          class:list={[
+            'cover-fill absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none',
+            cover.shape === 'wide' ? 'w-[250%] h-auto' : 'h-[250%] w-auto',
+          ]}
+        />
+      ) : (
+        <img
+          src={cover.src}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          class="cover-backdrop absolute inset-0 w-full h-full object-cover"
+        />
+      ))}
+      <img
+        src={cover.src}
+        srcset={cover.srcset}
+        sizes={sizes}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        class:list={[
+          'absolute',
+          cover.shape === 'fit'
+            ? 'inset-0 w-full h-full object-cover'
+            : cover.shape === 'wide'
+              ? 'cover-fade-y left-0 top-1/2 -translate-y-1/2 w-full h-auto'
+              : 'cover-fade top-0 left-1/2 -translate-x-1/2 h-full w-auto max-w-none',
+        ]}
+      />
+    </div>
   )}
   <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
   <div class:list={['absolute inset-x-0 bottom-0', compact ? 'p-3' : 'p-4']}>

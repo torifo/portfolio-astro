@@ -3,6 +3,7 @@
 
   元画像  ~/dev/data/trip-covers/<slug>.<jpg|jpeg|png|heic|webp>（リポジトリの外）
   出力    public/journey/trips/<slug>-800.webp（カード用）・<slug>-1600.webp（見出し・高解像度画面用）
+          <slug>-fill.webp（カード・見出しの余白に敷く、端を鏡に映して上下左右へ延ばした画像。CSS でぼかす）
   一覧    data/journey/trip_covers.json（slug → 幅ごとの [幅, 高さ]。サイトの coverFor() が読む）
 
 位置情報などの EXIF は消す（-strip）。縮小だけで拡大はしない。元画像が出力より新しいときだけ作り直す。
@@ -26,6 +27,12 @@ OUT = ROOT / "public" / "journey" / "trips"
 WIDTHS = (800, 1600)
 QUALITY = 72
 SUFFIXES = {".jpg", ".jpeg", ".png", ".heic", ".webp"}
+# 余白用の画像は、上下左右それぞれに元の幅・高さの 0.75 倍を鏡に映して延ばす（全体で 2.5 倍）。
+# TripCard・trips/[slug] はこの画像を手前の画像の 250% の大きさで中央に重ね、延ばした部分が余白に来るようにする。
+# 0.75 あれば、正方形の画像を見出し（横長の帯）に置いたときも余白とぼかしのにじみ（28px）が収まる
+FILL_EXTEND = 0.75
+FILL_WIDTH = 480
+FILL_QUALITY = 55
 
 
 def magick():
@@ -41,6 +48,22 @@ def convert(source, destination, width):
     )
     if result.returncode != 0:
         sys.exit(f"変換に失敗した {source.name}: {result.stderr.decode()[:200]}")
+
+
+def convert_fill(source, destination):
+    # 以前は同じ画像を枠いっぱいに拡大してぼかしていたので、手前の画像の端とぼかしの絵柄がずれ、画像が端で切れて見えた。
+    # 端を鏡に映して延ばすと、手前の画像の端からそのまま続く絵になる。ぼかすので解像度は低くてよい
+    scale = 1 + 2 * FILL_EXTEND
+    viewport = (f"%[fx:round(w*{scale})]x%[fx:round(h*{scale})]"
+                f"-%[fx:round(w*{FILL_EXTEND})]-%[fx:round(h*{FILL_EXTEND})]")
+    result = subprocess.run(
+        [magick(), str(source), "-auto-orient", "-strip", "-resize", "640x>",
+         "-virtual-pixel", "mirror", "-set", "option:distort:viewport", viewport, "-distort", "SRT", "0", "+repage",
+         "-resize", f"{FILL_WIDTH}x", "-quality", str(FILL_QUALITY), f"webp:{destination}"],
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        sys.exit(f"余白用の画像の作成に失敗した {source.name}: {result.stderr.decode()[:200]}")
 
 
 def size_of(path):
@@ -89,8 +112,12 @@ def main():
             sources[path.stem] = path
 
     OUT.mkdir(parents=True, exist_ok=True)
-    made = []
+    made, filled = [], []
     for slug, path in sources.items():
+        fill = OUT / f"{slug}-fill.webp"
+        if args.force or not fill.exists() or fill.stat().st_mtime < path.stat().st_mtime:
+            convert_fill(path, fill)
+            filled.append(slug)
         outputs = [OUT / f"{slug}-{width}.webp" for width in WIDTHS]
         fresh = all(o.exists() and o.stat().st_mtime >= path.stat().st_mtime for o in outputs)
         if fresh and slug in covers and not args.force:
@@ -112,6 +139,8 @@ def main():
     print(f"作り直した {len(made)} 件 / 画像のある旅 {len(covers)} 件 / まだ無い旅 {len(missing)} 件")
     for slug in made:
         print(f"  作成: {slug}  {covers[slug]}")
+    if filled:
+        print(f"  余白用の画像を作った {len(filled)} 件")
     for name in unknown:
         print(f"  飛ばした（旅に無い名前）: {name}")
     stale = sorted(set(covers) - slugs)

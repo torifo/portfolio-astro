@@ -804,8 +804,13 @@ body.light-mode .opus-context hr { border-color: rgba(0, 0, 0, 0.1); }
   border: 1px solid rgb(255 255 255 / 0.25);
 }
 
-/* 旅の背景画像を、形を崩さず全体を見せるとき（TripCard の正方形の画像・旅のページの見出し）。
-   後ろに同じ画像を軽くぼかして敷き（ぼかしの縁が見えないよう少しだけ拡大）、手前の画像の左右の端を透明にしてつなぐ */
+/* 旅の背景画像を、形を崩さず全体を見せるとき（TripCard・旅のページの見出し）。
+   本人の画像は、端を鏡に映して延ばした画像（-fill.webp）を手前の画像と重なる位置に敷いてぼかす（cover-fill）。
+   投稿のサムネで代えた旅は、同じ画像を広げてぼかす（cover-backdrop。ぼかしの縁が見えないよう少しだけ拡大）。
+   どちらも手前の画像の端を透明にしてつなぐ */
+.cover-fill {
+  filter: blur(8px) brightness(0.85);
+}
 .cover-backdrop {
   filter: blur(8px) brightness(0.85);
   transform: scale(1.08);

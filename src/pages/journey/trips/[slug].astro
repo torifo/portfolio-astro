@@ -33,19 +33,32 @@ const cover = coverFor(trip);
 
   <main class="pt-24 pb-16 relative z-10">
     <div class="container mx-auto px-6 max-w-5xl">
-      <!-- 画像は形を崩さず全体を見せ、左右は同じ画像のぼかしでつなぐ（global.css の cover-*）。スマホは 4:3 -->
+      <!-- 画像は形を崩さず全体を見せ、余白は端を鏡に映して延ばした画像のぼかしでつなぐ（global.css の cover-*）。スマホは 4:3 -->
       <div class="trip-hero relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto md:h-[30rem] mb-10">
         {cover && (
           <>
-            <img
-              src={cover.src}
-              srcset={cover.srcset}
-              sizes="(min-width: 1024px) 976px, 100vw"
-              alt=""
-              aria-hidden="true"
-              decoding="async"
-              class="cover-backdrop absolute inset-0 w-full h-full object-cover"
-            />
+            {cover.fill ? (
+              <img
+                src={cover.fill}
+                alt=""
+                aria-hidden="true"
+                decoding="async"
+                class:list={[
+                  'cover-fill absolute left-1/2 top-1/2 max-w-none',
+                  cover.shape === 'wide' ? 'hero-fill-wide' : 'hero-fill',
+                ]}
+              />
+            ) : (
+              <img
+                src={cover.src}
+                srcset={cover.srcset}
+                sizes="(min-width: 1024px) 976px, 100vw"
+                alt=""
+                aria-hidden="true"
+                decoding="async"
+                class="cover-backdrop absolute inset-0 w-full h-full object-cover"
+              />
+            )}
             <img
               src={cover.src}
               srcset={cover.srcset}
@@ -108,6 +121,33 @@ const cover = coverFor(trip);
     filter: blur(28px) brightness(0.8);
     transform: scale(1.15);
   }
+  .trip-hero .cover-fill {
+    filter: blur(28px) brightness(0.8);
+  }
+  /* 見出しはぼかしが強いので、くっきりした画像からぼけた余白への切り替えを広くとる（カードは6%）。
+     6% だと切り替えが急で、余白の絵が端の続きになっていても画像がそこで切れて見えた */
+  .trip-hero .cover-fade {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%);
+  }
+  /* 余白用の画像（上下左右に 0.75 倍ずつ延ばしてある）を、手前の画像の 250% の大きさで中央に重ねる。
+     手前が高さに合わせる形なら高さで、幅に合わせる形（スマホの横長）なら幅で合わせる */
+  .hero-fill {
+    height: 250%;
+    width: auto;
+    transform: translate(-50%, -50%);
+  }
+  .hero-fill-wide {
+    width: 250%;
+    height: auto;
+    transform: translate(-50%, -50%);
+  }
+  @media (min-width: 768px) {
+    .hero-fill-wide {
+      height: 250%;
+      width: auto;
+    }
+  }
   /* 4:3 より横長の画像。スマホの帯（4:3）では幅に合わせて上下をつなぎ、md 以上の帯（画像より横長）では
      ほかの画像と同じく高さに合わせて左右をつなぐ。スマホで左右が切れて、端の文字が欠けていた */
   .hero-wide {
@@ -127,8 +167,8 @@ const cover = coverFor(trip);
       max-width: none;
       height: 100%;
       transform: translateX(-50%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%);
     }
   }
 </style>
