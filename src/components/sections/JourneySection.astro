@@ -48,7 +48,7 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
 
     <!-- 旅の帯。写真が目に入るように地方の一覧より先に置く。全部の旅を新しい順に横へ並べ、
          端まで行っても途切れないよう同じ並びを2周ぶん置く（1周目は複製で、読み上げとタブ移動から外す）。
-         手でも横にスクロールでき、ふだんは時間で少しずつ右へ流れる。動きは下の <script> -->
+         手でも横にスクロールでき、ふだんは時間で少しずつ左へ流れる（右から古い旅が出てくる）。動きは下の <script> -->
     {tripsByDate.length > 0 && (
       <div class="mb-8">
         <div class="flex items-center justify-between gap-4 mb-4">
@@ -70,8 +70,8 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
           </div>
         </div>
         <div class="trip-reel -mx-6 overflow-x-auto" data-trip-reel role="region" aria-label="これまでの旅（横にスクロールできます）">
-          <!-- 上下の余白は、カーソルを乗せたカードが浮く分（5px）と影の分。横にスクロールする箱は上下もはみ出しを切るため -->
-          <div class="flex w-max gap-4 px-6 pt-2 pb-6">
+          <!-- 上下の余白は、カーソルを乗せたカードが浮く分（10px）と影の分。横にスクロールする箱は上下もはみ出しを切るため -->
+          <div class="flex w-max gap-4 px-6 pt-4 pb-8">
             {[0, 1].map((copy) => (
               <div class="flex gap-4" data-reel-set={copy} aria-hidden={copy === 0 ? 'true' : undefined}>
                 {tripsByDate.map((trip) => (
@@ -316,11 +316,16 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
   .trip-reel::-webkit-scrollbar {
     display: none;
   }
+  /* 帯のカードは、カーソルを乗せたら少し上へ浮かせてはっきり分かるようにする（ふつうの hover-lift は 5px）。
+     乗せている間は流れも止まる */
+  .trip-reel :global(.trip-card:hover) {
+    transform: translateY(-10px);
+  }
 </style>
 
 <script>
   // 旅の帯。同じ並びを2周ぶん置き、端に近づいたら1周ぶん位置を戻して、途切れずにつながって見せる。
-  // ふだんは時間で少しずつ右へ流す（中身が右へ動く）。カーソルを乗せている間・触った直後・画面の外にある間は止め、
+  // ふだんは時間で少しずつ左へ流す（中身が左へ動き、新しい順の続きの古い旅が右から出てくる。右へ流すと逆に感じた）。カーソルを乗せている間・触った直後・画面の外にある間は止め、
   // 止めるボタンで止めたままにもできる。「動きを減らす」の設定の人には流さない。
   const SPEED = 24; // 1秒に動かす px
   const RESUME_DELAY = 2500; // 手で動かしたあと、流れを戻すまでの ms
@@ -383,7 +388,7 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
         pos = wrapped;
         if (pos !== before) reel.scrollLeft = pos;
       } else if (!stopped && visible && !hovering && now >= holdUntil) {
-        pos = wrap(pos - (SPEED * dt) / 1000);
+        pos = wrap(pos + (SPEED * dt) / 1000);
         reel.scrollLeft = pos;
       }
       requestAnimationFrame(tick);
