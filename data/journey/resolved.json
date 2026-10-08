@@ -56,6 +56,28 @@
    ],
    "gpsPrefCode": null
   },
+  "17909373285487814": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "ontology",
+   "evidence": "仙台",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "18243665824313705": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "ontology",
+   "evidence": "松島海岸駅",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
   "18185913400417715": {
    "prefCodes": [
     "04"
@@ -106,6 +128,17 @@
    ],
    "method": "date-line-place",
    "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "17950596102272053": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "ontology",
+   "evidence": "松島",
    "tagPrefCodes": [
     "04"
    ],
