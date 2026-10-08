@@ -814,4 +814,9 @@ body.light-mode .opus-context hr { border-color: rgba(0, 0, 0, 0.1); }
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
+/* 4:3 より横長の画像を幅に合わせたとき。上下の端を透明にする */
+.cover-fade-y {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
 

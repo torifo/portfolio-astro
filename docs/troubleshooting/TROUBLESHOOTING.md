@@ -405,7 +405,7 @@ Instagram API は位置情報を返さないので、新着の県は本文とタ
 `public/journey/trips/` にでき、一覧が `data/journey/trip_covers.json` に入る。差し替えは同じ名前で置き直して流す
 （元の画像が新しいときだけ作り直す。`--force` で全部作り直す）。
 
-- 画像がない旅は、その旅のいちばん早い投稿のサムネで出る
+- 画像がない旅は、その旅のいちばん新しく投稿したもののサムネで出る（撮影日ではなく投稿日時 `uploaded_at` で選ぶ）
 - 元の画像を消しても、サイトの画像は自動では消えない。消すときは `public/journey/trips/<slug>-*.webp` と
   `trip_covers.json` の該当行を手で消す
 - 旅の名前のタグを付け直したときは slug を引き継ぐ（`trips.json` の tag・title を書き換える）ので、画像もそのまま使える

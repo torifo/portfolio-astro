@@ -38,6 +38,8 @@ export interface Post {
   hashtags: string[];
   cover: string | null;
   media: string[];
+  /** Instagram に投稿した日時（2026-10-05T22:52:00+09:00）。撮影日の date とは別 */
+  uploaded_at: string;
 }
 
 export interface Trip {
@@ -194,13 +196,26 @@ export interface TripCover {
   /** 本人の画像なら 800w・1600w。投稿のサムネで代えたときは無い */
   srcset?: string;
   own: boolean;
-  /** 4:3 以上の横長か。横長ならカードいっぱいに敷き、そうでなければ全体を見せて左右をぼかしでつなぐ */
-  wide: boolean;
+  /**
+   * 4:3 のカードにどう収めるか。どの形でも画像は全体を見せる。
+   * fit: ほぼ 4:3 なのでカードいっぱいに敷く／wide: 4:3 より横長なので幅に合わせ、上下を同じ画像のぼかしでつなぐ／
+   * tall: 正方形などなので高さに合わせ、左右をぼかしでつなぐ
+   */
+  shape: 'fit' | 'wide' | 'tall';
+}
+
+function shapeOf(width: number, height: number): TripCover['shape'] {
+  const ratio = width / height;
+  if (Math.abs(ratio - 4 / 3) < 0.02) return 'fit';
+  return ratio > 4 / 3 ? 'wide' : 'tall';
 }
 
 const tripCovers = (coverData as { covers: Record<string, Record<string, [number, number]>> }).covers;
 
-/** 旅の背景画像。本人の画像（npm run journey:covers）が無ければ、旅のいちばん早い投稿のサムネで代える。 */
+/**
+ * 旅の背景画像。本人の画像（npm run journey:covers）が無ければ、旅のいちばん新しく投稿したもののサムネで代える。
+ * 本人は旅の投稿を終えてから画像を作るので、それまでは投稿が増えるたびに最新のものが出る。
+ */
 export function coverFor(trip: Trip): TripCover | null {
   const own = tripCovers[trip.slug];
   if (own) {
@@ -209,11 +224,11 @@ export function coverFor(trip: Trip): TripCover | null {
       src: `${base}-800.webp`,
       srcset: `${base}-800.webp ${own['800'][0]}w, ${base}-1600.webp ${own['1600'][0]}w`,
       own: true,
-      wide: own['800'][0] / own['800'][1] >= 4 / 3,
+      shape: shapeOf(own['800'][0], own['800'][1]),
     };
   }
-  const first = postsForTrip(trip).slice().sort((a, b) => a.date.localeCompare(b.date))[0];
-  return first ? { src: thumbUrl(first), own: false, wide: false } : null;
+  const latest = postsForTrip(trip).slice().sort((a, b) => b.uploaded_at.localeCompare(a.uploaded_at))[0];
+  return latest ? { src: thumbUrl(latest), own: false, shape: 'tall' } : null;
 }
 
 /**
