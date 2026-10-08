@@ -18,6 +18,7 @@ import {
 } from '../../lib/journey';
 // 地方の形の透かし（scripts/journey/build_region_silhouettes.py が県境から作る）
 import silhouettes from '../../lib/region-silhouettes.json';
+import TripCard from '../journey/TripCard.astro';
 
 const silhouetteByRegion: Record<string, { viewBox: string; d: string }> = silhouettes;
 
@@ -29,6 +30,8 @@ const postCount = posts.length;
 const tripPostCount = trips.reduce((sum, trip) => sum + trip.postCount, 0);
 const workPostCount = works.reduce((sum, work) => sum + work.postCount, 0);
 const themePostCount = themes.reduce((sum, theme) => sum + theme.postCount, 0);
+// 新しい旅から3件。トップで旅の写真が見えるのはここだけ
+const recentTrips = [...trips].sort((a, b) => b.start.localeCompare(a.start)).slice(0, 3);
 
 ---
 
@@ -42,6 +45,26 @@ const themePostCount = themes.reduce((sum, theme) => sum + theme.postCount, 0);
         その土地にしかない空気感と光を求めて、今日も旅を続けています。
       </p>
     </div>
+
+    <!-- 最近の旅。写真が目に入るように地方の一覧より先に置く。
+         スマホで縦に3枚積むと長くなるので、横に流して1枚ずつ送る -->
+    {recentTrips.length > 0 && (
+      <div class="mb-12">
+        <div class="flex items-baseline justify-between gap-4 mb-4">
+          <h3 class="text-xl font-bold text-white">最近の旅</h3>
+          <a href="/journey/trips/" class="shrink-0 text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+            すべての旅（{trips.length}件）→
+          </a>
+        </div>
+        <div class="-mx-6 px-6 scroll-px-6 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-3 gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pt-1 pb-2 sm:p-0">
+          {recentTrips.map((trip) => (
+            <div class="w-[80%] shrink-0 snap-start sm:w-auto">
+              <TripCard trip={trip} />
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
 
     <!-- 8地方＋海外のグリッド -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
