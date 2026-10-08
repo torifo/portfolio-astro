@@ -87,6 +87,16 @@ const postTotal = trips.reduce((sum, trip) => sum + trip.postCount, 0);
     background: rgba(255, 255, 255, 0.15);
     color: #fff;
   }
+  /* 昼（ライトモード）は枠も白っぽく、選択中の白い文字が溶けて読めなかった。
+     選択中は白い地に濃い文字、選ばれていない方は濃い灰色にする */
+  :global(body.light-mode) .journey-tab {
+    color: #4b5563;
+  }
+  :global(body.light-mode) .journey-tab[aria-selected='true'] {
+    background: #fff;
+    color: #111827;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18);
+  }
 </style>
 
 <script>
