@@ -1,28 +1,6 @@
 {
  "policy": "gps",
  "posts": {
-  "17923825956439320": {
-   "prefCodes": [
-    "13"
-   ],
-   "method": "date-line-place",
-   "evidence": "東京",
-   "tagPrefCodes": [
-    "13"
-   ],
-   "gpsPrefCode": null
-  },
-  "17909441790557385": {
-   "prefCodes": [
-    "04"
-   ],
-   "method": "date-line-place",
-   "evidence": "宮城",
-   "tagPrefCodes": [
-    "04"
-   ],
-   "gpsPrefCode": null
-  },
   "17857837452611905": {
    "prefCodes": [
     "42"
@@ -35,6 +13,17 @@
    "gpsPrefCode": "42"
   },
   "18118652923953329": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "17923825956439320": {
    "prefCodes": [
     "13"
    ],
@@ -79,6 +68,17 @@
    "gpsPrefCode": null
   },
   "18185913400417715": {
+   "prefCodes": [
+    "04"
+   ],
+   "method": "date-line-place",
+   "evidence": "宮城",
+   "tagPrefCodes": [
+    "04"
+   ],
+   "gpsPrefCode": null
+  },
+  "17909441790557385": {
    "prefCodes": [
     "04"
    ],
