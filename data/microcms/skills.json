@@ -559,9 +559,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -585,6 +585,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -633,6 +634,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -676,6 +678,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -714,6 +717,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -1039,9 +1043,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -1065,6 +1069,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -1113,6 +1118,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -1156,6 +1162,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -1194,6 +1201,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -1331,9 +1339,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -1357,6 +1365,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -1405,6 +1414,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -1448,6 +1458,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -1486,6 +1497,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -1590,9 +1602,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -1616,6 +1628,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -1664,6 +1677,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -1707,6 +1721,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -1745,6 +1760,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -2054,9 +2070,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -2080,6 +2096,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -2128,6 +2145,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -2171,6 +2189,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -2209,6 +2228,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -2436,9 +2456,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -2462,6 +2482,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -2510,6 +2531,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -2553,6 +2575,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -2591,6 +2614,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -2627,9 +2651,9 @@
     {
      "id": "ca9bwrj88j28",
      "createdAt": "2025-08-23T17:10:22.433Z",
-     "updatedAt": "2026-02-24T04:07:44.893Z",
+     "updatedAt": "2026-10-08T04:49:27.918Z",
      "publishedAt": "2026-02-18T04:44:25.037Z",
-     "revisedAt": "2026-02-24T04:07:44.893Z",
+     "revisedAt": "2026-10-08T04:49:27.918Z",
      "title": "Game",
      "galleryTypes": [],
      "description": "<p>ゲーム</p>",
@@ -2647,6 +2671,7 @@
          "width": 982
         }
        ],
+       "context": "# レトロシューティングゲーム 〜原神風〜\n\n原神の「雷電将軍」と「スカラマッシュ」をテーマにした、Java の縦スクロール弾幕シューティングです。個人の学習用に作りました。\n\n## 遊び方\n- 矢印キーで移動し、Z で弾を撃ちます（タイトル画面では SPACE で開始）\n- ボスの HP を 0 にするとステージクリア、被弾するとゲームオーバーです\n- 画面は 800×720、約60FPS で動きます\n\n## 工夫したこと\n- **弾幕の組み立て**: 撃ち方（扇状・十字・二連・正弦波・ランダム散弾・追尾・回転など8種類）と、弾の動き方（加速・螺旋・追尾）を別のクラスに分け、組み合わせて弾幕を作れるようにしました（Strategy パターン）\n- **ボスの行動**: 行動パターンを状態として切り替えます（State パターン）\n- **動作の軽さ**: 弾をあらかじめ確保して使い回し（敵弾200・自機弾20）、ガベージコレクションを抑えています。描画はダブルバッファリングでちらつきを防ぎ、移動はフレームの時間をもとに速度を一定にしています\n- **当たり判定**: 円どうしの距離を二乗のまま比べ、平方根の計算を省いています\n\n## 技術構成\n- Java（JDK 21）・AWT\n- Eclipse",
        "repoUrl": "https://github.com/torifo/java-game-RetroShootingGame.Genshin_Impact-Style",
        "relatedSkill": [
         {
@@ -2667,7 +2692,7 @@
          "width": 1852
         }
        ],
-       "context": "日本全国47都道府県のストリートビュー画像から場所を当てる位置推測ゲーム(無料)。\n\n機能\nソロプレイ - 1人用，5ラウンド\nローカルマルチ - 2〜4人，1台の端末で順番に回答\nオンラインマルチ - リンク共有で最大100人対戦（WebSocket）\nタイマー - なし / 15秒 / 30秒 / 60秒から選択",
+       "context": "# JGeo - 日本版ジオゲッサー\n\n日本全国47都道府県の街角の景色（ストリートビューの画像）を見て、その場所を地図の上で当てる位置推測ゲームです。無料で遊べます。\n\n## 主な機能\n- **ソロプレイ**: 1人で5ラウンド\n- **ローカルマルチ**: 2〜4人が1台の端末で順番に回答\n- **オンラインマルチ**: リンクを共有して最大100人で対戦（WebSocket）\n- **タイマー**: なし・15秒・30秒・60秒から選択\n\n## 仕組み\n- 景色のパノラマには Mapillary の画像を、回答用の地図には国土地理院の標準地図を使っています\n- 回答した地点と正解の地点の距離を計算します（Turf.js）\n- オンライン対戦は Express と WebSocket（ws）のサーバーで動かしています\n- main ブランチへの push で GitHub Actions が Docker イメージを作って GHCR に置き、VPS で配備します\n\n## 技術構成\n- React 19・Vite 7・Tailwind CSS v4\n- Mapillary JS・React-Leaflet / Leaflet・国土地理院 標準地図・Turf.js\n- Express・ws\n- Docker・GitHub Actions・GHCR・VPS",
        "repoUrl": "https://github.com/torifo/jgeo",
        "opusUrl": "https://jgeo.opus.riumu.net/",
        "relatedSkill": [
@@ -2707,7 +2732,7 @@
          "width": 1863
         }
        ],
-       "context": "日本の市区町村をドラッグ&ドロップで正しい位置に配置するパズルゲーム。\n\n機能\n全国モード: 47都道府県を日本地図に配置\n地方モード: 地方ごとの市区町村を配置（95〜355ピース）\n県内モード: 都道府県内の市区町村を配置（10〜194ピース）\n3段階の難易度: かんたん / ふつう / むずかしい（スナップ距離・ゴースト表示・境界線の太さが変化）\nレスポンシブ対応: PC / タブレット / スマホ",
+       "context": "# Shikuty - 市区町村パズル\n\n日本の市区町村や都道府県のピースを、ドラッグ&ドロップで地図の正しい位置に置いていくパズルゲームです。\n\n## 主な機能\n- **3つのモード**: 全国（47都道府県）・地方（8地方から選んで市区町村を配置、95〜355ピース）・県内（都道府県を選んで配置、10〜194ピース）\n- **3段階の難易度**: かんたん・ふつう・むずかしいで、ピースが吸い付く距離・お手本の表示・境界線の太さが変わります。かんたんでは、ピースの初期配置が地理的な位置を参考にしたものになり、時間がたつと段階的にヒントが点滅します\n- **選び方**: 地図をクリックして選ぶか、名前の一覧から選ぶかを切り替えられます\n- **遊びやすさ**: 市区町村名とよみがなのツールチップ（政令市は「京都市北区」の形）、完成形のプレビュー、0.5〜8倍のズーム、PC・タブレット・スマホへの対応\n\n## 仕組み\n- **地図データ**: 国土数値情報の行政区域（2024年版）を Python のスクリプトで整え、124,133 の図形を 1,905 の市区町村にまとめています。mapshaper で形を約88%軽くしてから TopoJSON に変換し、全市区町村で 720KB（gzip で 156KB）に収めています\n- **よみがな**: 政令市20市・169区のよみがなを別に付けています\n- **API**: Ruby on Rails 7.2（API モード）と PostGIS で、都道府県と市区町村のデータを返します\n- **描画**: D3.js と TopoJSON で地図を描き、ピースを置くと名前のラベルを境界の内側に収めて表示します\n\n## 技術構成\n- Vite・TypeScript・D3.js v7・topojson-client\n- Ruby on Rails 7.2・PostGIS\n- Python・mapshaper・Node.js（データの前処理）\n- Docker・GHCR・nginx-proxy・Let's Encrypt",
        "repoUrl": "https://github.com/torifo/shikuty",
        "opusUrl": "https://shikuty.opus.riumu.net/",
        "relatedSkill": [
@@ -3036,9 +3061,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -3062,6 +3087,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -3110,6 +3136,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -3153,6 +3180,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -3191,6 +3219,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -3227,9 +3256,9 @@
     {
      "id": "ca9bwrj88j28",
      "createdAt": "2025-08-23T17:10:22.433Z",
-     "updatedAt": "2026-02-24T04:07:44.893Z",
+     "updatedAt": "2026-10-08T04:49:27.918Z",
      "publishedAt": "2026-02-18T04:44:25.037Z",
-     "revisedAt": "2026-02-24T04:07:44.893Z",
+     "revisedAt": "2026-10-08T04:49:27.918Z",
      "title": "Game",
      "galleryTypes": [],
      "description": "<p>ゲーム</p>",
@@ -3247,6 +3276,7 @@
          "width": 982
         }
        ],
+       "context": "# レトロシューティングゲーム 〜原神風〜\n\n原神の「雷電将軍」と「スカラマッシュ」をテーマにした、Java の縦スクロール弾幕シューティングです。個人の学習用に作りました。\n\n## 遊び方\n- 矢印キーで移動し、Z で弾を撃ちます（タイトル画面では SPACE で開始）\n- ボスの HP を 0 にするとステージクリア、被弾するとゲームオーバーです\n- 画面は 800×720、約60FPS で動きます\n\n## 工夫したこと\n- **弾幕の組み立て**: 撃ち方（扇状・十字・二連・正弦波・ランダム散弾・追尾・回転など8種類）と、弾の動き方（加速・螺旋・追尾）を別のクラスに分け、組み合わせて弾幕を作れるようにしました（Strategy パターン）\n- **ボスの行動**: 行動パターンを状態として切り替えます（State パターン）\n- **動作の軽さ**: 弾をあらかじめ確保して使い回し（敵弾200・自機弾20）、ガベージコレクションを抑えています。描画はダブルバッファリングでちらつきを防ぎ、移動はフレームの時間をもとに速度を一定にしています\n- **当たり判定**: 円どうしの距離を二乗のまま比べ、平方根の計算を省いています\n\n## 技術構成\n- Java（JDK 21）・AWT\n- Eclipse",
        "repoUrl": "https://github.com/torifo/java-game-RetroShootingGame.Genshin_Impact-Style",
        "relatedSkill": [
         {
@@ -3267,7 +3297,7 @@
          "width": 1852
         }
        ],
-       "context": "日本全国47都道府県のストリートビュー画像から場所を当てる位置推測ゲーム(無料)。\n\n機能\nソロプレイ - 1人用，5ラウンド\nローカルマルチ - 2〜4人，1台の端末で順番に回答\nオンラインマルチ - リンク共有で最大100人対戦（WebSocket）\nタイマー - なし / 15秒 / 30秒 / 60秒から選択",
+       "context": "# JGeo - 日本版ジオゲッサー\n\n日本全国47都道府県の街角の景色（ストリートビューの画像）を見て、その場所を地図の上で当てる位置推測ゲームです。無料で遊べます。\n\n## 主な機能\n- **ソロプレイ**: 1人で5ラウンド\n- **ローカルマルチ**: 2〜4人が1台の端末で順番に回答\n- **オンラインマルチ**: リンクを共有して最大100人で対戦（WebSocket）\n- **タイマー**: なし・15秒・30秒・60秒から選択\n\n## 仕組み\n- 景色のパノラマには Mapillary の画像を、回答用の地図には国土地理院の標準地図を使っています\n- 回答した地点と正解の地点の距離を計算します（Turf.js）\n- オンライン対戦は Express と WebSocket（ws）のサーバーで動かしています\n- main ブランチへの push で GitHub Actions が Docker イメージを作って GHCR に置き、VPS で配備します\n\n## 技術構成\n- React 19・Vite 7・Tailwind CSS v4\n- Mapillary JS・React-Leaflet / Leaflet・国土地理院 標準地図・Turf.js\n- Express・ws\n- Docker・GitHub Actions・GHCR・VPS",
        "repoUrl": "https://github.com/torifo/jgeo",
        "opusUrl": "https://jgeo.opus.riumu.net/",
        "relatedSkill": [
@@ -3307,7 +3337,7 @@
          "width": 1863
         }
        ],
-       "context": "日本の市区町村をドラッグ&ドロップで正しい位置に配置するパズルゲーム。\n\n機能\n全国モード: 47都道府県を日本地図に配置\n地方モード: 地方ごとの市区町村を配置（95〜355ピース）\n県内モード: 都道府県内の市区町村を配置（10〜194ピース）\n3段階の難易度: かんたん / ふつう / むずかしい（スナップ距離・ゴースト表示・境界線の太さが変化）\nレスポンシブ対応: PC / タブレット / スマホ",
+       "context": "# Shikuty - 市区町村パズル\n\n日本の市区町村や都道府県のピースを、ドラッグ&ドロップで地図の正しい位置に置いていくパズルゲームです。\n\n## 主な機能\n- **3つのモード**: 全国（47都道府県）・地方（8地方から選んで市区町村を配置、95〜355ピース）・県内（都道府県を選んで配置、10〜194ピース）\n- **3段階の難易度**: かんたん・ふつう・むずかしいで、ピースが吸い付く距離・お手本の表示・境界線の太さが変わります。かんたんでは、ピースの初期配置が地理的な位置を参考にしたものになり、時間がたつと段階的にヒントが点滅します\n- **選び方**: 地図をクリックして選ぶか、名前の一覧から選ぶかを切り替えられます\n- **遊びやすさ**: 市区町村名とよみがなのツールチップ（政令市は「京都市北区」の形）、完成形のプレビュー、0.5〜8倍のズーム、PC・タブレット・スマホへの対応\n\n## 仕組み\n- **地図データ**: 国土数値情報の行政区域（2024年版）を Python のスクリプトで整え、124,133 の図形を 1,905 の市区町村にまとめています。mapshaper で形を約88%軽くしてから TopoJSON に変換し、全市区町村で 720KB（gzip で 156KB）に収めています\n- **よみがな**: 政令市20市・169区のよみがなを別に付けています\n- **API**: Ruby on Rails 7.2（API モード）と PostGIS で、都道府県と市区町村のデータを返します\n- **描画**: D3.js と TopoJSON で地図を描き、ピースを置くと名前のラベルを境界の内側に収めて表示します\n\n## 技術構成\n- Vite・TypeScript・D3.js v7・topojson-client\n- Ruby on Rails 7.2・PostGIS\n- Python・mapshaper・Node.js（データの前処理）\n- Docker・GHCR・nginx-proxy・Let's Encrypt",
        "repoUrl": "https://github.com/torifo/shikuty",
        "opusUrl": "https://shikuty.opus.riumu.net/",
        "relatedSkill": [
@@ -3458,9 +3488,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -3484,6 +3514,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -3532,6 +3563,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -3575,6 +3607,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -3613,6 +3646,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -3922,9 +3956,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -3948,6 +3982,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -3996,6 +4031,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -4039,6 +4075,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -4077,6 +4114,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -4386,9 +4424,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -4412,6 +4450,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -4460,6 +4499,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -4503,6 +4543,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -4541,6 +4582,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -4614,9 +4656,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -4640,6 +4682,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -4688,6 +4731,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -4731,6 +4775,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -4769,6 +4814,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -4918,9 +4964,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -4944,6 +4990,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -4992,6 +5039,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -5035,6 +5083,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -5073,6 +5122,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -5330,9 +5380,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -5356,6 +5406,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -5404,6 +5455,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -5447,6 +5499,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -5485,6 +5538,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -5558,9 +5612,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -5584,6 +5638,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -5632,6 +5687,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -5675,6 +5731,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -5713,6 +5770,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -5940,9 +5998,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -5966,6 +6024,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -6014,6 +6073,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -6057,6 +6117,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -6095,6 +6156,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -6150,9 +6212,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -6176,6 +6238,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -6224,6 +6287,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -6267,6 +6331,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -6305,6 +6370,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -6514,9 +6580,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -6540,6 +6606,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -6588,6 +6655,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -6631,6 +6699,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -6669,6 +6738,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -6760,9 +6830,9 @@
     {
      "id": "ca9bwrj88j28",
      "createdAt": "2025-08-23T17:10:22.433Z",
-     "updatedAt": "2026-02-24T04:07:44.893Z",
+     "updatedAt": "2026-10-08T04:49:27.918Z",
      "publishedAt": "2026-02-18T04:44:25.037Z",
-     "revisedAt": "2026-02-24T04:07:44.893Z",
+     "revisedAt": "2026-10-08T04:49:27.918Z",
      "title": "Game",
      "galleryTypes": [],
      "description": "<p>ゲーム</p>",
@@ -6780,6 +6850,7 @@
          "width": 982
         }
        ],
+       "context": "# レトロシューティングゲーム 〜原神風〜\n\n原神の「雷電将軍」と「スカラマッシュ」をテーマにした、Java の縦スクロール弾幕シューティングです。個人の学習用に作りました。\n\n## 遊び方\n- 矢印キーで移動し、Z で弾を撃ちます（タイトル画面では SPACE で開始）\n- ボスの HP を 0 にするとステージクリア、被弾するとゲームオーバーです\n- 画面は 800×720、約60FPS で動きます\n\n## 工夫したこと\n- **弾幕の組み立て**: 撃ち方（扇状・十字・二連・正弦波・ランダム散弾・追尾・回転など8種類）と、弾の動き方（加速・螺旋・追尾）を別のクラスに分け、組み合わせて弾幕を作れるようにしました（Strategy パターン）\n- **ボスの行動**: 行動パターンを状態として切り替えます（State パターン）\n- **動作の軽さ**: 弾をあらかじめ確保して使い回し（敵弾200・自機弾20）、ガベージコレクションを抑えています。描画はダブルバッファリングでちらつきを防ぎ、移動はフレームの時間をもとに速度を一定にしています\n- **当たり判定**: 円どうしの距離を二乗のまま比べ、平方根の計算を省いています\n\n## 技術構成\n- Java（JDK 21）・AWT\n- Eclipse",
        "repoUrl": "https://github.com/torifo/java-game-RetroShootingGame.Genshin_Impact-Style",
        "relatedSkill": [
         {
@@ -6800,7 +6871,7 @@
          "width": 1852
         }
        ],
-       "context": "日本全国47都道府県のストリートビュー画像から場所を当てる位置推測ゲーム(無料)。\n\n機能\nソロプレイ - 1人用，5ラウンド\nローカルマルチ - 2〜4人，1台の端末で順番に回答\nオンラインマルチ - リンク共有で最大100人対戦（WebSocket）\nタイマー - なし / 15秒 / 30秒 / 60秒から選択",
+       "context": "# JGeo - 日本版ジオゲッサー\n\n日本全国47都道府県の街角の景色（ストリートビューの画像）を見て、その場所を地図の上で当てる位置推測ゲームです。無料で遊べます。\n\n## 主な機能\n- **ソロプレイ**: 1人で5ラウンド\n- **ローカルマルチ**: 2〜4人が1台の端末で順番に回答\n- **オンラインマルチ**: リンクを共有して最大100人で対戦（WebSocket）\n- **タイマー**: なし・15秒・30秒・60秒から選択\n\n## 仕組み\n- 景色のパノラマには Mapillary の画像を、回答用の地図には国土地理院の標準地図を使っています\n- 回答した地点と正解の地点の距離を計算します（Turf.js）\n- オンライン対戦は Express と WebSocket（ws）のサーバーで動かしています\n- main ブランチへの push で GitHub Actions が Docker イメージを作って GHCR に置き、VPS で配備します\n\n## 技術構成\n- React 19・Vite 7・Tailwind CSS v4\n- Mapillary JS・React-Leaflet / Leaflet・国土地理院 標準地図・Turf.js\n- Express・ws\n- Docker・GitHub Actions・GHCR・VPS",
        "repoUrl": "https://github.com/torifo/jgeo",
        "opusUrl": "https://jgeo.opus.riumu.net/",
        "relatedSkill": [
@@ -6840,7 +6911,7 @@
          "width": 1863
         }
        ],
-       "context": "日本の市区町村をドラッグ&ドロップで正しい位置に配置するパズルゲーム。\n\n機能\n全国モード: 47都道府県を日本地図に配置\n地方モード: 地方ごとの市区町村を配置（95〜355ピース）\n県内モード: 都道府県内の市区町村を配置（10〜194ピース）\n3段階の難易度: かんたん / ふつう / むずかしい（スナップ距離・ゴースト表示・境界線の太さが変化）\nレスポンシブ対応: PC / タブレット / スマホ",
+       "context": "# Shikuty - 市区町村パズル\n\n日本の市区町村や都道府県のピースを、ドラッグ&ドロップで地図の正しい位置に置いていくパズルゲームです。\n\n## 主な機能\n- **3つのモード**: 全国（47都道府県）・地方（8地方から選んで市区町村を配置、95〜355ピース）・県内（都道府県を選んで配置、10〜194ピース）\n- **3段階の難易度**: かんたん・ふつう・むずかしいで、ピースが吸い付く距離・お手本の表示・境界線の太さが変わります。かんたんでは、ピースの初期配置が地理的な位置を参考にしたものになり、時間がたつと段階的にヒントが点滅します\n- **選び方**: 地図をクリックして選ぶか、名前の一覧から選ぶかを切り替えられます\n- **遊びやすさ**: 市区町村名とよみがなのツールチップ（政令市は「京都市北区」の形）、完成形のプレビュー、0.5〜8倍のズーム、PC・タブレット・スマホへの対応\n\n## 仕組み\n- **地図データ**: 国土数値情報の行政区域（2024年版）を Python のスクリプトで整え、124,133 の図形を 1,905 の市区町村にまとめています。mapshaper で形を約88%軽くしてから TopoJSON に変換し、全市区町村で 720KB（gzip で 156KB）に収めています\n- **よみがな**: 政令市20市・169区のよみがなを別に付けています\n- **API**: Ruby on Rails 7.2（API モード）と PostGIS で、都道府県と市区町村のデータを返します\n- **描画**: D3.js と TopoJSON で地図を描き、ピースを置くと名前のラベルを境界の内側に収めて表示します\n\n## 技術構成\n- Vite・TypeScript・D3.js v7・topojson-client\n- Ruby on Rails 7.2・PostGIS\n- Python・mapshaper・Node.js（データの前処理）\n- Docker・GHCR・nginx-proxy・Let's Encrypt",
        "repoUrl": "https://github.com/torifo/shikuty",
        "opusUrl": "https://shikuty.opus.riumu.net/",
        "relatedSkill": [
@@ -7087,9 +7158,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -7113,6 +7184,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -7161,6 +7233,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -7204,6 +7277,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -7242,6 +7316,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -7409,9 +7484,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -7435,6 +7510,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -7483,6 +7559,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -7526,6 +7603,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -7564,6 +7642,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -7619,9 +7698,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -7645,6 +7724,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -7693,6 +7773,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -7736,6 +7817,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -7774,6 +7856,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -7865,9 +7948,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -7891,6 +7974,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -7939,6 +8023,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -7982,6 +8067,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -8020,6 +8106,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -8075,9 +8162,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -8101,6 +8188,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -8149,6 +8237,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -8192,6 +8281,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -8230,6 +8320,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -8541,9 +8632,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -8567,6 +8658,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -8615,6 +8707,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -8658,6 +8751,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -8696,6 +8790,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -8763,9 +8858,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -8789,6 +8884,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -8837,6 +8933,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -8880,6 +8977,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -8918,6 +9016,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -8991,9 +9090,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -9017,6 +9116,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -9065,6 +9165,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -9108,6 +9209,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -9146,6 +9248,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -9201,9 +9304,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -9227,6 +9330,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -9275,6 +9379,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -9318,6 +9423,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -9356,6 +9462,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
@@ -9593,9 +9700,9 @@
     {
      "id": "nr5ld4kp3rqt",
      "createdAt": "2025-08-01T17:30:34.399Z",
-     "updatedAt": "2026-02-24T04:02:15.652Z",
+     "updatedAt": "2026-10-08T04:49:27.936Z",
      "publishedAt": "2025-08-23T17:09:28.389Z",
-     "revisedAt": "2026-02-24T04:02:15.652Z",
+     "revisedAt": "2026-10-08T04:49:27.936Z",
      "title": "Web-Page",
      "galleryTypes": [
       {
@@ -9619,6 +9726,7 @@
          "width": 1847
         }
        ],
+       "context": "# ポートフォリオ（Astro）\n\n作品・技術・旅の記録をひとつにまとめた、このサイトです。Astro の静的サイト生成で作り、自分の VPS で配信しています。\n\n## 主な機能\n- **作品・スキル・経歴**: microCMS で管理しています。作品に付けたスキルのタグから、Skills の項目へ移動できます\n- **Journey**: Instagram に載せた旅の投稿約1,000件を、都道府県・旅・聖地巡礼・テーマの4つの軸でたどれます。新しい投稿は毎日 GitHub Actions が取り込み、プルリクエストにします\n- **昼夜の自動切り替え**: 日の出・日没の時刻に合わせて、ライトモードとダークモードを切り替えます\n\n## 仕組み\n- **ビルドと配信を分ける**: GitHub Actions でビルドしたイメージを GHCR に置き、VPS では nginx で配信するだけにしています\n- **外部サービスが止まってもサイトが出る**: microCMS の内容はビルドの前に取得して保存し、ビルドそのものは外部を呼びません。取得に失敗しても、最後に取れた内容で公開されます\n- **撮影地の判定**: 投稿の本文やタグから都道府県を決め、判定の規則と根拠を記録に残しています\n\n## 技術構成\n- Astro・TypeScript・Tailwind CSS\n- microCMS（作品・スキル・プロフィール）\n- Python（Instagram の投稿の取り込みと判定）\n- Docker・nginx・GitHub Actions・GHCR",
        "repoUrl": "https://github.com/torifo/portfolio-astro",
        "opusUrl": "https://portorifo.riumu.net/",
        "relatedSkill": [
@@ -9667,6 +9775,7 @@
          "width": 1855
         }
        ],
+       "context": "# TMU 卒業要件確認システム\n\n東京都立大学 システムデザイン学部 情報科学科の卒業要件を、履修した科目から確かめるためのシステムです。\n\n## 主な機能\n- 学科の標準履修モデル（2023年度）をもとにした、科目の一覧の表示\n- 履修した科目の単位を区分ごとに集計し、卒業要件を満たしているかの判定\n  - 総単位数（128単位以上）\n  - 必修の実験科目（システムプログラミング実験・応用プログラミング実験）\n  - 専門基礎科目の分野ごと（基礎理論系・アーキテクチャ系など）の単位\n\n## 仕組み\n- **科目データ**: 履修モデル表の科目を CSV に起こし、SQLite に取り込んでいます。授業番号の形式は、テーブルの制約で検査しています\n- **判定**: 卒業要件を Prolog（SWI-Prolog）の規則として書き、Python から呼び出して判定します\n- **画面**: React で、科目の一覧と判定の結果を表示します\n\n## 技術構成\n- Python・Prolog（SWI-Prolog / pyswip）・SQLite\n- React",
        "relatedSkill": [
         {
          "id": "gn2b92e2t_no"
@@ -9710,6 +9819,7 @@
          "width": 1857
         }
        ],
+       "context": "# 原神データベース管理システム\n\n原神のキャラクターや関連データを PostgreSQL で管理し、ブラウザから参照・追加できるようにした Web アプリです。\n\n## 主な機能\n- **キャラクター管理**: キャラクターの追加と一覧表示\n- **関連データの参照**: 元素・国・武器・天賦・声優のデータ\n- **ダッシュボード**: 登録しているデータの統計を表示\n- **ユーザー登録とログイン**\n\n## 仕組み\n- フロントエンドとバックエンドを TypeScript でそろえ、型の定義を共有しています\n- もともと使っていた PostgreSQL のデータベースを、そのまま使えるようにしています\n- パスワードのハッシュ化（bcrypt）、セキュリティヘッダー（Helmet）、CORS の制御、API のレート制限を入れています\n\n## 技術構成\n- フロントエンド: React・TypeScript・Material-UI・React Router\n- バックエンド: Node.js・Express・TypeScript\n- データベース: PostgreSQL\n- 認証: JWT・セッション",
        "opusUrl": "https://data-ops.genshin.riumu.net",
        "relatedSkill": [
         {
@@ -9748,6 +9858,7 @@
          "width": 1687
         }
        ],
+       "context": "# 旅の軌跡 可視化 Web ツール（Wanderpath Journey）\n\n旅の記録を位置情報と合わせて残し、地図に重ねて見るための Web アプリです。アカウントを作ってログインして使います。\n\n## 仕組み\n- **バックエンド**: Ruby on Rails 7.2 の API です。位置情報は PostgreSQL の拡張の PostGIS で扱います\n- **フロントエンド**: React（Vite）と Tailwind CSS です\n- **環境**: Rails・PostGIS・React の3つを Docker Compose でまとめ、開発も本番（VPS）も同じ構成で動かしています。ドメインや認証情報は環境変数で渡し、リポジトリには置いていません\n\n## 技術構成\n- Ruby on Rails 7.2・Ruby 3.3・PostgreSQL + PostGIS\n- React（Vite）・Tailwind CSS\n- Docker Compose・VPS",
        "opusUrl": "https://wanderpath-journey.megu.riumu.net",
        "relatedSkill": [
         {
