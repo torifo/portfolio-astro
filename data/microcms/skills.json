@@ -802,14 +802,14 @@
   {
    "id": "gkkfkpeg9j5",
    "createdAt": "2026-04-29T07:47:20.588Z",
-   "updatedAt": "2026-09-12T11:57:31.765Z",
+   "updatedAt": "2026-10-08T03:43:40.788Z",
    "publishedAt": "2026-04-29T07:47:20.588Z",
-   "revisedAt": "2026-09-12T11:57:31.765Z",
+   "revisedAt": "2026-10-08T03:43:40.788Z",
    "name": "Dart",
    "icon": {
-    "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/f717bd6b3ec04699b7086743ab5c5611/dart.svg",
-    "height": 138,
-    "width": 443
+    "url": "https://images.microcms-assets.io/assets/1daa96d4e9b64c138cd24a2ae4079dba/de4de088bece4f70ba1f06d957e470cb/dart-mark.svg",
+    "height": 140,
+    "width": 140
    },
    "category": [
     "プログラミング言語"
