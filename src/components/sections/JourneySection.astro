@@ -70,8 +70,8 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
           </div>
         </div>
         <div class="trip-reel -mx-6 overflow-x-auto" data-trip-reel role="region" aria-label="これまでの旅（横にスクロールできます）">
-          <!-- 上下の余白は、カーソルを乗せたカードが浮く分（10px）と影の分。横にスクロールする箱は上下もはみ出しを切るため -->
-          <div class="flex w-max gap-4 px-6 pt-4 pb-8">
+          <!-- 上下の余白は、カーソルを乗せたカードが浮く分と影の分。横にスクロールする箱は上下もはみ出しを切るため（下の .trip-reel-track） -->
+          <div class="trip-reel-track flex w-max gap-4 px-6">
             {[0, 1].map((copy) => (
               <div class="flex gap-4" data-reel-set={copy} aria-hidden={copy === 0 ? 'true' : undefined}>
                 {tripsByDate.map((trip) => (
@@ -316,9 +316,22 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
   .trip-reel::-webkit-scrollbar {
     display: none;
   }
-  /* 帯のカードは、カーソルを乗せたら少し上へ浮かせてはっきり分かるようにする（ふつうの hover-lift は 5px）。
-     乗せている間は流れも止まる */
-  .trip-reel :global(.trip-card:hover) {
+  /* 帯の上下の余白。指だけの端末は、ほかのカードと同じ浮き方（hover-lift の 5px）の分だけ。
+     マウスを使える端末は、下の 10px 浮かせる分も取る */
+  .trip-reel-track {
+    padding-top: 0.5rem;
+    padding-bottom: 1.5rem;
+  }
+  @media (any-hover: hover) {
+    .trip-reel-track {
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+  }
+  /* マウスを乗せたカードだけ、少し大きく上へ浮かせてはっきり分かるようにする（乗せている間は流れも止まる）。
+     指はタップで浮いたままになりやすいので、ほかのカードと同じ 5px のまま。
+     画面の大きさや端末の種類ではなく、入ってきた操作がマウスかどうか（pointerType）で分ける。印は下の <script> が付ける */
+  .trip-reel :global(.trip-card[data-mouse-hover]) {
     transform: translateY(-10px);
   }
 </style>
@@ -413,6 +426,15 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
     };
     reel.addEventListener('pointerenter', (event) => {
       if (event.pointerType === 'mouse') hovering = true;
+    });
+    // マウスで乗せたカードにだけ印を付ける（CSS で 10px 浮かせる）。指で触ったときは付けない
+    reel.addEventListener('pointerover', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      (event.target as Element).closest('.trip-card')?.setAttribute('data-mouse-hover', '');
+    });
+    reel.addEventListener('pointerout', (event) => {
+      const card = (event.target as Element).closest('.trip-card');
+      if (card && !card.contains(event.relatedTarget as Node | null)) card.removeAttribute('data-mouse-hover');
     });
     reel.addEventListener('pointerleave', () => {
       hovering = false;
