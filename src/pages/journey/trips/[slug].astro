@@ -10,6 +10,7 @@ import {
   formatRange,
   hasDay,
   coverFor,
+  titleChunks,
   type Trip,
 } from '../../../lib/journey';
 
@@ -26,6 +27,10 @@ const posts = postsForTrip(trip).slice().sort((a, b) => a.date.localeCompare(b.d
 const visited = trip.allPrefCodes.map((code) => prefectureByCode(code)).filter(Boolean);
 const days = [...new Set(posts.filter(hasDay).map((post) => post.date))];
 const cover = coverFor(trip);
+// PC の見出しで、正方形・4:3 の本人の画像は左に置き、右に文字を並べる（中央に置くと左右の半分近くがぼかしになった）
+const split = Boolean(cover?.own && cover.shape !== 'wide');
+// 4:3 は右側が約336px と狭いので、文字を少し小さくする
+const narrow = split && (cover?.ratio ?? 1) > 1.2;
 ---
 
 <Layout title={`${trip.title} - Toriforium Portfolio`} description={`${formatRange(trip.start, trip.end)}の旅・${posts.length}件`}>
@@ -33,49 +38,60 @@ const cover = coverFor(trip);
 
   <main class="pt-24 pb-16 relative z-10">
     <div class="container mx-auto px-6 max-w-5xl">
-      <!-- 画像は形を崩さず全体を見せ、余白は端を鏡に映して延ばした画像のぼかしでつなぐ（global.css の cover-*）。スマホは 4:3 -->
-      <div class="trip-hero relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto md:h-[30rem] mb-10">
-        {cover && (
-          <>
-            {cover.fill ? (
-              <img
-                src={cover.fill}
-                alt=""
-                aria-hidden="true"
-                decoding="async"
-                class:list={[
-                  'cover-fill absolute left-1/2 top-1/2 max-w-none',
-                  cover.shape === 'wide' ? 'hero-fill-wide' : 'hero-fill',
-                ]}
-              />
-            ) : (
-              <img
-                src={cover.src}
-                srcset={cover.srcset}
-                sizes="(min-width: 1024px) 976px, 100vw"
-                alt=""
-                aria-hidden="true"
-                decoding="async"
-                class="cover-backdrop absolute inset-0 w-full h-full object-cover"
-              />
-            )}
+      <!-- 画像は形を崩さず全体を見せる。本人の画像は、画像と同じ形の枠（hero-media）に画像をぴったり入れ、
+           端を鏡に映して延ばした余白用の画像を 250% で中央に重ねてぼかす（画像のすぐ外は弱く、離れるほど強く）。
+           枠の位置だけを形と画面の幅で変える：PC の正方形・4:3 は左に画像・右に文字（is-split）、それ以外は中央。スマホは 4:3 -->
+      <div
+        class:list={[
+          'trip-hero relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto md:h-[30rem] mb-10',
+          { 'is-split': split, 'is-narrow': narrow, 'is-wide': cover?.shape === 'wide' },
+        ]}
+        style={cover?.ratio ? `--r: ${cover.ratio}` : undefined}
+      >
+        {cover && cover.fill ? (
+          <div class="hero-media">
+            <img src={cover.fill} alt="" aria-hidden="true" decoding="async" class="hero-fill hero-fill-strong" />
+            <img src={cover.fill} alt="" aria-hidden="true" decoding="async" class="hero-fill hero-fill-soft" />
             <img
               src={cover.src}
               srcset={cover.srcset}
-              sizes="(min-width: 768px) 480px, 75vw"
+              sizes="(min-width: 768px) 860px, 100vw"
               alt=""
               decoding="async"
               fetchpriority="high"
-              class:list={['absolute', cover.shape === 'wide' ? 'hero-wide' : 'cover-fade top-0 left-1/2 -translate-x-1/2 h-full w-auto max-w-none']}
+              class="hero-img"
+            />
+          </div>
+        ) : cover ? (
+          <>
+            <img
+              src={cover.src}
+              alt=""
+              aria-hidden="true"
+              decoding="async"
+              class="cover-backdrop absolute inset-0 w-full h-full object-cover"
+            />
+            <img
+              src={cover.src}
+              alt=""
+              decoding="async"
+              fetchpriority="high"
+              class="cover-fade absolute top-0 left-1/2 -translate-x-1/2 h-full w-auto max-w-none"
             />
           </>
-        )}
-        <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
-        <div class="relative h-full flex flex-col justify-end items-center text-center p-6">
-          <h1 class="photo-title text-2xl md:text-3xl font-bold mb-3">{trip.title}</h1>
-          <div class="flex flex-wrap justify-center gap-2 text-sm">
-            <span class="photo-chip px-3 py-1 rounded-full">{formatRange(trip.start, trip.end)}</span>
-            <span class="photo-chip px-3 py-1 rounded-full">{days.length}日・{posts.length}件</span>
+        ) : null}
+        <div class="hero-shade absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div class="hero-text relative h-full flex flex-col justify-end items-center text-center p-6">
+          <!-- 左右に分けたとき、このかたまりを右側の中央に置き、中は左揃えにする -->
+          <div class="hero-block">
+            <h1 class="hero-title photo-title text-2xl md:text-3xl font-bold mb-3">
+              {/* 改行やインデントが空白として入らないよう1行で書く */}
+              {titleChunks(trip.title).map((chunk, i) => <>{i > 0 && <wbr />}{chunk}</>)}
+            </h1>
+            <div class="hero-chips flex flex-wrap justify-center gap-2 text-sm">
+              <span class="photo-chip px-3 py-1 rounded-full">{formatRange(trip.start, trip.end)}</span>
+              <span class="photo-chip px-3 py-1 rounded-full">{days.length}日・{posts.length}件</span>
+            </div>
           </div>
         </div>
       </div>
@@ -116,59 +132,129 @@ const cover = coverFor(trip);
   .trip-hero {
     background: #0f172a;
   }
-  /* 見出しは横に長く、左右の画像が大きく引き伸ばされて形が残るので、カードより強くぼかす */
+  /* 題名は単語の区切り（<wbr>）でだけ折り返す。どうしても入らない長い塊だけは途中で折る */
+  .hero-title {
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  /* 投稿のサムネで代えた旅（余白用の画像が無い）。同じ画像を広げて強くぼかす */
   .trip-hero .cover-backdrop {
     filter: blur(28px) brightness(0.8);
     transform: scale(1.15);
   }
-  .trip-hero .cover-fill {
-    filter: blur(28px) brightness(0.8);
+
+  /* 本人の画像。枠（hero-media）は画像と同じ形（--r は幅÷高さ）。ふだんは高さに合わせて中央に置く */
+  .hero-media {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    aspect-ratio: var(--r);
+    transform: translateX(-50%);
   }
-  /* 見出しはぼかしが強いので、くっきりした画像からぼけた余白への切り替えを広くとる（カードは6%）。
-     6% だと切り替えが急で、余白の絵が端の続きになっていても画像がそこで切れて見えた */
-  .trip-hero .cover-fade {
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%);
-  }
-  /* 余白用の画像（上下左右に 0.75 倍ずつ延ばしてある）を、手前の画像の 250% の大きさで中央に重ねる。
-     手前が高さに合わせる形なら高さで、幅に合わせる形（スマホの横長）なら幅で合わせる */
-  .hero-fill {
-    height: 250%;
-    width: auto;
-    transform: translate(-50%, -50%);
-  }
-  .hero-fill-wide {
-    width: 250%;
-    height: auto;
-    transform: translate(-50%, -50%);
-  }
-  @media (min-width: 768px) {
-    .hero-fill-wide {
-      height: 250%;
-      width: auto;
-    }
-  }
-  /* 4:3 より横長の画像。スマホの帯（4:3）では幅に合わせて上下をつなぎ、md 以上の帯（画像より横長）では
-     ほかの画像と同じく高さに合わせて左右をつなぐ。スマホで左右が切れて、端の文字が欠けていた */
-  .hero-wide {
-    left: 0;
+  /* スマホの帯（4:3）に横長の画像：幅に合わせて上下を空ける（高さに合わせると左右が切れて、端の文字が欠けた） */
+  .trip-hero.is-wide .hero-media {
     top: 50%;
+    left: 0;
     width: 100%;
     height: auto;
     transform: translateY(-50%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
   }
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* 画像の端はわずかに透かすだけにする（16% 透かしたら、端の文字がぼけて読めなくなった） */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
+  }
+  .trip-hero.is-wide .hero-img {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%);
+  }
+  /* 余白用の画像（上下左右に 0.75 倍ずつ延ばしてある）を枠の 250% で中央に重ねる。手前の画像は余白用の画像の 30%〜70% に当たる */
+  .hero-fill {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 250%;
+    height: 250%;
+    max-width: none;
+    transform: translate(-50%, -50%);
+  }
+  .hero-fill-strong {
+    filter: blur(28px) brightness(0.8);
+  }
+  /* 画像のすぐ外は弱いぼかしにし、離れるにつれて強いぼかし（下の層）へ移る。継ぎ目は画像の外でなじませる */
+  .hero-fill-soft {
+    filter: blur(6px) brightness(0.85);
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 21%, #000 29.5%, #000 70.5%, transparent 79%),
+      linear-gradient(to bottom, transparent 21%, #000 29.5%, #000 70.5%, transparent 79%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 21%, #000 29.5%, #000 70.5%, transparent 79%),
+      linear-gradient(to bottom, transparent 21%, #000 29.5%, #000 70.5%, transparent 79%);
+    mask-composite: intersect;
+  }
+
   @media (min-width: 768px) {
-    .hero-wide {
-      left: 50%;
+    /* PC の帯は画像より横長なので、横長の画像も高さに合わせて中央に置く */
+    .trip-hero.is-wide .hero-media {
       top: 0;
+      left: 50%;
       width: auto;
-      max-width: none;
       height: 100%;
       transform: translateX(-50%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%);
+    }
+    .trip-hero.is-wide .hero-img {
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
+    }
+    /* 正方形・4:3 は左に画像、右に文字。画像の左端は帯の端なので、右端だけ透かす */
+    .trip-hero.is-split .hero-media {
+      left: 0;
+      transform: none;
+    }
+    .trip-hero.is-split .hero-img {
+      -webkit-mask-image: linear-gradient(to right, #000 0, #000 97%, transparent 100%);
+      mask-image: linear-gradient(to right, #000 0, #000 97%, transparent 100%);
+    }
+    /* 正方形だと余白用の画像（画像の 0.75 倍ぶん）が文字の側の右端まで届かず、下地の濃紺が出た。
+       遠くの強いぼかしの層だけ大きくして右端まで覆う。画像のすぐ外は位置の合った弱いぼかしの層が受け持つので、ずれは見えない */
+    .trip-hero.is-split .hero-fill-strong {
+      transform: translate(-50%, -50%) scale(1.4);
+    }
+    /* 文字の下だけ暗くする（画像の上には暗い帯を掛けない）。帯の高さは 30rem なので画像の幅は 30rem × --r */
+    .trip-hero.is-split .hero-shade {
+      left: calc(30rem * var(--r));
+      /* 画像の右端からいきなり暗くすると段が見えたので、透明から少しずつ暗くする */
+      background: linear-gradient(to right, rgb(0 0 0 / 0) 0, rgb(0 0 0 / 0.35) 30%, rgb(0 0 0 / 0.5) 100%);
+    }
+    /* 文字のかたまりは右側の上下左右の中央に置き、中は左揃え（行頭がそろって読みやすい。JAI Gateway の Gemini に確認し、本人が選んだ）。
+       行の長さは均等にして折り返す。短い題名ほどかたまりが小さくなり、中央に寄る */
+    .trip-hero.is-split .hero-text {
+      margin-left: calc(30rem * var(--r));
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      padding: 2rem;
+    }
+    .trip-hero.is-split .hero-block {
+      width: fit-content;
+      max-width: 100%;
+    }
+    .trip-hero.is-split .hero-block h1 {
+      text-wrap: balance;
+    }
+    .trip-hero.is-split .hero-chips {
+      justify-content: flex-start;
+    }
+    /* 4:3 は右側が狭く、30px だと1行8〜9文字で3〜4行になる */
+    .trip-hero.is-narrow .hero-block h1 {
+      font-size: 1.625rem;
+      line-height: 1.3;
     }
   }
 </style>

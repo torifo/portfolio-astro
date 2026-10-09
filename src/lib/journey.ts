@@ -200,6 +200,8 @@ export interface TripCover {
    * 手前の画像の 250% の大きさで中央に重ねると、延ばした部分が手前の画像の端から続く（build_trip_covers.py）
    */
   fill?: string;
+  /** 本人の画像の幅÷高さ。旅のページの見出しで、画像と同じ形の枠を作るのに使う */
+  ratio?: number;
   own: boolean;
   /**
    * 4:3 のカードにどう収めるか。どの形でも画像は全体を見せる。
@@ -229,12 +231,46 @@ export function coverFor(trip: Trip): TripCover | null {
       src: `${base}-800.webp`,
       srcset: `${base}-800.webp ${own['800'][0]}w, ${base}-1600.webp ${own['1600'][0]}w`,
       fill: `${base}-fill.webp`,
+      ratio: own['800'][0] / own['800'][1],
       own: true,
       shape: shapeOf(own['800'][0], own['800'][1]),
     };
   }
   const latest = postsForTrip(trip).slice().sort((a, b) => b.uploaded_at.localeCompare(a.uploaded_at))[0];
   return latest ? { src: thumbUrl(latest), own: false, shape: 'tall' } : null;
+}
+
+// 題名の折り返し位置。日本語は既定だとどの文字の間でも折り返すので、「伊勢志 / 摩」のように単語の途中で切れる。
+// word-break: auto-phrase は Chrome だけなので使わず、ビルドのときに単語の区切りを出し、その間にだけ <wbr> を置く（CSS は keep-all）。
+// 区切りは Intl.Segmenter（ICU の辞書）。ただしカタカナ・平仮名の語を割ることがある（サン|ラ|イズ、シ|ャ|トレー|ゼ）ので、次では区切らない
+const wordSegmenter = new Intl.Segmenter('ja', { granularity: 'word' });
+const HIRAGANA_START = /^[\u3041-\u309f]/;
+const KATAKANA_START = /^[\u30a1-\u30ff]/;
+const KATAKANA_END = /[\u30a1-\u30ff]$/;
+const LINE_START_NG = /^[ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶー]/;
+const DIGIT_END = /[0-9０-９]$/;
+const PARTICLES = new Set(['の', 'へ', 'を', 'に', 'が', 'と', 'で', 'は', 'も', 'や', 'から', 'まで', 'より']);
+
+function breakableBetween(a: string, b: string): boolean {
+  const lengthOf = (s: string) => [...s].length;
+  if (LINE_START_NG.test(b) || DIGIT_END.test(a)) return false; // 行頭の小さい仮名・長音、数字と助数詞（2泊・3度目）
+  if (HIRAGANA_START.test(b) && lengthOf(b) <= 2) return false; // 助詞・送り仮名は前の言葉に付ける
+  if (lengthOf(b) < 2) return false; // 1文字の断片（旅・編・巻・市、割れた語）は前に付ける
+  if (PARTICLES.has(a)) return true; // 助詞の後は区切ってよい（松島への / 往復）
+  if (lengthOf(a) < 2) return false; // 1文字の断片は後ろにも付ける（鳩ノ巣、初首都高）
+  if (KATAKANA_END.test(a) && KATAKANA_START.test(b) && (lengthOf(a) < 3 || lengthOf(b) < 3)) return false; // 短いカタカナどうし（インスパ）
+  return true;
+}
+
+/** 題名を、折り返してよい位置で区切った塊にする（間に <wbr> を置いて使う）。 */
+export function titleChunks(title: string): string[] {
+  const parts = [...wordSegmenter.segment(title)].map((s) => s.segment);
+  const chunks = parts.length ? [parts[0]] : [];
+  for (let i = 1; i < parts.length; i++) {
+    if (breakableBetween(parts[i - 1], parts[i])) chunks.push(parts[i]);
+    else chunks[chunks.length - 1] += parts[i];
+  }
+  return chunks;
 }
 
 /**
