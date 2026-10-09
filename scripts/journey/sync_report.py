@@ -156,6 +156,11 @@ def main():
         r = resolved[p["id"]]
         if r.get("hidden"):
             continue  # 載せないと本人が決めた投稿は点検しない
+        # 撮影日が投稿日より後はありえない。本文の日付の打ち間違い（2025 を 2035）で、旅のタグの期間が10年に伸びて
+        # 旅ごと外れ、#13 の自動マージで本番のページが消えたことがある（2026-10-09）
+        uploaded = (p.get("uploaded_at") or "")[:10]
+        if uploaded and p.get("date_precision") not in UNDATED and p["date"] > uploaded:
+            warnings.append((p, "撮影日が投稿日より後", f"撮影日 {p['date']} が投稿日 {uploaded} より後（本文の日付の打ち間違い？）"))
         codes = r.get("prefCodes") or []
         if not codes:
             warnings.append((p, "県が不明", "タグ・本文から県を特定できない"))
@@ -204,9 +209,16 @@ def main():
     auto_ids = [p["id"] for p in new if resolved[p["id"]]["method"] in AUTO_MERGE_METHODS and p["id"] not in review_ids]
     auto_id_set = set(auto_ids)
     hold_ids = [p["id"] for p in new if p["id"] not in auto_id_set]
-    # 新着がすべて日付の後ろに書いた場所で決まり、要確認も無ければ、人が見る点が無いのでマージまで進めてよい
-    auto_merge = bool(auto_ids) and not hold_ids
+    # 旅が無くなる（その旅の URL が消える）なら、人が見るまでマージしない。報告の「無くなった旅」に出ていても、
+    # 以前は判定に使っておらず、旅が消えたまま自動マージされた（#13）。載せない旅（hidden）は URL が無いので数えない
+    now_tags = {t["tag"] for t in trips}
+    removed_trips = [old for tag, old in base_trips.items() if tag not in now_tags and not old.get("hidden")]
+    # 新着がすべて日付の後ろに書いた場所で決まり、要確認も無く、旅も消えなければ、人が見る点が無いのでマージまで進めてよい
+    auto_merge = bool(auto_ids) and not hold_ids and not removed_trips
     lines = [f"新着 **{len(new)} 件**・要確認 **{review_count} 件**", ""]
+    if removed_trips:
+        names = "・".join(t["title"] for t in removed_trips)
+        lines += [f"**無くなる旅があるため、自動マージしない**：{names}（下の「旅の変化」）", ""]
     if args.preface:
         lines += [args.preface, ""]
 
@@ -292,7 +304,14 @@ def main():
     args.out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     args.summary.write_text(
         json.dumps(
-            {"new": len(new), "warnings": review_count, "autoMerge": auto_merge, "autoIds": auto_ids, "holdIds": hold_ids},
+            {
+                "new": len(new),
+                "warnings": review_count,
+                "autoMerge": auto_merge,
+                "autoIds": auto_ids,
+                "holdIds": hold_ids,
+                "removedTrips": [t["slug"] for t in removed_trips],
+            },
             ensure_ascii=False,
         ),
         encoding="utf-8",
