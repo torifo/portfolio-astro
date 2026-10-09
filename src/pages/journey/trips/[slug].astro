@@ -27,10 +27,6 @@ const posts = postsForTrip(trip).slice().sort((a, b) => a.date.localeCompare(b.d
 const visited = trip.allPrefCodes.map((code) => prefectureByCode(code)).filter(Boolean);
 const days = [...new Set(posts.filter(hasDay).map((post) => post.date))];
 const cover = coverFor(trip);
-// PC の見出しで、正方形・4:3 の本人の画像は左に置き、右に文字を並べる（中央に置くと左右の半分近くがぼかしになった）
-const split = Boolean(cover?.own && cover.shape !== 'wide');
-// 4:3 は右側が約336px と狭いので、文字を少し小さくする
-const narrow = split && (cover?.ratio ?? 1) > 1.2;
 ---
 
 <Layout title={`${trip.title} - Toriforium Portfolio`} description={`${formatRange(trip.start, trip.end)}の旅・${posts.length}件`}>
@@ -38,13 +34,13 @@ const narrow = split && (cover?.ratio ?? 1) > 1.2;
 
   <main class="pt-24 pb-16 relative z-10">
     <div class="container mx-auto px-6 max-w-5xl">
-      <!-- 画像は形を崩さず全体を見せる。本人の画像は、画像と同じ形の枠（hero-media）に画像をぴったり入れ、
-           端を鏡に映して延ばした余白用の画像を 250% で中央に重ねてぼかす（画像のすぐ外は弱く、離れるほど強く）。
-           枠の位置だけを形と画面の幅で変える：PC の正方形・4:3 は左に画像・右に文字（is-split）、それ以外は中央。スマホは 4:3 -->
+      <!-- 画像は形を崩さず全体を見せる。本人の画像は、画像と同じ形の枠（hero-media）に画像をぴったり入れ、帯の中央に置く。
+           左右の余白には画像を鏡に映して並べ、継ぎ目から離れるほどぼかして暗くする（hero-side）。いちばん下には、
+           端を鏡に映して延ばした余白用の画像を枠の 250% で重ねて強くぼかし、上下の端まで覆う。スマホは 4:3 -->
       <div
         class:list={[
           'trip-hero relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto md:h-[30rem] mb-10',
-          { 'is-split': split, 'is-narrow': narrow, 'is-wide': cover?.shape === 'wide' },
+          { 'is-wide': cover?.shape === 'wide' },
         ]}
         style={cover?.ratio ? `--r: ${cover.ratio}` : undefined}
       >
@@ -52,6 +48,20 @@ const narrow = split && (cover?.ratio ?? 1) > 1.2;
           <div class="hero-media">
             <img src={cover.fill} alt="" aria-hidden="true" decoding="async" class="hero-fill hero-fill-strong" />
             <img src={cover.fill} alt="" aria-hidden="true" decoding="async" class="hero-fill hero-fill-soft" />
+            {['l', 'r'].map((side) => (
+              <div class={`hero-side hero-side-${side}`} aria-hidden="true">
+                {['far', 'mid', 'near'].map((depth) => (
+                  <img
+                    src={cover.src}
+                    srcset={cover.srcset}
+                    sizes="(min-width: 768px) 860px, 100vw"
+                    alt=""
+                    decoding="async"
+                    class={`hero-mirror is-${depth}`}
+                  />
+                ))}
+              </div>
+            ))}
             <img
               src={cover.src}
               srcset={cover.srcset}
@@ -80,18 +90,15 @@ const narrow = split && (cover?.ratio ?? 1) > 1.2;
             />
           </>
         ) : null}
-        <div class="hero-shade absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
-        <div class="hero-text relative h-full flex flex-col justify-end items-center text-center p-6">
-          <!-- 左右に分けたとき、このかたまりを右側の中央に置き、中は左揃えにする -->
-          <div class="hero-block">
-            <h1 class="hero-title photo-title text-2xl md:text-3xl font-bold mb-3">
-              {/* 改行やインデントが空白として入らないよう1行で書く */}
-              {titleChunks(trip.title).map((chunk, i) => <>{i > 0 && <wbr />}{chunk}</>)}
-            </h1>
-            <div class="hero-chips flex flex-wrap justify-center gap-2 text-sm">
-              <span class="photo-chip px-3 py-1 rounded-full">{formatRange(trip.start, trip.end)}</span>
-              <span class="photo-chip px-3 py-1 rounded-full">{days.length}日・{posts.length}件</span>
-            </div>
+        <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div class="relative h-full flex flex-col justify-end items-center text-center p-6">
+          <h1 class="hero-title photo-title text-2xl md:text-3xl font-bold mb-3">
+            {/* 改行やインデントが空白として入らないよう1行で書く */}
+            {titleChunks(trip.title).map((chunk, i) => <>{i > 0 && <wbr />}{chunk}</>)}
+          </h1>
+          <div class="flex flex-wrap justify-center gap-2 text-sm">
+            <span class="photo-chip px-3 py-1 rounded-full">{formatRange(trip.start, trip.end)}</span>
+            <span class="photo-chip px-3 py-1 rounded-full">{days.length}日・{posts.length}件</span>
           </div>
         </div>
       </div>
@@ -186,7 +193,7 @@ const narrow = split && (cover?.ratio ?? 1) > 1.2;
   .hero-fill-strong {
     filter: blur(28px) brightness(0.8);
   }
-  /* 画像のすぐ外は弱いぼかしにし、離れるにつれて強いぼかし（下の層）へ移る。継ぎ目は画像の外でなじませる */
+  /* スマホの横長の上下の余白。画像のすぐ外は弱いぼかしにし、離れるにつれて強いぼかし（下の層）へ移る */
   .hero-fill-soft {
     filter: blur(6px) brightness(0.85);
     -webkit-mask-image:
@@ -212,49 +219,65 @@ const narrow = split && (cover?.ratio ?? 1) > 1.2;
       -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
       mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
     }
-    /* 正方形・4:3 は左に画像、右に文字。画像の左端は帯の端なので、右端だけ透かす */
-    .trip-hero.is-split .hero-media {
-      left: 0;
-      transform: none;
+    .trip-hero.is-wide .hero-fill-soft {
+      display: none;
     }
-    .trip-hero.is-split .hero-img {
-      -webkit-mask-image: linear-gradient(to right, #000 0, #000 97%, transparent 100%);
-      mask-image: linear-gradient(to right, #000 0, #000 97%, transparent 100%);
-    }
-    /* 正方形だと余白用の画像（画像の 0.75 倍ぶん）が文字の側の右端まで届かず、下地の濃紺が出た。
-       遠くの強いぼかしの層だけ大きくして右端まで覆う。画像のすぐ外は位置の合った弱いぼかしの層が受け持つので、ずれは見えない */
-    .trip-hero.is-split .hero-fill-strong {
-      transform: translate(-50%, -50%) scale(1.4);
-    }
-    /* 文字の下だけ暗くする（画像の上には暗い帯を掛けない）。帯の高さは 30rem なので画像の幅は 30rem × --r */
-    .trip-hero.is-split .hero-shade {
-      left: calc(30rem * var(--r));
-      /* 画像の右端からいきなり暗くすると段が見えたので、透明から少しずつ暗くする */
-      background: linear-gradient(to right, rgb(0 0 0 / 0) 0, rgb(0 0 0 / 0.35) 30%, rgb(0 0 0 / 0.5) 100%);
-    }
-    /* 文字のかたまりは右側の上下左右の中央に置き、中は左揃え（行頭がそろって読みやすい。JAI Gateway の Gemini に確認し、本人が選んだ）。
-       行の長さは均等にして折り返す。短い題名ほどかたまりが小さくなり、中央に寄る */
-    .trip-hero.is-split .hero-text {
-      margin-left: calc(30rem * var(--r));
-      justify-content: center;
-      align-items: center;
-      text-align: left;
-      padding: 2rem;
-    }
-    .trip-hero.is-split .hero-block {
-      width: fit-content;
-      max-width: 100%;
-    }
-    .trip-hero.is-split .hero-block h1 {
-      text-wrap: balance;
-    }
-    .trip-hero.is-split .hero-chips {
-      justify-content: flex-start;
-    }
-    /* 4:3 は右側が狭く、30px だと1行8〜9文字で3〜4行になる */
-    .trip-hero.is-narrow .hero-block h1 {
-      font-size: 1.625rem;
-      line-height: 1.3;
-    }
+  }
+
+  /* 左右の余白：画像を鏡に映して並べる（本人が、鏡・端の色を横に延ばす・色のにじみに浮かべる の3案から選んだ）。
+     弱いぼかしの層（hero-fill-soft）は、スマホの横長の上下の余白にだけ使う（PC の横長は上の @media で消す） */
+  .trip-hero:not(.is-wide) .hero-fill-soft {
+    display: none;
+  }
+  .hero-side {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  /* --dir は継ぎ目から外への向き。鏡の画像は裏返してあるので、画像に掛ける透かしは逆の向き（--mdir）で書く
+     （同じ向きで書いたら、くっきりした部分が継ぎ目でなく外側に出た） */
+  .hero-side-l {
+    right: 100%;
+    --dir: to left;
+    --mdir: to right;
+  }
+  .hero-side-r {
+    left: 100%;
+    --dir: to right;
+    --mdir: to left;
+  }
+  .hero-mirror {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    transform: scaleX(-1);
+  }
+  /* 継ぎ目のすぐ外はくっきり（1.5px）、60〜180px で 6px、その先は 18px のぼかしへ移る。
+     遠くの層はぼかしで上下の端が透けるので、上下に少しはみ出させる */
+  .hero-mirror.is-far {
+    top: -8%;
+    height: 116%;
+    filter: blur(18px) brightness(0.6);
+  }
+  .hero-mirror.is-mid {
+    filter: blur(6px) brightness(0.7);
+    -webkit-mask-image: linear-gradient(var(--mdir), #000 0, #000 60px, transparent 180px);
+    mask-image: linear-gradient(var(--mdir), #000 0, #000 60px, transparent 180px);
+  }
+  /* 鏡の側は手前の画像より少し暗くし、どこまでが写真かを分かるようにする */
+  .hero-mirror.is-near {
+    filter: blur(1.5px) brightness(0.8);
+    -webkit-mask-image: linear-gradient(var(--mdir), #000 0, #000 12px, transparent 64px);
+    mask-image: linear-gradient(var(--mdir), #000 0, #000 12px, transparent 64px);
+  }
+  .hero-side::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(var(--dir), rgb(15 23 42 / 0) 0, rgb(15 23 42 / 0.55) 280px);
   }
 </style>
