@@ -23,11 +23,11 @@ interface Props {
 }
 
 const { trip } = Astro.props;
-// 撮影日の古い順。撮影日は日までしか無いので、同じ日は投稿の古い順にする（posts.json は新しく投稿した順なので、
-// 撮影日だけで並べると同じ日の中だけ投稿と逆になった）
+// 投稿順（新しいものが上・古い日付は下）。撮影日の新しい順に並べ、撮影日は日までしか無いので、同じ日は新しく投稿した順にする
+// （以前は撮影日の古い順で、同じ日の中だけ新しい投稿が先になり、ちぐはぐだった）
 const posts = postsForTrip(trip)
   .slice()
-  .sort((a, b) => a.date.localeCompare(b.date) || a.uploaded_at.localeCompare(b.uploaded_at));
+  .sort((a, b) => b.date.localeCompare(a.date) || b.uploaded_at.localeCompare(a.uploaded_at));
 const visited = trip.allPrefCodes.map((code) => prefectureByCode(code)).filter(Boolean);
 const days = [...new Set(posts.filter(hasDay).map((post) => post.date))];
 const cover = coverFor(trip);
