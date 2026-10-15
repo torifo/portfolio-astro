@@ -1,5 +1,5 @@
 {
- "_": "聖地巡礼の作品の公式リンク（人が書く）。slug → youtube（公式 PV の id・題・チャンネル）・x（公式アカウントと、キャラクターの絵のある投稿）・officialSite。作品のページに埋め込む（画像はこちらに置かない）",
+ "_": "聖地巡礼の作品の公式リンク（人が書く）。slug → youtube（公式 PV の id・題・チャンネル）・officialSite（公式サイト）・site（公式サイトのカード：題と、サイトがリンク共有用に出している og:image の URL。画像は公式サイトから直接出し、こちらに置かない）・x（公式 X。表示していない）。作品のページに埋め込む",
  "links": {
   "atri": {
    "youtube": {
@@ -11,7 +11,11 @@
     "handle": "ATRI_anime",
     "post": "https://x.com/ATRI_anime/status/1771374734338646385"
    },
-   "officialSite": "https://atri-anime.com/"
+   "officialSite": "https://atri-anime.com/",
+   "site": {
+    "title": "アニメ「ATRI-My Dear Moments-」公式サイト",
+    "image": "https://atri-anime.com/assets/siteinfo/og_image.jpg?240604"
+   }
   },
   "bocchi-the-rock": {
    "youtube": {
@@ -23,7 +27,11 @@
     "handle": "BTR_anime",
     "post": "https://x.com/BTR_anime/status/1570018272065556482"
    },
-   "officialSite": "https://bocchi.rocks/"
+   "officialSite": "https://bocchi.rocks/",
+   "site": {
+    "title": "「劇場総集編ぼっち・ざ・ろっく！」公式サイト",
+    "image": "https://bocchi.rocks/omnibus/assets/siteinfo/og_image_20241225.png"
+   }
   },
   "hyouka": {
    "youtube": {
@@ -35,7 +43,11 @@
     "handle": "Hyouka_10th",
     "post": "https://x.com/Hyouka_10th/status/1624558906793132032"
    },
-   "officialSite": "https://www.kyotoanimation.co.jp/kotenbu/"
+   "officialSite": "https://www.kyotoanimation.co.jp/kotenbu/",
+   "site": {
+    "title": "TVアニメ「氷菓」京アニサイト | 京都アニメーション",
+    "image": "https://www.kyotoanimation.co.jp/kotenbu/social.jpg"
+   }
   },
   "lovelive-sunshine": {
    "youtube": {
@@ -47,7 +59,10 @@
     "handle": "LoveLive_staff",
     "post": "https://x.com/LoveLive_staff/status/1807369796100727237"
    },
-   "officialSite": "https://www.lovelive-anime.jp/uranohoshi/"
+   "officialSite": "https://www.lovelive-anime.jp/uranohoshi/",
+   "site": {
+    "title": "ラブライブ！サンシャイン!! Official Web Site"
+   }
   },
   "lycoris-recoil": {
    "youtube": {
@@ -59,7 +74,11 @@
     "handle": "lycoris_recoil",
     "post": "https://x.com/lycoris_recoil/status/1507371728820867072"
    },
-   "officialSite": "https://lycoris-recoil.com/"
+   "officialSite": "https://lycoris-recoil.com/",
+   "site": {
+    "title": "オリジナルTVアニメーション「リコリス・リコイル」公式サイト",
+    "image": "https://lycoris-recoil.com/ogp4.png"
+   }
   },
   "okitsura": {
    "youtube": {
@@ -71,7 +90,11 @@
     "handle": "okitsura",
     "post": "https://x.com/okitsura/status/1864867625689584041"
    },
-   "officialSite": "https://okitsura.com/"
+   "officialSite": "https://okitsura.com/",
+   "site": {
+    "title": "TVアニメ『沖縄で好きになった子が方言すぎてツラすぎる』公式",
+    "image": "https://okitsura.com/assets/img/ogp.jpg"
+   }
   },
   "oregairu": {
    "youtube": {
@@ -83,7 +106,11 @@
     "handle": "anime_oregairu",
     "post": "https://x.com/anime_oregairu/status/1710219594399416669"
    },
-   "officialSite": "https://www.tbs.co.jp/anime/oregairu/"
+   "officialSite": "https://www.tbs.co.jp/anime/oregairu/",
+   "site": {
+    "title": "TVアニメ「やはり俺の青春ラブコメはまちがっている。完」公式ホームページ｜TBSテレビ",
+    "image": "https://www.tbs.co.jp/anime/oregairu/img/ogp.png"
+   }
   },
   "slow-loop": {
    "youtube": {
@@ -95,7 +122,11 @@
     "handle": "slowloop_tv",
     "post": "https://x.com/slowloop_tv/status/1429820977165176832"
    },
-   "officialSite": "https://slowlooptv.com/"
+   "officialSite": "https://slowlooptv.com/",
+   "site": {
+    "title": "TVアニメ「スローループ」公式サイト",
+    "image": "https://slowlooptv.com/ogp.jpg"
+   }
   },
   "sukimega": {
    "youtube": {
@@ -107,7 +138,11 @@
     "handle": "Sukimega",
     "post": "https://x.com/Sukimega/status/1635596642253697026"
    },
-   "officialSite": "https://sh-anime.shochiku.co.jp/sukimega/"
+   "officialSite": "https://sh-anime.shochiku.co.jp/sukimega/",
+   "site": {
+    "title": "テレビアニメ「好きな子がめがねを忘れた」",
+    "image": "https://sh-anime.shochiku.co.jp/sukimega/wp-content/themes/sukimega_first_theme/common2/images/sukimega_og3_1200x630.png"
+   }
   },
   "takagi-san": {
    "youtube": {
@@ -119,7 +154,11 @@
     "handle": "takagi3_anime",
     "post": "https://x.com/takagi3_anime/status/1519511727334846464"
    },
-   "officialSite": "https://takagi3.me/"
+   "officialSite": "https://takagi3.me/",
+   "site": {
+    "title": "劇場版『からかい上手の高木さん』公式サイト",
+    "image": "https://takagi3.me/assets/og/ogp_movie2.jpg"
+   }
   },
   "yama-no-susume": {
    "youtube": {
@@ -131,7 +170,11 @@
     "handle": "yamanosusume",
     "post": "https://x.com/yamanosusume/status/1517337726240329728"
    },
-   "officialSite": "https://yamanosusume-ns.com/"
+   "officialSite": "https://yamanosusume-ns.com/",
+   "site": {
+    "title": "テレビアニメ『ヤマノススメ Next Summit』公式サイト",
+    "image": "https://yamanosusume-ns.com/core_sys/images/others/ogp.jpg"
+   }
   },
   "yowamushi-pedal": {
    "youtube": {
@@ -143,7 +186,11 @@
     "handle": "yowapeda_anime",
     "post": "https://x.com/yowapeda_anime/status/1468234330627575821"
    },
-   "officialSite": "https://yowapeda.com/"
+   "officialSite": "https://yowapeda.com/",
+   "site": {
+    "title": "TVアニメ『弱虫ペダル LIMIT BREAK』 公式サイト",
+    "image": "https://yowapeda.com/assets/img/common/fb.jpg"
+   }
   },
   "yurucamp": {
    "youtube": {
@@ -155,7 +202,11 @@
     "handle": "yurucamp_anime",
     "post": "https://x.com/yurucamp_anime/status/2027985925150781561"
    },
-   "officialSite": "https://yurucamp.jp/"
+   "officialSite": "https://yurucamp.jp/",
+   "site": {
+    "title": "アニメ『ゆるキャン△』ポータルサイト",
+    "image": "https://yurucamp.jp/camping/content/themes/ycp-v2/ogp_portal.jpg"
+   }
   },
   "zatsutabi": {
    "youtube": {
@@ -167,7 +218,11 @@
     "handle": "zatsutabi_anime",
     "post": "https://x.com/zatsutabi_anime/status/1895783573551993134"
    },
-   "officialSite": "https://zatsutabi.com/"
+   "officialSite": "https://zatsutabi.com/",
+   "site": {
+    "title": "TVアニメ『ざつ旅-That's Journey-』公式サイト",
+    "image": "https://zatsutabi.com/og-image2b.jpg"
+   }
   }
  }
 }

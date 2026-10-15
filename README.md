@@ -184,7 +184,7 @@ PR の「要確認」は、本番で実際に起きた誤りの型を機械で�
 | 聖地巡礼の作品 | `data/journey/pilgrimages.json` の `works` | `{"slug": "hyouka", "title": "氷菓", "aliases": []}`（タグに作品名か別名があればその作品に入る）。聖地の場所のタグは `"spots"`、個別の投稿は `"extraPostIds"` に書くと、聖地巡礼タグがなくても入る。聖地巡礼タグがあって作品のタグが無い投稿は、同じ日（無ければ同じ旅）の投稿の作品が1つならその作品に入る。2つ以上なら「作品が複数」で同期 PR が止まるので、`extraPostIds` で決める |
 | 旅の背景画像 | `~/dev/data/trip-covers/<slug>.<拡張子>`（リポジトリの外） | 置いてから `npm run journey:covers`。EXIF を消した webp（800w・1600w）が `public/journey/trips/` にでき、一覧が `data/journey/trip_covers.json` に入る。画像がない旅は投稿のサムネで出る |
 | 聖地巡礼の作品の背景画像 | `~/dev/data/work-covers/<slug>.<拡張子>`（リポジトリの外）と同じフォルダの `meta.json` | 置いてから `npm run journey:work-covers`。`meta.json` には作品ごとに `credit`（他人の写真の出典の表示）・`source`（出典のページ）・`mode`（一覧の帯で `cover`＝切り取る／`fit`＝全体を見せる）・`focus`（切り取る中心）を書く。風景の写真だけの版は `~/dev/data/work-covers/_landscape/` にあり、`npm run journey:work-covers -- --source ~/dev/data/work-covers/_landscape --force` で戻せる |
-| 聖地巡礼の公式リンク | `data/journey/work_links.json` | 作品ごとに公式の PV（YouTube の id・題・チャンネル）・公式 X（アカウントとキャラクターの絵のある投稿）・公式サイト。作品のページに埋め込む（画像はこちらに置かない） |
+| 聖地巡礼の公式リンク | `data/journey/work_links.json` | 作品ごとに公式の PV（YouTube の id・題・チャンネル）・公式サイト（`officialSite`）・カード（`site` の題と og:image の URL。og:image は公式サイトから直接出す）。作品のページに置く（画像はこちらに置かない）。公式 X は表示していない |
 
 Instagram 側のキャプションを直しても、同期（新着しか読まない）では取り込み済みの投稿に届かない。
 直したら `npm run journey:refresh` で読み直す（下記）。

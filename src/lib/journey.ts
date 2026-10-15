@@ -286,6 +286,8 @@ export interface WorkLinks {
   youtube?: { id: string; title: string; channel: string };
   x?: { handle: string; post?: string | null };
   officialSite?: string;
+  /** 公式サイトのカード。image はサイトの og:image（公式サイトから直接出す） */
+  site?: { title: string; image?: string };
 }
 
 const workLinks = (workLinkData as { links: Record<string, WorkLinks> }).links;
