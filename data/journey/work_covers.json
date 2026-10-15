@@ -10,22 +10,20 @@
     1440,
     1440
    ],
-   "mode": "fit",
-   "focus": "50% 60%"
+   "mode": "cover",
+   "focus": "50% 45%"
   },
   "bocchi-the-rock": {
    "800": [
     800,
-    602
+    800
    ],
    "1600": [
-    1600,
-    1205
+    1440,
+    1440
    ],
-   "credit": "写真：Syced / CC0（Wikimedia Commons）",
-   "source": "https://commons.wikimedia.org/wiki/File:SHELTER.jpg",
    "mode": "cover",
-   "focus": "45% 45%"
+   "focus": "50% 58%"
   },
   "hyouka": {
    "800": [
@@ -36,8 +34,8 @@
     1440,
     1440
    ],
-   "mode": "fit",
-   "focus": "50% 50%"
+   "mode": "cover",
+   "focus": "50% 21%"
   },
   "lovelive-sunshine": {
    "800": [
@@ -48,8 +46,8 @@
     1440,
     1440
    ],
-   "mode": "fit",
-   "focus": "50% 50%"
+   "mode": "cover",
+   "focus": "50% 56%"
   },
   "lycoris-recoil": {
    "800": [
@@ -60,8 +58,8 @@
     1440,
     1440
    ],
-   "mode": "fit",
-   "focus": "50% 45%"
+   "mode": "cover",
+   "focus": "50% 24%"
   },
   "okitsura": {
    "800": [
@@ -85,7 +83,7 @@
     1440
    ],
    "mode": "cover",
-   "focus": "50% 58%"
+   "focus": "50% 37%"
   },
   "slow-loop": {
    "800": [
@@ -116,14 +114,14 @@
   "takagi-san": {
    "800": [
     800,
-    800
+    589
    ],
    "1600": [
     1440,
-    1440
+    1060
    ],
    "mode": "cover",
-   "focus": "50% 40%"
+   "focus": "50% 35%"
   },
   "yama-no-susume": {
    "800": [
@@ -146,8 +144,8 @@
     1440,
     1440
    ],
-   "mode": "fit",
-   "focus": "50% 50%"
+   "mode": "cover",
+   "focus": "50% 18%"
   },
   "yurucamp": {
    "800": [
@@ -155,25 +153,23 @@
     800
    ],
    "1600": [
-    1600,
-    1600
+    1440,
+    1440
    ],
-   "mode": "fit",
-   "focus": "50% 40%"
+   "mode": "cover",
+   "focus": "50% 38%"
   },
   "zatsutabi": {
    "800": [
     800,
-    403
+    800
    ],
    "1600": [
-    1600,
-    806
+    1440,
+    1440
    ],
-   "credit": "写真：lumoplank / CC0（Wikimedia Commons）",
-   "source": "https://commons.wikimedia.org/wiki/File:Matsushima_Bay_-_Matsushima6233.jpg",
    "mode": "cover",
-   "focus": "50% 55%"
+   "focus": "50% 80%"
   }
  }
 }
