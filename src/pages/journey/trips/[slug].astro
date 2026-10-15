@@ -4,6 +4,7 @@ import Layout from '../../../layouts/Layout.astro';
 import DetailHeader from '../../../components/DetailHeader.astro';
 import PostGrid from '../../../components/journey/PostGrid.astro';
 import PrefectureChips from '../../../components/journey/PrefectureChips.astro';
+import CoverHero from '../../../components/journey/CoverHero.astro';
 import {
   trips,
   postsForTrip,
@@ -39,74 +40,16 @@ const cover = coverFor(trip);
 
   <main class="pt-24 pb-16 relative z-10">
     <div class="container mx-auto px-6 max-w-5xl">
-      <!-- 画像は形を崩さず全体を見せる。本人の画像は、画像と同じ形の枠（hero-media）に画像をぴったり入れ、帯の中央に置く。
-           左右の余白には画像を鏡に映して並べ、継ぎ目から離れるほどぼかして暗くする（hero-side）。いちばん下には、
-           端を鏡に映して延ばした余白用の画像を枠の 250% で重ねて強くぼかし、上下の端まで覆う。スマホは 4:3 -->
-      <div
-        class:list={[
-          'trip-hero relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto md:h-[30rem] mb-10',
-          { 'is-wide': cover?.shape === 'wide' },
-        ]}
-        style={cover?.ratio ? `--r: ${cover.ratio}` : undefined}
-      >
-        {cover && cover.fill ? (
-          <div class="hero-media">
-            <img src={cover.fill} alt="" aria-hidden="true" decoding="async" class="hero-fill hero-fill-strong" />
-            <img src={cover.fill} alt="" aria-hidden="true" decoding="async" class="hero-fill hero-fill-soft" />
-            {['l', 'r'].map((side) => (
-              <div class={`hero-side hero-side-${side}`} aria-hidden="true">
-                {['far', 'mid', 'near'].map((depth) => (
-                  <img
-                    src={cover.src}
-                    srcset={cover.srcset}
-                    sizes="(min-width: 768px) 860px, 100vw"
-                    alt=""
-                    decoding="async"
-                    class={`hero-mirror is-${depth}`}
-                  />
-                ))}
-              </div>
-            ))}
-            <img
-              src={cover.src}
-              srcset={cover.srcset}
-              sizes="(min-width: 768px) 860px, 100vw"
-              alt=""
-              decoding="async"
-              fetchpriority="high"
-              class="hero-img"
-            />
-          </div>
-        ) : cover ? (
-          <>
-            <img
-              src={cover.src}
-              alt=""
-              aria-hidden="true"
-              decoding="async"
-              class="cover-backdrop absolute inset-0 w-full h-full object-cover"
-            />
-            <img
-              src={cover.src}
-              alt=""
-              decoding="async"
-              fetchpriority="high"
-              class="cover-fade absolute top-0 left-1/2 -translate-x-1/2 h-full w-auto max-w-none"
-            />
-          </>
-        ) : null}
-        <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
-        <div class="relative h-full flex flex-col justify-end items-center text-center p-6">
-          <h1 class="hero-title photo-title text-2xl md:text-3xl font-bold mb-3">
-            {/* 改行やインデントが空白として入らないよう1行で書く */}
-            {titleChunks(trip.title).map((chunk, i) => <>{i > 0 && <wbr />}{chunk}</>)}
-          </h1>
-          <div class="flex flex-wrap justify-center gap-2 text-sm">
-            <span class="photo-chip px-3 py-1 rounded-full">{formatRange(trip.start, trip.end)}</span>
-            <span class="photo-chip px-3 py-1 rounded-full">{days.length}日・{posts.length}件</span>
-          </div>
+      <CoverHero cover={cover} class="mb-10">
+        <h1 class="hero-title photo-title text-2xl md:text-3xl font-bold mb-3">
+          {/* 改行やインデントが空白として入らないよう1行で書く */}
+          {titleChunks(trip.title).map((chunk, i) => <>{i > 0 && <wbr />}{chunk}</>)}
+        </h1>
+        <div class="flex flex-wrap justify-center gap-2 text-sm">
+          <span class="photo-chip px-3 py-1 rounded-full">{formatRange(trip.start, trip.end)}</span>
+          <span class="photo-chip px-3 py-1 rounded-full">{days.length}日・{posts.length}件</span>
         </div>
-      </div>
+      </CoverHero>
 
       <section class="mb-8">
         <h2 class="text-sm font-semibold text-gray-400 mb-2">通った県</h2>
@@ -130,150 +73,3 @@ const cover = coverFor(trip);
     </div>
   </main>
 </Layout>
-
-<style>
-  .trip-hero {
-    background: #0f172a;
-  }
-  /* 題名は単語の区切り（<wbr>）でだけ折り返す。どうしても入らない長い塊だけは途中で折る */
-  .hero-title {
-    word-break: keep-all;
-    overflow-wrap: anywhere;
-  }
-  /* 投稿のサムネで代えた旅（余白用の画像が無い）。同じ画像を広げて強くぼかす */
-  .trip-hero .cover-backdrop {
-    filter: blur(28px) brightness(0.8);
-    transform: scale(1.15);
-  }
-
-  /* 本人の画像。枠（hero-media）は画像と同じ形（--r は幅÷高さ）。ふだんは高さに合わせて中央に置く */
-  .hero-media {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    height: 100%;
-    aspect-ratio: var(--r);
-    transform: translateX(-50%);
-  }
-  /* スマホの帯（4:3）に横長の画像：幅に合わせて上下を空ける（高さに合わせると左右が切れて、端の文字が欠けた） */
-  .trip-hero.is-wide .hero-media {
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: auto;
-    transform: translateY(-50%);
-  }
-  .hero-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    /* 画像の端はわずかに透かすだけにする（16% 透かしたら、端の文字がぼけて読めなくなった） */
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
-  }
-  .trip-hero.is-wide .hero-img {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%);
-  }
-  /* 余白用の画像（上下左右に 0.75 倍ずつ延ばしてある）を枠の 250% で中央に重ねる。手前の画像は余白用の画像の 30%〜70% に当たる */
-  .hero-fill {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 250%;
-    height: 250%;
-    max-width: none;
-    transform: translate(-50%, -50%);
-  }
-  .hero-fill-strong {
-    filter: blur(28px) brightness(0.8);
-  }
-  /* スマホの横長の上下の余白。画像のすぐ外は弱いぼかしにし、離れるにつれて強いぼかし（下の層）へ移る */
-  .hero-fill-soft {
-    filter: blur(6px) brightness(0.85);
-    -webkit-mask-image:
-      linear-gradient(to right, transparent 21%, #000 29.5%, #000 70.5%, transparent 79%),
-      linear-gradient(to bottom, transparent 21%, #000 29.5%, #000 70.5%, transparent 79%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(to right, transparent 21%, #000 29.5%, #000 70.5%, transparent 79%),
-      linear-gradient(to bottom, transparent 21%, #000 29.5%, #000 70.5%, transparent 79%);
-    mask-composite: intersect;
-  }
-
-  @media (min-width: 768px) {
-    /* PC の帯は画像より横長なので、横長の画像も高さに合わせて中央に置く */
-    .trip-hero.is-wide .hero-media {
-      top: 0;
-      left: 50%;
-      width: auto;
-      height: 100%;
-      transform: translateX(-50%);
-    }
-    .trip-hero.is-wide .hero-img {
-      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
-    }
-    .trip-hero.is-wide .hero-fill-soft {
-      display: none;
-    }
-  }
-
-  /* 左右の余白：画像を鏡に映して並べる（本人が、鏡・端の色を横に延ばす・色のにじみに浮かべる の3案から選んだ）。
-     弱いぼかしの層（hero-fill-soft）は、スマホの横長の上下の余白にだけ使う（PC の横長は上の @media で消す） */
-  .trip-hero:not(.is-wide) .hero-fill-soft {
-    display: none;
-  }
-  .hero-side {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-  /* --dir は継ぎ目から外への向き。鏡の画像は裏返してあるので、画像に掛ける透かしは逆の向き（--mdir）で書く
-     （同じ向きで書いたら、くっきりした部分が継ぎ目でなく外側に出た） */
-  .hero-side-l {
-    right: 100%;
-    --dir: to left;
-    --mdir: to right;
-  }
-  .hero-side-r {
-    left: 100%;
-    --dir: to right;
-    --mdir: to left;
-  }
-  .hero-mirror {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    transform: scaleX(-1);
-  }
-  /* 継ぎ目のすぐ外はくっきり（1.5px）、60〜180px で 6px、その先は 18px のぼかしへ移る。
-     遠くの層はぼかしで上下の端が透けるので、上下に少しはみ出させる */
-  .hero-mirror.is-far {
-    top: -8%;
-    height: 116%;
-    filter: blur(18px) brightness(0.6);
-  }
-  .hero-mirror.is-mid {
-    filter: blur(6px) brightness(0.7);
-    -webkit-mask-image: linear-gradient(var(--mdir), #000 0, #000 60px, transparent 180px);
-    mask-image: linear-gradient(var(--mdir), #000 0, #000 60px, transparent 180px);
-  }
-  /* 鏡の側は手前の画像より少し暗くし、どこまでが写真かを分かるようにする */
-  .hero-mirror.is-near {
-    filter: blur(1.5px) brightness(0.8);
-    -webkit-mask-image: linear-gradient(var(--mdir), #000 0, #000 12px, transparent 64px);
-    mask-image: linear-gradient(var(--mdir), #000 0, #000 12px, transparent 64px);
-  }
-  .hero-side::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(var(--dir), rgb(15 23 42 / 0) 0, rgb(15 23 42 / 0.55) 280px);
-  }
-</style>

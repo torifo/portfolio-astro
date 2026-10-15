@@ -1,0 +1,173 @@
+{
+ "_": "聖地巡礼の作品の公式リンク（人が書く）。slug → youtube（公式 PV の id・題・チャンネル）・x（公式アカウントと、キャラクターの絵のある投稿）・officialSite。作品のページに埋め込む（画像はこちらに置かない）",
+ "links": {
+  "atri": {
+   "youtube": {
+    "id": "Pv5Kb62OSvg",
+    "title": "アニメ『ATRI-My Dear Moments-』第3弾PV｜7月13日放送・配信スタート",
+    "channel": "アニプレックス チャンネル"
+   },
+   "x": {
+    "handle": "ATRI_anime",
+    "post": "https://x.com/ATRI_anime/status/1771374734338646385"
+   },
+   "officialSite": "https://atri-anime.com/"
+  },
+  "bocchi-the-rock": {
+   "youtube": {
+    "id": "nomJbjuQXAY",
+    "title": "【第1弾PV】「ぼっち・ざ・ろっく！」2022年10月8日㈯より放送開始！",
+    "channel": "アニメ「ぼっち・ざ・ろっく！」公式チャンネル"
+   },
+   "x": {
+    "handle": "BTR_anime",
+    "post": "https://x.com/BTR_anime/status/1570018272065556482"
+   },
+   "officialSite": "https://bocchi.rocks/"
+  },
+  "hyouka": {
+   "youtube": {
+    "id": "RpqqaNJuopc",
+    "title": "【TVアニメ「氷菓」ノンクレジットOP❶】Choucho「優しさの理由」｜10周年記念フィルムコンサート開催記念",
+    "channel": "KADOKAWAanime"
+   },
+   "x": {
+    "handle": "Hyouka_10th",
+    "post": "https://x.com/Hyouka_10th/status/1624558906793132032"
+   },
+   "officialSite": "https://www.kyotoanimation.co.jp/kotenbu/"
+  },
+  "lovelive-sunshine": {
+   "youtube": {
+    "id": "ktcJXY0T_7E",
+    "title": "ラブライブ！サンシャイン!! TVシリーズスペシャルPV（90秒ver.）",
+    "channel": "(Love Live! series)ラブライブ！シリーズ公式チャンネル"
+   },
+   "x": {
+    "handle": "LoveLive_staff",
+    "post": "https://x.com/LoveLive_staff/status/1807369796100727237"
+   },
+   "officialSite": "https://www.lovelive-anime.jp/uranohoshi/"
+  },
+  "lycoris-recoil": {
+   "youtube": {
+    "id": "UMAbDJbl9nE",
+    "title": "TVアニメ『リコリス・リコイル』PV第3弾｜2022年7月放送",
+    "channel": "アニプレックス チャンネル"
+   },
+   "x": {
+    "handle": "lycoris_recoil",
+    "post": "https://x.com/lycoris_recoil/status/1507371728820867072"
+   },
+   "officialSite": "https://lycoris-recoil.com/"
+  },
+  "okitsura": {
+   "youtube": {
+    "id": "yp_TLUBjrz0",
+    "title": "TVアニメ「沖縄で好きになった子が方言すぎてツラすぎる」PV第1弾",
+    "channel": "ハピネット【アニメ公式】"
+   },
+   "x": {
+    "handle": "okitsura",
+    "post": "https://x.com/okitsura/status/1864867625689584041"
+   },
+   "officialSite": "https://okitsura.com/"
+  },
+  "oregairu": {
+   "youtube": {
+    "id": "32oQi6mWhDg",
+    "title": "TVアニメ「やはり俺の青春ラブコメはまちがっている。」10周年記念PV",
+    "channel": "アニメ 音楽 2.5次元舞台 - マーベラス公式チャンネル"
+   },
+   "x": {
+    "handle": "anime_oregairu",
+    "post": "https://x.com/anime_oregairu/status/1710219594399416669"
+   },
+   "officialSite": "https://www.tbs.co.jp/anime/oregairu/"
+  },
+  "slow-loop": {
+   "youtube": {
+    "id": "LyxCk1GUais",
+    "title": "TVアニメ「スローループ」PV第2弾",
+    "channel": "KADOKAWAanime"
+   },
+   "x": {
+    "handle": "slowloop_tv",
+    "post": "https://x.com/slowloop_tv/status/1429820977165176832"
+   },
+   "officialSite": "https://slowlooptv.com/"
+  },
+  "sukimega": {
+   "youtube": {
+    "id": "45lyCUdzRx4",
+    "title": "TVアニメ「好きな子がめがねを忘れた」PV第３弾｜2023年7月4日より放送開始！",
+    "channel": "SHOCHIKU animeチャンネル【公式】"
+   },
+   "x": {
+    "handle": "Sukimega",
+    "post": "https://x.com/Sukimega/status/1635596642253697026"
+   },
+   "officialSite": "https://sh-anime.shochiku.co.jp/sukimega/"
+  },
+  "takagi-san": {
+   "youtube": {
+    "id": "KwUghPuqNAU",
+    "title": "TVアニメ『からかい上手の高木さん』PV第1弾",
+    "channel": "TOHO animation チャンネル"
+   },
+   "x": {
+    "handle": "takagi3_anime",
+    "post": "https://x.com/takagi3_anime/status/1519511727334846464"
+   },
+   "officialSite": "https://takagi3.me/"
+  },
+  "yama-no-susume": {
+   "youtube": {
+    "id": "JjvPiWmr8mo",
+    "title": "テレビアニメ『ヤマノススメ Next Summit』　PV",
+    "channel": "KADOKAWAanime"
+   },
+   "x": {
+    "handle": "yamanosusume",
+    "post": "https://x.com/yamanosusume/status/1517337726240329728"
+   },
+   "officialSite": "https://yamanosusume-ns.com/"
+  },
+  "yowamushi-pedal": {
+   "youtube": {
+    "id": "EV6pG5FB9qc",
+    "title": "TVアニメ『弱虫ペダル』PV│\"YOWAMUSHI PEDAL\"(2013) Trailer",
+    "channel": "TMSアニメ公式チャンネル"
+   },
+   "x": {
+    "handle": "yowapeda_anime",
+    "post": "https://x.com/yowapeda_anime/status/1468234330627575821"
+   },
+   "officialSite": "https://yowapeda.com/"
+  },
+  "yurucamp": {
+   "youtube": {
+    "id": "vpH42sJ8t9c",
+    "title": "TVアニメ「ゆるキャン△」予告編第二弾映像",
+    "channel": "FURYU Pictures Channel"
+   },
+   "x": {
+    "handle": "yurucamp_anime",
+    "post": "https://x.com/yurucamp_anime/status/2027985925150781561"
+   },
+   "officialSite": "https://yurucamp.jp/"
+  },
+  "zatsutabi": {
+   "youtube": {
+    "id": "F2lIatsblH4",
+    "title": "TVアニメ『ざつ旅 -That's Journey-』PV第２弾｜2025年４月7日放送開始！",
+    "channel": "KADOKAWAanime"
+   },
+   "x": {
+    "handle": "zatsutabi_anime",
+    "post": "https://x.com/zatsutabi_anime/status/1895783573551993134"
+   },
+   "officialSite": "https://zatsutabi.com/"
+  }
+ }
+}

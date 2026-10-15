@@ -1,0 +1,179 @@
+{
+ "_": "聖地巡礼の作品の背景画像の一覧（scripts/journey/build_work_covers.py が書く）。slug → 幅ごとの [幅, 高さ]・credit（画像の出典の表示）・source（出典のページ）・mode（帯での置き方）・focus（帯で切り取るときの中心）。画像は public/journey/works/<slug>-<幅>.webp。元画像は ~/dev/data/work-covers/",
+ "covers": {
+  "atri": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "fit",
+   "focus": "50% 60%"
+  },
+  "bocchi-the-rock": {
+   "800": [
+    800,
+    602
+   ],
+   "1600": [
+    1600,
+    1205
+   ],
+   "credit": "写真：Syced / CC0（Wikimedia Commons）",
+   "source": "https://commons.wikimedia.org/wiki/File:SHELTER.jpg",
+   "mode": "cover",
+   "focus": "45% 45%"
+  },
+  "hyouka": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "fit",
+   "focus": "50% 50%"
+  },
+  "lovelive-sunshine": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "fit",
+   "focus": "50% 50%"
+  },
+  "lycoris-recoil": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "fit",
+   "focus": "50% 45%"
+  },
+  "okitsura": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "fit",
+   "focus": "50% 50%"
+  },
+  "oregairu": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "cover",
+   "focus": "50% 58%"
+  },
+  "slow-loop": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "cover",
+   "focus": "50% 45%"
+  },
+  "sukimega": {
+   "800": [
+    800,
+    475
+   ],
+   "1600": [
+    1600,
+    949
+   ],
+   "credit": "写真：Htanaungg / CC BY-SA 4.0（Wikimedia Commons）",
+   "source": "https://commons.wikimedia.org/wiki/File:Inokashira_Pond.jpg",
+   "mode": "cover",
+   "focus": "50% 60%"
+  },
+  "takagi-san": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "cover",
+   "focus": "50% 40%"
+  },
+  "yama-no-susume": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "fit",
+   "focus": "50% 50%"
+  },
+  "yowamushi-pedal": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1440,
+    1440
+   ],
+   "mode": "fit",
+   "focus": "50% 50%"
+  },
+  "yurucamp": {
+   "800": [
+    800,
+    800
+   ],
+   "1600": [
+    1600,
+    1600
+   ],
+   "mode": "fit",
+   "focus": "50% 40%"
+  },
+  "zatsutabi": {
+   "800": [
+    800,
+    403
+   ],
+   "1600": [
+    1600,
+    806
+   ],
+   "credit": "写真：lumoplank / CC0（Wikimedia Commons）",
+   "source": "https://commons.wikimedia.org/wiki/File:Matsushima_Bay_-_Matsushima6233.jpg",
+   "mode": "cover",
+   "focus": "50% 55%"
+  }
+ }
+}

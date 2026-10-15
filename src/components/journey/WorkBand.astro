@@ -1,0 +1,293 @@
+---
+// WorkBand.astro - 聖地巡礼の一覧の作品の帯。作品の画像（workCoverFor）を背景に敷き、作品名を大きく載せる。
+// 投稿の多い作品ほど帯を高くする（feature・medium・compact）。PC では文字の側を帯ごとに入れ替える（flip）。
+//
+// 画像の置き方：帯より縦長〜少し横長の画像（キービジュアル・正方形の投稿）は、高さに合わせて文字と反対の側に置き、
+// 残りは端を鏡に映して延ばした画像（fill）のぼかしでつなぐ（切り取ると人物やロゴが欠ける）。
+// 帯と同じくらい横長の画像（聖地の風景）は帯いっぱいに切り取り、中心は focus で決める。
+import { workCoverFor, formatRange, prefectureByCode, titleChunks, type Work } from '../../lib/journey';
+
+interface Props {
+  work: Work;
+  index: number;
+  size: 'feature' | 'medium' | 'compact';
+  flip?: boolean;
+}
+
+const { work, index, size, flip = false } = Astro.props;
+const cover = workCoverFor(work);
+// 置き方は画像ごとの指定（mode）が優先。無ければ帯より縦長〜少し横長なら fit
+const fit = cover ? (cover.mode ? cover.mode === 'fit' : !cover.own || (cover.ratio ?? 1) < 1.9) : false;
+const prefectures = work.prefCodes
+  .slice(0, size === 'compact' ? 2 : 4)
+  .map((code) => prefectureByCode(code))
+  .filter(Boolean);
+const sizes = size === 'compact' ? '(min-width: 768px) 480px, 100vw' : '(min-width: 1024px) 976px, 100vw';
+---
+
+<a
+  href={`/journey/pilgrimage/${work.slug}/`}
+  class:list={['work-band group', `is-${size}`, { 'is-flip': flip, 'is-fit': fit }]}
+  style={cover?.ratio ? `--r: ${cover.ratio}` : undefined}
+>
+  <div class="band-bg" aria-hidden="true">
+    {cover && fit ? (
+      <>
+        <img src={cover.fill ?? cover.src} alt="" loading="lazy" decoding="async" class="band-fill" />
+        <img
+          src={cover.src}
+          srcset={cover.srcset}
+          sizes={sizes}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="band-fit"
+        />
+      </>
+    ) : cover ? (
+      <img
+        src={cover.src}
+        srcset={cover.srcset}
+        sizes={sizes}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        class="band-cover"
+        style={cover.focus ? `object-position: ${cover.focus}` : undefined}
+      />
+    ) : null}
+  </div>
+  <div class="band-shade" aria-hidden="true"></div>
+  <div class="band-text">
+    <span class="band-index">{String(index).padStart(2, '0')}</span>
+    <h2 class="band-title photo-title">
+      {titleChunks(work.title).map((chunk, i) => <>{i > 0 && <wbr />}{chunk}</>)}
+    </h2>
+    <p class="band-meta photo-meta">
+      <span>{formatRange(work.start, work.end)}</span>
+      <span aria-hidden="true">・</span>
+      <span>{work.postCount}件</span>
+      {prefectures.length > 0 && (
+        <span class="band-prefs">
+          {prefectures.map((prefecture) => <span class="photo-chip">{prefecture!.shortName}</span>)}
+        </span>
+      )}
+    </p>
+  </div>
+  {cover?.credit && <span class="band-credit">{cover.credit}</span>}
+</a>
+
+<style>
+  .work-band {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: #0f172a;
+    isolation: isolate;
+    outline: 1px solid rgb(167 139 250 / 0.18);
+    outline-offset: -1px;
+    transition: outline-color 300ms ease-out, transform 300ms ease-out;
+  }
+  .work-band:hover {
+    outline-color: rgb(167 139 250 / 0.5);
+  }
+  .work-band:focus-visible {
+    outline: 2px solid rgb(196 181 253);
+    outline-offset: 3px;
+  }
+  .is-feature {
+    height: 18rem;
+  }
+  .is-medium {
+    height: 14rem;
+  }
+  .is-compact {
+    height: 10rem;
+  }
+  @media (min-width: 768px) {
+    .is-feature {
+      height: 24rem;
+    }
+    .is-medium {
+      height: 17rem;
+    }
+  }
+
+  /* 背景。ホバーで少しだけ寄る（文字は動かさない） */
+  .band-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .work-band:hover .band-bg {
+    transform: scale(1.04);
+  }
+  .band-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .band-fill {
+    position: absolute;
+    inset: -10%;
+    width: 120%;
+    height: 120%;
+    max-width: none;
+    object-fit: cover;
+    filter: blur(26px) brightness(0.7) saturate(1.2);
+  }
+  /* 画像は高さに合わせて文字と反対の側（ふだんは右）に置き、文字の側の端だけ透かしてぼかしへつなぐ */
+  .band-fit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    aspect-ratio: var(--r, 1);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%);
+    mask-image: linear-gradient(to right, transparent 0, #000 22%);
+  }
+  .is-flip .band-fit {
+    right: auto;
+    left: 0;
+    -webkit-mask-image: linear-gradient(to left, transparent 0, #000 22%);
+    mask-image: linear-gradient(to left, transparent 0, #000 22%);
+  }
+
+  /* 文字の側を暗くする。スマホは下から、PC は文字の側から */
+  .band-shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgb(2 6 23 / 0.9) 0%, rgb(2 6 23 / 0.45) 45%, rgb(2 6 23 / 0.1) 100%);
+  }
+  @media (min-width: 768px) {
+    .band-shade {
+      background: linear-gradient(to right, rgb(2 6 23 / 0.88) 0%, rgb(2 6 23 / 0.6) 38%, rgb(2 6 23 / 0) 72%),
+        linear-gradient(to top, rgb(2 6 23 / 0.5) 0%, rgb(2 6 23 / 0) 50%);
+    }
+    .is-flip .band-shade {
+      background: linear-gradient(to left, rgb(2 6 23 / 0.88) 0%, rgb(2 6 23 / 0.6) 38%, rgb(2 6 23 / 0) 72%),
+        linear-gradient(to top, rgb(2 6 23 / 0.5) 0%, rgb(2 6 23 / 0) 50%);
+    }
+  }
+
+  .band-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .band-text {
+      max-width: 58%;
+      padding: 2rem 2.25rem;
+    }
+    .is-flip .band-text {
+      left: auto;
+      right: 0;
+      align-items: flex-end;
+      text-align: right;
+    }
+    .is-flip .band-meta {
+      justify-content: flex-end;
+    }
+    .is-compact .band-text {
+      max-width: 75%;
+      padding: 1.25rem 1.5rem;
+    }
+  }
+  .band-index {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: rgb(221 214 254 / 0.85);
+    text-shadow: 0 1px 3px rgb(0 0 0 / 0.6);
+  }
+  /* 題名は単語の区切り（<wbr>）でだけ折り返す */
+  .band-title {
+    font-weight: 700;
+    line-height: 1.25;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+  .is-feature .band-title {
+    font-size: 1.75rem;
+  }
+  .is-medium .band-title {
+    font-size: 1.375rem;
+  }
+  .is-compact .band-title {
+    font-size: 1.125rem;
+  }
+  @media (min-width: 768px) {
+    .is-feature .band-title {
+      font-size: 2.75rem;
+    }
+    .is-medium .band-title {
+      font-size: 2rem;
+    }
+    .is-compact .band-title {
+      font-size: 1.25rem;
+    }
+  }
+  .band-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.375rem;
+    font-size: 0.8125rem;
+  }
+  .band-prefs {
+    display: inline-flex;
+    gap: 0.25rem;
+    margin-left: 0.25rem;
+  }
+  .band-prefs .photo-chip {
+    padding: 0.0625rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+  }
+
+  /* 画像の出典。文字と反対の下の隅に小さく出す */
+  .band-credit {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.5rem;
+    max-width: 45%;
+    font-size: 10px;
+    line-height: 1.4;
+    text-align: right;
+    color: rgb(255 255 255 / 0.62);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.85);
+  }
+  .is-flip .band-credit {
+    right: auto;
+    left: 0.75rem;
+    text-align: left;
+  }
+  @media (max-width: 767px) {
+    .band-credit {
+      top: 0.5rem;
+      bottom: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .band-bg,
+    .work-band {
+      transition: none;
+    }
+    .work-band:hover .band-bg {
+      transform: none;
+    }
+  }
+</style>

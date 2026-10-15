@@ -1,10 +1,16 @@
 ---
-// 聖地巡礼の一覧。作品ごとにまとめている。
+// 聖地巡礼の一覧。作品ごとに、作品の画像を背景にした帯を重ねる（WorkBand）。
+// 投稿の多い作品ほど帯を高くし、PC では文字の側を帯ごとに入れ替えて、雑誌の目次のように読ませる。1件の作品は細い帯を2列に並べる。
 import Layout from '../../../layouts/Layout.astro';
 import DetailHeader from '../../../components/DetailHeader.astro';
-import { works, workCount, prefectureByCode, formatRange } from '../../../lib/journey';
+import WorkBand from '../../../components/journey/WorkBand.astro';
+import { works, workCount } from '../../../lib/journey';
 
 const postTotal = works.reduce((sum, work) => sum + work.postCount, 0);
+// works は投稿の多い順（build_pilgrimages.py）。作品名なしは最後
+const sizeOf = (count: number) => (count >= 9 ? 'feature' : count >= 2 ? 'medium' : 'compact');
+const major = works.filter((work) => sizeOf(work.postCount) !== 'compact');
+const minor = works.filter((work) => sizeOf(work.postCount) === 'compact');
 ---
 
 <Layout title="聖地巡礼 - Toriforium Portfolio" description={`${workCount}作品・${postTotal}件の投稿`}>
@@ -21,25 +27,26 @@ const postTotal = works.reduce((sum, work) => sum + work.postCount, 0);
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        {works.map((work) => (
-          <a
-            href={`/journey/pilgrimage/${work.slug}/`}
-            class="glass rounded-2xl p-5 hover-lift block border border-violet-500/20"
-          >
-            <div class="text-white font-medium mb-2">{work.title}</div>
-            <div class="text-gray-500 text-xs mb-3">{formatRange(work.start, work.end)}・{work.postCount}件</div>
-            <div class="flex flex-wrap gap-1">
-              {work.prefCodes.slice(0, 5).map((code) => {
-                const prefecture = prefectureByCode(code);
-                return prefecture ? (
-                  <span class="px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-200 text-[10px]">{prefecture.shortName}</span>
-                ) : null;
-              })}
-            </div>
-          </a>
+      <ol class="space-y-5 md:space-y-6">
+        {major.map((work, i) => (
+          <li>
+            <WorkBand work={work} index={i + 1} size={sizeOf(work.postCount)} flip={i % 2 === 1} />
+          </li>
         ))}
-      </div>
+      </ol>
+
+      {minor.length > 0 && (
+        <>
+          <h2 class="text-sm font-semibold text-gray-400 mt-14 mb-4">ひとつの聖地を訪ねた作品</h2>
+          <ol class="grid grid-cols-1 md:grid-cols-2 gap-4" start={major.length + 1}>
+            {minor.map((work, i) => (
+              <li>
+                <WorkBand work={work} index={major.length + i + 1} size="compact" />
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
     </div>
   </main>
 </Layout>

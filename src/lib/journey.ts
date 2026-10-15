@@ -12,6 +12,8 @@ import pilgrimageData from '../../data/journey/pilgrimages.json';
 import permalinkData from '../../data/journey/permalinks.json';
 import themeData from '../../data/journey/themes.json';
 import coverData from '../../data/journey/trip_covers.json';
+import workCoverData from '../../data/journey/work_covers.json';
+import workLinkData from '../../data/journey/work_links.json';
 
 export interface Prefecture {
   code: string;
@@ -240,6 +242,58 @@ export function coverFor(trip: Trip): TripCover | null {
   return latest ? { src: thumbUrl(latest), own: false, shape: 'tall' } : null;
 }
 
+export interface WorkCover extends TripCover {
+  /** 画像の出典の表示（「写真：作者 / CC BY-SA 4.0」「© 作品の権利者」）。本人の画像には無い */
+  credit?: string;
+  /** 出典のページ（作品のページのクレジットからリンクする） */
+  source?: string;
+  /** 一覧の帯での置き方。cover＝帯いっぱいに切り取る／fit＝全体を見せて余白をぼかす。無ければ形で決める */
+  mode?: 'cover' | 'fit';
+  /** 帯で切り取るときの中心（CSS の object-position）。無ければ中央 */
+  focus?: string;
+}
+
+type WorkCoverEntry = Record<string, [number, number]> & { credit?: string; source?: string; mode?: 'cover' | 'fit'; focus?: string };
+const workCovers = (workCoverData as { covers: Record<string, WorkCoverEntry> }).covers;
+
+/**
+ * 聖地巡礼の作品の背景画像。用意した画像（npm run journey:work-covers）が無ければ、作品のいちばん新しく投稿したもののサムネで代える。
+ * 画像は旅の画像と同じ形（800w・1600w・余白用の fill）なので、旅の見出しと同じ作りで出せる。
+ */
+export function workCoverFor(work: Work): WorkCover | null {
+  const own = workCovers[work.slug];
+  if (own) {
+    const base = `/journey/works/${work.slug}`;
+    return {
+      src: `${base}-800.webp`,
+      srcset: `${base}-800.webp ${own['800'][0]}w, ${base}-1600.webp ${own['1600'][0]}w`,
+      fill: `${base}-fill.webp`,
+      ratio: own['800'][0] / own['800'][1],
+      own: true,
+      shape: shapeOf(own['800'][0], own['800'][1]),
+      credit: own.credit,
+      source: own.source,
+      mode: own.mode,
+      focus: own.focus,
+    };
+  }
+  const latest = postsForWork(work).slice().sort((a, b) => b.uploaded_at.localeCompare(a.uploaded_at))[0];
+  return latest ? { src: thumbUrl(latest), own: false, shape: 'tall' } : null;
+}
+
+/** 作品の公式リンク（data/journey/work_links.json）。作品のページに PV と投稿を埋め込む */
+export interface WorkLinks {
+  youtube?: { id: string; title: string; channel: string };
+  x?: { handle: string; post?: string | null };
+  officialSite?: string;
+}
+
+const workLinks = (workLinkData as { links: Record<string, WorkLinks> }).links;
+
+export function workLinksFor(work: Work): WorkLinks {
+  return workLinks[work.slug] ?? {};
+}
+
 // 題名の折り返し位置。日本語は既定だとどの文字の間でも折り返すので、「伊勢志 / 摩」のように単語の途中で切れる。
 // word-break: auto-phrase は Chrome だけなので使わず、ビルドのときに単語の区切りを出し、その間にだけ <wbr> を置く（CSS は keep-all）。
 // 区切りは Intl.Segmenter（ICU の辞書）。ただしカタカナ・平仮名の語を割ることがある（サン|ラ|イズ、シ|ャ|トレー|ゼ）ので、次では区切らない
@@ -254,6 +308,8 @@ const PARTICLES = new Set(['の', 'へ', 'を', 'に', 'が', 'と', 'で', 'は
 function breakableBetween(a: string, b: string): boolean {
   const lengthOf = (s: string) => [...s].length;
   if (LINE_START_NG.test(b) || DIGIT_END.test(a)) return false; // 行頭の小さい仮名・長音、数字と助数詞（2泊・3度目）
+  // 助詞の後に2文字以上の語が続くなら区切ってよい。次の決まりより先に見る（「ラブコメは / まちがっている」の「まち」は短い平仮名だった）
+  if (PARTICLES.has(a) && !PARTICLES.has(b) && lengthOf(b) >= 2) return true;
   if (HIRAGANA_START.test(b) && lengthOf(b) <= 2) return false; // 助詞・送り仮名は前の言葉に付ける
   if (lengthOf(b) < 2) return false; // 1文字の断片（旅・編・巻・市、割れた語）は前に付ける
   if (PARTICLES.has(a)) return true; // 助詞の後は区切ってよい（松島への / 往復）
