@@ -12,6 +12,171 @@
    ],
    "gpsPrefCode": "42"
   },
+  "18131748538812419": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18084801602701563": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18119476546956410": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18108896360236066": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18116995357811800": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18396142717164588": {
+   "prefCodes": [
+    "33"
+   ],
+   "method": "date-line-place",
+   "evidence": "岡山",
+   "tagPrefCodes": [
+    "33"
+   ],
+   "gpsPrefCode": null
+  },
+  "18111834889891020": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
+  "18218928085357065": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
+  "18115006943605532": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
+  "17905874472580481": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
+  "18137826421638885": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
+  "17927262234423982": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
+  "18111682682268648": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
+  "18641436298025061": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
+  "18098715098435071": {
+   "prefCodes": [
+    "37"
+   ],
+   "method": "date-line-place",
+   "evidence": "香川",
+   "tagPrefCodes": [
+    "37"
+   ],
+   "gpsPrefCode": null
+  },
   "17898218481396486": {
    "prefCodes": [
     "37"
