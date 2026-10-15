@@ -122,9 +122,8 @@ def main():
     base_trips = {t["tag"]: t for t in load_base(root, args.base, "data/journey/trips.json")["trips"]}
     permalinks = load(root, "data/journey/permalinks.json")
     prefs = {p["code"]: p["name"] for p in load(root, "data/ontology/prefectures.json")}
-    visited = {
-        p["code"] for region in load(root, "data/journey/prefectures.json")["regions"] for p in region["prefectures"] if p["visited"]
-    }
+    # 聖地巡礼に数えるのに、どの作品にも入らない投稿（pilgrimages.json の「作品名なし」）
+    untitled_ids = {i for w in works if w.get("untitled") for i in w["postIds"]}
 
     new = sorted((posts[i] for i in posts if i not in base_posts), key=lambda p: (p["date"], p["id"]))
     base_count = collections.Counter(c for r in base_resolved.values() for c in (r.get("prefCodes") or []))
@@ -165,9 +164,16 @@ def main():
         if not codes:
             warnings.append((p, "県が不明", "タグ・本文から県を特定できない"))
         for c in codes:
-            # 日付の後ろに書いた県が訪問済み（prefectures.json）なら、最初の投稿でも本人の指定どおりとみなす
-            if base_count[c] == 0 and not (r.get("method") == "date-line-place" and c in visited):
+            # 日付の後ろに書いた県は本人の指定なので、その県の最初の投稿でも点検しない。訪問済み（prefectures.json）は
+            # その県を観光したかで本人が決めるもので、投稿があるかとは関係ない（岡山駅に数分だけいた寝台列車の連結は、
+            # 岡山の投稿だが訪問済みにはしない。2026-10-15 本人の指示）。機械が決めた県は誤りの目印として残す
+            if base_count[c] == 0 and r.get("method") != "date-line-place":
                 warnings.append((p, "初めての県", f"{prefs[c]}の最初の投稿。撮影地を確認"))
+        # 作品のページを足すまで自動マージしない（2026-10-15 本人の指示。からかい上手の高木さんが「作品名なし」に入っていた）
+        if p["id"] in untitled_ids:
+            warnings.append(
+                (p, "作品のページが無い", "聖地巡礼のタグがあるが、どの作品にも入らない。pilgrimages.json の works に作品を足す")
+            )
         other = decided_by_trip_tag(p, r, gaz, trip_tags)
         if other:
             alt, evidence = other
@@ -294,6 +300,7 @@ def main():
         "",
         "- 県が違う：`data/journey/overrides.json` に `\"投稿ID\": [\"県コード\"]`",
         "- 撮影日が違う：`data/journey/date_overrides.json` に `\"投稿ID\": \"YYYY-MM-DD\"`（月まで `YYYY-MM`・年まで `YYYY`・不明 `unknown`）",
+        "- 作品のページが無い：`data/journey/pilgrimages.json` の `works` に `{\"slug\": \"…\", \"title\": \"作品名\", \"aliases\": [\"タグに入る呼び名\"]}` を足す",
         "- 修正後に `npm run journey:build` を実行し、コミット",
         "",
         "</details>",

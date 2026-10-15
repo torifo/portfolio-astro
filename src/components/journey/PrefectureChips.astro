@@ -1,0 +1,29 @@
+---
+// PrefectureChips.astro - 旅・聖地巡礼・テーマのページの県の一覧。県のページへのリンクにする。
+// 県のページは訪問済み（prefectures.json の visited）の県にしか無い。訪問済みは観光したかで本人が決め、
+// 投稿があるかとは関係ないので、通っただけの県（岡山駅で数分の寝台列車の連結）はリンクにせず淡く出す
+import type { Prefecture } from '../../lib/journey';
+
+interface Props {
+  prefectures: (Prefecture | undefined)[];
+}
+
+const { prefectures } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2">
+  {prefectures.filter((p): p is Prefecture => Boolean(p)).map((prefecture) =>
+    prefecture.visited ? (
+      <a
+        href={`/journey/${prefecture.slug}/`}
+        class="px-3 py-1.5 rounded-full bg-white/10 text-gray-200 text-xs hover:bg-white/20 transition-colors"
+      >
+        {prefecture.name}
+      </a>
+    ) : (
+      <span class="px-3 py-1.5 rounded-full bg-white/5 text-gray-400 text-xs" title="通っただけの県（県のページは無い）">
+        {prefecture.name}
+      </span>
+    )
+  )}
+</div>

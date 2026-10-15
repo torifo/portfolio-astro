@@ -3,6 +3,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import DetailHeader from '../../../components/DetailHeader.astro';
 import PostGrid from '../../../components/journey/PostGrid.astro';
+import PrefectureChips from '../../../components/journey/PrefectureChips.astro';
 import { works, postsForWork, prefectureByCode, formatRange, type Work } from '../../../lib/journey';
 
 export async function getStaticPaths() {
@@ -38,16 +39,7 @@ const heading = work.untitled ? '作品名のない聖地巡礼' : `${work.title
 
       <section class="mb-8">
         <h2 class="text-sm font-semibold text-gray-400 mb-2">巡った県</h2>
-        <div class="flex flex-wrap gap-2">
-          {visited.map((prefecture) => (
-            <a
-              href={`/journey/${prefecture!.slug}/`}
-              class="px-3 py-1.5 rounded-full bg-white/10 text-gray-200 text-xs hover:bg-white/20 transition-colors"
-            >
-              {prefecture!.name}
-            </a>
-          ))}
-        </div>
+        <PrefectureChips prefectures={visited} />
       </section>
 
       <div class="section-divider"></div>
