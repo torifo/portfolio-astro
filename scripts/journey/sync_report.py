@@ -122,8 +122,16 @@ def main():
     base_trips = {t["tag"]: t for t in load_base(root, args.base, "data/journey/trips.json")["trips"]}
     permalinks = load(root, "data/journey/permalinks.json")
     prefs = {p["code"]: p["name"] for p in load(root, "data/ontology/prefectures.json")}
-    # 聖地巡礼に数えるのに、どの作品にも入らない投稿（pilgrimages.json の「作品名なし」）
+    # 聖地巡礼に数えるのに、どの作品にも入らない投稿（pilgrimages.json の「作品名なし」）。
+    # 同じ日・同じ旅の投稿から作品が2つ以上見つかって決められなかったものは candidates に候補がある
     untitled_ids = {i for w in works if w.get("untitled") for i in w["postIds"]}
+    candidates = {i: c for w in works if w.get("untitled") for i, c in (w.get("candidates") or {}).items()}
+    base_candidates = {
+        i
+        for w in load_base(root, args.base, "data/journey/pilgrimages.json")["works"]
+        if w.get("untitled")
+        for i in (w.get("candidates") or {})
+    }
 
     new = sorted((posts[i] for i in posts if i not in base_posts), key=lambda p: (p["date"], p["id"]))
     base_count = collections.Counter(c for r in base_resolved.values() for c in (r.get("prefCodes") or []))
@@ -169,10 +177,14 @@ def main():
             # 岡山の投稿だが訪問済みにはしない。2026-10-15 本人の指示）。機械が決めた県は誤りの目印として残す
             if base_count[c] == 0 and r.get("method") != "date-line-place":
                 warnings.append((p, "初めての県", f"{prefs[c]}の最初の投稿。撮影地を確認"))
-        # 作品のページを足すまで自動マージしない（2026-10-15 本人の指示。からかい上手の高木さんが「作品名なし」に入っていた）
-        if p["id"] in untitled_ids:
+        # 作品を決められない聖地巡礼の投稿は自動マージしない（2026-10-15 本人の指示）。タグは5つまでなので作品名が無くても、
+        # 同じ日（無ければ同じ旅）の投稿の作品が1つなら build_pilgrimages.py がその作品に入れている
+        if p["id"] in candidates:
+            c = candidates[p["id"]]
+            warnings.append((p, "作品が複数", f"{c['scope']}の投稿に{'・'.join(c['titles'])}。作品のタグか extraPostIds で決める"))
+        elif p["id"] in untitled_ids:
             warnings.append(
-                (p, "作品のページが無い", "聖地巡礼のタグがあるが、どの作品にも入らない。pilgrimages.json の works に作品を足す")
+                (p, "作品のページが無い", "聖地巡礼のタグがあるが、同じ日・同じ旅の投稿にも作品が無い。pilgrimages.json の works に作品を足す")
             )
         other = decided_by_trip_tag(p, r, gaz, trip_tags)
         if other:
@@ -220,11 +232,23 @@ def main():
     now_tags = {t["tag"] for t in trips}
     removed_trips = [old for tag, old in base_trips.items() if tag not in now_tags and not old.get("hidden")]
     # 新着がすべて日付の後ろに書いた場所で決まり、要確認も無く、旅も消えなければ、人が見る点が無いのでマージまで進めてよい
-    auto_merge = bool(auto_ids) and not hold_ids and not removed_trips
+    # 新着で同じ日・同じ旅に別の作品が入り、取り込み済みの投稿の作品が決められなくなる（作品名なしに戻る）なら、
+    # その新着が日付の後ろの場所だけでも自動マージしない（2026-10-15 本人の指示「複数の作品が見つかったら自動マージしない」）
+    newly_ambiguous = [i for i in candidates if i in base_posts and i not in base_candidates]
+    auto_merge = bool(auto_ids) and not hold_ids and not removed_trips and not newly_ambiguous
     lines = [f"新着 **{len(new)} 件**・要確認 **{review_count} 件**", ""]
     if removed_trips:
         names = "・".join(t["title"] for t in removed_trips)
         lines += [f"**無くなる旅があるため、自動マージしない**：{names}（下の「旅の変化」）", ""]
+    if newly_ambiguous:
+        lines += ["**取り込み済みの投稿の作品が決められなくなるため、自動マージしない**：", ""]
+        for post_id in newly_ambiguous:
+            c = candidates[post_id]
+            lines.append(
+                f"- [{first_line(posts[post_id])}]({permalinks.get(post_id, '')}) `{post_id}`："
+                f"{c['scope']}の投稿に{'・'.join(c['titles'])}（作品のタグか extraPostIds で決める）"
+            )
+        lines.append("")
     if args.preface:
         lines += [args.preface, ""]
 
@@ -286,7 +310,11 @@ def main():
     # 聖地巡礼に入った新着と作品。作品名なしなら、作品として pilgrimages.json の works に足すかを決める
     holy_lines = []
     for p in new:
-        titles = [w["title"] for w in works if p["id"] in w["postIds"]]
+        titles = [
+            w["title"] + (f"（{w['inferred'][p['id']]}の投稿から）" if p["id"] in (w.get("inferred") or {}) else "")
+            for w in works
+            if p["id"] in w["postIds"]
+        ]
         if titles:
             holy_lines.append(f"- [{first_line(p)}]({permalinks.get(p['id'], '')})：{'・'.join(titles)}")
     if holy_lines:
@@ -301,6 +329,7 @@ def main():
         "- 県が違う：`data/journey/overrides.json` に `\"投稿ID\": [\"県コード\"]`",
         "- 撮影日が違う：`data/journey/date_overrides.json` に `\"投稿ID\": \"YYYY-MM-DD\"`（月まで `YYYY-MM`・年まで `YYYY`・不明 `unknown`）",
         "- 作品のページが無い：`data/journey/pilgrimages.json` の `works` に `{\"slug\": \"…\", \"title\": \"作品名\", \"aliases\": [\"タグに入る呼び名\"]}` を足す",
+        "- 作品が複数：その作品の `extraPostIds` に投稿IDを足す（または Instagram で作品のタグを付けて `npm run journey:refresh`）",
         "- 修正後に `npm run journey:build` を実行し、コミット",
         "",
         "</details>",
@@ -318,6 +347,7 @@ def main():
                 "autoIds": auto_ids,
                 "holdIds": hold_ids,
                 "removedTrips": [t["slug"] for t in removed_trips],
+                "ambiguousPosts": newly_ambiguous,
             },
             ensure_ascii=False,
         ),

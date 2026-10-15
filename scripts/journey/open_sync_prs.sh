@@ -22,6 +22,7 @@ read_summary() {
   auto="$(summary_field autoMerge)"
   warnings="$(summary_field warnings)"
   removed="$(summary_field removedTrips)"
+  ambiguous="$(summary_field ambiguousPosts)"
 }
 
 open_pr() {
@@ -29,6 +30,8 @@ open_pr() {
   [ "$warnings" -gt 0 ] && title="${title}・要確認 ${warnings} 件"
   # 旅が消えるときは自動マージしない（sync_report.py）。要確認が0件でも理由が題で分かるようにする
   [ -n "$removed" ] && title="${title}・旅が消える"
+  # 取り込み済みの投稿の作品が決められなくなるときも自動マージしない（sync_report.py）
+  [ -n "$ambiguous" ] && title="${title}・作品が決まらない"
   git push -q -u origin "$BRANCH"
   url="$(gh pr create --base main --head "$BRANCH" --title "$title" --body-file "$RUNNER_TEMP/report.md")"
   echo "PR: $url" | tee -a "$GITHUB_STEP_SUMMARY"

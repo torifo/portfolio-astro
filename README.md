@@ -181,7 +181,7 @@ PR の「要確認」は、本番で実際に起きた誤りの型を機械で�
 | 撮影日 | `data/journey/date_overrides.json` | `"投稿ID": "2023-09-05"`。月までなら `"2023-09"`、年までなら `"2022"`、分からなければ `"unknown"`（「日付不明」と出る） |
 | テーマ | `data/journey/themes.json` の `extraPostIds` | `["投稿ID"]`（タグの無い投稿をテーマに入れる） |
 | 再利用できる地名 | `data/journey/gazetteer.json` | `"地名": ["27"]` |
-| 聖地巡礼の作品 | `data/journey/pilgrimages.json` の `works` | `{"slug": "hyouka", "title": "氷菓", "aliases": []}`（タグに作品名か別名があればその作品に入る）。聖地の場所のタグは `"spots"`、個別の投稿は `"extraPostIds"` に書くと、聖地巡礼タグがなくても入る |
+| 聖地巡礼の作品 | `data/journey/pilgrimages.json` の `works` | `{"slug": "hyouka", "title": "氷菓", "aliases": []}`（タグに作品名か別名があればその作品に入る）。聖地の場所のタグは `"spots"`、個別の投稿は `"extraPostIds"` に書くと、聖地巡礼タグがなくても入る。聖地巡礼タグがあって作品のタグが無い投稿は、同じ日（無ければ同じ旅）の投稿の作品が1つならその作品に入る。2つ以上なら「作品が複数」で同期 PR が止まるので、`extraPostIds` で決める |
 | 旅の背景画像 | `~/dev/data/trip-covers/<slug>.<拡張子>`（リポジトリの外） | 置いてから `npm run journey:covers`。EXIF を消した webp（800w・1600w）が `public/journey/trips/` にでき、一覧が `data/journey/trip_covers.json` に入る。画像がない旅は投稿のサムネで出る |
 
 Instagram 側のキャプションを直しても、同期（新着しか読まない）では取り込み済みの投稿に届かない。

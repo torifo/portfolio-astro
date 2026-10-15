@@ -11,6 +11,10 @@
   聖地の場所（spots）   作品の聖地として人が登録した場所のタグ。そのタグの投稿は聖地巡礼タグが無くても
                         その作品に入れる（弱虫ペダルの伊勢志摩スカイライン）
   extraPostIds          人が個別に入れる投稿。本文に「〇〇聖地巡礼」と書いてタグを付けていない投稿など
+  作品を推し量る        聖地巡礼に数えるのにタグで作品に入らない投稿（タグは5つまでなので作品名を付けられないことがある）は、
+                        同じ日のほかの投稿が入った作品を見る。1つならその作品に入れる。同じ日に作品が無ければ同じ旅の投稿に
+                        広げ、1つならその作品に入れる。2つ以上なら決めずに「作品名なし」に残し、候補を candidates に書く
+                        （同期 PR は自動マージしない）。推し量った投稿は作品の inferred に「同じ日」「同じ旅」と書く
   作品名なし            聖地巡礼に数えるのにどの作品にも入らない投稿は「作品名なし」にまとめる
 
 新しい作品は works に title・aliases・slug を足す。聖地巡礼の軸は都道府県・旅の軸と排他ではなく、
@@ -78,7 +82,9 @@ def main():
     holy_posts = [p for p in posts if is_holy(p, trip_tags)]
     holy_ids = {p["id"] for p in holy_posts}
     by_id = {p["id"]: p for p in posts}
-    works, rest, assigned = [], [], set()
+
+    # 1回目：タグの作品名・聖地の場所・個別の指定で作品に入れる
+    groups = []
     for entry in dictionary:
         keys = [normalize(k) for k in [entry["title"], *entry.get("aliases", [])]]
         spots = {normalize(s) for s in entry.get("spots", [])}
@@ -91,8 +97,48 @@ def main():
             or spots & {normalize(t) for t in p["hashtags"]}
             or p["id"] in entry.get("extraPostIds", [])
         ]
+        groups.append(group)
+    direct = collections.defaultdict(set)  # 投稿ID → 1回目で入った作品（dictionary の添字）
+    for index, group in enumerate(groups):
+        for p in group:
+            direct[p["id"]].add(index)
+
+    # 2回目：残った聖地巡礼の投稿の作品を、同じ日→同じ旅の投稿から推し量る（2026-10-15 本人の指示）
+    by_day = collections.defaultdict(list)
+    for p in posts:
+        if p["date_precision"] == "day":
+            by_day[p["date"]].append(p)
+    trips = json.loads((JOURNEY / "trips.json").read_text(encoding="utf-8"))["trips"]
+    trip_sets = [{t["tag"], *t.get("spots", [])} for t in trips]
+
+    def works_of(neighbors, post_id):
+        return {i for q in neighbors if q["id"] != post_id for i in direct.get(q["id"], ())}
+
+    inferred = collections.defaultdict(dict)  # 作品の添字 → {投稿ID: 同じ日／同じ旅}
+    candidates = {}  # 決められなかった投稿ID → {scope, titles}
+    for p in holy_posts:
+        if p["id"] in direct:
+            continue
+        found, scope = works_of(by_day.get(p["date"], []) if p["date_precision"] == "day" else [], p["id"]), "同じ日"
+        if not found:
+            tags = set(p["hashtags"])
+            mates = [q for q in posts if any(tags & ts and set(q["hashtags"]) & ts for ts in trip_sets)]
+            found, scope = works_of(mates, p["id"]), "同じ旅"
+        if len(found) == 1:
+            index = next(iter(found))
+            groups[index].append(p)
+            inferred[index][p["id"]] = scope
+        elif found:
+            candidates[p["id"]] = {"scope": scope, "titles": sorted(dictionary[i]["title"] for i in found)}
+
+    order = {p["id"]: n for n, p in enumerate(posts)}
+    works, rest, assigned = [], [], set()
+    for index, (entry, group) in enumerate(zip(dictionary, groups)):
+        group = sorted(group, key=lambda p: order[p["id"]])  # 推し量った投稿も posts.json の並びに戻す
         assigned.update(p["id"] for p in group)
         record = {k: entry[k] for k in ("slug", "title", "aliases", "spots", "extraPostIds") if k in entry}
+        if inferred.get(index):
+            record["inferred"] = inferred[index]
         if entry.get("hidden"):
             # 除外の印は書き戻す。サイト側（journey.ts）が hidden を弾く
             rest.append({**summarize(record, group, resolved), "hidden": True})
@@ -104,7 +150,8 @@ def main():
     works.sort(key=lambda w: -w["postCount"])
     untitled = [p for p in holy_posts if p["id"] not in assigned]
     if untitled:
-        works.append(summarize(UNTITLED, untitled, resolved))
+        record = {**UNTITLED, "candidates": candidates} if candidates else UNTITLED
+        works.append(summarize(record, untitled, resolved))
     args.out.write_text(
         json.dumps({"works": works + rest}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
     )
@@ -116,6 +163,10 @@ def main():
         print(f"  {w['postCount']:3d}投稿  {w['start']}〜{w['end']}  {where:<18} {w['title']}")
     for w in rest:
         print(f"  （{'除外' if w.get('hidden') else '投稿なし'}）{w['postCount']:3d}投稿  {w['title']}")
+    for index, found in inferred.items():
+        print(f"  作品を推し量った {len(found)} 件 → {dictionary[index]['title']}（{'・'.join(sorted(set(found.values())))}の投稿から）")
+    for post_id, c in candidates.items():
+        print(f"  作品を決められない（{c['scope']}の投稿に {'・'.join(c['titles'])}）: {by_id[post_id]['date']} {post_id}")
     if untitled:
         print(f"\n  作品名なし {len(untitled)} 件（作品なら works に title・aliases を足す）:")
         for p in untitled[:8]:
