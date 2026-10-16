@@ -50,6 +50,9 @@ MIN_DAY_COVERAGE = 0.8
 NAMED_TRIP_SUFFIXES = ("旅", "編", "旅行", "ツアー", "巻")
 NAMED_TRIP_MIN_LENGTH = 8
 NAMED_TRIP_MIN_POSTS = 5
+# 旅の名前らしい長いタグ（…旅・…編・…巻などで終わる8文字以上）は2件から旅にする。日ごとの被覆率は MIN_DAY_COVERAGE のまま。
+# 富士宮ルートの富士登山（…ご来光with大学同期の巻）が投稿2件で旅に出なかった（2026-10-16 本人の指示）。当時これで増えたのはこの1件だけ
+NAMED_TRIP_FIRST_POSTS = 2
 NAMED_TRIP_MIN_COVERAGE = 0.5
 
 # 旅の日付が3日以上飛んだら、そこから先は別の塊とみなす。
@@ -116,7 +119,8 @@ def main():
 
     candidates = []
     for tag, group in by_tag.items():
-        if len(group) < MIN_POSTS:
+        looks_named = tag.endswith(NAMED_TRIP_SUFFIXES) and len(tag) >= NAMED_TRIP_MIN_LENGTH
+        if len(group) < (NAMED_TRIP_FIRST_POSTS if looks_named else MIN_POSTS):
             continue
         dates = sorted(dt.date.fromisoformat(p["date"]) for p in group)
         if (dates[-1] - dates[0]).days > MAX_SPAN_DAYS:
