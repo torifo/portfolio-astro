@@ -12,6 +12,54 @@
    ],
    "gpsPrefCode": "42"
   },
+  "18094538204399110": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18116384168085566": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18130637132494454": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18425637451148892": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
   "18131748538812419": {
    "prefCodes": [
     "22"
