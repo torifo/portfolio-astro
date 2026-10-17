@@ -45,6 +45,115 @@
    ],
    "gpsPrefCode": null
   },
+  "18026833910862681": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "trip-inherit",
+   "evidence": "ディズニーリゾート"
+  },
+  "18137187424642427": {
+   "prefCodes": null,
+   "method": null,
+   "evidence": null,
+   "tagPrefCodes": null,
+   "gpsPrefCode": null
+  },
+  "18119001424974546": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "override",
+   "evidence": "東京ディズニーランド",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "17908225359588723": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "override",
+   "evidence": "東京ディズニーランド",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "18126726535844877": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "override",
+   "evidence": "東京ディズニーランド",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "17964355665225155": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "override",
+   "evidence": "東京ディズニーランド",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "17882565486534045": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "override",
+   "evidence": "東京ディズニーランド",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "18099413813557027": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "override",
+   "evidence": "舞浜",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "17873683086602179": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18385359391229459": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "trip-inherit",
+   "evidence": "プーさん"
+  },
+  "18077259665723780": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "pref-name-caption",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
   "18121966978946866": {
    "prefCodes": [
     "19",
