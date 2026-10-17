@@ -13,7 +13,9 @@ gazetteer.py が人の辞書（gazetteer.json）の下に読み込み、タグ�
 """
 from __future__ import annotations
 
+import argparse
 import collections
+import csv
 import json
 import pathlib
 import re
@@ -78,6 +80,9 @@ AMBIGUOUS = {"大島", "粟島", "青島", "姫島", "久賀", "長島", "硫黄
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--export", type=pathlib.Path, help="公開用（torifo/ritou）の data/ritou.json・ritou.csv・prefectures.csv をこのフォルダに書く")
+    args = parser.parse_args()
     gaz = Gazetteer()
     # 全国の地名（種類を問わない）・市区町村の短い呼び方・県名で、その呼び方がどの県を指しうるか。県ごとに一番有名な場所の
     # サイトリンク数を持つ（市区町村・県名は強い印として 999）
@@ -109,6 +114,7 @@ def main():
 
     islands = [p for p in gaz.places if "島" in p.get("kinds", []) and len(p["prefCodes"]) == 1]
     found, skipped = {}, collections.Counter()
+    origin = {}  # 語 → (種類, 出どころ)
     for island in islands:
         code = island["prefCodes"][0]
         # 機械で拾うのは正式な名前（…島・…諸島・…列島）だけ。短い呼び方を全自動で作ると「大仏」「包丁」「人参」のような
@@ -122,6 +128,7 @@ def main():
                 skipped["ほかの県にも同じ名前"] += 1
                 continue
             found[form] = [code]
+            origin[form] = ("name" if form == island["name"] else "alias", f"wikidata:{island['qid']}")
 
     # 人が書いた一覧。同じ決まりで、決められないものは入れずに知らせる
     extra_skipped = []
@@ -134,6 +141,7 @@ def main():
                 extra_skipped.append(f"{name}（{code}／ほかに {','.join(others)}）")
                 continue
             found[name] = [code]
+            origin[name] = ("manual", "manual")
 
     document = {
         "_": "離島の辞書（scripts/journey/build_islands.py が places.json の島から作る。人が直さない）。"
@@ -143,10 +151,31 @@ def main():
     }
     OUT.write_text(json.dumps(document, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"{OUT} に {len(found)} 語（島 {len(islands)} 件から）")
+    if args.export:
+        export(args.export, found, origin, gaz.pref_name)
     for reason, n in skipped.most_common():
         print(f"  入れなかった：{reason} {n}")
     if extra_skipped:
         print("  人の一覧から入れなかった（同名がほかの県にある）：" + "、".join(extra_skipped))
+
+
+def export(folder, found, origin, pref_name):
+    """公開用のデータ。ritou.json は呼び方 → 県コード（文字列）、ritou.csv は出どころつきの表、prefectures.csv は県コードと県名"""
+    folder.mkdir(parents=True, exist_ok=True)
+    terms = dict(sorted((term, codes[0]) for term, codes in found.items()))
+    (folder / "ritou.json").write_text(json.dumps(terms, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    with open(folder / "ritou.csv", "w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["term", "pref_code", "pref_name", "kind", "source"])
+        for term, code in terms.items():
+            kind, source = origin[term]
+            writer.writerow([term, code, pref_name[code], kind, source])
+    with open(folder / "prefectures.csv", "w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["pref_code", "pref_name"])
+        for code in sorted(pref_name):
+            writer.writerow([code, pref_name[code]])
+    print(f"{folder} に ritou.json・ritou.csv（{len(terms)} 語）・prefectures.csv を書いた")
 
 
 if __name__ == "__main__":
