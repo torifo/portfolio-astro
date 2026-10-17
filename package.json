@@ -11,7 +11,8 @@
     "journey:refresh": "python3 scripts/ingest/refresh_captions.py && npm run journey:build",
     "journey:covers": "python3 scripts/journey/build_trip_covers.py",
     "journey:build": "python3 scripts/journey/apply_date_overrides.py && python3 scripts/journey/resolve.py && python3 scripts/journey/build_trips.py --merge && python3 scripts/journey/build_pilgrimages.py --merge && python3 scripts/journey/build_themes.py",
-    "journey:work-covers": "python3 scripts/journey/build_work_covers.py"
+    "journey:work-covers": "python3 scripts/journey/build_work_covers.py",
+    "journey:islands": "python3 scripts/journey/build_islands.py"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",

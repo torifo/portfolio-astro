@@ -102,8 +102,8 @@ class Gazetteer:
             }
             self._add_place(short, entry)
 
-        # 人が育てる確定辞書と手動指定。無くても動く。
-        self.curated = self._load_map(JOURNEY / "gazetteer.json")
+        # 人が育てる確定辞書と手動指定。無くても動く。離島の辞書（build_islands.py が作る）は人の辞書の下に敷く
+        self.curated = {**self._load_map(JOURNEY / "islands.json"), **self._load_map(JOURNEY / "gazetteer.json")}
         self.overrides = self._load_map(JOURNEY / "overrides.json")
 
         # 部分一致用の語を長さ降順で持つ（最長一致を優先するため）。
