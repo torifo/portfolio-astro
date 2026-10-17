@@ -12,6 +12,65 @@
    ],
    "gpsPrefCode": "42"
   },
+  "17931778917162788": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "date-line-place",
+   "evidence": "茨城",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": null
+  },
+  "18218664205346717": {
+   "prefCodes": [
+    "08"
+   ],
+   "method": "date-line-place",
+   "evidence": "茨城",
+   "tagPrefCodes": [
+    "08"
+   ],
+   "gpsPrefCode": null
+  },
+  "18098491493092664": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18121966978946866": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18129782596890472": {
+   "prefCodes": [
+    "19",
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "富士山",
+   "tagPrefCodes": [
+    "19",
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
   "18094538204399110": {
    "prefCodes": [
     "19",
