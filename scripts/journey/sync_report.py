@@ -137,6 +137,10 @@ def main():
     base_count = collections.Counter(c for r in base_resolved.values() for c in (r.get("prefCodes") or []))
     trip_of_tag = {t["tag"]: t for t in trips if not t.get("hidden")}
 
+    def in_trip(post, trip):
+        """期間つきの旅（同じタグを別の時期にも付けている）は、期間の中の投稿だけがその旅に入る。"""
+        return not trip.get("window") or trip["start"] <= post["date"] <= trip["end"]
+
     gaz = Gazetteer()
     trip_tags = {t["tag"] for t in trips}
     by_date = collections.defaultdict(list)
@@ -207,7 +211,7 @@ def main():
             warnings.append((p, "撮影日が不明", "本文に日付が無いため、投稿日を使用"))
         for tag in p["hashtags"] or []:
             trip = trip_of_tag.get(tag)
-            if not trip:
+            if not trip or not in_trip(p, trip):
                 continue
             if p.get("date_precision") not in UNDATED and not (trip["start"] <= p["date"] <= trip["end"]):
                 warnings.append(
@@ -268,7 +272,7 @@ def main():
 
     groups = collections.defaultdict(list)
     for p in new:
-        tag = next((tag for tag in p["hashtags"] or [] if tag in trip_of_tag), None)  # 旅タグが2つあれば先に付いた方
+        tag = next((tag for tag in p["hashtags"] or [] if tag in trip_of_tag and in_trip(p, trip_of_tag[tag])), None)  # 旅タグが2つあれば先に付いた方
         groups[("trip", tag) if tag is not None else ("date", p["date"])].append(p)
     lines += [f"## 新着 {len(new)} 件", ""]
     for (kind, key), group in sorted(groups.items(), key=lambda item: item[1][0]["date"]):

@@ -117,36 +117,52 @@ def main():
         for tag in post["hashtags"]:
             by_tag[tag].append(post)
 
-    candidates = []
-    for tag, group in by_tag.items():
+    def judge(tag, group):
+        """旅の条件を満たせば (開始, 終了, タグ, 投稿, 県の件数) を返す。"""
         looks_named = tag.endswith(NAMED_TRIP_SUFFIXES) and len(tag) >= NAMED_TRIP_MIN_LENGTH
         if len(group) < (NAMED_TRIP_FIRST_POSTS if looks_named else MIN_POSTS):
-            continue
+            return None
         dates = sorted(dt.date.fromisoformat(p["date"]) for p in group)
         if (dates[-1] - dates[0]).days > MAX_SPAN_DAYS:
-            continue
+            return None
         # タグそのものが地名・県名なら、それは旅ではなく場所。
         if gaz.lookup(tag) or normalize(tag) in gaz.pref_terms:
-            continue
+            return None
         # このタグが出た日ごとに、その日の投稿をどれだけ覆っているか。旅の名前なら高い。
         tagged_per_day = collections.Counter(p["date"] for p in group)
         coverage = statistics.mean(
             count / posts_per_day[day] for day, count in tagged_per_day.items()
         )
-        named = (
-            tag.endswith(NAMED_TRIP_SUFFIXES)
-            and len(tag) >= NAMED_TRIP_MIN_LENGTH
-            and len(group) >= NAMED_TRIP_MIN_POSTS
-        )
+        named = looks_named and len(group) >= NAMED_TRIP_MIN_POSTS
         if coverage < (NAMED_TRIP_MIN_COVERAGE if named else MIN_DAY_COVERAGE):
-            continue
+            return None
         counts = collections.Counter(
             code for p in group for code in (resolved[p["id"]]["prefCodes"] or [])
         )
         if not counts:
-            continue
+            return None
         start, end = dense_span(dates)
-        candidates.append((start, end, tag, group, counts))
+        return (start, end, tag, group, counts)
+
+    candidates = [c for c in (judge(tag, group) for tag, group in by_tag.items()) if c]
+
+    # 前回あった旅が、同じタグの投稿が後から増えたせいで条件（30日以内など）から外れたら、前回の期間（前後 MAX_GAP_DAYS）に
+    # 絞って判定し直し、通れば期間つきの旅（window）として残す。2023年の「東京ディズニーランド」が、2025年に同じタグを付けた
+    # 投稿で旅ごと消えかけた（2026-10-18）。期間つきの旅には、期間の中の投稿だけを入れる（journey.ts の postsForTrip も同じ）
+    previous = {}
+    if args.merge and args.out.exists():
+        previous = {t["tag"]: t for t in json.loads(args.out.read_text(encoding="utf-8"))["trips"]}
+    found = {c[2] for c in candidates}
+    windowed = set()
+    for tag, old in previous.items():
+        if old.get("hidden") or tag in found or tag not in by_tag:
+            continue
+        lo = dt.date.fromisoformat(old["start"]) - dt.timedelta(days=MAX_GAP_DAYS)
+        hi = dt.date.fromisoformat(old["end"]) + dt.timedelta(days=MAX_GAP_DAYS)
+        kept = judge(tag, [p for p in by_tag[tag] if lo <= dt.date.fromisoformat(p["date"]) <= hi])
+        if kept:
+            candidates.append(kept)
+            windowed.add(tag)
 
     # 同じ日程の候補は同じ旅を指している。「ユニバーサルスタジオジャパン」
     # 「ホテルユニバーサルポート」「スーパーニンテンドーワールド」は 2024-02-14〜16 の
@@ -199,10 +215,6 @@ def main():
     ]
     candidates.sort(key=lambda c: c[0], reverse=True)
 
-    previous = {}
-    if args.merge and args.out.exists():
-        previous = {t["tag"]: t for t in json.loads(args.out.read_text(encoding="utf-8"))["trips"]}
-
     # 引き継いだ slug も先に押さえておかないと、新しい旅と衝突する。
     taken = {t["slug"] for t in previous.values() if t.get("slug")}
     trips, hidden_trips = [], []
@@ -225,6 +237,7 @@ def main():
                 "prefCodes": main,
                 "allPrefCodes": [code for code, _ in counts.most_common()],
                 "spots": old.get("spots") or spots,
+                **({"window": True} if tag in windowed else {}),
             }
         )
 
@@ -235,7 +248,8 @@ def main():
     covered = len({p["id"] for c in candidates for p in c[3]})
     print(f"{args.out} に旅 {len(trips)} 件（投稿 {covered} 件をカバー）")
     for t in trips:
-        print(f"  {t['slug']:<22} {t['postCount']:3d}投稿  {t['start']}〜{t['end']}  {t['title'][:40]}")
+        mark = "（期間つき）" if t.get("window") else ""
+        print(f"  {t['slug']:<22} {t['postCount']:3d}投稿  {t['start']}〜{t['end']}  {t['title'][:40]}{mark}")
 
 
 if __name__ == "__main__":

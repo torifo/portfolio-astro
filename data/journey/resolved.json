@@ -3589,10 +3589,10 @@
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "東京ベイ舞浜ホテルファーストリゾート ⊃ 東京",
+   "method": "curated",
+   "evidence": "ディズニー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
    "gpsPrefCode": "12"
   },
@@ -5065,10 +5065,10 @@
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "アンバサダーホテルシーグランドニッコー東京ベイ舞浜 ⊃ 東京",
+   "method": "curated",
+   "evidence": "ディズニー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
    "gpsPrefCode": "12"
   },
@@ -5076,10 +5076,10 @@
    "prefCodes": [
     "12"
    ],
-   "method": "gps-over-tag",
-   "evidence": "アンバサダーホテルシーグランドニッコー東京ベイ舞浜 ⊃ 東京",
+   "method": "curated",
+   "evidence": "ディズニー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
    "gpsPrefCode": "12"
   },

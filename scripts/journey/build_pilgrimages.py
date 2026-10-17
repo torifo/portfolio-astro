@@ -109,7 +109,11 @@ def main():
         if p["date_precision"] == "day":
             by_day[p["date"]].append(p)
     trips = json.loads((JOURNEY / "trips.json").read_text(encoding="utf-8"))["trips"]
-    trip_sets = [{t["tag"], *t.get("spots", [])} for t in trips]
+    # 旅のタグの組と、期間つきの旅（window）なら期間。期間の外の同じタグの投稿は同じ旅に数えない
+    trip_sets = [({t["tag"], *t.get("spots", [])}, (t["start"], t["end"]) if t.get("window") else None) for t in trips]
+
+    def within(post, span):
+        return span is None or span[0] <= post["date"] <= span[1]
 
     def works_of(neighbors, post_id):
         return {i for q in neighbors if q["id"] != post_id for i in direct.get(q["id"], ())}
@@ -122,7 +126,10 @@ def main():
         found, scope = works_of(by_day.get(p["date"], []) if p["date_precision"] == "day" else [], p["id"]), "同じ日"
         if not found:
             tags = set(p["hashtags"])
-            mates = [q for q in posts if any(tags & ts and set(q["hashtags"]) & ts for ts in trip_sets)]
+            mates = [
+                q for q in posts
+                if any(tags & ts and within(p, span) and set(q["hashtags"]) & ts and within(q, span) for ts, span in trip_sets)
+            ]
             found, scope = works_of(mates, p["id"]), "同じ旅"
         if len(found) == 1:
             index = next(iter(found))

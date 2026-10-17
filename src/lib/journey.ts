@@ -55,6 +55,8 @@ export interface Trip {
   allPrefCodes: string[];
   spots: string[];
   hidden?: boolean;
+  /** 期間つきの旅。同じタグを別の時期にも付けているので、期間（start〜end）の中の投稿だけを入れる（build_trips.py） */
+  window?: boolean;
 }
 
 export interface Work {
@@ -128,7 +130,8 @@ export function postsForPrefecture(code: string): Post[] {
 
 export function postsForTrip(trip: Trip): Post[] {
   const tags = new Set([trip.tag, ...trip.spots]);
-  return posts.filter((p) => p.hashtags.some((t) => tags.has(t)));
+  const inWindow = (p: Post) => !trip.window || (p.date >= trip.start && p.date <= trip.end);
+  return posts.filter((p) => p.hashtags.some((t) => tags.has(t)) && inWindow(p));
 }
 
 export function postsForWork(work: Work): Post[] {
