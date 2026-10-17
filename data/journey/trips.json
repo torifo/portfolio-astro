@@ -24,12 +24,10 @@
    "end": "2025-09-01",
    "postCount": 11,
    "prefCodes": [
-    "12",
-    "13"
+    "12"
    ],
    "allPrefCodes": [
-    "12",
-    "13"
+    "12"
    ],
    "spots": []
   },
@@ -562,6 +560,22 @@
    "spots": [
     "きゅんパス"
    ]
+  },
+  {
+   "slug": "2023-09-chiba",
+   "tag": "東京ディズニーランド",
+   "title": "東京ディズニーランド",
+   "start": "2023-09-19",
+   "end": "2023-09-19",
+   "postCount": 5,
+   "prefCodes": [
+    "12"
+   ],
+   "allPrefCodes": [
+    "12"
+   ],
+   "spots": [],
+   "window": true
   },
   {
    "slug": "2023-09-kagawa",
