@@ -247,23 +247,23 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
       </a>
     </div>
 
-    <!-- 統計 -->
+    <!-- 統計。見出しは狭い画面で「都道府 / 県」のように語の途中で折れたので、<wbr> の所でだけ折り返す（break-keep） -->
     <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text-cyan mb-2">{visitedCount}</div>
-        <p class="text-gray-300 text-sm">訪問済み都道府県</p>
+        <p class="text-gray-300 text-sm break-keep">訪問済み<wbr />都道府県</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text mb-2">{totalCount - visitedCount}</div>
-        <p class="text-gray-300 text-sm">まだ見ぬ土地</p>
+        <p class="text-gray-300 text-sm break-keep">まだ見ぬ<wbr />土地</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text-cyan mb-2">{visitedRegionCount}</div>
-        <p class="text-gray-300 text-sm">訪問済み地方</p>
+        <p class="text-gray-300 text-sm break-keep">訪問済み<wbr />地方</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text mb-2">{postCount}</div>
-        <p class="text-gray-300 text-sm">記録した投稿</p>
+        <p class="text-gray-300 text-sm break-keep">記録した<wbr />投稿</p>
       </div>
     </div>
     <!-- 投稿は Instagram から毎日取り込む（journey-sync.yml）。タイルの中に入れると高さがそろわなかったので、統計の下に置く（本人の指示） -->
