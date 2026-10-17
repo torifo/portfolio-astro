@@ -49,14 +49,22 @@
    "prefCodes": [
     "12"
    ],
-   "method": "trip-inherit",
-   "evidence": "ディズニーリゾート"
+   "method": "date-line-place",
+   "evidence": "ディズニー",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
   },
   "18137187424642427": {
-   "prefCodes": null,
-   "method": null,
-   "evidence": null,
-   "tagPrefCodes": null,
+   "prefCodes": [
+    "12"
+   ],
+   "method": "date-line-place",
+   "evidence": "ディズニー",
+   "tagPrefCodes": [
+    "12"
+   ],
    "gpsPrefCode": null
   },
   "18119001424974546": {
@@ -127,12 +135,12 @@
   },
   "17873683086602179": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "date-line-place",
+   "evidence": "ディズニー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
    "gpsPrefCode": null
   },
@@ -140,17 +148,21 @@
    "prefCodes": [
     "12"
    ],
-   "method": "trip-inherit",
-   "evidence": "プーさん"
+   "method": "date-line-place",
+   "evidence": "ディズニー",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
   },
   "18077259665723780": {
    "prefCodes": [
-    "13"
+    "12"
    ],
-   "method": "pref-name-caption",
-   "evidence": "東京",
+   "method": "date-line-place",
+   "evidence": "ディズニー",
    "tagPrefCodes": [
-    "13"
+    "12"
    ],
    "gpsPrefCode": null
   },
