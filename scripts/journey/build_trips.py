@@ -16,6 +16,7 @@ import collections
 import datetime as dt
 import json
 import pathlib
+import re
 import statistics
 import sys
 
@@ -79,21 +80,61 @@ def dense_span(dates):
     return best[0], best[-1]
 
 
-def slugify(date, pref_slug, taken):
-    """2025-06-akita の形。同じ月・同じ県の旅が複数あれば連番を足す。"""
-    base = f"{date[:7]}-{pref_slug}"
-    slug, n = base, 2
+# 旅の URL 名は開始日（2025-08-31）。旅の日付は被らないので、これで一意になる（2026-10-18 本人の指示「可能な限り自動で」）。
+# 以前は「月＋投稿のいちばん多い県」（2025-08-chiba）で、ディズニーの旅が3件とも chiba になり、見分けがつかなかった
+DATE_SLUG = re.compile(r"(\d{4}-\d{2}-\d{2})(?:-\d+)?")
+
+
+def slugify(date, taken):
+    """2025-08-31 の形。同じ日に始まる旅が複数あれば連番を足す。"""
+    slug, n = date, 2
     while slug in taken:
-        slug, n = f"{base}-{n}", n + 1
+        slug, n = f"{date}-{n}", n + 1
     taken.add(slug)
     return slug
+
+
+def keep_slug(slug, start, covered):
+    """引き継いだ URL 名をそのまま使うか。
+
+    古い形（2025-08-chiba）は開始日の形に付け替える。開始日の形でも、前日の写真が後から投稿されて開始日が
+    早まったなどで今の開始日と違えば付け替える。ただし背景画像がある旅は付け替えない（画像は投稿が終わってから
+    入るので日付は固まっている。画像のファイル名まで付け替える仕組みは持たない）。
+    """
+    match = DATE_SLUG.fullmatch(slug or "")
+    return bool(match) and (match.group(1) == start or slug in covered)
+
+
+def write_redirects(path, moved, live):
+    """付け替えた URL 名の旧→新を書き足す。astro.config.mjs がここから旧 URL の転送ページを作る。
+
+    A→B→C は A→C にまとめ、今ある旅の名前と同じ旧名は消す（ページの方を生かす）。
+    """
+    document = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    redirects = {**document.get("redirects", {}), **moved}
+
+    def follow(slug):
+        seen = set()
+        while slug in redirects and slug not in seen:
+            seen.add(slug)
+            slug = redirects[slug]
+        return slug
+
+    redirects = {old: follow(old) for old in redirects if old not in live}
+    redirects = {old: new for old, new in redirects.items() if old != new}
+    document = {
+        "_": "旅の URL 名を付け替えたときの旧 → 新（scripts/journey/build_trips.py が書き足す）。"
+             "astro.config.mjs がここから /journey/trips/<旧>/ の転送ページを作る",
+        "redirects": dict(sorted(redirects.items())),
+    }
+    path.write_text(json.dumps(document, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=pathlib.Path, default=JOURNEY / "trips.json")
     parser.add_argument(
-        "--merge", action="store_true", help="既存 trips.json の手直し（title・除外）を保つ"
+        "--merge", action="store_true", help="既存 trips.json の slug・手直し（title・除外）を保つ"
     )
     args = parser.parse_args()
 
@@ -105,11 +146,8 @@ def main():
         if not resolved.get(p["id"], {}).get("hidden") and p["date_precision"] not in UNDATED
     ]
     posts_per_day = collections.Counter(p["date"] for p in posts)
-    pref_slug = {
-        p["code"]: p["slug"]
-        for region in json.loads((JOURNEY / "prefectures.json").read_text(encoding="utf-8"))["regions"]
-        for p in region["prefectures"]
-    }
+    covers_path = JOURNEY / "trip_covers.json"
+    covered = set(json.loads(covers_path.read_text(encoding="utf-8"))["covers"]) if covers_path.exists() else set()
     gaz = Gazetteer()
 
     by_tag = collections.defaultdict(list)
@@ -215,9 +253,11 @@ def main():
     ]
     candidates.sort(key=lambda c: c[0], reverse=True)
 
-    # 引き継いだ slug も先に押さえておかないと、新しい旅と衝突する。
-    taken = {t["slug"] for t in previous.values() if t.get("slug")}
-    trips, hidden_trips = [], []
+    # 引き継いだ slug も先に押さえておかないと、新しい旅と衝突する。今回の旅に無いタグ（付け直して消えた旅）の slug は空ける。
+    # 空けないと、タグを付け直した旅が同じ開始日なのに 2025-08-31-2 になる
+    live_tags = {c[2] for c in candidates}
+    taken = {t["slug"] for tag, t in previous.items() if t.get("slug") and (tag in live_tags or t.get("hidden"))}
+    trips, hidden_trips, moved = [], [], {}
     for start, end, tag, group, counts, spots in candidates:
         old = previous.get(tag, {})
         if old.get("hidden"):
@@ -226,9 +266,14 @@ def main():
             continue
         # 件数が多い順の県。1件しか無い県は立ち寄りなので主役から外す。
         main = [code for code, n in counts.most_common() if n > 1] or [counts.most_common(1)[0][0]]
+        slug = old.get("slug")
+        if not keep_slug(slug, start.isoformat(), covered):
+            slug, previous_slug = slugify(start.isoformat(), taken), slug
+            if previous_slug:
+                moved[previous_slug] = slug
         trips.append(
             {
-                "slug": old.get("slug") or slugify(start.isoformat(), pref_slug[main[0]], taken),
+                "slug": slug,
                 "tag": tag,
                 "title": old.get("title") or tag,
                 "start": start.isoformat(),
@@ -245,11 +290,14 @@ def main():
         json.dumps({"trips": trips + hidden_trips}, ensure_ascii=False, indent=1) + "\n",
         encoding="utf-8",
     )
-    covered = len({p["id"] for c in candidates for p in c[3]})
-    print(f"{args.out} に旅 {len(trips)} 件（投稿 {covered} 件をカバー）")
+    write_redirects(JOURNEY / "trip_redirects.json", moved, {t["slug"] for t in trips + hidden_trips})
+    covered_posts = len({p["id"] for c in candidates for p in c[3]})
+    print(f"{args.out} に旅 {len(trips)} 件（投稿 {covered_posts} 件をカバー）")
     for t in trips:
         mark = "（期間つき）" if t.get("window") else ""
         print(f"  {t['slug']:<22} {t['postCount']:3d}投稿  {t['start']}〜{t['end']}  {t['title'][:40]}{mark}")
+    for old, new in moved.items():
+        print(f"  URL 名を付け替えた: {old} → {new}")
 
 
 if __name__ == "__main__":
