@@ -108,10 +108,12 @@ def keep_slug(slug, start, covered):
 def write_redirects(path, moved, live):
     """付け替えた URL 名の旧→新を書き足す。astro.config.mjs がここから旧 URL の転送ページを作る。
 
-    A→B→C は A→C にまとめ、今ある旅の名前と同じ旧名は消す（ページの方を生かす）。
+    今ある旅の名前と同じ旧名を先に消し（ページの方を生かす）、残りの A→B→C を A→C にまとめる。
+    消す前にまとめると、開始日が戻った旅（09-09→09-08→09-09）で旧名の行き先が空の 09-08 になる。
+    行き先の旅が無くなった転送は消さずに残す（旅が戻れば生きる）。転送ページを作るかは astro.config.mjs が行き先を見て決める
     """
     document = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
-    redirects = {**document.get("redirects", {}), **moved}
+    redirects = {old: new for old, new in {**document.get("redirects", {}), **moved}.items() if old not in live}
 
     def follow(slug):
         seen = set()
@@ -120,7 +122,7 @@ def write_redirects(path, moved, live):
             slug = redirects[slug]
         return slug
 
-    redirects = {old: follow(old) for old in redirects if old not in live}
+    redirects = {old: follow(old) for old in redirects}
     redirects = {old: new for old, new in redirects.items() if old != new}
     document = {
         "_": "旅の URL 名を付け替えたときの旧 → 新（scripts/journey/build_trips.py が書き足す）。"
@@ -253,13 +255,26 @@ def main():
     ]
     candidates.sort(key=lambda c: c[0], reverse=True)
 
-    # 引き継いだ slug も先に押さえておかないと、新しい旅と衝突する。今回の旅に無いタグ（付け直して消えた旅）の slug は空ける。
-    # 空けないと、タグを付け直した旅が同じ開始日なのに 2025-08-31-2 になる
+    # 前回の旅を引き継ぐ。タグを付け直して消えた旅は、期間が重なる新しいタグの旅を同じ旅とみなして引き継がせる
+    # （旅の日付は被らないので、期間が重なればタグを付け直した同じ旅）。URL 名と、手で直した題名がそのまま残る
     live_tags = {c[2] for c in candidates}
-    taken = {t["slug"] for tag, t in previous.items() if t.get("slug") and (tag in live_tags or t.get("hidden"))}
+    released = [t for tag, t in previous.items() if tag not in live_tags and not t.get("hidden") and t.get("slug")]
+    plans = []
+    for candidate in candidates:
+        start, end, tag = candidate[0].isoformat(), candidate[1].isoformat(), candidate[2]
+        old = previous.get(tag)
+        if old is None:
+            old = next((t for t in released if t["start"] <= end and start <= t["end"]), None)
+            if old is not None:
+                released.remove(old)
+        old = old or {}
+        plans.append((candidate, old, not old.get("hidden") and keep_slug(old.get("slug"), start, covered)))
+    # 押さえるのは引き継ぐ名前と除外した旅の名前だけ。付け替えで空く名前や消えた旅の名前まで押さえると、
+    # その日に始まる旅が 2025-09-09-2 になる
+    taken = {old["slug"] for _, old, keep in plans if old.get("slug") and (keep or old.get("hidden"))}
+    taken |= {t["slug"] for t in previous.values() if t.get("hidden") and t.get("slug")}
     trips, hidden_trips, moved = [], [], {}
-    for start, end, tag, group, counts, spots in candidates:
-        old = previous.get(tag, {})
+    for (start, end, tag, group, counts, spots), old, keep in plans:
         if old.get("hidden"):
             # 除外の印は書き戻す。落とすと次の --merge で印ごと消えて旅が復活する。
             hidden_trips.append(old)
@@ -267,15 +282,16 @@ def main():
         # 件数が多い順の県。1件しか無い県は立ち寄りなので主役から外す。
         main = [code for code, n in counts.most_common() if n > 1] or [counts.most_common(1)[0][0]]
         slug = old.get("slug")
-        if not keep_slug(slug, start.isoformat(), covered):
-            slug, previous_slug = slugify(start.isoformat(), taken), slug
-            if previous_slug:
-                moved[previous_slug] = slug
+        if not keep:
+            slug = slugify(start.isoformat(), taken)
+            if old.get("slug"):
+                moved[old["slug"]] = slug
         trips.append(
             {
                 "slug": slug,
                 "tag": tag,
-                "title": old.get("title") or tag,
+                # 題名は手で直したものだけ引き継ぐ。タグのままの題名は今のタグにする（タグを付け直した旅に古いタグ名が残らないように）
+                "title": old["title"] if old.get("title") and old["title"] != old.get("tag") else tag,
                 "start": start.isoformat(),
                 "end": end.isoformat(),
                 "postCount": len(group),
@@ -290,7 +306,8 @@ def main():
         json.dumps({"trips": trips + hidden_trips}, ensure_ascii=False, indent=1) + "\n",
         encoding="utf-8",
     )
-    write_redirects(JOURNEY / "trip_redirects.json", moved, {t["slug"] for t in trips + hidden_trips})
+    # 転送の行き先になれるのは載せる旅だけ（除外した旅はページが無い）
+    write_redirects(args.out.parent / "trip_redirects.json", moved, {t["slug"] for t in trips})
     covered_posts = len({p["id"] for c in candidates for p in c[3]})
     print(f"{args.out} に旅 {len(trips)} 件（投稿 {covered_posts} 件をカバー）")
     for t in trips:

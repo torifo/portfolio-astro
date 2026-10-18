@@ -120,6 +120,14 @@ def main():
     trips = load(root, "data/journey/trips.json")["trips"]
     works = [w for w in load(root, "data/journey/pilgrimages.json")["works"] if w.get("postCount") and not w.get("hidden")]
     base_trips = {t["tag"]: t for t in load_base(root, args.base, "data/journey/trips.json")["trips"]}
+    # 旅の URL 名を付け替えたときの旧 → 新（build_trips.py が書く）。旧 URL は転送されるので、URL が消えたことにはしない
+    redirects_path = root / "data/journey/trip_redirects.json"
+    trip_redirects = load(root, "data/journey/trip_redirects.json")["redirects"] if redirects_path.exists() else {}
+    live_slugs = {t["slug"] for t in trips if not t.get("hidden")}
+
+    def url_kept(slug):
+        """その URL 名の旅のページが、そのままか転送で残るか（タグを付け直した旅・開始日がずれた旅）。"""
+        return slug in live_slugs or trip_redirects.get(slug) in live_slugs
     permalinks = load(root, "data/journey/permalinks.json")
     prefs = {p["code"]: p["name"] for p in load(root, "data/ontology/prefectures.json")}
     # 聖地巡礼に数えるのに、どの作品にも入らない投稿（pilgrimages.json の「作品名なし」）。
@@ -234,7 +242,10 @@ def main():
     # 旅が無くなる（その旅の URL が消える）なら、人が見るまでマージしない。報告の「無くなった旅」に出ていても、
     # 以前は判定に使っておらず、旅が消えたまま自動マージされた（#13）。載せない旅（hidden）は URL が無いので数えない
     now_tags = {t["tag"] for t in trips}
-    removed_trips = [old for tag, old in base_trips.items() if tag not in now_tags and not old.get("hidden")]
+    removed_trips = [
+        old for tag, old in base_trips.items()
+        if tag not in now_tags and not old.get("hidden") and not url_kept(old.get("slug"))
+    ]
     # 新着がすべて日付の後ろに書いた場所で決まり、要確認も無く、旅も消えなければ、人が見る点が無いのでマージまで進めてよい
     # 新着で同じ日・同じ旅に別の作品が入り、取り込み済みの投稿の作品が決められなくなる（作品名なしに戻る）なら、
     # その新着が日付の後ろの場所だけでも自動マージしない（2026-10-15 本人の指示「複数の作品が見つかったら自動マージしない」）
@@ -297,16 +308,28 @@ def main():
 
     trip_lines = []
     now = {t["tag"]: t for t in trips}
+    # タグを付け直した旅は、前回のタグの旅の URL 名（転送先を含む）を引き継いでいる
+    renamed = {
+        t["tag"]: old for t in now.values() if t["tag"] not in base_trips
+        for old in base_trips.values()
+        if old["tag"] not in now and old.get("slug") in (t["slug"], *[k for k, v in trip_redirects.items() if v == t["slug"]])
+    }
     for tag, t in now.items():
         old = base_trips.get(tag)
-        if old is None:
+        if tag in renamed:
+            trip_lines.append(f"- タグの付け直し：{renamed[tag]['title']} → **{t['title']}**（`{t['slug']}`）")
+            old = renamed[tag]
+        elif old is None:
             trip_lines.append(f"- 新規：**{t['title']}**（{trip_period(t)}・{t['postCount']}件・`{t['slug']}`）")
         elif old["postCount"] != t["postCount"] or (old["start"], old["end"]) != (t["start"], t["end"]):
             trip_lines.append(
                 f"- 更新：{t['title']}　{old['postCount']}件 → {t['postCount']}件（{trip_period(t)}）"
             )
+        if old is not None and old.get("slug") and old["slug"] != t["slug"]:
+            trip_lines.append(f"- URL 名の付け替え：{t['title']}　`{old['slug']}` → `{t['slug']}`（旧 URL は転送）")
+    renamed_from = {old["tag"] for old in renamed.values()}
     for tag, old in base_trips.items():
-        if tag not in now:
+        if tag not in now and tag not in renamed_from:
             trip_lines.append(f"- **無くなった旅**：{old['title']}（`{old['slug']}` の URL が消える）")
     if trip_lines:
         lines += ["## 旅の変化", ""] + trip_lines + [""]
