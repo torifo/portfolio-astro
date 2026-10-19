@@ -149,80 +149,110 @@ const section = (id: string) => (isTop ? `#${id}` : `/#${id}`);
 </header>
 
 <script>
-  // モバイルメニューの制御
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+  // ヘッダーのボタンの結線。ClientRouter のページ遷移ではヘッダーごと要素が差し替わり、このスクリプトは
+  // モジュールなので再実行されない。以前は最初の1回だけ結線していたため、サイト内で移動して戻ると
+  // ハンバーガーメニューやテーマ切り替えが押せなくなっていた（再読み込みで直る）。ThemeToggle.astro と同じく、
+  // 遷移のたび（astro:page-load）に繋ぎ直し、同じ要素に二重で付けないよう印を付ける。
+  function bindOnce(element: Element | null, key: string): element is HTMLElement {
+    if (!(element instanceof HTMLElement) || element.dataset[key]) return false;
+    element.dataset[key] = '1';
+    return true;
   }
 
-  // スムーズスクロール
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
-      const target = href ? document.querySelector(href) : null;
-      // 飛び先がそのページに無いなら、止めずにブラウザの遷移に任せる。
-      // 無条件に preventDefault していたため、リンクが丸ごと無反応になっていた。
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+  // テーマを選んだときの処理（スマホ用・タブレット用で共通）
+  function applySelectedTheme(selectedTheme: string | null, updateIcon: () => void): void {
+    if (selectedTheme === 'light') {
+      document.body.classList.remove('night-mode');
+      document.body.classList.add('light-mode');
+      updateIcon();
+    } else if (selectedTheme === 'dark') {
+      document.body.classList.remove('light-mode');
+      document.body.classList.add('night-mode');
+      updateIcon();
+    } else if (selectedTheme === 'auto') {
+      // デスクトップ版のテーマ機能を呼び出し
+      if ((window as any).setThemeBasedOnSunriseSunset) {
+        (window as any).setThemeBasedOnSunriseSunset();
+      }
+    }
+  }
+
+  // テーマのドロップダウン（スマホ用・タブレット用）を結線する
+  function bindThemeDropdown(variant: 'mobile' | 'tablet', updateIcon: () => void): void {
+    const toggle = document.getElementById(`themeToggleBtn-${variant}`);
+    const dropdown = document.querySelector(`.theme-dropdown-${variant}`);
+    if (dropdown && bindOnce(toggle, 'themeBound')) {
+      toggle.addEventListener('click', () => {
+        dropdown.classList.toggle('hidden');
       });
-      // モバイルメニューを閉じる
-      if (mobileMenu) {
-        mobileMenu.classList.add('hidden');
-      }
-    });
-  });
-
-  // モバイル用のテーマ切り替え機能
-  const themeToggleMobile = document.getElementById('themeToggleBtn-mobile');
-  const themeDropdownMobile = document.querySelector('.theme-dropdown-mobile');
-
-  if (themeToggleMobile && themeDropdownMobile) {
-    themeToggleMobile.addEventListener('click', () => {
-      themeDropdownMobile.classList.toggle('hidden');
-    });
-
-    // 外部クリックでメニューを閉じる
-    document.addEventListener('click', (e) => {
-      if (!themeToggleMobile.contains(e.target as Node) && !themeDropdownMobile.contains(e.target as Node)) {
-        themeDropdownMobile.classList.add('hidden');
-      }
+    }
+    document.querySelectorAll(`.theme-dropdown-${variant} button`).forEach((button) => {
+      if (!bindOnce(button, 'themeBound')) return;
+      button.addEventListener('click', (event) => {
+        applySelectedTheme((event.currentTarget as HTMLButtonElement).getAttribute('data-theme'), updateIcon);
+        // メニューを閉じる
+        document.querySelector(`.theme-dropdown-${variant}`)?.classList.add('hidden');
+      });
     });
   }
 
-  // モバイル用テーマドロップダウンメニューでテーマ選択
-  document.querySelectorAll('.theme-dropdown-mobile button').forEach(button => {
-    button.addEventListener('click', (event) => {
-      const selectedTheme = (event.currentTarget as HTMLButtonElement).getAttribute('data-theme');
+  // ページごとの結線
+  function setupHeader(): void {
+    // モバイルメニューの制御
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu && bindOnce(mobileMenuBtn, 'menuBound')) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
 
-      if (selectedTheme === 'light') {
-        document.body.classList.remove('night-mode');
-        document.body.classList.add('light-mode');
-        updateMobileThemeIcon();
-      } else if (selectedTheme === 'dark') {
-        document.body.classList.remove('light-mode');
-        document.body.classList.add('night-mode');
-        updateMobileThemeIcon();
-      } else if (selectedTheme === 'auto') {
-        // デスクトップ版のテーマ機能を呼び出し
-        if ((window as any).setThemeBasedOnSunriseSunset) {
-          (window as any).setThemeBasedOnSunriseSunset();
-        }
-      }
-
-      // メニューを閉じる
-      if (themeDropdownMobile) {
-        themeDropdownMobile.classList.add('hidden');
-      }
+    // スムーズスクロール
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      if (!bindOnce(anchor, 'scrollBound')) return;
+      anchor.addEventListener('click', function (e) {
+        const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+        const target = href ? document.querySelector(href) : null;
+        // 飛び先がそのページに無いなら、止めずにブラウザの遷移に任せる。
+        // 無条件に preventDefault していたため、リンクが丸ごと無反応になっていた。
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        // モバイルメニューを閉じる
+        document.getElementById('mobile-menu')?.classList.add('hidden');
+      });
     });
+
+    // モバイル用・タブレット用のテーマ切り替え
+    bindThemeDropdown('mobile', updateMobileThemeIcon);
+    bindThemeDropdown('tablet', updateTabletThemeIcon);
+
+    // 時計・日の出と日没・アイコンを、差し替わった要素にすぐ反映する
+    updateMobileCurrentTime();
+    updateMobileSunTimes();
+    updateTabletCurrentTime();
+    updateTabletSunTimes();
+    setTimeout(() => {
+      updateMobileThemeIcon();
+      updateTabletThemeIcon();
+    }, 200);
+  }
+
+  // 外部クリックでテーマのメニューを閉じる。document は遷移で差し替わらないので1度だけ登録し、
+  // そのときの要素を探す（遷移のたびに登録すると増えていく）
+  document.addEventListener('click', (e) => {
+    for (const variant of ['mobile', 'tablet']) {
+      const toggle = document.getElementById(`themeToggleBtn-${variant}`);
+      const dropdown = document.querySelector(`.theme-dropdown-${variant}`);
+      if (toggle && dropdown && !toggle.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
+        dropdown.classList.add('hidden');
+      }
+    }
   });
-  
+
   // モバイル用アイコンを更新する関数
   function updateMobileThemeIcon(): void {
     const sunIconMobile = document.getElementById('sunIcon-mobile');
@@ -309,73 +339,17 @@ const section = (id: string) => (isTop ? `#${id}` : `/#${id}`);
       }
     }
   }
-  
-  // タブレット用テーマ切り替えボタンの制御
-  const themeToggleTablet = document.getElementById('themeToggleBtn-tablet');
-  const themeDropdownTablet = document.querySelector('.theme-dropdown-tablet');
-  
-  if (themeToggleTablet && themeDropdownTablet) {
-    themeToggleTablet.addEventListener('click', () => {
-      themeDropdownTablet.classList.toggle('hidden');
-    });
-    
-    // 外部クリックでメニューを閉じる
-    document.addEventListener('click', (e) => {
-      if (!themeToggleTablet.contains(e.target as Node) && !themeDropdownTablet.contains(e.target as Node)) {
-        themeDropdownTablet.classList.add('hidden');
-      }
-    });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHeader, { once: true });
+  } else {
+    setupHeader();
   }
-  
-  // タブレット用テーマドロップダウンメニューでテーマ選択
-  document.querySelectorAll('.theme-dropdown-tablet button').forEach(button => {
-    button.addEventListener('click', (event) => {
-      const selectedTheme = (event.currentTarget as HTMLButtonElement).getAttribute('data-theme');
+  document.addEventListener('astro:page-load', setupHeader);
 
-      if (selectedTheme === 'light') {
-        document.body.classList.remove('night-mode');
-        document.body.classList.add('light-mode');
-        updateTabletThemeIcon();
-      } else if (selectedTheme === 'dark') {
-        document.body.classList.remove('light-mode');
-        document.body.classList.add('night-mode');
-        updateTabletThemeIcon();
-      } else if (selectedTheme === 'auto') {
-        // デスクトップ版のテーマ機能を呼び出し
-        if ((window as any).setThemeBasedOnSunriseSunset) {
-          (window as any).setThemeBasedOnSunriseSunset();
-        }
-      }
-
-      // メニューを閉じる
-      if (themeDropdownTablet) {
-        themeDropdownTablet.classList.add('hidden');
-      }
-    });
-  });
-
-  // モバイル機能の初期化
-  document.addEventListener('DOMContentLoaded', () => {
-    // モバイル用現在時刻の定期的な更新
-    updateMobileCurrentTime();
-    setInterval(updateMobileCurrentTime, 1000);
-    
-    // モバイル用日の出・日没時間の定期更新
-    updateMobileSunTimes();
-    setInterval(updateMobileSunTimes, 5000);
-    
-    // モバイル用アイコンの初期更新
-    setTimeout(updateMobileThemeIcon, 200);
-    
-    // タブレット用現在時刻の定期的な更新
-    updateTabletCurrentTime();
-    setInterval(updateTabletCurrentTime, 1000);
-    
-    // タブレット用日の出・日没時間の定期更新
-    updateTabletSunTimes();
-    setInterval(updateTabletSunTimes, 5000);
-    
-    // タブレット用アイコンの初期更新
-    setTimeout(updateTabletThemeIcon, 200);
-  });
+  // 時計と日の出・日没の定期更新は1度だけ仕掛ける（遷移のたびに増やさない）。毎回要素を探すので、遷移後も効く
+  setInterval(updateMobileCurrentTime, 1000);
+  setInterval(updateMobileSunTimes, 5000);
+  setInterval(updateTabletCurrentTime, 1000);
+  setInterval(updateTabletSunTimes, 5000);
 </script>
