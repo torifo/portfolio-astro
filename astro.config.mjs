@@ -23,6 +23,10 @@ export default defineConfig({
   // OGP の og:image は絶対URLでないとSNS側が解決できない。その基準として置く。
   site: 'https://portorifo.riumu.net',
 
+  // Astro 7 で既定が 'jsx'（行をまたぐ要素の間の空白を消す）に変わった。「hello world」が「helloworld」になるので、
+  // Astro 6 までと同じ HTML の空白の扱い（表示を変えない範囲で詰める）にしておく
+  compressHTML: true,
+
   redirects: Object.fromEntries(
     tripRedirects.map(([from, to]) => [`/journey/trips/${from}`, `/journey/trips/${to}/`])
   ),

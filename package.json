@@ -15,13 +15,17 @@
     "journey:islands": "python3 scripts/journey/build_islands.py"
   },
   "dependencies": {
-    "@astrojs/react": "^5.0.7",
-    "@tailwindcss/vite": "^4.1.11",
+    "@astrojs/react": "^7.1.0",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "astro": "^6.4.8",
+    "astro": "^7.4.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.11"
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "tailwindcss": "^4.3.3",
+    "unified": "^11.0.5"
   }
 }
