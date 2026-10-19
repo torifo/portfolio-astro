@@ -385,7 +385,7 @@
   // 初期テーマを即座に適用（フラッシュ防止）
   initializeTheme();
 
-  // ViewTransitions のページ遷移では <body> の class が新しいページのものに
+  // ClientRouter のページ遷移では <body> の class が新しいページのものに
   // 差し替わり、実行時に付けた light-mode / night-mode が消える。スクリプトは
   // モジュールなので再実行されず、テーマが初期状態に戻ってしまう。
   // 描画前の after-swap で付け直す。

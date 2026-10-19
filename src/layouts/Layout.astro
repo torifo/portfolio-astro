@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -39,7 +39,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="twitter:description" content={description} />
     
     <!-- View Transitions -->
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="text-white overflow-x-hidden">
     <main class="relative">
