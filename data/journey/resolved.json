@@ -12,6 +12,39 @@
    ],
    "gpsPrefCode": "42"
   },
+  "18096430556680457": {
+   "prefCodes": [
+    "01"
+   ],
+   "method": "date-line-place",
+   "evidence": "北海道",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": null
+  },
+  "18148464205562440": {
+   "prefCodes": [
+    "01"
+   ],
+   "method": "date-line-place",
+   "evidence": "北海道",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": null
+  },
+  "18110055521264003": {
+   "prefCodes": [
+    "01"
+   ],
+   "method": "date-line-place",
+   "evidence": "北海道",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": null
+  },
   "18181060897433640": {
    "prefCodes": [
     "01"
