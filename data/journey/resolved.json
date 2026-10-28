@@ -67,6 +67,17 @@
    ],
    "gpsPrefCode": null
   },
+  "18023228801939158": {
+   "prefCodes": [
+    "01"
+   ],
+   "method": "date-line-place",
+   "evidence": "北海道",
+   "tagPrefCodes": [
+    "01"
+   ],
+   "gpsPrefCode": null
+  },
   "17976879186150816": {
    "prefCodes": [
     "01"
