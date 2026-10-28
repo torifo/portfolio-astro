@@ -309,10 +309,11 @@
    ]
   },
   {
-   "slug": "untitled",
-   "title": "作品名なし",
-   "aliases": [],
-   "untitled": true,
+   "slug": "otonari-no-tenshi",
+   "title": "お隣の天使様にいつの間にか駄目人間にされていた件",
+   "aliases": [
+    "お隣の天使様"
+   ],
    "postCount": 1,
    "start": "2025-09-13",
    "end": "2025-09-13",
@@ -321,7 +322,8 @@
    ],
    "postIds": [
     "18023228801939158"
-   ]
+   ],
+   "hidden": true
   }
  ]
 }
