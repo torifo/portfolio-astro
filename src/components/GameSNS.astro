@@ -1,5 +1,6 @@
 ---
 // GameSNS.astro - ゲーム関連SNSセクション専用コンポーネント
+import { cmsImage } from '../lib/microcms';
 
 interface SNSItem {
   fieldId: string;
@@ -83,10 +84,12 @@ const getSNSConfig = (snsType: string) => {
               <div class={`w-16 h-16 bg-gradient-to-br ${config.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                 {sns.icon?.[0] ? (
                   <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-2">
-                    <img 
-                      src={sns.icon[0].url} 
+                    <img
+                      src={cmsImage(sns.icon[0].url, { w: 32, h: 32 })}
                       alt={config.name}
                       class="w-full h-full object-contain"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 ) : (

@@ -1,6 +1,6 @@
 ---
 // AboutSection.astro - 自己紹介セクション（microCMS連携）
-import { fetchProfile } from '../../lib/microcms';
+import { cmsImage, fetchProfile } from '../../lib/microcms';
 
 const profile = await fetchProfile();
 
@@ -77,9 +77,11 @@ const getTagBadgeColor = (tag: string) => {
           <div class="absolute inset-2 bg-gray-800 rounded-2xl overflow-hidden">
             {profile?.avatar ? (
               <img
-                src={profile.avatar.url}
+                src={cmsImage(profile.avatar.url, { w: 208 })}
                 alt={`${profile.name} avatar`}
                 class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             ) : (
               <img

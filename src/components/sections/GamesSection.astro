@@ -3,7 +3,7 @@
 
 import GameSNS from '../GameSNS.astro';
 // ゲームデータは data/microcms/games.json から読む（ビルドは microCMS を呼ばない）
-import { loadGames } from '../../lib/microcms';
+import { cmsImage, loadGames } from '../../lib/microcms';
 
 interface Game {
   id: string;
@@ -118,9 +118,11 @@ const allSNS = games.reduce((acc, game) => {
                   <div class="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-2xl flex items-center justify-center">
                     {gameIcon ? (
                       <img
-                        src={gameIcon.url}
+                        src={cmsImage(gameIcon.url, { w: 64, h: 64 })}
                         alt={`${game.title}アイコン`}
                         class="w-16 h-16 rounded-xl object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <span class="text-3xl">🎮</span>

@@ -108,6 +108,17 @@ export function loadGames<T>(): T[] {
   return ((gamesData as { contents?: T[] }).contents ?? []) as T[];
 }
 
+// microCMS の画像を表示の大きさに合わせて取る（画像 API で縮小して webp にする）。高精細の画面向けに表示の2倍、
+// 元より大きくはしない（fit=max）。以前は元の画像をそのまま読んでいて、56px のアイコンに 3000×2000 の PNG を
+// 使うなど、トップだけで約46MB を読んでいた（2026-10-29）。
+// SVG は変換しても同じものが返り、GIF は動きを保って webp にするとかえって大きくなることがあるので、どちらも元のまま
+export function cmsImage(url: string, size: { w: number; h?: number }): string {
+  if (/\.(svg|gif)$/i.test(new URL(url).pathname)) return url;
+  const params = new URLSearchParams({ w: String(size.w * 2), fit: 'max', fm: 'webp' });
+  if (size.h) params.set('h', String(size.h * 2));
+  return `${url}${url.includes('?') ? '&' : '?'}${params}`;
+}
+
 // opus.id + linkIndex から一意なslugを生成
 export function generateSlug(opusId: string, linkIndex: number): string {
   return `${opusId}-${linkIndex}`;

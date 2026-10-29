@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import DetailHeader from '../../components/DetailHeader.astro';
-import { fetchAllOpus, generateSlug } from '../../lib/microcms';
+import { cmsImage, fetchAllOpus, generateSlug } from '../../lib/microcms';
 import type { RelatedLink, Opus } from '../../lib/microcms';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -137,10 +137,11 @@ const getCategoryColor = (category: string) => {
               {link.thumbnail.map((thumb, idx) => (
                 <div class="rounded-xl overflow-hidden bg-gray-900 flex items-center justify-center">
                   <img
-                    src={thumb.url}
+                    src={cmsImage(thumb.url, { w: 800 })}
                     alt={`${link.service} - ${idx + 1}`}
                     class="w-full h-auto object-contain"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
               ))}
