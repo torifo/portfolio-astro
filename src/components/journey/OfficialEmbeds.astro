@@ -4,6 +4,7 @@
 // YouTube は最初はサムネだけを出し、押したら動画を読み込む（ページを重くしない。youtube-nocookie）。
 // 公式サイトのカードの画像は、サイトがリンク共有用に出している og:image を公式サイトから直接出す（SNS のリンクカードと同じ）。
 // 公式 X の埋め込みはやめた（ログイン状態やブラウザの追跡防止で出ないことが多く、更新の止まったアカウントもあった）。
+// シリーズが2件以上ある作品（俺ガイルの1期・続・完など）は、期ごとの PV を格子に並べ、公式サイトは期ごとのリンクにまとめる。
 import type { WorkLinks } from '../../lib/journey';
 
 interface Props {
@@ -12,11 +13,75 @@ interface Props {
 }
 
 const { title, links } = Astro.props;
-const { youtube, officialSite, site } = links;
+const { youtube, officialSite, site, series = [] } = links;
 const host = officialSite ? new URL(officialSite).host.replace(/^www\./, '') : '';
+const isSeries = series.length >= 2;
+const seriesVideos = series.filter((entry) => entry.youtube);
+
+// 期ごとの公式サイト。同じ URL は1つにまとめて名前をつなげる。期のサイトが1つも無ければ作品の公式サイトを出す
+const seriesSites: { url: string; labels: string[] }[] = [];
+for (const entry of series) {
+  if (!entry.officialSite) continue;
+  const same = seriesSites.find((link) => link.url === entry.officialSite);
+  if (same) same.labels.push(entry.label);
+  else seriesSites.push({ url: entry.officialSite, labels: [entry.label] });
+}
+if (!seriesSites.length && officialSite) seriesSites.push({ url: officialSite, labels: [site?.title ?? `${title} 公式サイト`] });
 ---
 
-{(youtube || officialSite) && (
+{isSeries && (
+  <section class="official-embeds mb-10" aria-labelledby="official-heading">
+    <h2 id="official-heading" class="text-sm font-semibold text-gray-400 mb-3">公式の映像</h2>
+    <ul class="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-4 md:gap-x-4 md:gap-y-5">
+      {seriesVideos.map((entry) => (
+        <li class="series-item">
+          <div class="yt-lite relative aspect-video overflow-hidden rounded-xl bg-black" data-yt={entry.youtube!.id}>
+            <button type="button" class="yt-play group absolute inset-0 w-full h-full" aria-label={`${title}（${entry.label}）の PV を再生（YouTube）`}>
+              <img
+                src={`https://i.ytimg.com/vi/${entry.youtube!.id}/hqdefault.jpg`}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+              <span class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent"></span>
+              <span class="yt-icon absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" aria-hidden="true">
+                <svg viewBox="0 0 68 48" width="48" height="34"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 12.9.1 24 .1 24s0 11.1 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35.1 67.9 24 67.9 24s0-11.1-1.4-16.3z" fill="#f00"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+              </span>
+            </button>
+          </div>
+          <p class="mt-2 text-sm text-gray-100 font-medium leading-snug">
+            {entry.label}<span class="ml-2 text-xs text-gray-400 font-normal">{entry.year}</span>
+          </p>
+          <p class="mt-0.5 text-xs text-gray-400 leading-snug truncate" title={`${entry.youtube!.title}（${entry.youtube!.channel}）`}>{entry.youtube!.channel}</p>
+        </li>
+      ))}
+    </ul>
+    {seriesSites.length > 0 && (
+      <>
+        <h3 class="text-sm font-semibold text-gray-400 mt-8 mb-3">公式サイト</h3>
+        <ul class="flex flex-wrap gap-2">
+          {seriesSites.map((link) => (
+            <li>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="site-chip group inline-flex items-center gap-1.5 rounded-full glass border border-violet-500/20 hover:border-violet-400/50 transition-colors px-3.5 py-1.5 text-sm text-gray-100"
+                title={link.url}
+              >
+                {link.labels.join('・')}
+                <svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true" class="text-violet-300 transition-transform group-hover:translate-x-0.5"><path d="M7 4h9v9M16 4 5 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+  </section>
+)}
+
+{!isSeries && (youtube || officialSite) && (
   <section class="official-embeds mb-10" aria-labelledby="official-heading">
     <h2 id="official-heading" class="text-sm font-semibold text-gray-400 mb-3">公式の映像・サイト</h2>
     <div class:list={['grid gap-4 items-start', { 'md:grid-cols-[3fr_2fr]': youtube && officialSite }]}>
@@ -75,18 +140,33 @@ const host = officialSite ? new URL(officialSite).host.replace(/^www\./, '') : '
 )}
 
 <script>
-  // YouTube：押したら iframe に差し替える
-  document.querySelectorAll<HTMLElement>('.yt-lite').forEach((box) => {
-    box.querySelector('.yt-play')?.addEventListener('click', () => {
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube-nocookie.com/embed/${box.dataset.yt}?autoplay=1&rel=0`;
-      iframe.title = 'YouTube';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-      iframe.allowFullscreen = true;
-      iframe.className = 'absolute inset-0 w-full h-full';
-      box.replaceChildren(iframe);
+  // YouTube：押したら iframe に差し替える。並べた PV は、その行いっぱいに広げてから読み込む。
+  // ClientRouter のページ遷移ではこのスクリプトが再実行されないので、遷移のたび（astro:page-load）に繋ぎ直す。
+  // 以前は最初の1回だけだったため、作品のページから別の作品のページへ移ると PV が押せなかった。同じ要素には二重に付けない。
+  function setupEmbeds(): void {
+    document.querySelectorAll<HTMLElement>('.yt-lite').forEach((box) => {
+      if (box.dataset.ytBound) return;
+      box.dataset.ytBound = '1';
+      box.querySelector('.yt-play')?.addEventListener('click', () => playIn(box));
     });
-  });
+  }
+
+  function playIn(box: HTMLElement): void {
+    const item = box.closest('.series-item');
+    if (item) {
+      item.classList.add('is-playing');
+      box.scrollIntoView({ block: 'nearest' });
+    }
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube-nocookie.com/embed/${box.dataset.yt}?autoplay=1&rel=0`;
+    iframe.title = 'YouTube';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.className = 'absolute inset-0 w-full h-full';
+    box.replaceChildren(iframe);
+  }
+
+  document.addEventListener('astro:page-load', setupEmbeds);
 </script>
 
 <style>
@@ -99,9 +179,14 @@ const host = officialSite ? new URL(officialSite).host.replace(/^www\./, '') : '
     transform: scale(1.08);
   }
   .yt-play:focus-visible,
-  .site-card:focus-visible {
+  .site-card:focus-visible,
+  .site-chip:focus-visible {
     outline: 2px solid rgb(196 181 253);
     outline-offset: 2px;
+  }
+  /* 押した PV は、その行いっぱいに広げて再生する */
+  .series-item.is-playing {
+    grid-column: 1 / -1;
   }
   @media (prefers-reduced-motion: reduce) {
     .yt-icon svg {

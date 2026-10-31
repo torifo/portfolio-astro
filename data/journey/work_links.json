@@ -1,5 +1,5 @@
 {
- "_": "聖地巡礼の作品の公式リンク（人が書く）。slug → youtube（公式 PV の id・題・チャンネル）・officialSite（公式サイト）・site（公式サイトのカード：題と、サイトがリンク共有用に出している og:image の URL。画像は公式サイトから直接出し、こちらに置かない）・x（公式 X。表示していない）。作品のページに埋め込む",
+ "_": "聖地巡礼の作品の公式リンク（人が書く）。slug → youtube（公式 PV の id・題・チャンネル）・officialSite（公式サイト）・site（公式サイトのカード：題と、サイトがリンク共有用に出している og:image の URL。画像は公式サイトから直接出し、こちらに置かない）・x（公式 X。表示していない）。作品のページに埋め込む。series はシリーズの各期（放送順。label・year・kind・youtube・officialSite）。TV は全期、TV 以外（劇場版・総集編・スピンオフ・OVA）は聖地巡礼のモデル地があるものだけ、実写は入れない。2件以上あると作品のページに期ごとの PV を並べる",
  "links": {
   "atri": {
    "youtube": {
@@ -31,7 +31,42 @@
    "site": {
     "title": "「劇場総集編ぼっち・ざ・ろっく！」公式サイト",
     "image": "https://bocchi.rocks/omnibus/assets/siteinfo/og_image_20241225.png"
-   }
+   },
+   "series": [
+    {
+     "label": "1期",
+     "year": 2022,
+     "kind": "tv",
+     "youtube": {
+      "id": "nomJbjuQXAY",
+      "title": "【第1弾PV】「ぼっち・ざ・ろっく！」2022年10月8日㈯より放送開始！",
+      "channel": "アニメ「ぼっち・ざ・ろっく！」公式チャンネル"
+     },
+     "officialSite": "https://bocchi.rocks/tv/"
+    },
+    {
+     "label": "劇場総集編 Re:",
+     "year": 2024,
+     "kind": "compilation",
+     "youtube": {
+      "id": "EKedY3tedTY",
+      "title": "「劇場総集編ぼっち・ざ・ろっく！」本予告｜前編Re:  6月7日(金)／ 後編Re:Re:  8月9日(金) 公開！",
+      "channel": "アニメ「ぼっち・ざ・ろっく！」公式チャンネル"
+     },
+     "officialSite": "https://bocchi.rocks/omnibus/"
+    },
+    {
+     "label": "劇場総集編 Re:Re:",
+     "year": 2024,
+     "kind": "compilation",
+     "youtube": {
+      "id": "duo1scb3dL0",
+      "title": "「劇場総集編ぼっち・ざ・ろっく！」新予告｜後編Re:Re: 8月9日(金) 公開！",
+      "channel": "アニメ「ぼっち・ざ・ろっく！」公式チャンネル"
+     },
+     "officialSite": "https://bocchi.rocks/omnibus/"
+    }
+   ]
   },
   "hyouka": {
    "youtube": {
@@ -46,7 +81,7 @@
    "officialSite": "https://www.kyotoanimation.co.jp/kotenbu/",
    "site": {
     "title": "TVアニメ「氷菓」京アニサイト | 京都アニメーション",
-    "image": "https://www.kyotoanimation.co.jp/kotenbu/social.jpg"
+    "image": "https://www.kyotoanimation.co.jp/kotenbu/img/social.jpg"
    }
   },
   "lovelive-sunshine": {
@@ -62,7 +97,64 @@
    "officialSite": "https://www.lovelive-anime.jp/uranohoshi/",
    "site": {
     "title": "ラブライブ！サンシャイン!! Official Web Site"
-   }
+   },
+   "series": [
+    {
+     "label": "1期",
+     "year": 2016,
+     "kind": "tv",
+     "youtube": {
+      "id": "Sbz9EeyUOIs",
+      "title": "【番宣PV】TVアニメ「ラブライブ！サンシャイン!!」番宣PV",
+      "channel": "Lantis Channel"
+     },
+     "officialSite": "https://www.lovelive-anime.jp/uranohoshi/"
+    },
+    {
+     "label": "2期",
+     "year": 2017,
+     "kind": "tv",
+     "youtube": {
+      "id": "gTl6HFQV6R0",
+      "title": "「ラブライブ！サンシャイン!!」TVアニメ2期 PV第3弾",
+      "channel": "Lantis Channel"
+     },
+     "officialSite": "https://www.lovelive-anime.jp/uranohoshi/"
+    },
+    {
+     "label": "劇場版",
+     "year": 2019,
+     "kind": "movie",
+     "youtube": {
+      "id": "1haB_uUpbUY",
+      "title": "「ラブライブ！サンシャイン!!The School Idol Movie Over the Rainbow」劇場本予告（90秒ver.）",
+      "channel": "(Love Live! series)ラブライブ！シリーズ公式チャンネル"
+     },
+     "officialSite": "https://www.lovelive-anime.jp/uranohoshi/sp_movie_story.php"
+    },
+    {
+     "label": "幻日のヨハネ",
+     "year": 2023,
+     "kind": "spinoff",
+     "youtube": {
+      "id": "4H2N5qcBUuQ",
+      "title": "【幻日のヨハネ】TVアニメ第2弾予告PV",
+      "channel": "(Love Live! series)ラブライブ！シリーズ公式チャンネル"
+     },
+     "officialSite": "https://www.yohane.net/"
+    },
+    {
+     "label": "幻日のヨハネ 劇場総集編",
+     "year": 2024,
+     "kind": "compilation",
+     "youtube": {
+      "id": "uNOo7eWH_e8",
+      "title": "『劇場総集編 幻日のヨハネ - SUNSHINE in the MIRROR -』PV",
+      "channel": "(Love Live! series)ラブライブ！シリーズ公式チャンネル"
+     },
+     "officialSite": "https://www.yohane.net/movie/"
+    }
+   ]
   },
   "lycoris-recoil": {
    "youtube": {
@@ -110,7 +202,42 @@
    "site": {
     "title": "TVアニメ「やはり俺の青春ラブコメはまちがっている。完」公式ホームページ｜TBSテレビ",
     "image": "https://www.tbs.co.jp/anime/oregairu/img/ogp.png"
-   }
+   },
+   "series": [
+    {
+     "label": "1期",
+     "year": 2013,
+     "kind": "tv",
+     "youtube": {
+      "id": "32oQi6mWhDg",
+      "title": "TVアニメ「やはり俺の青春ラブコメはまちがっている。」10周年記念PV",
+      "channel": "アニメ 音楽 2.5次元舞台 - マーベラス公式チャンネル"
+     },
+     "officialSite": "https://www.tbs.co.jp/anime/oregairu/1st/"
+    },
+    {
+     "label": "続",
+     "year": 2015,
+     "kind": "tv",
+     "youtube": {
+      "id": "b6cmXXm89cI",
+      "title": "「やはり俺の青春ラブコメはまちがっている。続」PV第1弾",
+      "channel": "アニメ 音楽 2.5次元舞台 - マーベラス公式チャンネル"
+     },
+     "officialSite": "https://www.tbs.co.jp/anime/oregairu/2nd/"
+    },
+    {
+     "label": "完",
+     "year": 2020,
+     "kind": "tv",
+     "youtube": {
+      "id": "ybQaaUETmfo",
+      "title": "「やはり俺の青春ラブコメはまちがっている。完」7月公開告知PV",
+      "channel": "アニメ 音楽 2.5次元舞台 - マーベラス公式チャンネル"
+     },
+     "officialSite": "https://www.tbs.co.jp/anime/oregairu/"
+    }
+   ]
   },
   "slow-loop": {
    "youtube": {
@@ -158,7 +285,53 @@
    "site": {
     "title": "劇場版『からかい上手の高木さん』公式サイト",
     "image": "https://takagi3.me/assets/og/ogp_movie2.jpg"
-   }
+   },
+   "series": [
+    {
+     "label": "1期",
+     "year": 2018,
+     "kind": "tv",
+     "youtube": {
+      "id": "KwUghPuqNAU",
+      "title": "TVアニメ『からかい上手の高木さん』PV第1弾",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://takagi3.me/1st/"
+    },
+    {
+     "label": "2期",
+     "year": 2019,
+     "kind": "tv",
+     "youtube": {
+      "id": "eKiYU9d03qc",
+      "title": "TVアニメ『からかい上手の高木さん２』PV第1弾",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://takagi3.me/2nd/"
+    },
+    {
+     "label": "3期",
+     "year": 2022,
+     "kind": "tv",
+     "youtube": {
+      "id": "VrLbU-vYUDQ",
+      "title": "TVアニメ『からかい上手の高木さん３』PV第1弾",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://takagi3.me/3rd/"
+    },
+    {
+     "label": "劇場版",
+     "year": 2022,
+     "kind": "movie",
+     "youtube": {
+      "id": "PesTvkh1nh4",
+      "title": "劇場版「からかい上手の高木さん」予告編｜6月10日（金）公開",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://takagi3.me/"
+    }
+   ]
   },
   "yama-no-susume": {
    "youtube": {
@@ -174,7 +347,64 @@
    "site": {
     "title": "テレビアニメ『ヤマノススメ Next Summit』公式サイト",
     "image": "https://yamanosusume-ns.com/core_sys/images/others/ogp.jpg"
-   }
+   },
+   "series": [
+    {
+     "label": "1期",
+     "year": 2013,
+     "kind": "tv",
+     "youtube": {
+      "id": "s2uVTxpKFQ0",
+      "title": "ＴＶアニメ「ヤマノススメ」ブルーレイCM～2013年5月24日発売!～",
+      "channel": "【公式】アース・スター エンターテイメント"
+     },
+     "officialSite": "https://yamanosusume.com/1st/"
+    },
+    {
+     "label": "セカンドシーズン",
+     "year": 2014,
+     "kind": "tv",
+     "youtube": {
+      "id": "m7SyiR2963Y",
+      "title": "ヤマノススメセカンドシーズン　PV第2弾",
+      "channel": "【公式】アース・スター エンターテイメント"
+     },
+     "officialSite": "https://yamanosusume.com/story/second.php"
+    },
+    {
+     "label": "おもいでプレゼント",
+     "year": 2017,
+     "kind": "ova",
+     "youtube": {
+      "id": "bu1-Gajd7Sw",
+      "title": "【公式】ヤマノススメ おもいでプレゼント予告編【10月28日イベント上映開始】",
+      "channel": "SMIRAL"
+     },
+     "officialSite": "https://yamanosusume.com/ova/"
+    },
+    {
+     "label": "サードシーズン",
+     "year": 2018,
+     "kind": "tv",
+     "youtube": {
+      "id": "N0IR7vF49iE",
+      "title": "『ヤマノススメ サードシーズン』PV第2弾【2018年7月放送開始】",
+      "channel": "SMIRAL"
+     },
+     "officialSite": "https://yamanosusume.com/"
+    },
+    {
+     "label": "Next Summit",
+     "year": 2022,
+     "kind": "tv",
+     "youtube": {
+      "id": "JjvPiWmr8mo",
+      "title": "テレビアニメ『ヤマノススメ Next Summit』　PV",
+      "channel": "KADOKAWAanime"
+     },
+     "officialSite": "https://yamanosusume-ns.com/"
+    }
+   ]
   },
   "yowamushi-pedal": {
    "youtube": {
@@ -190,7 +420,108 @@
    "site": {
     "title": "TVアニメ『弱虫ペダル LIMIT BREAK』 公式サイト",
     "image": "https://yowapeda.com/assets/img/common/fb.jpg"
-   }
+   },
+   "series": [
+    {
+     "label": "1期",
+     "year": 2013,
+     "kind": "tv",
+     "youtube": {
+      "id": "EV6pG5FB9qc",
+      "title": "TVアニメ『弱虫ペダル』PV│\"YOWAMUSHI PEDAL\"(2013) Trailer",
+      "channel": "TMSアニメ公式チャンネル"
+     },
+     "officialSite": "https://yowapeda.com/series/1st/"
+    },
+    {
+     "label": "Re:RIDE",
+     "year": 2014,
+     "kind": "compilation",
+     "youtube": {
+      "id": "iYUfp0qv1tA",
+      "title": "『弱虫ペダル Re:RIDE』予告編",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://yowapeda.com/reride/"
+    },
+    {
+     "label": "GRANDE ROAD",
+     "year": 2014,
+     "kind": "tv",
+     "youtube": {
+      "id": "JhdLGdVNPss",
+      "title": "『弱虫ペダル GRANDE ROAD』PV",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://yowapeda.com/series/2nd/"
+    },
+    {
+     "label": "Re:ROAD",
+     "year": 2015,
+     "kind": "compilation",
+     "youtube": {
+      "id": "T1WrXSQcnhQ",
+      "title": "6/12（金）劇場公開『弱虫ペダル Re:ROAD（リロード）』予告編",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://yowapeda.com/reroad/"
+    },
+    {
+     "label": "劇場版",
+     "year": 2015,
+     "kind": "movie",
+     "youtube": {
+      "id": "9gEDz62g_cM",
+      "title": "8/28（金）公開『劇場版 弱虫ペダル』本予告",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "http://yowapeda-movie.com/"
+    },
+    {
+     "label": "NEW GENERATION",
+     "year": 2017,
+     "kind": "tv",
+     "youtube": {
+      "id": "AMJBNzTZ4K8",
+      "title": "『弱虫ペダル NEW GENERATION』PV（TVアニメ第3期）2017年1月放送スタート！",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://yowapeda.com/series/3rd/"
+    },
+    {
+     "label": "Re:GENERATION",
+     "year": 2017,
+     "kind": "compilation",
+     "youtube": {
+      "id": "cKYw2FGcMc4",
+      "title": "10/13（金）劇場公開『弱虫ペダル Re:GENERATION』予告編（TVアニメ第4期2018年1月放送スタート）",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://yowapeda.com/regeneration/"
+    },
+    {
+     "label": "GLORY LINE",
+     "year": 2018,
+     "kind": "tv",
+     "youtube": {
+      "id": "XSTjKhvUpLo",
+      "title": "TVアニメ第4期『弱虫ペダル GLORY LINE』第1弾PV（2018年1月放送スタート）",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://yowapeda.com/series/4th/"
+    },
+    {
+     "label": "LIMIT BREAK",
+     "year": 2022,
+     "kind": "tv",
+     "youtube": {
+      "id": "KLdllQiQX58",
+      "title": "TVアニメ第5期『弱虫ペダル LIMIT BREAK』PV第1弾",
+      "channel": "TOHO animation チャンネル"
+     },
+     "officialSite": "https://yowapeda.com/"
+    }
+   ]
   },
   "yurucamp": {
    "youtube": {
@@ -206,7 +537,75 @@
    "site": {
     "title": "アニメ『ゆるキャン△』ポータルサイト",
     "image": "https://yurucamp.jp/camping/content/themes/ycp-v2/ogp_portal.jpg"
-   }
+   },
+   "series": [
+    {
+     "label": "1期",
+     "year": 2018,
+     "kind": "tv",
+     "youtube": {
+      "id": "vpH42sJ8t9c",
+      "title": "TVアニメ「ゆるキャン△」予告編第二弾映像",
+      "channel": "FURYU Pictures Channel"
+     },
+     "officialSite": "https://yurucamp.jp/first/"
+    },
+    {
+     "label": "へやキャン△",
+     "year": 2020,
+     "kind": "spinoff",
+     "youtube": {
+      "id": "s3C66twy5Mw",
+      "title": "【特報】ショートアニメ「へやキャン△」【2020年1月放送開始！】",
+      "channel": "FURYU Pictures Channel"
+     },
+     "officialSite": "https://yurucamp.jp/heyacamp/"
+    },
+    {
+     "label": "へやキャン△ SP",
+     "year": 2020,
+     "kind": "ova",
+     "youtube": {
+      "id": "m2phYLQ5zqU",
+      "title": "「サウナとごはんと三輪バイク」予告編",
+      "channel": "FURYU Pictures Channel"
+     },
+     "officialSite": "https://yurucamp.jp/heyacamp/"
+    },
+    {
+     "label": "SEASON2",
+     "year": 2021,
+     "kind": "tv",
+     "youtube": {
+      "id": "sPDfHlGXeyo",
+      "title": "TVアニメ『ゆるキャン△ SEASON２』本予告 │ 2021.1 ONAIR",
+      "channel": "FURYU Pictures Channel"
+     },
+     "officialSite": "https://yurucamp.jp/second/"
+    },
+    {
+     "label": "映画",
+     "year": 2022,
+     "kind": "movie",
+     "youtube": {
+      "id": "DROz9ATilaw",
+      "title": "映画『ゆるキャン△』本予告│ 2022.7.1 ROADSHOW",
+      "channel": "FURYU Pictures Channel"
+     },
+     "officialSite": "https://yurucamp.jp/cinema/"
+    },
+    {
+     "label": "SEASON3",
+     "year": 2024,
+     "kind": "tv",
+     "youtube": {
+      "id": "fx5tfPNvubo",
+      "title": "TVアニメ『ゆるキャン△ SEASON３』予告篇│04.04 ONAIR",
+      "channel": "FURYU Pictures Channel"
+     },
+     "officialSite": "https://yurucamp.jp/third/"
+    }
+   ]
   },
   "zatsutabi": {
    "youtube": {

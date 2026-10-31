@@ -338,6 +338,19 @@ export interface WorkLinks {
   officialSite?: string;
   /** 公式サイトのカード。image はサイトの og:image（公式サイトから直接出す） */
   site?: { title: string; image?: string };
+  /** シリーズの各期（放送順）。2件以上あると、作品のページに期ごとの PV と公式サイトを並べる */
+  series?: SeriesEntry[];
+}
+
+/** シリーズの1件。TV は全期、TV 以外は聖地巡礼のモデル地があるものだけ。実写は入れない */
+export interface SeriesEntry {
+  /** 期を見分ける短い名前（1期・続・完・SEASON2・劇場版 など） */
+  label: string;
+  year: number;
+  kind: 'tv' | 'movie' | 'compilation' | 'spinoff' | 'ova' | 'web';
+  youtube?: { id: string; title: string; channel: string };
+  /** その期の内容を今も出している公式サイトだけ */
+  officialSite?: string;
 }
 
 const workLinks = (workLinkData as { links: Record<string, WorkLinks> }).links;
