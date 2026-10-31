@@ -25,7 +25,8 @@ const silhouetteByRegion: Record<string, { viewBox: string; d: string }> = silho
 const allPrefectures = regions.flatMap((region) => region.prefectures);
 const visitedCount = allPrefectures.filter((p) => p.visited).length;
 const totalCount = allPrefectures.length;
-const visitedRegionCount = regions.filter((r) => r.prefectures.some((p) => p.visited)).length;
+// 「訪問済み地方」は、地方の都道府県を全部訪れた（制覇した）地方の数（本人の指示。1県でも行けば数えていたのをやめた）
+const visitedRegionCount = regions.filter((r) => r.prefectures.every((p) => p.visited)).length;
 const postCount = posts.length;
 const tripPostCount = trips.reduce((sum, trip) => sum + trip.postCount, 0);
 const workPostCount = works.reduce((sum, work) => sum + work.postCount, 0);
