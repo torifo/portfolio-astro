@@ -340,145 +340,17 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
 </style>
 
 <script>
-  // 旅の帯。同じ並びを2周ぶん置き、端に近づいたら1周ぶん位置を戻して、途切れずにつながって見せる。
-  // ふだんは時間で少しずつ左へ流す（中身が左へ動き、新しい順の続きの古い旅が右から出てくる。右へ流すと逆に感じた）。カーソルを乗せている間・触った直後・画面の外にある間は止め、
-  // 止めるボタンで止めたままにもできる。「動きを減らす」の設定の人には流さない。
-  const SPEED = 36; // 1秒に動かす px（24 から本人の指示で1.5倍に）
-  const RESUME_DELAY = 2500; // 手で動かしたあと、流れを戻すまでの ms
+  // 旅の帯。動きは聖地巡礼の作品ページの「公式の映像」と共通（src/lib/reel.ts）。いちばん新しい旅から始める
+  import { setupReel } from '../../lib/reel';
 
   const setup = () => {
     const reel = document.querySelector<HTMLElement>('[data-trip-reel]');
-    if (!reel || reel.dataset.ready) return;
-    const sets = reel.querySelectorAll<HTMLElement>('[data-reel-set]');
-    if (sets.length < 2) return;
-    reel.dataset.ready = '1';
-
-    const toggle = document.querySelector<HTMLButtonElement>('.trip-reel-toggle');
-    const steps = document.querySelectorAll<HTMLButtonElement>('.trip-reel-step');
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    // 1周の長さ（2周目の先頭 - 1周目の先頭。間の余白を含む）
-    const period = () => sets[1].offsetLeft - sets[0].offsetLeft;
-    const inset = () => sets[0].offsetLeft;
-    // 1周の4分の1より左、または1と4分の1周より右へ出たら、1周ぶん戻す。見えている絵は同じなので気づかれない
-    const wrap = (value: number) => {
-      const p = period();
-      if (p <= 0) return value;
-      if (value < p * 0.25) return value + p;
-      if (value >= p * 1.25) return value - p;
-      return value;
-    };
-
-    // 2周目（読み上げの対象のほう）の先頭、いちばん新しい旅から始める
-    let pos = sets[1].offsetLeft - inset();
-    let target: number | null = null;
-    let last = 0;
-    let visible = true;
-    let hovering = false;
-    let holdUntil = 0;
-    let stopped = reduce.matches;
-    reel.scrollLeft = pos;
-
-    const render = () => {
-      if (!toggle) return;
-      toggle.setAttribute('aria-label', stopped ? '流れを再開する' : '流れを止める');
-      toggle.querySelector('.reel-icon-pause')?.classList.toggle('hidden', stopped);
-      toggle.querySelector('.reel-icon-play')?.classList.toggle('hidden', !stopped);
-    };
-    render();
-
-    const tick = (now: number) => {
-      if (!reel.isConnected) return; // ページを移ったら止める
-      const dt = last ? Math.min(now - last, 100) : 0;
-      last = now;
-      if (target !== null) {
-        // 前後のボタンで1枚ぶん送るときは、目標へなめらかに寄せる
-        const before = pos;
-        pos += (target - pos) * Math.min(1, dt / 120);
-        if (Math.abs(target - pos) < 0.5) {
-          pos = target;
-          target = null;
-        }
-        const wrapped = wrap(pos);
-        if (target !== null) target += wrapped - pos;
-        pos = wrapped;
-        if (pos !== before) reel.scrollLeft = pos;
-      } else if (!stopped && visible && !hovering && now >= holdUntil) {
-        pos = wrap(pos + (SPEED * dt) / 1000);
-        reel.scrollLeft = pos;
-      }
-      requestAnimationFrame(tick);
-    };
-
-    // 手で動かしたら、その位置を引き継ぐ（流している間の差は1px未満なので、2px を超えたら手で動かしたとみなす）
-    reel.addEventListener(
-      'scroll',
-      () => {
-        if (target !== null || Math.abs(reel.scrollLeft - pos) <= 2) return;
-        pos = reel.scrollLeft;
-        const wrapped = wrap(pos);
-        if (wrapped !== pos) {
-          pos = wrapped;
-          reel.scrollLeft = pos;
-        }
-      },
-      { passive: true },
-    );
-    const hold = () => {
-      holdUntil = performance.now() + RESUME_DELAY;
-    };
-    reel.addEventListener('pointerenter', (event) => {
-      if (event.pointerType === 'mouse') hovering = true;
+    if (!reel) return;
+    setupReel(reel, {
+      toggle: document.querySelector<HTMLButtonElement>('.trip-reel-toggle'),
+      steps: document.querySelectorAll<HTMLButtonElement>('.trip-reel-step'),
+      card: '.trip-card',
     });
-    // マウスで乗せたカードにだけ印を付ける（CSS で 10px 浮かせる）。指で触ったときは付けない
-    reel.addEventListener('pointerover', (event) => {
-      if (event.pointerType !== 'mouse') return;
-      (event.target as Element).closest('.trip-card')?.setAttribute('data-mouse-hover', '');
-    });
-    reel.addEventListener('pointerout', (event) => {
-      const card = (event.target as Element).closest('.trip-card');
-      if (card && !card.contains(event.relatedTarget as Node | null)) card.removeAttribute('data-mouse-hover');
-    });
-    reel.addEventListener('pointerleave', () => {
-      hovering = false;
-    });
-    reel.addEventListener('pointerdown', hold);
-    reel.addEventListener('touchmove', hold, { passive: true });
-    reel.addEventListener('wheel', hold, { passive: true });
-    reel.addEventListener('focusin', () => {
-      hovering = true;
-    });
-    reel.addEventListener('focusout', () => {
-      hovering = false;
-    });
-    new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-    }).observe(reel);
-
-    toggle?.addEventListener('click', () => {
-      stopped = !stopped;
-      render();
-    });
-    reduce.addEventListener('change', () => {
-      stopped = reduce.matches;
-      render();
-    });
-    steps.forEach((button) => {
-      button.addEventListener('click', () => {
-        const card = sets[1].firstElementChild as HTMLElement | null;
-        const step = (card?.offsetWidth ?? 300) + 16;
-        const base = target ?? pos;
-        hold();
-        if (reduce.matches) {
-          pos = wrap(base + step * Number(button.dataset.step));
-          reel.scrollLeft = pos;
-        } else {
-          target = base + step * Number(button.dataset.step);
-        }
-      });
-    });
-
-    requestAnimationFrame(tick);
   };
 
   setup();
