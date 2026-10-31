@@ -10,6 +10,8 @@ import {
   tripsForPrefecture,
   worksForPrefecture,
   themesForPrefecture,
+  areasForPrefecture,
+  highlightTags,
   hasYear,
   type Prefecture,
 } from '../../lib/journey';
@@ -30,9 +32,11 @@ const trips = tripsForPrefecture(prefecture.code);
 const works = worksForPrefecture(prefecture.code);
 const themes = themesForPrefecture(prefecture.code);
 
-// 料理・食べ物のタグは県のハイライトとして拾う。地名ではないので判定には使っていない。
-const FOOD = /(グルメ|ラーメン|そば|うどん|寿司|鮨|丼|定食|カフェ|スイーツ|ソフトクリーム|プリン|団子|餅|酒|ビール|弁当)/;
-const foodTags = [...new Set(posts.flatMap((post) => post.hashtags).filter((tag) => FOOD.test(tag)))].slice(0, 12);
+// 見出しの下：投稿に書いたエリア（北海道(旭川) など）。無い県は手書きの note
+const areas = areasForPrefecture(prefecture, posts);
+const subtitle = areas.length > 0 ? areas.join('・') : prefecture.note;
+// ハイライト：この県の投稿でよく付けたタグ（以前の「この県で食べたもの」は「ネカフェ」がカフェに当たった）
+const highlights = highlightTags(posts);
 
 const years = [...new Set(posts.filter(hasYear).map((post) => post.date.slice(0, 4)))].sort();
 const yearLabel =
@@ -41,7 +45,7 @@ const yearLabel =
 
 <Layout
   title={`${prefecture.name}の記録 - Toriforium Portfolio`}
-  description={`${prefecture.name}で撮った写真${posts.length}件。${prefecture.note ?? ''}`}
+  description={`${prefecture.name}で撮った写真${posts.length}件。${subtitle ?? ''}`}
 >
   <DetailHeader title={prefecture.name} backHref="/#journey" backLabel="旅の記録に戻る" />
 
@@ -49,7 +53,16 @@ const yearLabel =
     <div class="container mx-auto px-6 max-w-5xl">
       <div class="text-center mb-10">
         <h1 class="text-3xl md:text-4xl font-bold gradient-text mb-3">{prefecture.name}</h1>
-        {prefecture.note && <p class="text-gray-400 mb-3">{prefecture.note}</p>}
+        {areas.length > 0 ? (
+          // エリアは「・」の後でだけ折り返す（「すす / きの」と語の途中で切れないように）
+          <p class="text-gray-400 mb-3 break-keep">
+            {areas.map((area, i) => (
+              <>{i > 0 && <>・<wbr /></>}{area}</>
+            ))}
+          </p>
+        ) : (
+          prefecture.note && <p class="text-gray-400 mb-3">{prefecture.note}</p>
+        )}
         <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-400">
           <span class="px-3 py-1 glass rounded-full">投稿{posts.length}件</span>
           {yearLabel && <span class="px-3 py-1 glass rounded-full">{yearLabel}</span>}
@@ -57,12 +70,14 @@ const yearLabel =
         </div>
       </div>
 
-      {foodTags.length > 0 && (
+      {highlights.length > 0 && (
         <section class="mb-10">
-          <h2 class="text-lg font-semibold text-white mb-3">この県で食べたもの</h2>
+          <h2 class="text-lg font-semibold text-white mb-3">ハイライト</h2>
           <div class="flex flex-wrap gap-2">
-            {foodTags.map((tag) => (
-              <span class="px-3 py-1 rounded-full bg-amber-500/15 text-amber-200 text-xs">#{tag}</span>
+            {highlights.map(({ tag, count }) => (
+              <span class="px-3 py-1 rounded-full bg-amber-500/15 text-amber-200 text-xs">
+                #{tag}<span class="ml-1.5 opacity-60">{count}</span>
+              </span>
             ))}
           </div>
         </section>

@@ -170,6 +170,53 @@ export function worksForPrefecture(code: string): Work[] {
   return works.filter((w) => w.prefCodes.includes(code));
 }
 
+const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * 県のページの見出しの下に出すエリア。投稿の1行目（日付の行）に「北海道(旭川)」のように書いたエリアを、多い順に並べる
+ * （2026-10-31 本人「北海道（エリア）で書いてるものがあるからエリアを書けばいい」）。エリアを書いた投稿が無い県は空で、
+ * ページは手で書いた note を出す（過去の投稿にエリアは足さない）。
+ */
+export function areasForPrefecture(prefecture: Prefecture, list: Post[]): string[] {
+  const names = [...new Set([prefecture.name, prefecture.shortName])].map(escapeRegExp).join('|');
+  const pattern = new RegExp(`(?:${names})[（(]([^）)]+)[）)]`, 'g');
+  const counts = new Map<string, number>();
+  for (const post of list) {
+    const first = post.caption.split('\n')[0];
+    if (!/^\d{4}-\d{2}-\d{2}/.test(first)) continue;
+    for (const match of first.matchAll(pattern)) {
+      for (const area of match[1].split(/[・、,，/]/).map((a) => a.trim()).filter(Boolean)) {
+        counts.set(area, (counts.get(area) ?? 0) + 1);
+      }
+    }
+  }
+  return [...counts].sort((a, b) => b[1] - a[1]).map(([area]) => area);
+}
+
+// ハイライトに出さないタグ：旅の名前（長い一文）、都道府県の名前、伏せた作品（hidden）の名前
+const NOT_HIGHLIGHT = new Set<string>([
+  ...(tripData.trips as Trip[]).flatMap((t) => [t.tag, t.title]),
+  ...prefectures.flatMap((p) => [p.name, p.shortName]),
+  ...(pilgrimageData.works as Work[]).filter((w) => w.hidden).flatMap((w) => [w.title, ...(w.aliases ?? [])]),
+]);
+
+/**
+ * 県のハイライト。その県の投稿でよく付けたタグを、多い順に件数つきで出す（2回以上・最大 limit 個）。
+ * 以前は料理の言葉（カフェ・丼など）で「この県で食べたもの」を拾っていて、「ネカフェ」がカフェに当たった
+ * （2026-10-31 本人「ハイライトとかタグ数で出すなら良さそう」）。
+ */
+export function highlightTags(list: Post[], limit = 10): { tag: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const post of list) {
+    for (const tag of new Set(post.hashtags)) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  }
+  return [...counts]
+    .filter(([tag, count]) => count >= 2 && !NOT_HIGHLIGHT.has(tag))
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([tag, count]) => ({ tag, count }));
+}
+
 export const INSTAGRAM_HANDLE = 'a_traveler_who_pursue_nature';
 export const INSTAGRAM_PROFILE = `https://www.instagram.com/${INSTAGRAM_HANDLE}/`;
 
