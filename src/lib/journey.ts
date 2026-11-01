@@ -351,7 +351,7 @@ export interface SeriesEntry {
   youtube?: { id: string; title: string; channel: string };
   /** その期の内容を今も出している公式サイトだけ */
   officialSite?: string;
-  /** 公式サイトがリンク共有用に出している横長の画像（og:image）。小さなロゴ・ほかの期と同じ画像しか無いときは書かない */
+  /** 公式サイトのサムネ。サイトがリンク共有用に出している横長の画像（og:image）。小さなロゴ・ほかの期と同じ画像しか無いサイトは、その期の公式 PV のコマ（i.ytimg.com の sd1〜3 から選ぶ） */
   siteImage?: string;
 }
 

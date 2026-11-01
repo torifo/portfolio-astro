@@ -21,7 +21,7 @@ const isSeries = series.length >= 2;
 const seriesVideos = series.filter((entry) => entry.youtube);
 
 // 期ごとの公式サイト。同じ URL は1つにまとめて名前をつなげる。期のサイトが1つも無ければ作品の公式サイトを出す。
-// 画像はサイトがリンク共有用に出している横長の画像（siteImage）。無い期は名前を大きく書いたカードにする
+// 画像は siteImage（サイトの横長の共有用画像か、その期の PV のコマ）。無いときだけ名前を大きく書いたカードにする
 const seriesSites: { url: string; labels: string[]; image?: string }[] = [];
 for (const entry of series) {
   if (!entry.officialSite) continue;
