@@ -1,0 +1,130 @@
+---
+// ReelStrip.astro - 聖地巡礼の作品ページの「公式の映像」「公式サイト」の並び。全部が横に収まれば並べるだけ、収まらなければ流れる帯（src/lib/reel.ts）。
+// カードの中身は呼ぶ側が関数で渡す：{(index, reachable) => ...}。reachable が false のカード（帯のための複製）はタブ移動から外すこと
+interface Props {
+  /** data-strip の名前（ページの中で重ならないもの） */
+  name: string;
+  heading: string;
+  headingId?: string;
+  level?: 2 | 3;
+  count: number;
+  /** ボタンの読み上げ（「前の映像へ」の「映像」） */
+  noun: string;
+}
+
+const { name, heading, headingId, level = 2, count, noun } = Astro.props;
+const Heading = level === 2 ? 'h2' : 'h3';
+
+// 帯の1周。少ないと1周が画面幅より短く、つなぎ目で途切れるので、6枚以上になるまで繰り返す（読み上げとタブ移動は最初の1回だけ）
+const MIN_PER_ROUND = 6;
+const repeats = Math.max(1, Math.ceil(MIN_PER_ROUND / Math.max(1, count)));
+const sets = await Promise.all(
+  [0, 1].map((copy) =>
+    Promise.all(
+      Array.from({ length: repeats * count }, async (_, k) => {
+        const first = k < count;
+        return { first, html: await Astro.slots.render('default', [k % count, copy === 1 && first]) };
+      }),
+    ),
+  ),
+);
+
+// 全部が横に収まる幅（1枚 220px 以上）なら流さずに並べるだけ（本人の指示）。境目は枚数で変わるので、ここで幅を出してコンテナクエリにする
+const CARD_MIN = 220;
+const GAP = 16;
+const root = `.reel-strip[data-strip="${name}"]`;
+const staticCss = `@container (min-width: ${count * CARD_MIN + (count - 1) * GAP}px) {
+  ${root} .reel { overflow: visible; margin-inline: 0; -webkit-mask-image: none; mask-image: none; }
+  ${root} .reel-track { width: auto; padding-inline: 0; }
+  ${root} [data-reel-set="0"], ${root} .reel-repeat, ${root} .reel-controls { display: none; }
+  ${root} [data-reel-set="1"] { display: grid; grid-template-columns: repeat(${count}, minmax(0, 1fr)); width: 100%; }
+  ${root} .reel-card { width: auto; max-width: none; }
+}`;
+---
+
+<div class="reel-strip" data-strip={name}>
+  <Fragment set:html={`<style>${staticCss}</style>`} />
+  <div class="flex items-center justify-between gap-4 mb-3">
+    <Heading id={headingId} class="text-sm font-semibold text-gray-400">{heading}</Heading>
+    <div class="reel-controls flex items-center gap-2 shrink-0">
+      <button type="button" class="reel-step glass rounded-full w-8 h-8 hidden sm:flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" data-step="-1" aria-label={`前の${noun}へ`}>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+      </button>
+      <button type="button" class="reel-toggle glass rounded-full w-8 h-8 flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" aria-label="流れを止める">
+        <svg class="reel-icon-pause w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" /></svg>
+        <svg class="reel-icon-play w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+      </button>
+      <button type="button" class="reel-step glass rounded-full w-8 h-8 hidden sm:flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" data-step="1" aria-label={`次の${noun}へ`}>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+      </button>
+    </div>
+  </div>
+  <slot name="stage" />
+  <div class="reel -mx-6 overflow-x-auto" data-reel role="region" aria-label={`${heading}（横にスクロールできます）`} data-label={heading}>
+    <div class="reel-track flex w-max gap-4 px-6">
+      {sets.map((items, copy) => (
+        <div class="flex gap-4" data-reel-set={copy} aria-hidden={copy === 0 ? 'true' : undefined}>
+          {items.map(({ first, html }) => (
+            <div
+              class:list={['reel-card w-[70vw] max-w-[300px] sm:w-[280px] shrink-0', { 'reel-repeat': !first }]}
+              aria-hidden={copy === 1 && !first ? 'true' : undefined}
+              set:html={html}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  // ClientRouter の遷移ではこのスクリプトが再実行されないので、遷移のたびに繋ぐ（setupReel は同じ帯に二重には付けない）
+  import { setupReel } from '../../lib/reel';
+
+  function setupStrips(): void {
+    document.querySelectorAll<HTMLElement>('.reel-strip').forEach((strip) => {
+      const reel = strip.querySelector<HTMLElement>('[data-reel]');
+      if (!reel) return;
+      setupReel(reel, {
+        toggle: strip.querySelector<HTMLButtonElement>('.reel-toggle'),
+        steps: strip.querySelectorAll<HTMLButtonElement>('.reel-step'),
+        card: '.reel-card',
+        onStill: (still) => reel.setAttribute('aria-label', still ? reel.dataset.label! : `${reel.dataset.label}（横にスクロールできます）`),
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupStrips);
+</script>
+
+<style>
+  /* 収まるかどうかを、この並びの幅で決める（上の staticCss のコンテナクエリ） */
+  .reel-strip {
+    container-type: inline-size;
+  }
+  /* 帯。トップの旅の帯と同じく、左右の端を淡くして続きがあることを見せ、スクロールバーは出さない */
+  .reel {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    scrollbar-width: none;
+    scroll-behavior: auto; /* global.css の smooth が効くと毎フレームの位置合わせで流れない */
+  }
+  .reel::-webkit-scrollbar {
+    display: none;
+  }
+  .reel-track {
+    padding-top: 0.75rem;
+    padding-bottom: 1rem;
+  }
+  .reel-card {
+    transition: transform 300ms ease-out;
+  }
+  .reel-card[data-mouse-hover] {
+    transform: translateY(-6px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reel-card {
+      transition: none;
+    }
+  }
+</style>

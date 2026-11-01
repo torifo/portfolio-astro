@@ -4,8 +4,9 @@
 // YouTube は最初はサムネだけを出し、押したら動画を読み込む（ページを重くしない。youtube-nocookie）。
 // 公式サイトのカードの画像は、サイトがリンク共有用に出している og:image を公式サイトから直接出す（SNS のリンクカードと同じ）。
 // 公式 X の埋め込みはやめた（ログイン状態やブラウザの追跡防止で出ないことが多く、更新の止まったアカウントもあった）。
-// シリーズが2件以上ある作品は、期ごとの PV をトップの旅の帯と同じく横に流れ続ける帯に並べ、押した PV は帯の上で再生する。
+// シリーズが2件以上ある作品は、期ごとの PV と公式サイトを同じ大きさのサムネで並べる（収まらなければ流れる帯。ReelStrip.astro）。押した PV は並びの上で再生する。
 import type { WorkLinks } from '../../lib/journey';
+import ReelStrip from './ReelStrip.astro';
 
 interface Props {
   title: string;
@@ -14,125 +15,108 @@ interface Props {
 
 const { title, links } = Astro.props;
 const { youtube, officialSite, site, series = [] } = links;
-const host = officialSite ? new URL(officialSite).host.replace(/^www\./, '') : '';
+const hostOf = (url: string) => new URL(url).host.replace(/^www\./, '');
+const host = officialSite ? hostOf(officialSite) : '';
 const isSeries = series.length >= 2;
 const seriesVideos = series.filter((entry) => entry.youtube);
 
-// 帯の1周。PV が少ないと1周が画面幅より短く、つなぎ目で途切れるので、6枚以上になるまで繰り返す（読み上げとタブ移動は最初の1回だけ）
-const MIN_PER_ROUND = 6;
-const repeats = Math.max(1, Math.ceil(MIN_PER_ROUND / Math.max(1, seriesVideos.length)));
-const round = Array.from({ length: repeats }, (_, i) => seriesVideos.map((entry) => ({ entry, first: i === 0 }))).flat();
-
-// 全部が横に収まる幅（1枚 220px 以上）なら流さずに並べるだけにする（本人の指示）。境目は PV の数で変わるので、ここで幅を出してコンテナクエリにする
-const CARD_MIN = 220;
-const fitWidth = seriesVideos.length * CARD_MIN + (seriesVideos.length - 1) * 16;
-const staticCss = `@container pv-series (min-width: ${fitWidth}px) {
-  .official-embeds.pv-series .pv-reel { overflow: visible; margin-inline: 0; -webkit-mask-image: none; mask-image: none; }
-  .official-embeds.pv-series .pv-reel-track { width: auto; padding-inline: 0; }
-  .official-embeds.pv-series [data-reel-set="0"], .official-embeds.pv-series .pv-repeat, .official-embeds.pv-series .pv-reel-controls { display: none; }
-  .official-embeds.pv-series [data-reel-set="1"] { display: grid; grid-template-columns: repeat(${seriesVideos.length}, minmax(0, 1fr)); width: 100%; }
-  .official-embeds.pv-series .pv-card { width: auto; max-width: none; }
-}`;
-
-// 期ごとの公式サイト。同じ URL は1つにまとめて名前をつなげる。期のサイトが1つも無ければ作品の公式サイトを出す
-const seriesSites: { url: string; labels: string[] }[] = [];
+// 期ごとの公式サイト。同じ URL は1つにまとめて名前をつなげる。期のサイトが1つも無ければ作品の公式サイトを出す。
+// 画像はサイトがリンク共有用に出している横長の画像（siteImage）。無い期は名前を大きく書いたカードにする
+const seriesSites: { url: string; labels: string[]; image?: string }[] = [];
 for (const entry of series) {
   if (!entry.officialSite) continue;
   const same = seriesSites.find((link) => link.url === entry.officialSite);
   if (same) same.labels.push(entry.label);
-  else seriesSites.push({ url: entry.officialSite, labels: [entry.label] });
+  else seriesSites.push({ url: entry.officialSite, labels: [entry.label], image: entry.siteImage });
 }
-if (!seriesSites.length && officialSite) seriesSites.push({ url: officialSite, labels: [site?.title ?? `${title} 公式サイト`] });
+if (!seriesSites.length && officialSite) seriesSites.push({ url: officialSite, labels: [site?.title ?? `${title} 公式サイト`], image: site?.image });
 ---
 
 {isSeries && (
-  <section class="official-embeds pv-series mb-10" aria-labelledby="official-heading">
-    <Fragment set:html={`<style>${staticCss}</style>`} />
-    <div class="flex items-center justify-between gap-4 mb-3">
-      <h2 id="official-heading" class="text-sm font-semibold text-gray-400">公式の映像</h2>
-      <div class="pv-reel-controls flex items-center gap-2 shrink-0">
-        <button type="button" class="pv-reel-step glass rounded-full w-8 h-8 hidden sm:flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" data-step="-1" aria-label="前の映像へ">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
-        </button>
-        <button type="button" class="pv-reel-toggle glass rounded-full w-8 h-8 flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" aria-label="流れを止める">
-          <svg class="reel-icon-pause w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" /></svg>
-          <svg class="reel-icon-play w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-        </button>
-        <button type="button" class="pv-reel-step glass rounded-full w-8 h-8 hidden sm:flex items-center justify-center text-gray-400 hover:text-cyan-400 transition-colors" data-step="1" aria-label="次の映像へ">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
-        </button>
+  <section class="official-embeds mb-10" aria-labelledby="official-heading">
+    <ReelStrip name="pv" heading="公式の映像" headingId="official-heading" count={seriesVideos.length} noun="映像">
+      <!-- 押した PV を出す場所。帯の中で再生すると流れて見えなくなるので、並びの上に出し、再生中は帯を止める -->
+      <div slot="stage" class="pv-stage mb-2" hidden>
+        <div class="pv-stage-frame relative aspect-video overflow-hidden rounded-2xl bg-black"></div>
+        <div class="mt-2 flex items-start justify-between gap-3">
+          <p class="pv-stage-caption text-sm text-gray-300 leading-snug"></p>
+          <button type="button" class="pv-stage-close glass shrink-0 rounded-full px-3 py-1 text-xs text-gray-300 hover:text-cyan-400 transition-colors">閉じる</button>
+        </div>
       </div>
-    </div>
-    <!-- 押した PV を出す場所。帯の中で再生すると流れて見えなくなるので、帯の上に出し、再生中は帯を止める -->
-    <div class="pv-stage mb-2" hidden>
-      <div class="pv-stage-frame relative aspect-video overflow-hidden rounded-2xl bg-black"></div>
-      <div class="mt-2 flex items-start justify-between gap-3">
-        <p class="pv-stage-caption text-sm text-gray-300 leading-snug"></p>
-        <button type="button" class="pv-stage-close glass shrink-0 rounded-full px-3 py-1 text-xs text-gray-300 hover:text-cyan-400 transition-colors">閉じる</button>
-      </div>
-    </div>
-    <div class="pv-reel -mx-6 overflow-x-auto" data-pv-reel role="region" aria-label="公式の映像（横にスクロールできます）">
-      <div class="pv-reel-track flex w-max gap-4 px-6">
-        {[0, 1].map((copy) => (
-          <div class="flex gap-4" data-reel-set={copy} aria-hidden={copy === 0 ? 'true' : undefined}>
-            {round.map(({ entry, first }) => {
-              const pv = entry.youtube!;
-              const reachable = copy === 1 && first;
-              return (
-                <div class:list={['pv-card w-[70vw] max-w-[300px] sm:w-[280px] shrink-0', { 'pv-repeat': !first }]} aria-hidden={copy === 1 && !first ? 'true' : undefined}>
-                  <button
-                    type="button"
-                    class="pv-play group block w-full text-left"
-                    data-yt={pv.id}
-                    data-caption={`${entry.label}：${pv.title}（${pv.channel}）`}
-                    tabindex={reachable ? undefined : -1}
-                    aria-label={`${title}（${entry.label}）の PV を再生（YouTube）`}
-                  >
-                    <span class="pv-thumb relative block aspect-video overflow-hidden rounded-xl bg-black">
-                      <img
-                        src={`https://i.ytimg.com/vi/${pv.id}/hqdefault.jpg`}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                      <span class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent"></span>
-                      <span class="yt-icon absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" aria-hidden="true">
-                        <svg viewBox="0 0 68 48" width="48" height="34"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 12.9.1 24 .1 24s0 11.1 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35.1 67.9 24 67.9 24s0-11.1-1.4-16.3z" fill="#f00"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
-                      </span>
-                    </span>
-                    <span class="mt-2 block text-sm text-gray-100 font-medium leading-snug">
-                      {entry.label}<span class="ml-2 text-xs text-gray-400 font-normal">{entry.year}</span>
-                    </span>
-                    <span class="mt-0.5 block text-xs text-gray-400 leading-snug truncate">{pv.channel}</span>
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        ))}
-      </div>
-    </div>
+      {(index: number, reachable: boolean) => {
+        const entry = seriesVideos[index];
+        const pv = entry.youtube!;
+        return (
+          <button
+            type="button"
+            class="pv-play group block w-full text-left"
+            data-yt={pv.id}
+            data-caption={`${entry.label}：${pv.title}（${pv.channel}）`}
+            tabindex={reachable ? undefined : -1}
+            aria-label={`${title}（${entry.label}）の PV を再生（YouTube）`}
+          >
+            <span class="pv-thumb relative block aspect-video overflow-hidden rounded-xl bg-black">
+              <img
+                src={`https://i.ytimg.com/vi/${pv.id}/hqdefault.jpg`}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+              <span class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent"></span>
+              <span class="yt-icon absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" aria-hidden="true">
+                <svg viewBox="0 0 68 48" width="48" height="34"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 12.9.1 24 .1 24s0 11.1 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35.1 67.9 24 67.9 24s0-11.1-1.4-16.3z" fill="#f00"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+              </span>
+            </span>
+            <span class="mt-2 block text-sm text-gray-200 font-medium leading-snug">
+              {entry.label}<span class="ml-2 text-xs text-gray-400 font-normal">{entry.year}</span>
+            </span>
+            <span class="mt-0.5 block text-xs text-gray-400 leading-snug truncate">{pv.channel}</span>
+          </button>
+        );
+      }}
+    </ReelStrip>
     {seriesSites.length > 0 && (
-      <>
-        <h3 class="text-sm font-semibold text-gray-400 mt-4 mb-3">公式サイト</h3>
-        <ul class="flex flex-wrap gap-2">
-          {seriesSites.map((link) => (
-            <li>
+      <div class="mt-4">
+        <ReelStrip name="site" heading="公式サイト" level={3} count={seriesSites.length} noun="サイト">
+          {(index: number, reachable: boolean) => {
+            const link = seriesSites[index];
+            const name = link.labels.join('・');
+            return (
               <a
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="site-chip group inline-flex items-center gap-1.5 rounded-full glass border border-violet-500/20 hover:border-violet-400/50 transition-colors px-3.5 py-1.5 text-sm text-gray-100"
-                title={link.url}
+                class="site-tile group block"
+                tabindex={reachable ? undefined : -1}
+                aria-label={`${title}（${name}）の公式サイト（${hostOf(link.url)}・新しいタブで開く）`}
               >
-                {link.labels.join('・')}
-                <svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true" class="text-violet-300 transition-transform group-hover:translate-x-0.5"><path d="M7 4h9v9M16 4 5 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="site-thumb relative block aspect-video overflow-hidden rounded-xl border border-violet-500/20 group-hover:border-violet-400/50 transition-colors">
+                  {link.image ? (
+                    <img
+                      src={link.image}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      referrerpolicy="no-referrer"
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <span class="absolute inset-0 flex items-center justify-center bg-linear-to-br from-violet-600/60 via-sky-600/45 to-cyan-500/50 px-4">
+                      <span class="site-thumb-label text-xl font-bold text-center leading-snug">{name}</span>
+                    </span>
+                  )}
+                </span>
+                <span class="mt-2 block text-sm text-gray-200 font-medium leading-snug">{name}</span>
+                <span class="mt-0.5 flex items-center gap-1 text-xs text-violet-300">
+                  {hostOf(link.url)}
+                  <svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true" class="transition-transform group-hover:translate-x-0.5"><path d="M7 4h9v9M16 4 5 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
               </a>
-            </li>
-          ))}
-        </ul>
-      </>
+            );
+          }}
+        </ReelStrip>
+      </div>
     )}
   </section>
 )}
@@ -183,7 +167,7 @@ if (!seriesSites.length && officialSite) seriesSites.push({ url: officialSite, l
             </div>
           )}
           <div class="p-4">
-            <p class="text-sm text-gray-100 font-medium leading-snug line-clamp-2">{site?.title ?? `${title} 公式サイト`}</p>
+            <p class="text-sm text-gray-200 font-medium leading-snug line-clamp-2">{site?.title ?? `${title} 公式サイト`}</p>
             <p class="mt-1 text-xs text-violet-300 flex items-center gap-1">
               {host}
               <svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true" class="transition-transform group-hover:translate-x-0.5"><path d="M7 4h9v9M16 4 5 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -197,8 +181,6 @@ if (!seriesSites.length && officialSite) seriesSites.push({ url: officialSite, l
 
 <script>
   // YouTube：押したら iframe を読み込む。ClientRouter の遷移ではこのスクリプトが再実行されないので、遷移のたびに繋ぎ直す（同じ要素には二重に付けない）
-  import { setupReel } from '../../lib/reel';
-
   function youtubeFrame(id: string): HTMLIFrameElement {
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
@@ -217,24 +199,11 @@ if (!seriesSites.length && officialSite) seriesSites.push({ url: officialSite, l
       box.querySelector('.yt-play')?.addEventListener('click', () => box.replaceChildren(youtubeFrame(box.dataset.yt!)));
     });
 
-    // シリーズの作品：流れる帯。押した PV は帯の上で再生し、その間は帯を止める
-    const reel = document.querySelector<HTMLElement>('[data-pv-reel]');
+    // シリーズの作品：押した PV は並びの上で再生し、その間は帯を止める（data-reel-hold。動きは ReelStrip.astro）
+    const reel = document.querySelector<HTMLElement>('[data-strip="pv"] [data-reel]');
     const stage = document.querySelector<HTMLElement>('.pv-stage');
-    if (!reel || !stage) return;
-    const controls = setupReel(reel, {
-      toggle: document.querySelector<HTMLButtonElement>('.pv-reel-toggle'),
-      steps: document.querySelectorAll<HTMLButtonElement>('.pv-reel-step'),
-      card: '.pv-card',
-    });
-    if (!controls) return;
-    // 全部が横に収まって並べるだけのとき（CSS のコンテナクエリで1周目を消している）と、再生している間は流さない
-    const firstSet = reel.querySelector<HTMLElement>('[data-reel-set="0"]')!;
-    const isStill = () => getComputedStyle(firstSet).display === 'none';
-    const update = () => {
-      controls.hold(isStill() || !stage.hidden);
-      reel.setAttribute('aria-label', isStill() ? '公式の映像' : '公式の映像（横にスクロールできます）');
-    };
-    new ResizeObserver(update).observe(reel);
+    if (!reel || !stage || reel.dataset.pvBound) return;
+    reel.dataset.pvBound = '1';
     const frame = stage.querySelector<HTMLElement>('.pv-stage-frame')!;
     const caption = stage.querySelector<HTMLElement>('.pv-stage-caption')!;
     const markCurrent = (id: string | null) =>
@@ -246,14 +215,14 @@ if (!seriesSites.length && officialSite) seriesSites.push({ url: officialSite, l
       frame.replaceChildren(youtubeFrame(button.dataset.yt!));
       caption.textContent = button.dataset.caption ?? '';
       stage.hidden = false;
-      update();
+      reel.setAttribute('data-reel-hold', '');
       markCurrent(button.dataset.yt!);
       stage.scrollIntoView({ block: 'nearest' });
     });
     stage.querySelector('.pv-stage-close')?.addEventListener('click', () => {
       frame.replaceChildren();
       stage.hidden = true;
-      update();
+      reel.removeAttribute('data-reel-hold');
       markCurrent(null);
     });
   }
@@ -274,46 +243,27 @@ if (!seriesSites.length && officialSite) seriesSites.push({ url: officialSite, l
   }
   .yt-play:focus-visible,
   .pv-play:focus-visible .pv-thumb,
-  .site-card:focus-visible,
-  .site-chip:focus-visible {
+  .site-tile:focus-visible .site-thumb,
+  .site-card:focus-visible {
     outline: 2px solid rgb(196 181 253);
     outline-offset: 2px;
   }
-  .pv-play:focus-visible {
+  .pv-play:focus-visible,
+  .site-tile:focus-visible {
     outline: none;
   }
-  /* 収まるかどうかを、この欄の幅で決める（上の staticCss のコンテナクエリ） */
-  .official-embeds.pv-series {
-    container: pv-series / inline-size;
-  }
-  /* PV の帯。トップの旅の帯と同じく、左右の端を淡くして続きがあることを見せ、スクロールバーは出さない */
-  .pv-reel {
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-    scrollbar-width: none;
-    scroll-behavior: auto; /* global.css の smooth が効くと毎フレームの位置合わせで流れない */
-  }
-  .pv-reel::-webkit-scrollbar {
-    display: none;
-  }
-  .pv-reel-track {
-    padding-top: 0.75rem;
-    padding-bottom: 1rem;
-  }
-  .pv-card {
-    transition: transform 300ms ease-out;
-  }
-  .pv-card[data-mouse-hover] {
-    transform: translateY(-6px);
-  }
-  /* 再生中の PV（帯の上に出している PV） */
+  /* 再生中の PV（並びの上に出している PV） */
   .pv-play[data-current] .pv-thumb {
     outline: 2px solid rgb(34 211 238);
     outline-offset: 2px;
   }
+  /* 画像の無いサイトのカードの名前。色の帯の上なので、昼も夜も白い字に影 */
+  .site-thumb-label {
+    color: #fff;
+    text-shadow: 0 1px 8px rgb(0 0 0 / 0.45);
+  }
   @media (prefers-reduced-motion: reduce) {
-    .yt-icon svg,
-    .pv-card {
+    .yt-icon svg {
       transition: none;
     }
   }

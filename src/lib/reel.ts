@@ -1,4 +1,4 @@
-// 横に流れ続ける帯（トップの「これまでの旅」・作品ページの「公式の映像」）。同じ並びを2周ぶん置き、端に近づいたら1周ぶん戻して途切れなく見せる。
+// 横に流れ続ける帯（トップの「これまでの旅」・作品ページの「公式の映像」「公式サイト」）。同じ並びを2周ぶん置き、端に近づいたら1周ぶん戻して途切れなく見せる。
 // 左へ流す（右へ流すと逆に感じた）。マウスを乗せている間・触った直後・画面の外では止め、「動きを減らす」設定の人には流さない。
 const SPEED = 36; // 1秒に動かす px（24 から本人の指示で1.5倍に）
 const RESUME_DELAY = 2500; // 手で動かしたあと、流れを戻すまでの ms
@@ -11,18 +11,15 @@ export interface ReelOptions {
   steps?: Iterable<HTMLButtonElement>;
   /** カード。マウスを乗せたカードに印（data-mouse-hover）を付け、CSS で浮かせる */
   card: string;
+  /** 全部が収まって並べるだけになった（CSS が1周目を消した）ときと、帯に戻ったときに呼ぶ */
+  onStill?: (still: boolean) => void;
 }
 
-export interface Reel {
-  /** 帯の外の理由（動画を再生している間など）で流れを止める・戻す */
-  hold(held: boolean): void;
-}
-
-/** 帯を動かす。同じ帯に二重には付けない（2回目は null） */
-export function setupReel(reel: HTMLElement, { toggle = null, steps = [], card }: ReelOptions): Reel | null {
-  if (reel.dataset.ready) return null;
+/** 帯を動かす。同じ帯に二重には付けない。帯に data-reel-hold が付いている間（動画の再生中など）は流さない */
+export function setupReel(reel: HTMLElement, { toggle = null, steps = [], card, onStill }: ReelOptions): void {
+  if (reel.dataset.ready) return;
   const sets = reel.querySelectorAll<HTMLElement>('[data-reel-set]');
-  if (sets.length < 2) return null;
+  if (sets.length < 2) return;
   reel.dataset.ready = '1';
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -45,10 +42,18 @@ export function setupReel(reel: HTMLElement, { toggle = null, steps = [], card }
   let last = 0;
   let visible = true;
   let hovering = false;
-  let held = false;
+  let still = false;
   let holdUntil = 0;
   let stopped = reduce.matches;
   reel.scrollLeft = pos;
+
+  // 並べるだけのとき（1周目が消えている）は流さない
+  new ResizeObserver(() => {
+    const now = getComputedStyle(sets[0]).display === 'none';
+    if (now === still) return;
+    still = now;
+    onStill?.(still);
+  }).observe(reel);
 
   const render = () => {
     if (!toggle) return;
@@ -74,7 +79,7 @@ export function setupReel(reel: HTMLElement, { toggle = null, steps = [], card }
       if (target !== null) target += wrapped - pos;
       pos = wrapped;
       if (pos !== before) reel.scrollLeft = pos;
-    } else if (!stopped && !held && visible && !hovering && now >= holdUntil) {
+    } else if (!stopped && !still && visible && !hovering && now >= holdUntil && !reel.hasAttribute('data-reel-hold')) {
       pos = wrap(pos + (SPEED * dt) / 1000);
       reel.scrollLeft = pos;
     }
@@ -150,9 +155,4 @@ export function setupReel(reel: HTMLElement, { toggle = null, steps = [], card }
   }
 
   requestAnimationFrame(tick);
-  return {
-    hold(value: boolean) {
-      held = value;
-    },
-  };
 }

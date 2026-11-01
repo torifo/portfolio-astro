@@ -351,6 +351,8 @@ export interface SeriesEntry {
   youtube?: { id: string; title: string; channel: string };
   /** その期の内容を今も出している公式サイトだけ */
   officialSite?: string;
+  /** 公式サイトがリンク共有用に出している横長の画像（og:image）。小さなロゴ・ほかの期と同じ画像しか無いときは書かない */
+  siteImage?: string;
 }
 
 const workLinks = (workLinkData as { links: Record<string, WorkLinks> }).links;
