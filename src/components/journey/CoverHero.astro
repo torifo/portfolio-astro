@@ -9,10 +9,13 @@ interface Props {
   credit?: string;
   /** 出典のページ（あればクレジットをリンクにする） */
   creditUrl?: string;
+  /** 押すと背景の画像だけを大きく出す（旅のページ。本人の画像は文字が重なって見えないため。本人の指示） */
+  zoomable?: boolean;
   class?: string;
 }
 
-const { cover, credit, creditUrl, class: className } = Astro.props;
+const { cover, credit, creditUrl, zoomable = false, class: className } = Astro.props;
+const zoom = zoomable && cover?.own && cover.srcset ? cover : null;
 ---
 
 <!-- 画像は形を崩さず全体を見せる。本人の画像は、画像と同じ形の枠（hero-media）に画像をぴったり入れ、帯の中央に置く。
@@ -73,9 +76,26 @@ const { cover, credit, creditUrl, class: className } = Astro.props;
     </>
   ) : null}
   <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
-  <div class="relative h-full flex flex-col justify-end items-center text-center p-6">
+  {zoom && (
+    <button type="button" class="hero-zoom" data-hero-zoom aria-label="背景の画像を大きく見る" aria-haspopup="dialog">
+      <span class="hero-zoom-hint" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+      </span>
+    </button>
+  )}
+  <!-- 押せるときは、文字の上を押しても画像のボタンに届くようにする（文字の中に押せるものは無い） -->
+  <div class:list={['relative h-full flex flex-col justify-end items-center text-center p-6', { 'pointer-events-none': zoom }]}>
     <slot />
   </div>
+  <!-- 画像だけを元の形のまま、画面に収まる大きさ（いちばん大きくて 1600px）で出す。どこを押しても・Esc でも閉じる -->
+  {zoom && (
+    <dialog class="hero-lightbox" aria-label="背景の画像">
+      <img src={zoom.src} srcset={zoom.srcset} sizes="min(1600px, 100vw)" alt="" loading="lazy" decoding="async" class="hero-lightbox-img" />
+      <button type="button" class="hero-lightbox-close" aria-label="閉じる">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
+    </dialog>
+  )}
   {credit && (
     <p class="hero-credit">
       {creditUrl ? <a href={creditUrl} target="_blank" rel="noopener noreferrer">{credit}</a> : credit}
@@ -83,9 +103,113 @@ const { cover, credit, creditUrl, class: className } = Astro.props;
   )}
 </div>
 
+<script>
+  // 背景の画像を大きく見る。ClientRouter の遷移ではこのスクリプトが再実行されないので、遷移のたびに繋ぐ（二重には付けない）
+  function setupHeroZoom(): void {
+    document.querySelectorAll<HTMLButtonElement>('[data-hero-zoom]').forEach((button) => {
+      const dialog = button.parentElement?.querySelector<HTMLDialogElement>('.hero-lightbox');
+      if (!dialog || button.dataset.bound) return;
+      button.dataset.bound = '1';
+      button.addEventListener('click', () => dialog.showModal());
+      // 画像の上でも外でも、押したら閉じる（もう一度押すと戻る）
+      dialog.addEventListener('click', () => dialog.close());
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupHeroZoom);
+</script>
+
 <style>
   .trip-hero {
     background: #0f172a;
+  }
+  /* 背景の画像を大きく見るボタン（見出し全体）。右上に小さく印を出す */
+  .hero-zoom {
+    position: absolute;
+    inset: 0;
+    cursor: zoom-in;
+  }
+  .hero-zoom:focus-visible {
+    outline: 2px solid rgb(196 181 253);
+    outline-offset: -4px;
+    border-radius: 1rem;
+  }
+  .hero-zoom-hint {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    color: #fff;
+    background: rgb(15 23 42 / 0.55);
+    backdrop-filter: blur(6px);
+    transition: transform 200ms ease-out, background-color 200ms ease-out;
+  }
+  .hero-zoom:hover .hero-zoom-hint,
+  .hero-zoom:focus-visible .hero-zoom-hint {
+    transform: scale(1.1);
+    background: rgb(15 23 42 / 0.75);
+  }
+  .hero-lightbox {
+    margin: auto; /* Tailwind の初期化が margin を 0 にして、左上に寄っていた */
+    padding: 0;
+    border: 0;
+    background: transparent;
+    max-width: none;
+    max-height: none;
+    overflow: visible;
+    cursor: zoom-out;
+  }
+  .hero-lightbox::backdrop {
+    background: rgb(2 6 23 / 0.88);
+    backdrop-filter: blur(4px);
+  }
+  .hero-lightbox-img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(1600px, calc(100vw - 2rem));
+    max-height: calc(100dvh - 2rem);
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  }
+  .hero-lightbox-close {
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    color: #fff;
+    background: rgb(15 23 42 / 0.7);
+  }
+  .hero-lightbox[open] {
+    animation: hero-lightbox-in 200ms ease-out;
+  }
+  @keyframes hero-lightbox-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+  /* 開いている間は後ろのページを動かさない */
+  :global(html:has(.hero-lightbox[open])) {
+    overflow: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-zoom-hint {
+      transition: none;
+    }
+    .hero-lightbox[open] {
+      animation: none;
+    }
   }
   /* 題名は単語の区切り（<wbr>）でだけ折り返す。どうしても入らない長い塊だけは途中で折る */
   .trip-hero :global(.hero-title) {
