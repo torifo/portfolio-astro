@@ -58,7 +58,7 @@ const section = (id: string) => (isTop ? `#${id}` : `/#${id}`);
             </button>
             
             <!-- タブレット用テーマドロップダウンメニュー -->
-            <div class="theme-dropdown-tablet absolute right-0 top-full mt-2 w-40 glass rounded-lg shadow-lg hidden z-50">
+            <div class="theme-dropdown-tablet absolute right-0 top-full mt-2 w-48 glass rounded-lg shadow-lg hidden z-50">
               <button data-theme="light" class="w-full px-3 py-2 text-left text-gray-300 hover:text-cyan-400 hover:bg-white/10 rounded-t-lg transition-colors text-xs">
                 ☀️ ライトモード
               </button>
@@ -159,22 +159,11 @@ const section = (id: string) => (isTop ? `#${id}` : `/#${id}`);
     return true;
   }
 
-  // テーマを選んだときの処理（スマホ用・タブレット用で共通）
-  function applySelectedTheme(selectedTheme: string | null, updateIcon: () => void): void {
-    if (selectedTheme === 'light') {
-      document.body.classList.remove('night-mode');
-      document.body.classList.add('light-mode');
-      updateIcon();
-    } else if (selectedTheme === 'dark') {
-      document.body.classList.remove('light-mode');
-      document.body.classList.add('night-mode');
-      updateIcon();
-    } else if (selectedTheme === 'auto') {
-      // デスクトップ版のテーマ機能を呼び出し
-      if ((window as any).setThemeBasedOnSunriseSunset) {
-        (window as any).setThemeBasedOnSunriseSunset();
-      }
-    }
+  // テーマを選んだときの処理（スマホ用・タブレット用で共通）。保存と切り替えは PC 版と同じ関数（ThemeToggle.astro の selectTheme）に任せる。
+  // 以前はここで class を付け替えるだけで保存せず、「自動」を選んでも PC 版で保存した手動の選択を消せなかった
+  async function applySelectedTheme(selectedTheme: string | null, updateIcon: () => void): Promise<void> {
+    await (window as any).selectTheme?.(selectedTheme);
+    updateIcon();
   }
 
   // テーマのドロップダウン（スマホ用・タブレット用）を結線する

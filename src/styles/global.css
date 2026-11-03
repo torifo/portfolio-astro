@@ -214,6 +214,26 @@ body.light-mode .text-cyan-400 {
   color: #0c4a6e !important;
 }
 
+/* テーマのメニューで今選ばれているモード（ThemeToggle.astro が aria-pressed を付ける）。
+   手動の選択は次の日の出・日没までなので、どれが効いているかを見せる */
+.theme-dropdown button[aria-pressed="true"],
+.theme-dropdown-tablet button[aria-pressed="true"],
+.theme-dropdown-mobile button[aria-pressed="true"] {
+  color: #22d3ee;
+  font-weight: 600;
+}
+.theme-dropdown button[aria-pressed="true"]::after,
+.theme-dropdown-tablet button[aria-pressed="true"]::after,
+.theme-dropdown-mobile button[aria-pressed="true"]::after {
+  content: '✓';
+  float: right;
+}
+body.light-mode .theme-dropdown button[aria-pressed="true"],
+body.light-mode .theme-dropdown-tablet button[aria-pressed="true"],
+body.light-mode .theme-dropdown-mobile button[aria-pressed="true"] {
+  color: #0c4a6e !important;
+}
+
 /* ライトモードで読めなかった色の補正。
    既存の上書きは text-white / text-gray-300 / text-gray-400 / text-cyan-400 しか
    面倒を見ておらず、Journey や Opus の案内で使っている色（都道府県バッジの件数、
