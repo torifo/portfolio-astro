@@ -12,6 +12,61 @@
    ],
    "gpsPrefCode": "42"
   },
+  "18120956095950241": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "date-line-place",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "17903489283607742": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "date-line-place",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "18008540714791531": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "date-line-place",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "18108909698288587": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "date-line-place",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
+  "18019926092957611": {
+   "prefCodes": [
+    "20"
+   ],
+   "method": "date-line-place",
+   "evidence": "長野",
+   "tagPrefCodes": [
+    "20"
+   ],
+   "gpsPrefCode": null
+  },
   "18039476195841928": {
    "prefCodes": [
     "20"
