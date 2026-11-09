@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import DetailHeader from '../../components/DetailHeader.astro';
 import PostGrid from '../../components/journey/PostGrid.astro';
 import TripCard from '../../components/journey/TripCard.astro';
+import PrefectureHeatmap from '../../components/journey/PrefectureHeatmap.astro';
 import {
   prefectures,
   postsForPrefecture,
@@ -129,7 +130,10 @@ const yearLabel =
       <div class="section-divider"></div>
 
       {posts.length > 0 ? (
-        <PostGrid posts={posts} omitPrefCode={prefecture.code} />
+        <>
+          <PrefectureHeatmap prefecture={prefecture} posts={posts} />
+          <PostGrid posts={posts} omitPrefCode={prefecture.code} />
+        </>
       ) : (
         <div class="glass rounded-2xl p-10 text-center">
           <p class="text-gray-300 mb-2">{prefecture.name}は訪れましたが、写真はまだ整理中です。</p>

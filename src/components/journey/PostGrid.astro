@@ -7,6 +7,7 @@ import {
   formatDate,
   instagramUrl,
   hasPermalink,
+  municipalityOf,
   type Post,
 } from '../../lib/journey';
 
@@ -25,7 +26,8 @@ const headline = (caption: string) => {
 };
 ---
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<!-- data-muni は県のページのヒートマップで市区町村ごとに絞り込むための印（PrefectureHeatmap.astro） -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-post-grid>
   {posts.map((post) => {
     const codes = prefCodesFor(post).filter((code) => code !== omitPrefCode);
     const title = headline(post.caption);
@@ -35,6 +37,7 @@ const headline = (caption: string) => {
         target="_blank"
         rel="noopener noreferrer"
         class="glass rounded-2xl overflow-hidden hover-lift group block"
+        data-muni={municipalityOf(post)}
         title={hasPermalink(post) ? 'Instagramで開く' : 'Instagramのプロフィールを開く'}
       >
         <div class="relative aspect-square bg-white/5">

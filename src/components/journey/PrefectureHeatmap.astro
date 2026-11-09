@@ -1,0 +1,340 @@
+---
+// PrefectureHeatmap.astro - 県のページの「投稿した場所」。近い市区町村をまとめたエリア（札幌エリア・府中エリア）ごとに、投稿の多い・少ないを色の濃さで出す。
+// 本人の発案（偏りが分かれば成功）。市区町村ごとは細かすぎ、六角形のマスは場所の名前が分からなかったので、名前の付いたエリアにした。
+// 件数は出さず、その県でいちばん多いエリアに対する相対の濃さ（本人「相対的にわかればいい」）。エリアの中心は data/journey/area_hubs.json で人が決められる。
+// 撮影地の座標は公開しないので、投稿は市区町村で数える（build_municipality_maps.py）。押したエリアの投稿だけを、すぐ下の投稿の一覧（PostGrid の data-muni）に並べる。
+import { municipalityOf, prefectureMapFor, type Post, type Prefecture } from '../../lib/journey';
+
+interface Props {
+  prefecture: Prefecture;
+  posts: Post[];
+}
+
+const { prefecture, posts } = Astro.props;
+const map = prefectureMapFor(prefecture.code);
+
+const perMuni = new Map<string, number>();
+for (const post of posts) {
+  const code = municipalityOf(post);
+  if (code?.startsWith(prefecture.code)) perMuni.set(code, (perMuni.get(code) ?? 0) + 1);
+}
+const areas = (map?.areas ?? []).map((area) => ({
+  ...area,
+  count: area.munis.reduce((sum, code) => sum + (perMuni.get(code) ?? 0), 0),
+}));
+
+// 濃さの段階（5段）。県でいちばん多いエリアに対する割合の平方根（対数だと上の方の差が見えなかった）
+const max = Math.max(1, ...areas.map((a) => a.count));
+const levelOf = (n: number) => (n === 0 ? 0 : Math.max(1, Math.ceil(5 * Math.sqrt(n / max))));
+const ranked = areas.filter((a) => a.count > 0).sort((a, b) => b.count - a.count);
+// エリアの名前は地図に書かない（本人「見にくくなる」）。乗せた・押したエリアの名前を、地図の上の決まった1か所に出す
+// （本人「上とか決まった位置に出せばいい。ひとつしか出さないし」）。
+// 多い順の一覧は12まで見せ、残りは「ほかNエリア」で開く（東京は区ごとで31エリアあり、スマホで長くなった）
+const SHOWN = 12;
+const clipId = `heat-clip-${prefecture.code}`;
+---
+
+{map && ranked.length > 0 && (
+  <section class="prefecture-heatmap mb-8" aria-labelledby="heatmap-heading">
+    <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-3">
+      <h2 id="heatmap-heading" class="text-lg font-semibold text-white">投稿した場所</h2>
+      <p class="text-xs text-gray-400">濃いほど投稿が多い（押すと、そのエリアの投稿だけを下に並べます）</p>
+    </div>
+    <div class="grid md:grid-cols-[3fr_2fr] gap-4 items-start">
+      <div class="heat-map glass rounded-2xl p-3 md:p-4 relative">
+        <p class="heat-name text-sm font-semibold text-white mb-1" aria-live="polite"></p>
+        <svg viewBox={map.viewBox} class="heat-svg block w-full h-auto mx-auto" role="group" aria-label={`${prefecture.name}のエリアごとの投稿の多さ`}>
+          <defs>
+            <clipPath id={clipId}><path d={map.outline} /></clipPath>
+          </defs>
+          <path d={map.outline} class="heat-land" />
+          {areas.map((area) => (
+            <path
+              d={area.d}
+              class:list={['heat-area', { 'is-active': area.count > 0 }]}
+              clip-path={area.inset ? undefined : `url(#${clipId})`}
+              data-level={levelOf(area.count)}
+              data-munis={area.munis.join(' ')}
+              data-label={area.label}
+              data-count={area.count}
+              role={area.count > 0 ? 'button' : undefined}
+              tabindex={area.count > 0 ? '0' : undefined}
+              aria-label={area.count > 0 ? area.label : undefined}
+            />
+          ))}
+          <path d={map.outline} class="heat-coast" />
+          {map.inset && (
+            <>
+              <rect class="heat-inset" x={map.inset.box[0]} y={map.inset.box[1]} width={map.inset.box[2]} height={map.inset.box[3]} rx="8" />
+              <text class="heat-inset-note" x={map.inset.box[0] + map.inset.box[2] - 4} y={map.inset.box[1] - 10} text-anchor="end">{map.inset.label}</text>
+            </>
+          )}
+        </svg>
+        <!-- 凡例。件数は出さず、その県の中での多い・少ない -->
+        <div class="mt-3 flex items-center gap-2 text-[11px] text-gray-400" aria-hidden="true">
+          <span>少ない</span>
+          {[1, 2, 3, 4, 5].map((level) => <span class="heat-swatch" data-level={level}></span>)}
+          <span>多い</span>
+        </div>
+      </div>
+      <div>
+        <!-- 多い順の一覧は、スマホでは閉じておく（東京は13個＋「ほか20エリア」で、投稿の一覧が始まるまでが長かった。本人）。
+             PC は常に開いておく。地図を押しても絞り込めるので、一覧は補助 -->
+        <button type="button" class="heat-rank-toggle md:hidden glass rounded-full px-3 py-1 text-xs text-gray-300 transition-colors" aria-expanded="false" aria-controls={`heat-rank-${prefecture.code}`}>
+          多い順（{ranked.length}エリア）
+        </button>
+        <div id={`heat-rank-${prefecture.code}`} class="heat-rank hidden md:block mt-3 md:mt-0">
+        <p class="hidden md:block text-xs text-gray-400 mb-2">多い順</p>
+        {[ranked.slice(0, SHOWN), ranked.slice(SHOWN)].map((group, i) =>
+          group.length === 0 ? null : (
+            <Fragment>
+              {i === 1 ? (
+                <details class="heat-more mt-2">
+                  <summary class="text-xs text-gray-400 cursor-pointer select-none">ほか{group.length}エリア</summary>
+                  <ul class="mt-2 flex flex-wrap gap-2">
+                    {group.map((area) => (
+                      <li>
+                        <button type="button" class="heat-pick glass rounded-full px-3 py-1 text-xs text-gray-200 transition-colors" data-munis={area.munis.join(' ')} data-label={area.label} data-count={area.count} aria-pressed="false">
+                          <span class="heat-swatch" data-level={levelOf(area.count)} aria-hidden="true"></span>
+                          {area.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              ) : (
+                <ul class="flex flex-wrap gap-2">
+                  {group.map((area) => (
+                    <li>
+                      <button type="button" class="heat-pick glass rounded-full px-3 py-1 text-xs text-gray-200 transition-colors" data-munis={area.munis.join(' ')} data-label={area.label} data-count={area.count} aria-pressed="false">
+                        <span class="heat-swatch" data-level={levelOf(area.count)} aria-hidden="true"></span>
+                        {area.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Fragment>
+          ),
+        )}
+        </div>
+      </div>
+    </div>
+    <div class="heat-filter mt-4 flex flex-wrap items-center gap-3" hidden>
+      <p class="text-sm text-gray-200"><span class="heat-filter-name font-semibold"></span>の投稿 <span class="heat-filter-count"></span>件</p>
+      <button type="button" class="heat-reset glass rounded-full px-3 py-1 text-xs text-gray-300 hover:text-cyan-400 transition-colors">すべて表示</button>
+    </div>
+  </section>
+)}
+
+<script>
+  // ClientRouter の遷移ではこのスクリプトが再実行されないので、遷移のたびに繋ぐ（同じ要素には二重に付けない）
+  function setupHeatmap(): void {
+    const section = document.querySelector<HTMLElement>('.prefecture-heatmap');
+    if (!section || section.dataset.bound) return;
+    section.dataset.bound = '1';
+    const map = section.querySelector<HTMLElement>('.heat-map')!;
+    const name = section.querySelector<HTMLElement>('.heat-name')!;
+    const filter = section.querySelector<HTMLElement>('.heat-filter')!;
+    let selected: string | null = null;
+    // 地図の上の1か所に、乗せているエリアの名前（無ければ押したエリアの名前）を出す
+    let hovered: string | null = null;
+    let selectedLabel = '';
+    const showName = () => {
+      const text = hovered ?? selectedLabel;
+      if (text) name.textContent = text;
+      name.classList.toggle('is-shown', Boolean(text));
+    };
+
+    // 押したエリア（地図か一覧）の市区町村の投稿だけを残す。同じものをもう一度押すと戻す
+    const select = (el: Element | null) => {
+      const data = (el as HTMLElement | null)?.dataset;
+      const key = data?.munis ?? null;
+      selected = key && key !== selected ? key : null;
+      const codes = new Set(selected?.split(' ') ?? []);
+      section.querySelectorAll<Element>('.heat-area.is-active').forEach((a) => a.toggleAttribute('data-selected', (a as HTMLElement).dataset.munis === selected));
+      selectedLabel = selected ? (data?.label ?? '') : '';
+      showName();
+      section.querySelectorAll<HTMLButtonElement>('.heat-pick').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.munis === selected)));
+      document.querySelectorAll<HTMLElement>('[data-post-grid] > a').forEach((card) => {
+        card.hidden = selected !== null && !codes.has(card.dataset.muni ?? '');
+      });
+      filter.hidden = selected === null;
+      if (selected && data) {
+        filter.querySelector('.heat-filter-name')!.textContent = data.label ?? '';
+        filter.querySelector('.heat-filter-count')!.textContent = data.count ?? '';
+        filter.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    };
+
+    section.querySelectorAll<Element>('.heat-area.is-active, .heat-pick').forEach((el) => {
+      el.addEventListener('click', () => select(el));
+      el.addEventListener('keydown', (event) => {
+        const key = (event as KeyboardEvent).key;
+        if (el.tagName !== 'BUTTON' && (key === 'Enter' || key === ' ')) {
+          event.preventDefault();
+          select(el);
+        }
+      });
+    });
+    section.querySelector('.heat-reset')?.addEventListener('click', () => {
+      selected = null;
+      select(null);
+    });
+
+    // スマホの「多い順」：押すと開く・閉じる（PC は md:block で常に開いている）
+    const rankToggle = section.querySelector<HTMLButtonElement>('.heat-rank-toggle');
+    const rank = section.querySelector<HTMLElement>('.heat-rank');
+    rankToggle?.addEventListener('click', () => {
+      const open = rankToggle.getAttribute('aria-expanded') !== 'true';
+      rankToggle.setAttribute('aria-expanded', String(open));
+      rank?.classList.toggle('hidden', !open);
+    });
+
+    // 乗せた（キーボードでは選んだ）エリアの名前を出す
+    const hover = (event: Event, on: boolean) => {
+      const area = (event.target as Element).closest<HTMLElement>('.heat-area.is-active');
+      if (!area) return;
+      hovered = on ? (area.dataset.label ?? null) : null;
+      showName();
+    };
+    map.addEventListener('pointerover', (event) => hover(event, true));
+    map.addEventListener('pointerout', (event) => hover(event, false));
+    map.addEventListener('focusin', (event) => hover(event, true));
+    map.addEventListener('focusout', (event) => hover(event, false));
+  }
+
+  document.addEventListener('astro:page-load', setupHeatmap);
+</script>
+
+<style>
+  /* 色はモードごとに一つの色相で、多いほど強く。昼は緑（地図の陸は緑が見慣れていて、青だと湖や海に見えた。本人「日本地図は緑」）、
+     薄い緑→深い緑。夜は黄色（夜の地図で、よく行った所ほど明るく灯る）、暗い黄色→明るい金色。
+     夜を青や緑の暗い→明るいにすると、多いほど白っぽく・くすんで「行くほど薄い」に見えた（本人）。
+     明るさは段ごとに変え（ΔL 0.08 前後）、いちばん少ない段も県の地の色と 2:1 以上離す（dataviz の validate_palette.js で確認） */
+  .prefecture-heatmap {
+    --heat-land: #141c2b;
+    --heat-0: #263244;
+    --heat-1: #625334;
+    --heat-2: #836932;
+    --heat-3: #a4802b;
+    --heat-4: #c89815;
+    --heat-5: #e9b10d;
+    --heat-coast: #475569;
+  }
+  :global(body.light-mode) .prefecture-heatmap {
+    --heat-land: #e2e8f0;
+    --heat-0: #d5dde8;
+    --heat-1: #60b46f;
+    --heat-2: #3f9c53;
+    --heat-3: #2c8240;
+    --heat-4: #226832;
+    --heat-5: #194f25;
+    --heat-coast: #94a3b8;
+  }
+  .heat-svg {
+    max-height: 28rem;
+  }
+  .heat-land {
+    fill: var(--heat-land);
+  }
+  .heat-coast {
+    fill: none;
+    stroke: var(--heat-coast);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+  /* エリアは市区町村の形を同じ色で重ねて描く。同じ色の線を細く引いて、市区町村の継ぎ目を消す */
+  .heat-area {
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 0.8;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+  }
+  .heat-area.is-active {
+    cursor: pointer;
+    transition: filter 150ms ease-out;
+  }
+  /* 押したあとに、エリアを囲む四角い枠（フォーカスの枠）が残った。選んだことは光る縁と名前で分かる */
+  .heat-area:focus {
+    outline: none;
+  }
+  .heat-area.is-active:hover,
+  .heat-area.is-active:focus-visible {
+    filter: brightness(1.15);
+    outline: none;
+  }
+  .heat-area[data-selected] {
+    filter: drop-shadow(0 0 1.5px #22d3ee) drop-shadow(0 0 1.5px #22d3ee) drop-shadow(0 0 1.5px #22d3ee);
+  }
+  [data-level='0'] { color: var(--heat-0); background: var(--heat-0); }
+  [data-level='1'] { color: var(--heat-1); background: var(--heat-1); }
+  [data-level='2'] { color: var(--heat-2); background: var(--heat-2); }
+  [data-level='3'] { color: var(--heat-3); background: var(--heat-3); }
+  [data-level='4'] { color: var(--heat-4); background: var(--heat-4); }
+  [data-level='5'] { color: var(--heat-5); background: var(--heat-5); }
+  /* 名前は地図の上の決まった1か所に出す。高さを先に取っておき、出し入れで地図が動かないようにする */
+  .heat-name {
+    min-height: 1.25rem;
+    opacity: 0;
+    transform: translateY(3px);
+    transition: opacity 150ms ease-out, transform 150ms ease-out;
+  }
+  .heat-name.is-shown {
+    opacity: 1;
+    transform: none;
+  }
+  .heat-inset {
+    fill: none;
+    stroke: var(--heat-coast);
+    stroke-width: 1;
+    stroke-dasharray: 4 3;
+    vector-effect: non-scaling-stroke;
+  }
+  .heat-inset-note {
+    font-size: 24px;
+    fill: #94a3b8;
+  }
+  :global(body.light-mode) .heat-inset-note {
+    fill: #475569;
+  }
+  .heat-swatch {
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 3px;
+    vertical-align: -1px;
+  }
+  .heat-pick .heat-swatch {
+    margin-right: 0.375rem;
+  }
+  .heat-pick[aria-pressed='true'] {
+    outline: 2px solid #22d3ee;
+    outline-offset: 1px;
+  }
+  /* スマホの「多い順」の開閉の向き（閉じているとき下向き、開いているとき上向き） */
+  .heat-rank-toggle::after {
+    content: '';
+    display: inline-block;
+    width: 0.4em;
+    height: 0.4em;
+    margin-left: 0.5em;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-0.15em) rotate(45deg);
+    transition: transform 150ms ease-out;
+  }
+  .heat-rank-toggle[aria-expanded='true']::after {
+    transform: translateY(0.1em) rotate(-135deg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .heat-area.is-active,
+    .heat-name,
+    .heat-rank-toggle::after {
+      transition: none;
+    }
+  }
+</style>

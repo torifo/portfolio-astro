@@ -14,6 +14,8 @@ import themeData from '../../data/journey/themes.json';
 import coverData from '../../data/journey/trip_covers.json';
 import workCoverData from '../../data/journey/work_covers.json';
 import workLinkData from '../../data/journey/work_links.json';
+import postMunicipalityData from '../../data/journey/post_municipalities.json';
+import prefectureMapData from './prefecture-maps.json';
 
 export interface Prefecture {
   code: string;
@@ -126,6 +128,26 @@ export function prefectureByCode(code: string): Prefecture | undefined {
 /** 県コードから、その県に属する投稿を新しい順で返す。県をまたぐ投稿は両方に出る。 */
 export function postsForPrefecture(code: string): Post[] {
   return posts.filter((p) => resolutions[p.id]?.prefCodes?.includes(code));
+}
+
+const postMunicipalities = (postMunicipalityData as { posts: Record<string, string> }).posts;
+
+/** 投稿の市区町村コード（N03。政令指定都市は市）。撮影地の座標は公開しないので市区町村に丸めたもの（build_municipality_maps.py） */
+export function municipalityOf(post: Post): string | undefined {
+  return postMunicipalities[post.id];
+}
+
+/** 県の形（県境の SVG パス）とエリア（近い市区町村をまとめた「札幌エリア」。x, y は名前を書く位置）。
+ * inset は本土から遠い島（投稿のある島だけ）を寄せた差し込み枠。その島のエリアは inset: true */
+export interface PrefectureMap {
+  viewBox: string;
+  outline: string;
+  areas: { label: string; munis: string[]; d: string; x: number; y: number; inset?: boolean }[];
+  inset: { box: [number, number, number, number]; label: string } | null;
+}
+
+export function prefectureMapFor(code: string): PrefectureMap | undefined {
+  return (prefectureMapData as Record<string, PrefectureMap>)[code];
 }
 
 export function postsForTrip(trip: Trip): Post[] {
