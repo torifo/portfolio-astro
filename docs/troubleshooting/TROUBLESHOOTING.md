@@ -23,10 +23,10 @@
 # Node.jsのバージョンを確認
 node --version
 
-# 推奨バージョン: 18.x以上
+# 必要なバージョン: 22.22 以上（Astro 7.4 の要件。本番のビルドも Node 22。2026-11-09 時点）
 # nvm使用時
-nvm install 18
-nvm use 18
+nvm install 22
+nvm use 22
 ```
 
 ### 依存関係の問題
@@ -54,10 +54,10 @@ yarn install
 
 **解決方法**:
 ```bash
-# 型チェックを実行
+# ビルドが通るかを確認（astro build は型チェックをしない）
 npm run build
 
-# または個別に確認
+# 型だけを確認する（typescript は依存に入っていないので npx が取得する。.astro ファイルは対象外）
 npx tsc --noEmit
 ```
 
@@ -122,9 +122,10 @@ lsof -i :80
 
 # 競合するプロセスを停止
 sudo kill <PID>
-
-# または docker-compose.ymlでポートを変更
 ```
+
+本番の `docker-compose.yml` はポートを公開せず、`global-proxy-network` の前段のプロキシ経由で受ける
+（`VIRTUAL_HOST`・`VIRTUAL_PORT=80`）。手元で `docker run -p` するときのポートだけを変える。
 
 ## API関連の問題
 
@@ -156,8 +157,8 @@ microCMS の変更を本番に出すには、デプロイを走らせる必要�
 // ブラウザのコンソールでエラーを確認
 // F12 > Console
 
-// 手動でAPIをテスト
-fetch('https://api.sunrise-sunset.org/json?lat=35.6762&lng=139.6503&formatted=0')
+// 手動でAPIをテスト（サイトと同じく JST の今日の日付を付ける。付けないと JST 0〜9時は前日の値が返る）
+fetch('https://api.sunrise-sunset.org/json?lat=35.6762&lng=139.6503&formatted=0&date=' + new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Tokyo' }))
   .then(response => response.json())
   .then(data => console.log(data));
 ```
@@ -225,17 +226,26 @@ Error: <path> attribute d: Expected arc flag ('0' or '1')
 このエラーはテンプレートリテラルとTypeScriptがJSX内のインラインイベントハンドラで競合した場合に発生します。`is:inline`ディレクティブを使用してプレーンJavaScriptに変更することで解決します。
 
 **関連ファイル**:
-- `/src/components/sections/OpusSection.astro` - 302-365行目（JavaScript実装）
-- 188-198行目（data属性を使用したHTML）
+- `/src/components/sections/OpusSection.astro` - 560-590行目（JavaScript実装。`<script is:inline>` の「関連プロジェクト折りたたみ機能」）
+- 244-254行目（data属性を使用したHTML。`related-toggle-btn` のボタンと `data-related-container`）
+- 行番号は 2026-11-09 時点
 
 ## テーマ機能の問題
 
 ### テーマが切り替わらない
 
-**症状**: ライト/ダークモードの切り替えが動作しない
+**症状**: ライト/ダークモードの切り替えが動作しない・日没を過ぎてもライトのまま
+
+メニューで手動で選んだライト／ダークは、選んだときの次の日の出か日没まで続き、そのあと自動に戻る
+（localStorage の `theme-preference` に `{"mode", "until"}` で保存。2026-11-03 から）。それより前は期限なしで
+保存していたため、一度選ぶと自動に戻らなかった。その頃の保存（`'light'`／`'dark'` の文字だけ）は読み込み時に捨てる。
+メニューでは今効いているモードに ✓ が付く。
 
 **解決方法**:
 ```javascript
+// 保存されている手動の選択と期限を確認（無ければ自動）
+console.log(localStorage.getItem('theme-preference'));
+
 // ブラウザコンソールで確認
 console.log(document.body.classList);
 
@@ -413,6 +423,8 @@ Instagram API は位置情報を返さないので、新着の県は本文とタ
 - 元の画像を消しても、サイトの画像は自動では消えない。消すときは `public/journey/trips/<slug>-*.webp` と
   `trip_covers.json` の該当行を手で消す
 - 旅の URL 名は開始日なので、旅の名前のタグを付け直しても開始日が同じなら変わらず、画像もそのまま使える
+- 差し替えて本番に出たのに古い画像が見える：nginx は旅・作品の背景の webp を1時間キャッシュさせる（投稿のサムネは1年）。
+  1時間待つか、ブラウザのキャッシュを消して確かめる
 
 ### Instagram でキャプション・タグを直した
 
@@ -432,6 +444,22 @@ Instagram API は位置情報を返さないので、新着の県は本文とタ
 日付の後ろの場所（`2025-06-28 横浜`）は、2026-09-30 以降に投稿したものだけが読まれる（投稿日で決まる）。
 それより前の投稿のキャプションに場所を書き足しても、県は変わらない。県を直すなら `overrides.json` で。
 API が本文を空で返した投稿は上書きせずに飛ばし、一覧に出す。
+
+### 新しい投稿が県のページの「投稿した場所」に出ない
+
+地図は同期では更新されない。投稿 → 市区町村（`data/journey/post_municipalities.json`）と、県の形・エリア
+（`src/lib/prefecture-maps.json`）は `scripts/journey/build_municipality_maps.py` が作り、`gps.json` を読むので手元でしか動かない。
+新しい投稿は、手元で次を流してコミットするまで地図に入らない（投稿の一覧には出る）。
+
+```bash
+python3 scripts/journey/build_municipality_maps.py ~/dev/data/kokudo/N03-20260101.geojson --report
+```
+
+- 入力の N03 市区町村 GeoJSON（リポジトリの外）の用意は [data/ontology/README.md](../../data/ontology/README.md)
+- 座標の無い投稿は、本文の地名・名所・短いタグから市区町村を引く。`--report` は決まらなかった投稿を出す
+- 名所の座標が `data/journey/place_coords.json` に無ければ Wikidata に問い合わせて、このファイルを書き換える
+- エリアの中心は `data/journey/area_hubs.json`（県コードごとの `hubs`・`radiusKm`）。変えたらこのスクリプトを流し直す
+- 投稿が無い市区町村は塗らない。エリアは投稿のある市区町村だけで作るので、初めての市区町村の投稿もこのスクリプトを流すまで出ない
 
 ### プロフィールの投稿数とサイトの件数が1件ずれる
 

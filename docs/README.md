@@ -19,13 +19,24 @@
   - 文字だけの判定の精度を測る `eval_resolve.py`、判定の層の順序と除外語、日付の後ろの場所と「趣味」、同じ日の点検
 - **[2026-10-04-journey-sync-pr-split-design.md](./superpowers/specs/2026-10-04-journey-sync-pr-split-design.md)** - 同期PRのグループ表示と自動マージの分割
   - 場所を書いた投稿と書いていない投稿が混ざったら PR を分ける、訪問済みの県なら最初の投稿でも自動マージ
+- **[2026-10-08-journey-trip-covers-design.md](./superpowers/specs/2026-10-08-journey-trip-covers-design.md)** - 旅の背景画像
+  - 本人の画像を旅のカード・旅のページの見出し・県のページの旅カードに敷く、置き場と変換、無い旅は投稿のサムネ
+- **[2026-10-18-journey-trip-date-slugs-design.md](./superpowers/specs/2026-10-18-journey-trip-date-slugs-design.md)** - 旅の URL 名を開始日にする
+  - URL 名の決め方、旧 URL の転送（`trip_redirects.json`）、付け替えの点検で見つかった穴と直し
+- **[2026-10-31-pilgrimage-series-pvs-design.md](./superpowers/specs/2026-10-31-pilgrimage-series-pvs-design.md)** - 聖地巡礼の作品ページにシリーズの PV を全部並べる
+  - 入れる期の決まり（TV は全期・TV 以外はモデル地があるものだけ・実写は入れない）、データと表示
+
+### superpowers/plans/
+実装の手順書
+
+- **[2026-10-08-journey-trip-covers.md](./superpowers/plans/2026-10-08-journey-trip-covers.md)** - 旅の背景画像の実装手順
 
 ### deployment/
 デプロイメントとバージョン管理に関するドキュメント
 
 - **[DEPLOYMENT.md](./deployment/DEPLOYMENT.md)** - デプロイ手順とワークフロー
   - main への push で本番が入れ替わる仕組み（GitHub Actions）
-  - Journey の同期（毎日 Instagram の新着を取り込んで PR にし、場所を書いた投稿は自動マージ）
+  - Journey の同期（毎日 Instagram の新着を取り込んで PR にし、場所を書いた投稿は自動マージ）と、同期では更新されない県のページの地図
   - 必要な GitHub Secrets とリポジトリ設定
   - 存在しない URL の 404
   - push 前に手元で CI と同じビルドを再現する方法
@@ -61,5 +72,5 @@ Journey の決定事項
 ルートディレクトリにある関連ドキュメント：
 
 - **[README.md](../README.md)** - プロジェクトのメインREADME
-- **[README_astro.md](../README_astro.md)** - Astroフレームワークのテンプレートドキュメント
-- **[data/ontology/README.md](../data/ontology/README.md)** - 地名オントロジーと県境データの再生成手順・地方シルエットの作り方
+- **[README_astro.md](../README_astro.md)** - Astro のスターター（minimal）に付いてきた雛形のまま。このサイトの構成は書かれていない
+- **[data/ontology/README.md](../data/ontology/README.md)** - 地名オントロジーと県境データの再生成手順・地方シルエットと県のページの地図の作り方

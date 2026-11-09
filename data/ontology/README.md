@@ -51,3 +51,23 @@ python3 scripts/journey/build_region_silhouettes.py   # → src/lib/region-silho
 地方ごとに県境をまとめて平面に投影し、簡略化する。透かしの大きさで点にしかならない小島は落とし、
 沖縄は本島だけを九州の左下へ差し込みの要領で寄せる（そのままだと九州が小さくなる）。
 
+## 県のページの地図（投稿した場所）
+
+県のページの「投稿した場所」は、上と同じ N03 の zip に入っている**市区町村**の GeoJSON から作る。
+
+```bash
+cd ~/dev/data/kokudo
+unzip -o N03-20260101_GML.zip N03-20260101.geojson
+
+cd ~/dev/web/portfolio-astro
+python3 scripts/journey/build_municipality_maps.py ~/dev/data/kokudo/N03-20260101.geojson   # --report で決まらない投稿を出す
+```
+
+- 出力は `data/journey/post_municipalities.json`（投稿ID → 市区町村コード）と `src/lib/prefecture-maps.json`
+  （訪問済みの県ごとの県境とエリア）。撮影地の座標は公開しないので、市区町村に丸めたものだけを置く
+- `data/journey/gps.json`（Git に入っていない）を読むので、手元でしか動かない。Journey の同期では流れないため、
+  新しい投稿はこれを流してコミットするまで地図に入らない
+- 座標の無い投稿は本文の地名・名所・短いタグから市区町村を引く（名所は `places.json(.gz)` の地名で探す）。
+  名所の座標が `data/journey/place_coords.json` に無ければ Wikidata に問い合わせ、このファイルを書き換える
+- 政令指定都市の区は市にまとめ、東京23区は区のまま。エリアの中心は `data/journey/area_hubs.json`（人が書く）
+

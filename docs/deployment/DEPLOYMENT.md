@@ -26,6 +26,11 @@ main に push（または Actions から workflow_dispatch）
 
 配信は nginx（`nginx.conf`）。**存在しない URL には 404 を返し、`404.astro` を表示します。**
 以前はどの URL にもトップを 200 で返していたため、リンク切れに気づけませんでした。
+webp は、投稿のサムネ（`/journey/thumbs/`、名前は投稿 ID で中身は変わらない）を1年、旅・作品の背景など
+同じ名前のまま差し替えるものを1時間キャッシュさせます。背景画像を差し替えた直後は、最大1時間古い画像が出ることがあります。
+
+ビルドは Node 22 です（`Dockerfile` の `node:22-alpine`、`deploy.yml` の setup-node）。Astro 7.4 は Node 22.22 以上が要るので、
+手元でビルドするときも同じにします。
 
 `deploy.sh` と `docker-compose.yml` は VPS 上の
 `/home/ubuntu/Web/portfolio-astro/` にあり、リポジトリ内のものと同じ内容です。
@@ -38,7 +43,7 @@ VPS 上のチェックアウトが古くても動作に影響はありません�
 |---|---|
 | `GHCR_TOKEN` | GHCR への push。Journey 同期では延長した Instagram トークンを secret に書き戻すのにも使う（repo 権限が要る） |
 | `VPS_HOST` / `VPS_USER` / `VPS_SSH_KEY` | VPS への SSH |
-| `PUBLIC_MICROCMS_API_KEY` | ビルド時の microCMS 取得 |
+| `PUBLIC_MICROCMS_API_KEY` | ビルドの前の段での microCMS 取得（`fetch_microcms.mjs`） |
 | `PUBLIC_MICROCMS_SERVICE_DOMAIN` | 同上 |
 | `INSTAGRAM_ACCESS_TOKEN` | Journey 同期。実行のたびに延長されて書き換わる |
 
@@ -70,7 +75,7 @@ VPS 上のチェックアウトが古くても動作に影響はありません�
 載せない印に「趣味」と書いた投稿（`2025-10-04 趣味`。サイトのどこにも出さない）は、
 人が見る点が無いので自動でマージします。マージに `GITHUB_TOKEN` を使うと、その push では
 本番デプロイが起動しない（GitHub の仕様）ため、secret の書き戻しと同じ `GHCR_TOKEN` を使います。
-書いた県が訪問済み（`data/journey/prefectures.json`）なら、その県の最初の投稿でも止めません。
+日付の後ろに書いた県は、訪問済み（`data/journey/prefectures.json`）でなくても、その県の最初の投稿でも止めません（2026-10-15 から）。
 場所の書いていない投稿や要確認が出た投稿は PR で止まります。main にある旅が PR で消える
 （その旅の URL が消える）ときも、要確認が0件でも自動ではマージしません（PR の題に「旅が消える」）。
 撮影日が投稿日より後の投稿（本文の日付の打ち間違い）は要確認になります。両方が一度に来たときは PR を2つに
@@ -81,6 +86,11 @@ PR の新着の表は、旅ごと・旅に入らない投稿は撮影日ごと�
   （トークンも延命しない）。`base` に古いコミットを渡すと、そこから新着がある状態を再現できる。
   古い `base` で `dry_run` を外すと、古いデータの PR ができてマージで巻き戻るので必ず付けること
 - Actions には撮影地の座標（`gps.json`、公開しない）が無い。GPS で決まった判定は前回の結果を引き継ぐ
+- **県のページの「投稿した場所」の地図は同期では更新されない。** 投稿 → 市区町村（`data/journey/post_municipalities.json`）と
+  県の形・エリア（`src/lib/prefecture-maps.json`）は `scripts/journey/build_municipality_maps.py` が作るが、`gps.json` と
+  リポジトリの外の N03 市区町村 GeoJSON が要るので手元でしか動かない。新しい投稿は、これを手元で流してコミットするまで
+  地図に入らない（名所の座標が `data/journey/place_coords.json` に無ければ Wikidata に問い合わせて書き換える）。
+  手順は [README の「手元で回す場合」](../../README.md) と [data/ontology/README.md](../../data/ontology/README.md)
 - サムネイル変換のため、実行のたびに ImageMagick と ffmpeg を apt で入れる
 - **公開リポジトリの定時実行は、60日間コミットが無いと GitHub が自動で止めます。** 止まる前にメールが来て、
   Actions の「Journey sync」から再開できます（手動実行は止まっていても使えます）
@@ -117,7 +127,7 @@ cd /home/ubuntu/Web/portfolio-astro
 
 ## イメージ容量に注意
 
-デプロイのたびに日付タグが増えます。Journey のサムネ（1,000枚超）を含むため、イメージは約115MBあります（サムネを入れる前は約70MB）。VPS のストレージは有限なので、古いタグはときどき整理してください（稼働中のイメージは消さないこと）。
+デプロイのたびに日付タグが増えます。Journey のサムネ（1,000枚超）を含むため、2026-09 の時点でイメージは約115MBでした（サムネを入れる前は約70MB）。その後に旅・作品の背景画像とサムネが増え、今はビルド結果（`dist`）だけで約81MB（2026-11-09 時点）あるので、イメージはそれより大きくなっています。VPS で下の `docker images` を流して測り直してください。VPS のストレージは有限なので、古いタグはときどき整理してください（稼働中のイメージは消さないこと）。
 
 ```bash
 docker images ghcr.io/torifo/portfolio-astro --format '{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'
