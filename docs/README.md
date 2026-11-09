@@ -42,10 +42,6 @@
   - push 前に手元で CI と同じビルドを再現する方法
   - ロールバック手順とイメージ容量の注意
 
-- **[STABLE_VERSION.md](./deployment/STABLE_VERSION.md)** - 戻せるイメージタグの記録
-  - 稼働中のタグの調べ方
-  - 過去の版と、それが何を含むか
-
 ### troubleshooting/
 トラブルシューティングガイド
 
@@ -72,5 +68,4 @@ Journey の決定事項
 ルートディレクトリにある関連ドキュメント：
 
 - **[README.md](../README.md)** - プロジェクトのメインREADME
-- **[README_astro.md](../README_astro.md)** - Astro のスターター（minimal）に付いてきた雛形のまま。このサイトの構成は書かれていない
 - **[data/ontology/README.md](../data/ontology/README.md)** - 地名オントロジーと県境データの再生成手順・地方シルエットと県のページの地図の作り方
