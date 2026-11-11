@@ -25,7 +25,9 @@ const silhouetteByRegion: Record<string, { viewBox: string; d: string }> = silho
 const allPrefectures = regions.flatMap((region) => region.prefectures);
 const visitedCount = allPrefectures.filter((p) => p.visited).length;
 const totalCount = allPrefectures.length;
-// 「訪問済み地方」は、地方の都道府県を全部訪れた（制覇した）地方の数（本人の指示。1県でも行けば数えていたのをやめた）
+// 「制覇した地方」は、地方の都道府県を全部訪れた（制覇した）地方の数（本人の指示。1県でも行けば数えていたのをやめた）。
+// 見出しは以前「訪問済み地方」だったが、下の地方のグリッドには訪れた県のある8地方がすべて出るので、
+// 初めて見た人が数と合わないと読み違える。数え方（10/31 の本人の決定）はそのままで見出しだけ変えた（2026-11-11 レビューで修正）
 const visitedRegionCount = regions.filter((r) => r.prefectures.every((p) => p.visited)).length;
 const postCount = posts.length;
 const tripPostCount = trips.reduce((sum, trip) => sum + trip.postCount, 0);
@@ -33,6 +35,9 @@ const workPostCount = works.reduce((sum, work) => sum + work.postCount, 0);
 const themePostCount = themes.reduce((sum, theme) => sum + theme.postCount, 0);
 // 旅の帯に並べる旅（新しい順）。トップで旅の写真が見えるのはここだけ
 const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
+// 都道府県バッジの色。グリッドの上の凡例の見本も同じ色で描くので一か所に置く（2026-11-11 レビューで追加）
+const badgeVisited = 'bg-white/20 text-white border border-white/30';
+const badgeUnvisited = 'bg-white/5 text-gray-500 border border-white/10';
 
 ---
 
@@ -87,6 +92,67 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
       </div>
     )}
 
+    <!-- 旅・聖地巡礼・テーマは見出しだけ置いて詳細ページへ送る（セクションが長くなりすぎるため）。
+         以前は地方のグリッドの後ろにあり、スマホでは地方の9枚を全部送らないと届かず、その前に離れてしまうおそれがあった。
+         旅の帯のすぐ下に移す。PC でも3枚が横一列のまま地方のグリッドと同じ幅に並ぶだけで崩れないので、
+         幅で並びを変えずどの画面でも同じ順にする（2026-11-11 レビューで修正） -->
+    <div class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="/journey/trips/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group">
+        <div>
+          <div class="text-2xl font-bold gradient-text-cyan mb-1">旅の記録</div>
+          <div class="text-gray-400 text-sm">{trips.length}件の旅・{tripPostCount}件の投稿</div>
+        </div>
+        <svg class="w-6 h-6 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+
+      <a href="/journey/pilgrimage/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group border border-violet-500/20">
+        <div>
+          <div class="text-2xl font-bold gradient-text mb-1">聖地巡礼</div>
+          <div class="text-gray-400 text-sm">{workCount}作品・{workPostCount}件の投稿</div>
+        </div>
+        <svg class="w-6 h-6 text-gray-500 group-hover:text-violet-300 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+
+      <a href="/journey/themes/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group">
+        <div>
+          <div class="text-2xl font-bold gradient-text-cyan mb-1">テーマ</div>
+          <div class="text-gray-400 text-sm">{themes.length}のテーマ・{themePostCount}件の投稿</div>
+        </div>
+        <svg class="w-6 h-6 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- 都道府県バッジの見方。数字・✓・薄い表示の意味がどこにも書かれておらず、岡山のような「薄い表示に数字」
+         （訪問済みにしていない県に投稿だけある。2026-10-15 の決まりどおり）が誤りに見えた。
+         見本のバッジはグリッドと同じ色で描き、読み上げでは見本を飛ばして言葉だけで意味が通るようにする。
+         スマホの幅では1行に収まらないので、項目の途中では折らず項目ごとに次の行へ送る（2026-11-11 レビューで追加） -->
+    <p class="mb-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-gray-400 text-xs">
+      <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
+        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${badgeVisited}`} aria-hidden="true">
+          県名<span class="ml-1 text-white/60 text-[10px]">3</span>
+        </span>
+        <span><span class="sr-only">数字は</span>投稿の数</span>
+      </span>
+      <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
+        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${badgeVisited}`} aria-hidden="true">
+          県名<span class="pref-check ml-1 text-green-400 text-xs">✓</span>
+        </span>
+        <span><span class="sr-only">チェックの印は</span>訪問済み（投稿はまだ）</span>
+      </span>
+      <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
+        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${badgeUnvisited}`} aria-hidden="true">
+          県名
+        </span>
+        <span><span class="sr-only">薄い表示は</span>未訪問</span>
+      </span>
+    </p>
+
     <!-- 8地方＋海外のグリッド -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
       {regions.map((region) => {
@@ -118,9 +184,10 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
               </div>
             </div>
 
-            <!-- 都道府県バッジ -->
+            <!-- 都道府県バッジ。スマホ（1列の幅）では高さ約26px・間隔8pxで43個が並び押し間違えやすかったので、
+                 md 未満だけ高さを36px以上にして間隔も広げる。md 以上（PC）は元のまま（2026-11-11 レビューで修正） -->
             <div class="p-4">
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-2.5 md:gap-2">
                 {region.prefectures.map((pref) => {
                   const count = postCountByPrefecture[pref.code] ?? 0;
                   const Tag = pref.visited ? 'a' : 'div';
@@ -130,16 +197,14 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
                     href={pref.visited ? `/journey/${pref.slug}/` : undefined}
                     title={pref.note ?? pref.name}
                   >
-                    <span class={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
-                      pref.visited
-                        ? 'bg-white/20 text-white border border-white/30 hover:bg-white/30'
-                        : 'bg-white/5 text-gray-500 border border-white/10'
+                    <span class={`inline-flex items-center min-h-9 px-2.5 py-2 md:min-h-0 md:py-1 rounded-full text-xs font-medium transition-all ${
+                      pref.visited ? `${badgeVisited} hover:bg-white/30` : badgeUnvisited
                     }`}>
                       {pref.shortName}
                       {count > 0 ? (
                         <span class="ml-1 text-white/60 text-[10px]">{count}</span>
                       ) : pref.visited ? (
-                        <span class="ml-1 text-green-400 text-xs">✓</span>
+                        <span class="pref-check ml-1 text-green-400 text-xs">✓</span>
                       ) : null}
                     </span>
                     {pref.note && (
@@ -193,39 +258,6 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
       </div>
     </div>
 
-    <!-- 旅・聖地巡礼・テーマは見出しだけ置いて詳細ページへ送る（セクションが長くなりすぎるため） -->
-    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <a href="/journey/trips/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group">
-        <div>
-          <div class="text-2xl font-bold gradient-text-cyan mb-1">旅の記録</div>
-          <div class="text-gray-400 text-sm">{trips.length}件の旅・{tripPostCount}件の投稿</div>
-        </div>
-        <svg class="w-6 h-6 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </a>
-
-      <a href="/journey/pilgrimage/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group border border-violet-500/20">
-        <div>
-          <div class="text-2xl font-bold gradient-text mb-1">聖地巡礼</div>
-          <div class="text-gray-400 text-sm">{workCount}作品・{workPostCount}件の投稿</div>
-        </div>
-        <svg class="w-6 h-6 text-gray-500 group-hover:text-violet-300 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </a>
-
-      <a href="/journey/themes/" class="glass rounded-2xl p-6 hover-lift flex items-center justify-between group">
-        <div>
-          <div class="text-2xl font-bold gradient-text-cyan mb-1">テーマ</div>
-          <div class="text-gray-400 text-sm">{themes.length}のテーマ・{themePostCount}件の投稿</div>
-        </div>
-        <svg class="w-6 h-6 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </a>
-    </div>
-
     <!-- Instagram リンクバナー -->
     <div class="mt-12 text-center">
       <a
@@ -260,7 +292,8 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text-cyan mb-2">{visitedRegionCount}</div>
-        <p class="text-gray-300 text-sm break-keep">訪問済み<wbr />地方</p>
+        <!-- 「訪問済み地方」から改名（上の visitedRegionCount のコメント）。390px 幅のタイルでも6文字で1行に収まる（2026-11-11 レビューで修正） -->
+        <p class="text-gray-300 text-sm break-keep">制覇した<wbr />地方</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text mb-2">{postCount}</div>
@@ -286,6 +319,13 @@ const tripsByDate = [...trips].sort((a, b) => b.start.localeCompare(a.start));
     stroke: #fff;
     stroke-width: 0.8;
     stroke-linejoin: round;
+  }
+  /* 都道府県バッジと凡例の見本の ✓。ダークは text-green-400 のまま。ライトモードの薄い灰色の地では
+     green-400 が溶けて見えなかったので、ライトモードだけ濃い緑（green-900）にする。
+     バッジの地は半透明で、セクションのあたりの背景は濃い側の灰色になる。green-800（global.css のほかの緑）では
+     地との明暗比が3前後の見積もりだったので、もう一段濃くした（2026-11-11 レビューで修正） */
+  :global(body.light-mode) .pref-check {
+    color: #14532d;
   }
   /* global.css がライトモードで塗り替えるクラスに頼らず、昼も夜も同じ見た目で描く */
   .overseas-earth {

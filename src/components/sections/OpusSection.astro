@@ -69,17 +69,15 @@ const groupSkillsByCategory = (skills: RelatedSkill[]) => {
   });
 };
 
-// カラーパターン
-const colorPatterns = [
-  'from-cyan-500 to-blue-600',
-  'from-purple-500 to-pink-600',
-  'from-emerald-500 to-teal-600',
-  'from-blue-400 to-sky-600',
-  'from-red-500 to-orange-600',
-  'from-violet-500 to-purple-600',
-  'from-indigo-500 to-purple-600',
-  'from-rose-500 to-pink-600',
-];
+// 画像のないカードの色付きグラデーション（colorPatterns）は、絵文字の代わりに線画のプレースホルダーを置いたので撤去（2026-11-11 レビューで修正）
+
+// 各カードで最初から開いておく作品の数。スマホでは作品がすべて折りたたまれていて、
+// 初めて来た人に作品が一つも見えなかったため、先頭のこの件数だけは常に出す（2026-11-11 レビューで修正）
+const WORKS_PREVIEW_COUNT = 2;
+
+// SVG はロゴの素材で、絵の端が viewBox の端にぴったり接している（Discord のロゴは左右とも余白ゼロ）。
+// object-contain だと枠の左右いっぱいまで広がり、切れて見えたので、SVG にだけ内側の余白を付ける（2026-11-11 レビューで修正）
+const isVectorImage = (url: string) => /\.svg$/i.test(new URL(url).pathname);
 
 // 動的グリッドクラスを決定する関数（最大3列・均等レイアウト優先）
 // 4件 → 2列(2+2)、5件以上 → 3列(3+2, 3+3, ...)
@@ -131,16 +129,17 @@ const getGridColumns = (itemCount: number) => {
 
     <!-- プロジェクトグリッド -->
     <div class={`grid ${getGridColumns(visibleOpus.length)} gap-8`}>
-      {visibleOpus.map((project, index) => {
-        const colorPattern = colorPatterns[index % colorPatterns.length];
+      {visibleOpus.map((project) => {
         const galleryImages = project.galleryTypes || [];
         const hasMultipleGalleryImages = galleryImages.length > 1;
+        const extraWorksCount = Math.max(project.relatedLinks.length - WORKS_PREVIEW_COUNT, 0);
 
         return (
-          <div class="glass rounded-2xl overflow-hidden hover-lift group opus-project-card" data-categories={project.category.join(',')}>
+          <div class="glass rounded-2xl overflow-hidden hover-lift opus-project-card" data-categories={project.category.join(',')}>
             <div class="relative overflow-hidden">
+              {/* 上の画像はスマホでは低くする。作品を最初から開いて見せる分、縦に長くなりすぎないように（2026-11-11 レビューで修正） */}
               {galleryImages.length > 0 ? (
-                <div class="w-full h-64 relative bg-gray-900 group/main-gallery">
+                <div class="w-full h-40 md:h-64 relative bg-gray-900 group/main-gallery">
                   <div class="relative w-full h-full flex items-center justify-center">
                     {galleryImages.map((img, imgIndex) => (
                       <img
@@ -148,18 +147,14 @@ const getGridColumns = (itemCount: number) => {
                         alt={`${project.title} - ${imgIndex + 1}`}
                         loading="lazy"
                         decoding="async"
-                        class={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 main-gallery-image-${project.id}`}
+                        class={`absolute inset-0 w-full h-full object-contain ${isVectorImage(img.url) ? 'p-4 md:p-6' : ''} transition-opacity duration-300 main-gallery-image-${project.id}`}
                         data-index={imgIndex}
                         style={imgIndex === 0 ? 'opacity: 1;' : 'opacity: 0;'}
                       />
                     ))}
                   </div>
-                  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
-                  <div class="absolute bottom-4 left-0 right-0 text-center">
-                    <div class="text-white">
-                      <div class="text-lg font-semibold drop-shadow-lg">{project.title}</div>
-                    </div>
-                  </div>
+                  {/* 画像に重ねていたタイトルと、それを読ませるための下側の暗いグラデーションは撤去。
+                      白い画像の上で白文字が読めず、ライトモードでは濁った灰色になり、すぐ下の h3 とも重複していた（2026-11-11 レビューで修正） */}
                   {hasMultipleGalleryImages && (
                     <>
                       <button
@@ -180,10 +175,11 @@ const getGridColumns = (itemCount: number) => {
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                       </button>
-                      <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                      {/* 重ねていたタイトルを外したので、点は画像の下端へ寄せる。暗いグラデーションがなくなった分、明るい画像でも見えるよう縁を付ける（2026-11-11 レビューで修正） */}
+                      <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
                         {galleryImages.map((_, dotIndex) => (
                           <div
-                            class={`w-2 h-2 rounded-full transition-colors main-gallery-dot-${project.id}`}
+                            class={`w-2 h-2 rounded-full ring-1 ring-black/30 transition-colors main-gallery-dot-${project.id}`}
                             data-index={dotIndex}
                             style={dotIndex === 0 ? 'background-color: rgb(34, 211, 238);' : 'background-color: rgba(255, 255, 255, 0.5);'}
                           ></div>
@@ -193,41 +189,20 @@ const getGridColumns = (itemCount: number) => {
                   )}
                 </div>
               ) : (
-                <div class={`w-full h-48 bg-gradient-to-br ${colorPattern} flex items-center justify-center`}>
-                  <div class="text-white text-center">
-                    <div class="text-4xl mb-2">🚀</div>
-                    <div class="text-lg font-semibold">{project.title}</div>
-                  </div>
+                <div class="w-full h-40 md:h-64 bg-gray-900 flex items-center justify-center opus-image-placeholder" aria-hidden="true">
+                  {/* 画像のないカード（今は Game）は、ロケットの絵文字ではなく線画の置き場所を出す。
+                      地は画像枠と同じ bg-gray-900（ライトモードでは global.css が淡い灰色にする）、線の色は下の <style> で両テーマ分を持つ（2026-11-11 レビューで修正） */}
+                  <svg class="w-14 h-14" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="8" y="17" width="32" height="23" rx="3" />
+                    <path d="M12 12.5h24" />
+                    <path d="M16 8h16" />
+                    <path d="M15 33l6-6 4 4 3-3 5 5" />
+                    <circle cx="30" cy="23.5" r="1.75" />
+                  </svg>
                 </div>
               )}
-              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="flex space-x-4">
-                  {project.relatedLinks.map((link) => (
-                    link.repoUrl ? (
-                      <a
-                        href={link.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors"
-                        title="GitHubリポジトリ"
-                      >
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                      </a>
-                    ) : null
-                  ))}
-                  <button
-                    class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors opus-detail-btn"
-                    data-opus-id={project.id}
-                    title="詳細を見る"
-                  >
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
+              {/* 画像に乗せていたホバー時の暗転と、その上の GitHub アイコン・詳細ボタンは撤去。
+                  詳細ボタンはどこにもクリック処理がなく、GitHub と詳細へのリンクは各作品の下に同じものがある（2026-11-11 レビューで修正） */}
             </div>
             <div class="p-6">
               <h3 class="text-xl font-bold text-white mb-2">{project.title}</h3>
@@ -239,24 +214,35 @@ const getGridColumns = (itemCount: number) => {
                   </span>
                 ))}
               </div>
+              {/* 作品の一覧。見出しを「関連プロジェクト」から「作品」に変え、先頭 WORKS_PREVIEW_COUNT 件はどの幅でも開いておく。
+                  残りは従来どおりスマホだけ折りたたみ（md 以上は常に表示）、「ほかN件」のボタンで開閉する（2026-11-11 レビューで修正） */}
               {project.relatedLinks.length > 0 && (
                 <div class="mt-4 pt-4 border-t border-gray-700">
-                  <button
-                    class="flex items-center justify-between w-full text-sm font-semibold text-white mb-3 cursor-pointer hover:text-cyan-300 md:cursor-default md:hover:text-white transition-colors related-toggle-btn"
-                    data-project-id={project.id}
-                    type="button"
-                  >
-                    <span>関連プロジェクト ({project.relatedLinks.length})</span>
-                    <svg class="w-4 h-4 transition-transform md:hidden" data-related-icon={project.id} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-                  <div class="grid grid-cols-1 gap-3 hidden md:grid" data-related-container={project.id}>
+                  <h4 class="text-sm font-semibold text-white mb-3">作品 ({project.relatedLinks.length})</h4>
+                  <div class="grid grid-cols-1 gap-3">
                     {project.relatedLinks.map((link, linkIndex) => {
                       const thumbnails = link.thumbnail || [];
                       const hasMultipleImages = thumbnails.length > 1;
+                      const isExtra = linkIndex >= WORKS_PREVIEW_COUNT;
                       return (
-                        <div class="bg-gray-800/50 rounded-lg p-3 hover:bg-gray-700/50 transition-colors">
+                        <>
+                        {linkIndex === WORKS_PREVIEW_COUNT && (
+                          <button
+                            class="md:hidden flex items-center justify-center gap-1 w-full py-2 rounded-lg border border-dashed border-gray-700 text-sm font-medium text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors related-toggle-btn"
+                            data-project-id={project.id}
+                            type="button"
+                            aria-expanded="false"
+                          >
+                            <span>ほか{extraWorksCount}件</span>
+                            <svg class="w-4 h-4 transition-transform" data-related-icon={project.id} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                          </button>
+                        )}
+                        <div
+                          class={`bg-gray-800/50 rounded-lg p-3 hover:bg-gray-700/50 transition-colors ${isExtra ? 'hidden md:block' : ''}`}
+                          data-related-extra={isExtra ? project.id : undefined}
+                        >
                           {thumbnails.length > 0 && (
                             <div class="w-full aspect-video mb-3 rounded overflow-hidden bg-gray-900 relative group/gallery">
                               <div class="relative w-full h-full flex items-center justify-center">
@@ -321,10 +307,12 @@ const getGridColumns = (itemCount: number) => {
                                 {link.service}
                               </div>
                             )}
+                            {/* スマホでは分野ごとの行分けをやめて一続きに折り返す（並び順と色は分野のまま）。
+                                作品を最初から開いて見せる分、1分野1行だと縦に長くなりすぎたため。md 以上は従来どおり分野ごとに1行（2026-11-11 レビューで修正） */}
                             {link.relatedSkill && link.relatedSkill.length > 0 && (
-                              <div class="mt-1 mb-1 space-y-1">
+                              <div class="mt-1 mb-1 flex flex-wrap justify-center gap-1 md:block md:space-y-1">
                                 {groupSkillsByCategory(link.relatedSkill).map(([cat, catSkills]) => (
-                                  <div class="flex flex-wrap justify-center gap-1">
+                                  <div class="contents md:flex md:flex-wrap md:justify-center md:gap-1">
                                     {catSkills.map((skill) => (
                                       <a
                                         href={`#skills-${SKILL_CATEGORY_SLUG[cat] ?? cat}`}
@@ -363,6 +351,7 @@ const getGridColumns = (itemCount: number) => {
                             </div>
                           </div>
                         </div>
+                        </>
                       );
                     })}
                   </div>
@@ -429,19 +418,21 @@ const getGridColumns = (itemCount: number) => {
       </div>
     </div>
 
-    <!-- 統計情報 -->
-    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text-cyan mb-2">{opus.length}</div>
-        <p class="text-gray-300">開発プロジェクト</p>
+    <!-- 統計情報。スマホでは縦に3つ積んで長くなっていたので、どの幅でも3列に並べる（2026-11-11 レビューで修正）。
+         390px では1枠の内側が約90pxしかないので、文字と余白を小さくし、見出しは <wbr> の所でだけ折り返す（break-keep）。
+         それでも入らない320px級の幅では、はみ出す代わりに語の途中で折る（wrap-anywhere）。数え方は変えていない -->
+    <div class="mt-8 grid grid-cols-3 gap-3 md:gap-8">
+      <div class="text-center glass px-2 py-4 md:p-6 rounded-2xl hover-lift">
+        <div class="text-2xl md:text-3xl font-bold gradient-text-cyan mb-1 md:mb-2">{opus.length}</div>
+        <p class="text-gray-300 text-xs md:text-base break-keep wrap-anywhere">開発<wbr />プロジェクト</p>
       </div>
-      <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text mb-2">{allCategories.length}</div>
-        <p class="text-gray-300">技術カテゴリ</p>
+      <div class="text-center glass px-2 py-4 md:p-6 rounded-2xl hover-lift">
+        <div class="text-2xl md:text-3xl font-bold gradient-text mb-1 md:mb-2">{allCategories.length}</div>
+        <p class="text-gray-300 text-xs md:text-base break-keep wrap-anywhere">技術<wbr />カテゴリ</p>
       </div>
-      <div class="text-center glass p-6 rounded-2xl hover-lift">
-        <div class="text-3xl font-bold gradient-text-cyan mb-2">{opus.reduce((acc, project) => acc + project.relatedLinks.length, 0)}</div>
-        <p class="text-gray-300">関連サービス</p>
+      <div class="text-center glass px-2 py-4 md:p-6 rounded-2xl hover-lift">
+        <div class="text-2xl md:text-3xl font-bold gradient-text-cyan mb-1 md:mb-2">{opus.reduce((acc, project) => acc + project.relatedLinks.length, 0)}</div>
+        <p class="text-gray-300 text-xs md:text-base break-keep wrap-anywhere">関連<wbr />サービス</p>
       </div>
     </div>
   </div>
@@ -557,7 +548,9 @@ const getGridColumns = (itemCount: number) => {
     });
   });
 
-  // 関連プロジェクト折りたたみ機能（モバイルのみ）
+  // 作品の折りたたみ機能（モバイルのみ）。
+  // 以前は一覧全体を畳んでいたが、先頭の数件は常に出すようにしたので、畳むのは残り（data-related-extra）だけ。
+  // md 以上ではボタン自体を出さず、残りも常に表示する（2026-11-11 レビューで修正）
   document.addEventListener('DOMContentLoaded', function() {
     const toggleButtons = document.querySelectorAll('.related-toggle-btn');
 
@@ -569,22 +562,18 @@ const getGridColumns = (itemCount: number) => {
         const projectId = this.getAttribute('data-project-id');
         if (!projectId) return;
 
-        const container = document.querySelector('[data-related-container="' + projectId + '"]');
+        const extras = document.querySelectorAll('[data-related-extra="' + projectId + '"]');
         const icon = document.querySelector('[data-related-icon="' + projectId + '"]');
 
-        if (!container || !icon) return;
+        if (extras.length === 0) return;
 
-        const isHidden = container.classList.contains('hidden');
+        const willOpen = this.getAttribute('aria-expanded') !== 'true';
 
-        if (isHidden) {
-          container.classList.remove('hidden');
-          container.classList.add('grid');
-          icon.style.transform = 'rotate(180deg)';
-        } else {
-          container.classList.add('hidden');
-          container.classList.remove('grid');
-          icon.style.transform = 'rotate(0deg)';
-        }
+        extras.forEach(function(item) {
+          item.classList.toggle('hidden', !willOpen);
+        });
+        this.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        if (icon) icon.style.transform = willOpen ? 'rotate(180deg)' : 'rotate(0deg)';
       });
     });
   });
@@ -596,5 +585,15 @@ const getGridColumns = (itemCount: number) => {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* 画像のないカードの線画。目立たせず「ここは画像の枠」と分かる程度の濃さにする。
+     global.css の text-gray-* の上書きに頼らず、両テーマの色をここで持つ（2026-11-11 レビューで修正） */
+  .opus-image-placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  :global(body.light-mode) .opus-image-placeholder {
+    color: rgba(17, 24, 39, 0.4);
   }
 </style>

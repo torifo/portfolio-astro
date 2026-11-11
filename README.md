@@ -262,7 +262,7 @@ python3 scripts/journey/build_municipality_maps.py ~/dev/data/kokudo/N03-2026010
 - [x] About経歴タイムライン タグフィルター（Academic / Technology / Opus / Pulse / Community）
 - [x] OpusのrelatedSkillタグ表示（カテゴリ別グループ・Skillsセクションへのアンカーリンク）
 - [x] 日の出・日没APIによる自動テーマ切り替え（JSTの日付変わりでキャッシュ自動リセット・手動の選択は次の日の出か日没まで）
-- [x] Journey 8地方・都道府県別訪問管理（「訪問済み地方」は県をすべて訪れた地方の数・地方の形のシルエット・9枠目に海外）
+- [x] Journey 8地方・都道府県別訪問管理（「制覇した地方」は県をすべて訪れた地方の数・地方の形のシルエット・9枠目に海外）
 - [x] Journey × Instagram 連携（投稿1,283件（2026-11-09 時点）・都道府県100%解決・LLM呼び出しなし）
 - [x] 都道府県ページ自動生成（`/journey/[slug]`・訪問済み43県（2026-11-09 時点））
 - [x] 県のページの「投稿した場所」の地図・ハイライト（よく付けたタグ）・日付の行に書いたエリア

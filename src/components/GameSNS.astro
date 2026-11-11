@@ -45,6 +45,48 @@ const snsConfig: Record<string, { name: string; color: string; fallbackIcon: str
   }
 };
 
+// 共有リンク由来のトラッキング用クエリを外す（2026-11-11 レビューで修正）。
+// microCMS の URL には ?t=…&s=09（X）、?_t=…&_r=1（TikTok）、?si=…（YouTube）などが付いており、
+// 閲覧者の共有元が分かってしまううえ見た目も長いので、描画時に取り除く。他のパラメータは残す。
+const TRACKING_PARAMS: Record<string, string[]> = {
+  'x.com': ['t', 's'],
+  'twitter.com': ['t', 's'],
+  'tiktok.com': ['_t', '_r'],
+  'youtube.com': ['si', 'feature'],
+  'youtu.be': ['si', 'feature'],
+  'instagram.com': ['igsh', 'igshid'],
+};
+const cleanSnsUrl = (raw: string): string => {
+  try {
+    const url = new URL(raw);
+    const host = url.hostname.replace(/^(www|m)\./, '');
+    const targets = TRACKING_PARAMS[host] ?? [];
+    for (const key of [...url.searchParams.keys()]) {
+      if (targets.includes(key) || key.startsWith('utm_')) url.searchParams.delete(key);
+    }
+    // 残りが無ければ「?」ごと消える（URLSearchParams の仕様）
+    return url.toString();
+  } catch {
+    return raw;
+  }
+};
+
+// URL からアカウント名（@…）を作る。データに専用フィールドが無いための代替。
+// 先頭パスが @ で始まるもの（TikTok・YouTube）はそのまま、X は先頭パスをハンドルとみなす。
+// どちらでもない（HoYoLab など）はドメイン名を表示する。
+const deriveHandle = (raw: string): string => {
+  try {
+    const url = new URL(raw);
+    const host = url.hostname.replace(/^(www|m)\./, '');
+    const first = url.pathname.split('/').filter(Boolean)[0] ?? '';
+    if (first.startsWith('@')) return decodeURIComponent(first);
+    if ((host === 'x.com' || host === 'twitter.com') && first) return `@${first}`;
+    return host;
+  } catch {
+    return raw;
+  }
+};
+
 // SNS設定を取得する関数
 const getSNSConfig = (snsType: string) => {
   return snsConfig[snsType] || { 
@@ -71,10 +113,12 @@ const getSNSConfig = (snsType: string) => {
       {snsItems.map((sns) => {
         const snsType = sns.sns[0];
         const config = getSNSConfig(snsType);
+        const href = cleanSnsUrl(sns.link);
+        const handle = deriveHandle(sns.link);
         
         return (
           <a 
-            href={sns.link} 
+            href={href} 
             target="_blank" 
             rel="noopener noreferrer"
             class="sns-card glass rounded-2xl p-6 hover-lift group transition-all duration-300 hover:shadow-2xl"
@@ -102,15 +146,7 @@ const getSNSConfig = (snsType: string) => {
               <!-- SNS名 -->
               <div>
                 <h4 class="text-white font-bold text-lg mb-1">{config.name}</h4>
-                <p class="text-gray-400 text-sm">ぜひチェックしてね～</p>
-              </div>
-              
-              <!-- 外部リンクアイコン -->
-              <div class="flex items-center text-cyan-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-                開く
+                <p class="text-gray-400 text-sm break-all">{handle}</p>
               </div>
             </div>
           </a>
@@ -137,7 +173,4 @@ const getSNSConfig = (snsType: string) => {
     transform: scale(1.1);
   }
   
-  .sns-card:hover .group-hover\:opacity-100 {
-    opacity: 1;
-  }
 </style>
