@@ -210,15 +210,16 @@ const allSNS = games.reduce((acc, game) => {
       })}
     </div>
 
-    <!-- ゲーム統計（データから算出する値だけを表示。プレイ時間・SNS数は撤去: 2026-11-11 レビューで修正） -->
+    <!-- ゲーム統計（データから算出する値だけを表示。プレイ時間・SNS数は撤去: 2026-11-11 レビューで修正）。
+         見出しの「ゲーム」は節の中なので省く（スマホで「ゲームアカウン／ト数」と語の途中で折れた） -->
     <div class="mt-16 grid grid-cols-2 gap-6 max-w-xl mx-auto">
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text-cyan mb-2">{games.length}</div>
-        <p class="text-gray-300 text-sm">ゲームタイトル数</p>
+        <p class="text-gray-300 text-sm break-keep">タイトル数</p>
       </div>
       <div class="text-center glass p-6 rounded-2xl hover-lift">
         <div class="text-3xl font-bold gradient-text mb-2">{games.reduce((acc, game) => acc + game.account.length, 0)}</div>
-        <p class="text-gray-300 text-sm">ゲームアカウント数</p>
+        <p class="text-gray-300 text-sm break-keep">アカウント数</p>
       </div>
     </div>
 
