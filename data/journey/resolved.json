@@ -12,6 +12,17 @@
    ],
    "gpsPrefCode": "42"
   },
+  "18113510906264507": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
   "18152670139556592": {
    "prefCodes": [
     "20"
