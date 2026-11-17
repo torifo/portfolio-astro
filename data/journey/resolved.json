@@ -12,6 +12,160 @@
    ],
    "gpsPrefCode": "42"
   },
+  "18036069512882778": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "date-line-place",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "18418264171094451": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "date-line-place",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "18004298531814405": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "date-line-place",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "18134691418760325": {
+   "prefCodes": [
+    "12"
+   ],
+   "method": "date-line-place",
+   "evidence": "千葉",
+   "tagPrefCodes": [
+    "12"
+   ],
+   "gpsPrefCode": null
+  },
+  "18079012505801301": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18115652273183382": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18488023489117390": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18023683991728489": {
+   "prefCodes": [
+    "13"
+   ],
+   "method": "date-line-place",
+   "evidence": "東京",
+   "tagPrefCodes": [
+    "13"
+   ],
+   "gpsPrefCode": null
+  },
+  "18136415128744154": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18151226929561228": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18130115494856980": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "17974963149215041": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "18014299568971950": {
+   "prefCodes": [
+    "22"
+   ],
+   "method": "date-line-place",
+   "evidence": "静岡",
+   "tagPrefCodes": [
+    "22"
+   ],
+   "gpsPrefCode": null
+  },
+  "17953640076348907": {
+   "prefCodes": [
+    "23"
+   ],
+   "method": "date-line-place",
+   "evidence": "愛知",
+   "tagPrefCodes": [
+    "23"
+   ],
+   "gpsPrefCode": null
+  },
   "18113510906264507": {
    "prefCodes": [
     "22"
