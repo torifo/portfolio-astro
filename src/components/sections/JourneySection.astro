@@ -131,22 +131,25 @@ const badgeUnvisited = 'bg-white/5 text-gray-500 border border-white/10';
     <!-- 都道府県バッジの見方。数字・✓・薄い表示の意味がどこにも書かれておらず、岡山のような「薄い表示に数字」
          （訪問済みにしていない県に投稿だけある。2026-10-15 の決まりどおり）が誤りに見えた。
          見本のバッジはグリッドと同じ色で描き、読み上げでは見本を飛ばして言葉だけで意味が通るようにする。
-         スマホの幅では1行に収まらないので、項目の途中では折らず項目ごとに次の行へ送る（2026-11-11 レビューで追加） -->
-    <p class="mb-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-gray-400 text-xs">
-      <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
-        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${badgeVisited}`} aria-hidden="true">
+         sm 以上は1行に並べる。スマホの幅では1行に収まらず、項目ごとに折ると「未訪問」だけが2行目に残って
+         片寄って見えたので、3列に分けて見本の下に説明を置く。「訪問済み（投稿はまだ）」は列の幅に収まらないので、
+         括弧の前でだけ折る（語の途中で折らない）。見本は押せるバッジ（スマホで高さ36px）と同じ大きさにはせず、
+         小さいまま並べて押せるものに見せない（2026-11-19 本人の指摘で修正） -->
+    <p class="mb-4 grid grid-cols-3 gap-x-2 sm:flex sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-1.5 text-gray-400 text-xs">
+      <span class="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:text-left sm:whitespace-nowrap">
+        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${badgeVisited}`} aria-hidden="true">
           県名<span class="ml-1 text-white/60 text-[10px]">3</span>
         </span>
         <span><span class="sr-only">数字は</span>投稿の数</span>
       </span>
-      <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
-        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${badgeVisited}`} aria-hidden="true">
+      <span class="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:text-left sm:whitespace-nowrap">
+        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${badgeVisited}`} aria-hidden="true">
           県名<span class="pref-check ml-1 text-green-400 text-xs">✓</span>
         </span>
-        <span><span class="sr-only">チェックの印は</span>訪問済み（投稿はまだ）</span>
+        <span><span class="sr-only">チェックの印は</span><span class="inline-block">訪問済み</span><span class="inline-block">（投稿はまだ）</span></span>
       </span>
-      <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
-        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${badgeUnvisited}`} aria-hidden="true">
+      <span class="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:text-left sm:whitespace-nowrap">
+        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${badgeUnvisited}`} aria-hidden="true">
           県名
         </span>
         <span><span class="sr-only">薄い表示は</span>未訪問</span>
